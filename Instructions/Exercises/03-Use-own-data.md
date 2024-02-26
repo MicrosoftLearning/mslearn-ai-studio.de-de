@@ -9,7 +9,7 @@ Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendun
 
 In dieser Übung verwenden Sie Azure KI Studio, um benutzerdefinierte Daten in einen generativen KI-Prompt Flow zu integrieren.
 
-> **Hinweis:** Azure KI Studio befindet sich zum Zeitpunkt des Schreibens in der Vorschau und befindet sich in der aktiven Entwicklung. Einige Elemente des Diensts sind möglicherweise nicht genau wie beschrieben und einige Features funktionieren möglicherweise nicht wie erwartet.
+> **Hinweis:** Azure KI Studio befindet sich zum Zeitpunkt des Schreibens in der Vorschau und befindet sich in der aktiven Entwicklung. Einige Elemente des Diensts sind möglicherweise nicht genau wie beschrieben, und einige Features funktionieren möglicherweise nicht wie erwartet.
 
 Diese Übung dauert ca. **45** Minuten.
 
@@ -31,15 +31,16 @@ Ihre Copilot-Lösung integriert benutzerdefinierte Daten in einen Prompt Flow. U
 Jetzt können Sie ein Azure KI Studio-Projekt und die Azure KI-Ressourcen erstellen, um es zu unterstützen.
 
 1. Öffnen Sie in einem Webbrowser [Azure KI Studio](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. wählen Sie auf der Seite **Erstellen** **+Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
+1. Wählen Sie auf der Seite **Erstellen** die Option **+ Neues KI-Projekt** aus. Erstellen Sie dann im Assistenten **Erste Schritte** ein Projekt mit den folgenden Einstellungen:
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
     - **KI Hub**: *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
         - **KI Hub-Name**: *Ein eindeutiger Name*
         - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
-        - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die Ihre Azure KI Search-Ressource enthält*
+        - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
         - **Speicherort:** *Derselbe Speicherort wie Ihre Azure KI Search-Ressource (oder ein geografischer Standort in der Nähe)*
-        - **Azure OpenAI**: (Neu) *hub_name*
+        - **Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
         - **Azure KI Search**: *Wählen Sie Ihre Azure KI Search-Ressource aus*
+
 1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
 ## Bereitstellen von Modellen
@@ -49,11 +50,16 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 - Ein *Einbettungsmodell* zum Vektorisieren von Textdaten für eine effiziente Indizierung und Verarbeitung.
 - Ein Modell, das in natürlicher Sprache Antworten auf Fragen generieren kann, basierend auf Ihren Daten.
 
-1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
-1. Erstellen Sie eine neue Bereitstellung (mithilfe eines Echtzeitendpunkts) des **text-embedding-ada-002**-Modells mit dem Namen `text-embedding-ada-002`. Legen Sie die **erweiterten** Optionen fest, um den Standardinhaltsfilter zu verwenden und die Token pro Minute (TPM) auf **5K** zu beschränken.
-1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit dem Namen `gpt-35-turbo`. Legen Sie die **erweiterten** Optionen fest, um den Standardinhaltsfilter zu verwenden und die Token pro Minute (TPM) auf **5K** zu beschränken.
+1. Wählen Sie in Azure KI Studio in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
+1. Erstellen Sie eine neue Bereitstellung (mithilfe eines **Echtzeitendpunkts**) des Modells **text-embedding-ada-002** mit den folgenden Einstellungen:
 
-> **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
+    - **Bereitstellungsname**: `text-embedding-ada-002`
+    - **Modellversion**: *Standard*
+    - **Erweiterte Optionen**:
+        - **Inhaltsfilter**: *Standard*
+        - **Ratenbegrenzung für Token pro Minute**: `5K`
+
+> **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
 ## Hinzufügen von Daten zu Ihrem Projekt
 
@@ -61,7 +67,10 @@ Die Daten für Ihren Copilot bestehen aus einer Reihe von Reisebroschüren des f
 
 1. Laden Sie das [gezippte Archiv der Broschüren](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) aus `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` herunter und extrahieren Sie es in einen Ordner mit dem Namen **Broschüren** in Ihrem lokalen Dateisystem.
 1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Daten** aus.
-1. Wählen Sie **+ Neue Daten** aus und fügen Sie eine neue Datenquellenverbindung hinzu, indem Sie den **Broschüren**-Ordner hochladen (wählen Sie die Option zum Hochladen eines *Ordners*, nicht einer *Datei*). Nennen Sie die neuen Datenquelle **Broschüren**.
+1. Wählen Sie **+ Neue Daten** aus.
+1. Erweitern Sie im Assistenten **Hinzufügen Ihrer Daten** das Dropdownmenü, um **Dateien/Ordner hochladen** auszuwählen.
+1. Wählen Sie **Ordner hochladen** und dann den Ordner **Broschüren** aus.
+1. Legen Sie den Datennamen auf **Broschüren** fest.
 
 ## Erstellen eines Indexes für Ihre Daten
 
@@ -82,9 +91,10 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
         - **Indexname**: Broschürenindex
         - **VM**: Automatisch auswählen
 1. Warten Sie, bis Ihr Index fertig ist, was mehrere Minuten dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
-    - Cracken, Blocken und Einbetten der Texttoken in Ihre Broschürendaten
-    - Aktualisieren des Index
-    - Registrieren der Indexressource
+
+    - Zerlegen, segmentieren und integrieren Sie die Texttoken in Ihre Broschürendaten.
+    - Aktualisieren des Indexes
+    - Registrieren Sie die Indexressource.
 
 ## Testen des Index
 
@@ -200,4 +210,3 @@ Um unnötige Azure-Kosten und Ressourcenauslastung zu vermeiden, sollten Sie die
 
 1. Zeigen Sie in Azure KI Studio die Seite **Build** an. Wählen Sie dann das Projekt aus, das Sie in dieser Übung erstellt haben, und verwenden Sie die Schaltfläche **Projekt löschen**, um es zu entfernen. Es kann einige Minuten dauern, bis alle Komponenten gelöscht sind.
 1. Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, kehren Sie bei Bedarf zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` zurück, und melden Sie sich bei Bedarf mit Ihren Azure-Anmeldeinformationen an. Löschen Sie dann die Ressourcengruppe, die Sie für Ihre Azure KI Search- und Azure KI-Ressourcen erstellt haben.
-
