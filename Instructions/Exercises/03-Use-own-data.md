@@ -23,8 +23,19 @@ Ihre Copilot-Lösung integriert benutzerdefinierte Daten in einen Prompt Flow. U
     - **Abonnement:** *Wählen Sie Ihr Azure-Abonnement aus.*
     - **Ressourcengruppe**: *Wählen oder erstellen Sie eine Ressourcengruppe*.
     - **Dienstname**: *Geben Sie einen eindeutigen Dienstnamen ein*
-    - **Speicherort:** *Wählen Sie einen beliebigen verfügbaren Speicherort aus*
+    - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
+        - Australien (Osten)
+        - Kanada, Osten
+        - East US
+        - USA (Ost) 2
+        - Frankreich, Mitte
+        - Japan, Osten
+        - USA Nord Mitte
+        - Schweden, Mitte
+        - Schweiz 
     - **Tarif**: Standard.
+
+    > \* Später erstellen Sie einen Azure KI-Hub (einschließlich eines Azure OpenAI-Diensts) in derselben Region wie Ihre Azure KI-Suche-Ressource. Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung eine Kontingentgrenze erreicht wird, müssen Sie eventuell einen weiteren Azure KI-Hub in einer anderen Region erstellen.
 
 1. Warten Sie, bis ihre Azure KI Search-Ressourcenbereitstellung abgeschlossen ist.
 
@@ -41,7 +52,7 @@ Jetzt können Sie ein Azure KI Studio-Projekt und die Azure KI-Ressourcen erstel
         - **KI Hub-Name**: *Ein eindeutiger Name*
         - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
         - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
-        - **Speicherort:** *Derselbe Speicherort wie Ihre Azure KI Search-Ressource (oder ein geografischer Standort in der Nähe)*
+        - **Speicherort:** *Derselbe Standort wie Ihre Azure KI-Suche-Ressource*
         - **Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
         - **Azure KI Search**: *Wählen Sie Ihre Azure KI Search-Ressource aus*
 
