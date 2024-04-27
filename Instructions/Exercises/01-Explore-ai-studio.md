@@ -31,9 +31,21 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu host
     - **Name des Azure KI-Hubs**: *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
-    - **Speicherort:** *Wählen Sie einen vom Azure OpenAI-Dienst unterstützten Standort aus.*
+    - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
+        - Australien (Osten)
+        - Kanada, Osten
+        - East US
+        - USA (Ost) 2
+        - Frankreich, Mitte
+        - Japan, Osten
+        - USA Nord Mitte
+        - Schweden, Mitte
+        - Schweiz, Norden
+        - UK, Süden
     - **Azure OpenAI**: (Neu) ai-*Hub_Name*
     - **KI-Suche**: (Keine)
+
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
     Nachdem der Azure KI-Hub erstellt wurde, sollte er ähnlich wie in der folgenden Abbildung aussehen:
 
