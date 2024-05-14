@@ -221,6 +221,18 @@ Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierte
 1. Geben Sie den Prompt `Where else could I go?` ein und überprüfen Sie die Antwort.
 1. Zeigen Sie die Seite **Nutzen** für den Endpunkt an und beachten Sie, dass sie Verbindungsinformationen und Beispielcode enthält, die Sie zum Erstellen einer Clientanwendung für Ihren Endpunkt verwenden können, sodass Sie die Prompt Flow-Lösung als benutzerdefinierten Copilot in eine Anwendung integrieren können.
 
+## Herausforderung 
+
+Sie haben erfahren, wie Sie Ihre eigenen Daten in einen Copilot integrieren können, der mit Azure KI Studio erstellt wurde. Lassen Sie uns dieses Thema nun weiter erkunden!
+
+Versuchen Sie, über Azure KI Studio eine neue Datenquelle hinzuzufügen, zu indizieren und die indizierten Daten in einen Prompt flow zu integrieren. Einige Datasets, die Sie ausprobieren könnten, sind zum Beispiel:
+
+- Eine Sammlung von Artikeln (z. B. Forschungsartikel), die sich auf Ihrem Computer befinden
+- Eine Reihe von Präsentationen aus früheren Konferenzen
+- Jedes beliebige Dataset, das Repository [Azure Search Sample Data](https://github.com/Azure-Samples/azure-search-sample-data) verfügbar ist.
+
+Seien Sie dabei möglichst kreativ, um Ihre Datenquelle zu erstellen und in Ihren Prompt flow zu integrieren. Probieren Sie den Prompt flow aus, und geben Sie dabei Prompts ein, die nur mithilfe des von Ihnen ausgewählten Datasets beantwortet werden können!
+
 ## Bereinigung
 
 Um unnötige Azure-Kosten und Ressourcenauslastung zu vermeiden, sollten Sie die in dieser Übung bereitgestellten Ressourcen entfernen.
