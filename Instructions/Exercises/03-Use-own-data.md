@@ -95,17 +95,17 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Indizes** aus.
 1. Fügen Sie einen neuen Index mit den folgenden Einstellungen hinzu:
     - **Quelldaten**:
-        - **Datenquelle**: Verwenden vorhandener Projektdaten
+        - **Datenquelle**: Daten in Azure KI Studio
             - *Auswählen der Datenquelle **Broschüren***
-    - **Indexspeicher**:
-        - *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
+    - **Indexeinstellungen**:
+        - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
+        - **Indexname**: Broschürenindex
+        - **VM**: Automatisch auswählen
     - **Sucheinstellungen**:
         - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
         - **Azure OpenAI Resource**: Default_AzureOpenAI
-        - *Bestätigen Sie, dass ein Einbettungsmodell bereitgestellt wird, wenn es noch nicht vorhanden ist*
-    - **Indexeinstellungen**:
-        - **Indexname**: Broschürenindex
-        - **VM**: Automatisch auswählen
+        - *Bestätigen Sie nach Aufforderung, dass ein Einbettungsmodell bereitgestellt wird, wenn es noch nicht vorhanden ist.*
+        
 1. Warten Sie, bis der Indizierungsprozess abgeschlossen ist, was mehrere Minuten dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
 
     - Zerlegen, segmentieren und integrieren Sie die Texttoken in Ihre Broschürendaten.
