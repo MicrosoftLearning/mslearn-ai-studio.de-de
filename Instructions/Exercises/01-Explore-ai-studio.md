@@ -27,8 +27,8 @@ Sehen Sie sich zunächst Azure KI Studio einmal an.
 
 Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu hosten. Sie können diese Ressource entweder beim Erstellen eines Projekts erstellen oder vorab bereitstellen (wie in dieser Übung).
 
-1. Wählen Sie auf der Seite **Verwalten** die Option **+ Neuer Azure KI-Hub** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Azure KI-Hubs** eine neue Ressource mit den folgenden Einstellungen:
-    - **Name des Azure KI-Hubs**: *Ein eindeutiger Name*
+1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Hubs** und dann **+Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
+    - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
     - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
@@ -42,8 +42,8 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu host
         - Schweden, Mitte
         - Schweiz, Norden
         - UK, Süden
-    - **Azure OpenAI**: (Neu) ai-*Hub_Name*
-    - **KI-Suche**: (Keine)
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: Wählen Sie eine Option aus, um einen neuen KI-Dienste zu erstellen oder einen vorhandenen zu verwenden.
+    - **Azure KI-Suche verbinden**: Verbindung überspringen
 
     > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
@@ -65,7 +65,7 @@ Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Si
 
 1. Wählen Sie in Azure KI Studio auf der Seite **Erstellen** die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
-    - **KI-Hub**: *Ihr KI-Hub*
+    - **Hub:** *Ihr KI-Hub*
 1. Warten Sie, bis Ihr Projekt erstellt wurde. Wenn es fertig ist, sollte es ähnlich wie in der folgenden Abbildung aussehen:
 
     ![Screenshot: Projektdetailseite in Azure KI Studio](./media/azure-ai-project.png)

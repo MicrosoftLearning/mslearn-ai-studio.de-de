@@ -44,12 +44,12 @@ Ihre Copilot-Lösung integriert benutzerdefinierte Daten in einen Prompt Flow. U
 Jetzt können Sie ein Azure KI Studio-Projekt und die Azure KI-Ressourcen erstellen, um es zu unterstützen.
 
 1. Öffnen Sie in einem Webbrowser [Azure KI Studio](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. Wählen Sie auf der Seite **Erstellen** die Option **+ Neues KI-Projekt** aus. Erstellen Sie dann im Assistenten **Erste Schritte** ein Projekt mit den folgenden Einstellungen:
+1. Wählen Sie auf der **Startseite** von Azure AI Studio die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
 
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
-    - **KI Hub**: *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
+    - **Hub:** *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
 
-        - **KI Hub-Name**: *Ein eindeutiger Name*
+        - **Hub-Name:** *Ein eindeutiger Name*
         - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
         - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
         - **Speicherort:** *Derselbe Standort wie Ihre Azure KI-Suche-Ressource*
@@ -116,8 +116,8 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Tools** die Seite **Playground** aus.
-1. Stellen Sie auf der Playground-Seite im Bereich Optionen sicher, dass die **gpt-35-Turbo**-Modellimplementierung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Projekt-Playground** die Seite **Chat** aus.
+1. Stellen Sie auf der Chat-Seite im Bereich „Optionen“ sicher, dass die **gpt-35-turbo**-Modellimplementierung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
 1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
 1. Wählen Sie im Setupbereich die Registerkarte **Daten hinzufügen** aus, und fügen Sie dann den Projektindex **Broschürenindex** hinzu, und wählen Sie den Suchtyp **Hybrid (Vektor + Schlüsselwort)** aus.
 1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
