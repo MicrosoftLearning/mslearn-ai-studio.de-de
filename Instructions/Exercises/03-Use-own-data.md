@@ -73,7 +73,7 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
     - **Erweiterte Optionen**:
         - **Inhaltsfilter**: *Standard*
         - **Ratenbegrenzung für Token pro Minute**: `5K`
-1. Wiederholen Sie die vorherigen Schritte zum Bereitstellen eines **gpt-35-Turbo-Modells** mit dem Bereitstellungsnamen `gpt-35-turbo`.
+1. Wiederholen Sie die vorherigen Schritte zum Bereitstellen eines **gpt-35-turbo-16k-** Modells mit dem Bereitstellungsnamen `gpt-35-turbo-16k`.
 
     > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
@@ -117,7 +117,7 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Projekt-Playground** die Seite **Chat** aus.
-1. Stellen Sie auf der Chat-Seite im Bereich „Optionen“ sicher, dass die **gpt-35-turbo**-Modellimplementierung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Stellen Sie auf der Seite "Chat" im Bereich "Optionen" sicher, dass ihre **gpt-35-turbo-16k** Modellbereitstellung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
 1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
 1. Wählen Sie im Setupbereich die Registerkarte **Daten hinzufügen** aus, und fügen Sie dann den Projektindex **Broschürenindex** hinzu, und wählen Sie den Suchtyp **Hybrid (Vektor + Schlüsselwort)** aus.
 1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
@@ -159,7 +159,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
 
     - **Verbindung**: `Default_AzureOpenAI`
     - **API**: `chat`
-    - **deployment_name**: `gpt-35-turbo`
+    - **deployment_name**: `gpt-35-turbo-16k`
     - **response_format**: `{"type":"text"}`
 
 1. Legen Sie im Abschnitt **Lookup** die folgenden Parameterwerte fest:
@@ -185,7 +185,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
 
     - **Verbindung**: Default_AzureOpenAI
     - **Api**: Chat
-    - **deployment_name**: gpt-35-turbo
+    - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
     Stellen Sie dann sicher, dass die **Eingaben** für dieses Tool die folgenden Parameter enthalten:
@@ -203,6 +203,8 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
 ## Bereitstellen des Flows
 
 Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierten Daten verwendet, können Sie ihn als Dienst bereitstellen, der von einer Copilot-Anwendung genutzt werden soll.
+
+> **Hinweis:** Je nach Region und Rechenzentrumslast können Bereitstellungen manchmal eine Weile dauern. Sie können sich auf den nachstehenden Abschnitt "Herausforderung" setzen, während sie die Bereitstellungen bereitstellt oder die Tests Ihrer Bereitstellung überspringt, wenn Sie nur wenig Zeit haben.
 
 1. Wählen Sie auf der Symbolleiste **Bereitstellen** aus.
 1. Erstellen Sie eine Bereitstellung mit den folgenden Einstellungen:
