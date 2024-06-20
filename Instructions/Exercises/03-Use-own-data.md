@@ -66,7 +66,7 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 - Ein Modell, das in natürlicher Sprache Antworten auf Fragen generieren kann, basierend auf Ihren Daten.
 
 1. Wählen Sie in Azure KI Studio in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
-1. Erstellen Sie eine neue Bereitstellung (mithilfe eines **Echtzeitendpunkts**) des Modells **text-embedding-ada-002** mit den folgenden Einstellungen:
+1. Erstellen Sie eine neue Bereitstellung des Modells **text-embedding-ada-002** mit den folgenden Einstellungen:
 
     - **Bereitstellungsname**: `text-embedding-ada-002`
     - **Modellversion**: *Standard*
@@ -141,7 +141,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
     - Erstellen Sie Prompt-Varianten, indem Sie eine Systemnachricht hinzufügen und den Chatverlauf strukturieren.
     - Senden Sie den Prompt an ein Sprachmodell, um eine natürliche Sprachantwort zu generieren.
 
-1. Wählen Sie in der Liste **Runtime** **Start** aus, um die automatische Runtime zu starten.
+1. Verwenden Sie die Schaltfläche **Computesitzung starten**, um Runtime Compute für den Flow zu starten.
 
     Warten Sie, bis die Runtime gestartet wurde. Dies stellt einen Berechnungskontext für den Prompt Flow bereit. Während Sie warten, überprüfen Sie auf der Registerkarte **Flow** die Abschnitte für die Tools im Flow.
 
@@ -153,22 +153,22 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
 
 1. Stellen Sie im Abschnitt **Ausgabe** sicher, dass die Ausgabe Folgendes enthält:
 
-    - **chat_output** mit `${chat_with_context.output}`-Wert
+    - **chat_output** mit dem Wert ${chat_with_context.output}
 
 1. Wählen Sie im Abschnitt **modify_query_with_history** die folgenden Einstellungen aus (lassen Sie andere wie sie sind):
 
-    - **Verbindung**: `Default_AzureOpenAI`
-    - **API**: `chat`
-    - **deployment_name**: `gpt-35-turbo-16k`
-    - **response_format**: `{"type":"text"}`
+    - **Verbindung**: *Die standardmäßige Azure OpenAI-Ressource für Ihren KI-Hub*
+    - **API**: Chat
+    - **deployment_name**: gpt-35-turbo-16k
+    - **response_format**: {"type":"text"}
 
 1. Legen Sie im Abschnitt **Lookup** die folgenden Parameterwerte fest:
 
     - **mlindex_content**: *Wählen Sie das leere Feld aus, um den Bereich „Generieren“ zu öffnen*
         - **index_type**: Registrierter Index
         - **mlindex_asset_id**: brochures-index:1
-    - **Abfragen**: `${modify_query_with_history.output}`
-    - **query_type**: `Hybrid (vector + keyword)`
+    - **Abfragen**: ${modify_query_with_history.output}
+    - **query_type**: Hybrid (Vektor + Schlüsselwort)
     - **top_k**: 2
 
 1. Überprüfen Sie im Abschnitt **generate_prompt_context** das Python-Skript und stellen Sie sicher, dass die **Eingaben** für dieses Tool den folgenden Parameter enthalten:
