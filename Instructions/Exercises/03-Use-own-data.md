@@ -86,7 +86,8 @@ Die Daten für Ihren Copilot bestehen aus einer Reihe von Reisebroschüren des f
 1. Wählen Sie **+ Neue Daten** aus.
 1. Erweitern Sie im Assistenten **Hinzufügen Ihrer Daten** das Dropdownmenü, um **Dateien/Ordner hochladen** auszuwählen.
 1. Wählen Sie **Ordner hochladen** und dann den Ordner **Broschüren** aus.
-1. Legen Sie den Datennamen auf **Broschüren** fest.
+1. Legen Sie den Datennamen auf `brochures` fest.
+1. Warten Sie, bis der Ordner hochgeladen wurde, und beachten Sie, dass er mehrere PDF-Dateien enthält.
 
 ## Erstellen eines Indexes für Ihre Daten
 
@@ -99,17 +100,16 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
             - *Auswählen der Datenquelle **Broschüren***
     - **Indexeinstellungen**:
         - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
-        - **Indexname**: Broschürenindex
+        - **Indexname**: `brochures-index`
         - **VM**: Automatisch auswählen
     - **Sucheinstellungen**:
         - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
-        - **Azure OpenAI Resource**: Default_AzureOpenAI
-        - *Bestätigen Sie nach Aufforderung, dass ein Einbettungsmodell bereitgestellt wird, wenn es noch nicht vorhanden ist.*
+        - **Auswählen eines Einbettungsmodells**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
         
 1. Warten Sie, bis der Indizierungsprozess abgeschlossen ist, was mehrere Minuten dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
 
     - Zerlegen, segmentieren und integrieren Sie die Texttoken in Ihre Broschürendaten.
-    - Aktualisieren Sie Azure AI Search mit dem neuen Index.
+    - Erstellen Sie den Azure KI-Suchindex.
     - Registrieren Sie die Indexressource.
 
 ## Testen des Index
@@ -210,8 +210,8 @@ Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierte
 1. Erstellen Sie eine Bereitstellung mit den folgenden Einstellungen:
     - **Grundeinstellungen**:
         - **Endpunkt**: Neu
-        - **Endpunkt Name**: `brochure-endpoint`
-        - **Bereitstellungsname**: Broschüren-Endpunkt-1
+        - **Endpunktname**: *Verwenden des standardmäßigen eindeutigen Endpunktnamens*
+        - **Bereitstellungsname**: *Verwenden des standardmäßigen Bereitstellungsendpunktnamens*
         - **VM**: Standard_DS3_v2
         - **Instanzenanzahl:** 3
         - **Rückschließen der Datensammlung**: Ausgewählt
@@ -239,5 +239,4 @@ Seien Sie dabei möglichst kreativ, um Ihre Datenquelle zu erstellen und in Ihre
 
 Um unnötige Azure-Kosten und Ressourcenauslastung zu vermeiden, sollten Sie die in dieser Übung bereitgestellten Ressourcen entfernen.
 
-1. Zeigen Sie in Azure KI Studio die Seite **Build** an. Wählen Sie dann das Projekt aus, das Sie in dieser Übung erstellt haben, und verwenden Sie die Schaltfläche **Projekt löschen**, um es zu entfernen. Es kann einige Minuten dauern, bis alle Komponenten gelöscht sind.
-1. Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, kehren Sie bei Bedarf zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` zurück, und melden Sie sich bei Bedarf mit Ihren Azure-Anmeldeinformationen an. Löschen Sie dann die Ressourcengruppe, die Sie für Ihre Azure KI Search- und Azure KI-Ressourcen erstellt haben.
+1. Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, kehren Sie bei Bedarf zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` zurück, und melden Sie sich bei Bedarf mit Ihren Azure-Anmeldeinformationen an. Löschen Sie dann die Ressourcen in der Ressourcengruppe, in der Sie Ihre Azure KI-Suche- und Azure AI-Ressourcen bereitgestellt haben.
