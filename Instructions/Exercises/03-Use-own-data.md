@@ -1,8 +1,3 @@
----
-lab:
-  title: 'Erstellen eines benutzerdefinierten Copilots, der Ihre eigenen Daten verwendet'
----
-
 # Erstellen eines benutzerdefinierten Copilots, der Ihre eigenen Daten verwendet
 
 Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein gängiges Muster für die Entwicklung von benutzerdefinierten *Copiloten* – chatbasierten Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
