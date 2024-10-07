@@ -51,13 +51,13 @@ Der nächste Schritt ist die Verbindung Ihrer lokalen Entwicklungsumgebung mit d
 
 1. Überprüfen Sie zunächst, ob die [neueste Version](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) der Azure Developer CLI installiert ist.
     ```bash
-        azd version
+    azd version
     ```
 
 1. Melden Sie sich als Nächstes über den VS Code-Terminal bei Ihrem Azure-Konto an.
 
     ```bash
-        azd auth login 
+    azd auth login 
     ```
 
 ## Bereitstellen von Azure-Ressourcen für Ihr Projekt
@@ -67,7 +67,7 @@ Sobald Sie angemeldet sind, können Sie mit der Bereitstellung der Azure-Ressour
 1. Bereitstellung *und Einsatz* Ihrer KI-Anwendung mit azd.
 
     ```bash
-        azd up
+    azd up
     ```
 
 1. Daraufhin sollte folgende Aufforderung angezeigt werden: Antworten Sie mithilfe der folgenden Anleitung:
@@ -144,7 +144,7 @@ Um zu überprüfen, ob der eingesetzte Copilot funktioniert, verwenden Sie die i
 1. Testen Sie nun die Copilot-Bereitstellung mit der folgenden Test-**Eingabe**:
 
     ```bash
-      {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
+    {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
     ```
 
 Sie sollten eine gültige JSON-Antwort in der Ausgabekomponente erhalten, wie dargestellt.
@@ -193,13 +193,13 @@ Mit dem Befehl **azd up** wird nicht nur die Anwendung auf Azure bereitgestellt,
 1. Stellen Sie sicher, dass die **Promptflow-Tools** in Ihrer Entwicklungsumgebung installiert sind.
 
     ```bash
-        pf version
+    pf version
     ```
 
 1. Verwenden Sie das **Pf Flow-Testtool**, um die **contoso_chat** Flex flow-Anwendung lokal mit der folgenden Beispielfrage zu testen. Beachten Sie die Syntax des Befehls zum Übergeben der Eingaben:
 
     ```bash
-        pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
+    pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
     ```
 
 Sie sollten eine solche Antwort erhalten:
@@ -211,7 +211,7 @@ Sie sollten eine solche Antwort erhalten:
 1. Mit dem Flag `--ui` können Sie die Einzelheiten Ihrer Ausführung wie unten gezeigt verfolgen.
 
     ```bash
-        pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
+    pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
     ```
 
 Dieser Befehl sollte eine **Verfolgungsansicht** in Ihrem Browser (auf einer neuen Registerkarte) mit einer Tabelle aufrufen, die detaillierte Informationen über diesen Testlauf enthält, einschließlich der Latenzzeit und der Verwendung von Token.
@@ -316,7 +316,7 @@ Ersetzen Sie das Testdatenset, das zum Ausführen der App-Auswertungspipeline ü
 Dieses Projekt verwendet Modelle und Dienste (z. B. Azure AI Search), die bei langfristiger Nutzung nicht unerhebliche Kosten verursachen können. Wenn Sie diese Azure AI AZD-Vorlage fertig erforscht haben, sollten Sie die erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden. Sie können dies tun, indem Sie den folgenden Befehl im VS-Code-Terminal ausführen:
 
 ```bash
-    azd down
+azd down
 ```
 
 Dadurch werden nicht nur die Schritte für die Bereitstellung und den Einsatz der Anwendung rückgängig gemacht, sondern es werden auch zusätzliche Schritte unternommen, um *Ressourcen zu bereinigen*, die andernfalls im „Soft Delete“-Status gehalten werden könnten, was sich auf Ihre Fähigkeit auswirkt, Ressourcennamen wiederzuverwenden oder Modellkontingente zurückzugewinnen. **Mit diesem Befehl werden Sie während des Herunterfahrens zu diesen Aktionen aufgefordert. Stellen Sie daher sicher, dass Sie richtig** reagieren.

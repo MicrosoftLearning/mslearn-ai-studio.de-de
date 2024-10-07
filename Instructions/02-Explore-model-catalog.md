@@ -15,7 +15,7 @@ Diese Übung dauert ungefähr **25** Minuten.
 
 Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu hosten. Sie können diese Ressource entweder beim Erstellen eines Projekts erstellen oder vorab bereitstellen (wie in dieser Übung).
 
-1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Hubs** und dann **+ Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
+1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Ressourcen** und dann **+ Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
