@@ -17,7 +17,7 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu host
 
 1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
 
-1. Wählen Sie im Abschnitt „Verwaltung“ die Option „Alle Hubs“ und dann **+Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
+1. Wählen Sie im Abschnitt „Verwaltung“ die Option „Alle Ressourcen“ und dann **+Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
@@ -50,7 +50,7 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu host
 
 Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie nun ein Projekt in Ihrem Azure KI-Hub.
 
-1. Wählen Sie in Azure KI Studio auf der Seite **Erstellen** die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
+1. Wählen Sie in Azure KI Studio auf der Seite **Hub-Übersicht** die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
 
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
     - **Hub:** *Ihr KI-Hub*
@@ -82,7 +82,7 @@ Jetzt können Sie ein Modell bereitstellen, das über **Azure KI Studio** verwe
 
 Inhaltsfilter werden auf Eingabeaufforderungen und Vervollständigungen angewendet, um zu verhindern, dass potenziell schädliche oder beleidigende Sprache generiert wird.
 
-1. Wählen Sie auf der Seite **Erstellen** die Option **Inhaltsfilter** in der linken Navigationsleiste aus, und wählen Sie dann **+ Inhaltsfilter erstellen** aus.
+1. Wählen Sie in der linken Navigationsleiste unter **Komponenten** die Option **Inhaltsfilter** und dann **+ Inhaltsfilter erstellen** aus.
 
 1. Geben Sie auf der Registerkarte **Grundlegende Informationen** die folgenden Informationen an: 
     - **Name:** *Ein eindeutiger Name für Ihren Inhaltsfilter*
@@ -117,7 +117,7 @@ Inhaltsfilter werden auf Eingabeaufforderungen und Vervollständigungen angewend
 
 Sehen wir uns an, wie sich das Modell in einer Konversation verhält.
 
-1. Navigieren Sie im linken Bereich zum **Playground**.
+1. Navigieren Sie im linken Fensterbereich zum **Projekt-Playground**.
 
 1. Geben Sie im Modus **Chat** die folgende Eingabeaufforderung im Abschnitt **Chatsitzung** ein.
 
