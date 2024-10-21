@@ -75,9 +75,9 @@ Nachdem Sie Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie das M
 1. Geben Sie in das Chat-Fenster die Abfrage `What can you do?` ein. Beachten Sie, dass das Modell bereits weiß, worauf es sich konzentrieren soll, obwohl Sie die Systemnachricht nicht angegeben haben, um Ihr Modell anzuweisen, reisebezogene Fragen zu beantworten.
 1. Versuchen Sie es mit einer anderen Abfrage wie `Where should I go on holiday for my 30th birthday?`
 
-## Löschen von Azure-Ressourcen
+## Bereinigung
 
-Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, löschen Sie die erstellten Ressourcen, um unnötige Azure-Kosten zu vermeiden.
+Wenn Sie die Erkundung von Azure AI Studio beendet haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
 
 - Navigieren Sie zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com`.
 - Wählen Sie auf der **Startseite** des Azure-Portals die Option **Ressourcengruppen** aus.
