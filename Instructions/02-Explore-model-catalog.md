@@ -18,22 +18,12 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu hos
 1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Ressourcen** und dann **+ Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
-    - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz, Norden
-        - UK, Süden
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Wählen Sie eine Option aus, um einen neuen KI-Dienste zu erstellen oder einen vorhandenen zu verwenden.*
+    - **Ressourcengruppe:** *Neue Ressourcengruppe*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
     Nachdem der Azure KI-Hub erstellt wurde, sollte er ähnlich wie in der folgenden Abbildung aussehen:
 
@@ -72,7 +62,7 @@ Stellen Sie sich vor, Sie möchten einen benutzerdefinierten Copilot erstellen, 
 Ihr Kopilot muss sachlich korrekte Informationen liefern, daher ist Bodenständigkeit wichtig. Darüber hinaus möchten Sie, dass die Antworten des Copilot leicht zu lesen und zu verstehen sind. Daher sollten Sie auch ein Modell wählen, das sich durch einen hohen Grad an Geläufigkeit und Kohärenz auszeichnet.
 
 1. Navigieren Sie im Azure AI Studio über das Menü auf der linken Seite zu **Modell-Benchmarks** unter dem Abschnitt **Get started**.
-    Auf der Registerkarte **Qualitätsvergleiche** finden Sie einige bereits visualisierte Diagramme, die verschiedene Modelle miteinander vergleichen.
+    Auf der Registerkarte **Qualitäts-Benchmarks** finden Sie einige bereits visualisierte Diagramme, die verschiedene Modelle vergleichen.
 1. Filtern Sie die angezeigten Modelle:
     - **Aufgaben**: Beantworten von Fragen
     - **Sammlungen** Azure OpenAI
@@ -94,12 +84,13 @@ Beginnen wir mit der Bereitstellung eines Modells aus dem Modellkatalog. Sie kö
 
 1. Navigieren Sie zur Seite **Modellkatalog** unter dem Abschnitt **Einstieg**, indem Sie das Menü auf der linken Seite verwenden.
 1. Suchen Sie nach dem Modell `gpt-35-turbo`, das von Azure AI erstellt wurde, und stellen Sie es mit den folgenden Einstellungen bereit:
-    - **Einsatzname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, der angibt, dass es sich um ein GPT-3.5-Modell handelt*
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
-    - **Verbundene Azure OpenAI-Ressource**: *Wählen Sie die Standardverbindung aus, die beim Erstellen des Hubs erstellt wurde.*
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: Standard
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
 
 ### Bereitstellen eines Modells über Bereitstellungen
 
@@ -108,12 +99,13 @@ Wenn Sie bereits genau wissen, welches Modell Sie bereitstellen möchten, sollte
 1. Navigieren Sie zur Seite **Einrichtungen** unter dem Abschnitt **Komponenten**, indem Sie das Menü auf der linken Seite verwenden.
 1. Erstellen Sie auf der Registerkarte **Modellbereitstellungen** eine neue Bereitstellung mit den folgenden Einstellungen:
     - **Modell**: gpt-4
-    - **Einsatzname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, der angibt, dass es sich um ein GPT-4-Modell handelt*
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
-    - **Verbundene Azure OpenAI-Ressource**: *Wählen Sie die Standardverbindung aus, die beim Erstellen des Hubs erstellt wurde.*
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: Standard
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
 
     > **Hinweis**: Vielleicht haben Sie bemerkt, dass einige Modelle die Modell-Benchmarks anzeigen, aber nicht als Option in Ihrem Modellkatalog. Die Modellverfügbarkeit unterscheidet sich je nach Standort. Ihr Standort wird auf der KI-Hub-Ebene angegeben, wo Sie den **Standorthilfsprogramm** verwenden können, um das Modell anzugeben, das Sie einsetzen wollen, um eine Liste von Standorten zu erhalten, an denen Sie es einsetzen können.
 
@@ -124,7 +116,7 @@ Nachdem wir nun zwei Modelle zum Vergleichen haben, sehen wir uns an, wie sich d
 1. Navigieren Sie zur Seite **Chat** unter dem Abschnitt **Projektspielplatz**, indem Sie das Menü auf der linken Seite verwenden.
 1. Wählen Sie im **Chat-Playground** Ihre GPT-3.5-Bereitstellung aus.
 1. Geben Sie im Chat-Fenster die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
-    Die Antworten sind sehr allgemein gehalten. Denken Sie daran, dass wir einen benutzerdefinierten Kopiloten erstellen wollen, der als Reiseassistent dient. Sie können angeben, welche Art von Hilfe Sie in der Frage benötigen, die Sie stellen.
+    Die Antworten sind sehr allgemein gehalten. Denken Sie daran, dass wir einen benutzerdefinierten Kopiloten erstellen wollen, der als Reiseassistent dient. In der Frage, die Sie stellen, können Sie angeben, welche Art von Hilfe Sie benötigen.
 1. Geben Sie im Chatfenster die Abfrage `Imagine you're a travel assistant, what can you help me with?` ein. Die Antworten sind bereits spezifischer. Möglicherweise möchten Sie nicht, dass Ihre Endbenutzer bei jeder Interaktion mit Ihrem Copilot den erforderlichen Kontext bereitstellen müssen. Um globale Anweisungen hinzuzufügen, können Sie die Systemmeldung bearbeiten.
 1. Aktualisieren Sie die Systemnachricht mit der folgenden Eingabeaufforderung:
 
@@ -132,11 +124,11 @@ Nachdem wir nun zwei Modelle zum Vergleichen haben, sehen wir uns an, wie sich d
    You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
    ```
 
-1. Wähle **Änderungen übernehmen** und **Chat löschen**.
+1. Klicken Sie auf **Speichern**, und **Chat löschen**.
 1. Geben Sie im Chatfenster die Abfrage `What can you do?` ein, und schauen Sie sich die neue Antwort an. Beobachten Sie, wie sich dies von der Antwort unterscheidet, die Sie zuvor erhalten haben. Die Antwort ist ausreichend spezifisch, um jetzt zu reisen.
 1. Setzen Sie das Gespräch fort, indem Sie fragen: `I'm planning a trip to London, what can I do there?` Der Copilot bietet viele reisebezogene Informationen. Möglicherweise möchten Sie die Ausgabe noch weiter verbessern. Vielleicht möchten Sie zum Beispiel, dass die Antwort prägnanter ausfällt.
 1. Aktualisieren Sie die Systemnachricht, indem Sie am Ende der Nachricht `Answer with a maximum of two sentences.`hinzufügen. Wenden Sie die Änderung an, löschen Sie den Chat und testen Sie den Chat erneut, indem Sie eine Frage stellen: `I'm planning a trip to London, what can I do there?` Vielleicht möchten Sie auch, dass Ihr Copilot das Gespräch fortsetzt, anstatt nur die Frage zu beantworten.
-1. Aktualisieren Sie die Systemnachricht, indem Sie `End your answer with a follow-up question.`am Ende der Nachricht hinzufügen . Wenden Sie die Änderung an, löschen Sie den Chat, und testen Sie den Chat erneut, indem Sie Folgendes fragen: `I'm planning a trip to London, what can I do there?`
+1. Aktualisieren Sie die Systemnachricht, indem Sie `End your answer with a follow-up question.`am Ende der Nachricht hinzufügen . Speichern Sie die Änderung, löschen Sie den Chat, und testen Sie den Chat erneut, indem Sie fragen: `I'm planning a trip to London, what can I do there?`
 1. Ändern Sie Ihre **Einrichtung** auf Ihr GPT-4-Modell und wiederholen Sie alle Schritte in diesem Abschnitt. Beachten Sie, wie die Modelle in ihren Ausgaben variieren können.
 1. Testen Sie schließlich beide Modelle für die Abfrage `Who is the prime minister of the UK?`. Die Leistung bei dieser Frage hängt mit der Fundiertheit der Modelle zusammen (d. h. ob die Antworten sachlich richtig sind). Korreliert die Leistung mit Ihren Schlussfolgerungen aus den Modell-Benchmarks?
 

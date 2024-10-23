@@ -1,9 +1,9 @@
 ---
 lab:
-  title: Evaluieren Sie die Leistung Ihres benutzerdefinierten Copiloten im Azure AI Studio
+  title: Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten im Azure KI Studio
 ---
 
-# Evaluieren Sie die Leistung Ihres benutzerdefinierten Copiloten im Azure AI Studio
+# Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten im Azure KI Studio
 
 In dieser Übung untersuchen Sie integrierte und benutzerdefinierte Auswertungen, um die Leistung Ihrer KI-Anwendungen mit Azure KI Studio zu bewerten und zu vergleichen.
 
@@ -15,30 +15,18 @@ Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hub
 
 1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
 1. Wählen Sie die **Startseite** und dann **+ Neues Projekt** aus.
-1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
-    - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
-    - **Hub:** *Erstellen Sie einen neuen Hub mit den folgenden Einstellungen:*
-        - **Hub-Name:** *Ein eindeutiger Name*
-        - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-        - **Ressourcengruppe:** *Neue Ressourcengruppe*
-        - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz, Norden
-        - UK, Süden
+1. Geben Sie im **Projekt erstellen**-Assistenten einen eindeutigen Namen für Ihr Projekt ein, wählen Sie dann **Anpassen** und legen Sie die folgenden Einstellungen fest:
+    - **Hub-Name:** *Ein eindeutiger Name*
+    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
+    - **Ressourcengruppe:** *Neue Ressourcengruppe*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
     - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
-1. Warten Sie, bis Ihr Projekt erstellt wurde.
+1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen.
+1. Wählen Sie **Ein Projekt erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 
 ## Bereitstellen eines GPT-Modells
 
@@ -47,11 +35,12 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
 1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
     - **Bereitstellungstyp**: Standard
-    - **Verbundene Azure OpenAI-Ressource**: *Wählen Sie die Standardverbindung aus.*
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: Standard
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
 1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
 1. Ändern Sie die **Systemmeldung** wie folgt:
 
@@ -73,7 +62,7 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Wählen Sie **Änderungen übernehmen** aus.
+1. Wählen Sie **Speichern**.
 1. Geben Sie im Chatfenster die Abfrage `What can you do?` ein, um zu überprüfen, ob das Sprachmodell erwartungsgemäß funktioniert.
 
 Nachdem Sie nun über ein bereitgestelltes Modell mit einer aktualisierten Systemmeldung verfügen, können Sie das Modell auswerten.
@@ -117,8 +106,8 @@ Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Durch 
 
 1. Wählen Sie **Ausführen** in der oberen Leiste aus, um Ausgaben für alle Fragen zu generieren, die Sie als Eingaben hinzugefügt haben.
 1. Jetzt können Sie die Ausgaben für jede Frage manuell überprüfen, indem Sie unten rechts in einer Antwort das Symbol mit dem Daumen nach oben oder unten auswählen. Bewerten Sie jede Antwort, und stellen Sie sicher, dass Sie in Ihren Bewertungen mindestens einen Daumen nach oben und einen Daumen nach unten verwenden.
-1. Wählen Sie **Ergebnisse speichern** in der oberen Leiste aus. Geben Sie `manual_evaluation_results` als Namen für die Ergebnisse ein.
-1. Navigieren Sie über das Menü links zu **Auswertungen**.
+1. Klicken Sie in der oberen Menüleiste auf **Ergebnisse speichern**. Geben Sie `manual_evaluation_results` als Namen für die Ergebnisse ein.
+1. Navigieren Sie über das Menü auf der linken Seite zu **Auswertungen**.
 1. Wählen Sie die Registerkarte **Manuellen Auswertungen** aus, um die manuellen Auswertungen zu finden, die Sie gerade gespeichert haben. Beachten Sie, dass Sie Ihre zuvor erstellten manuellen Auswertungen durchsehen, dort weitermachen, wo Sie aufgehört haben, und die aktualisierten Auswertungen speichern können.
 
 ## Bewerten Ihres Copilots mit integrierten Metriken
@@ -130,7 +119,7 @@ Wenn Sie einen Copilot mit einem Chatfluss erstellt haben, können Sie den Fluss
         <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
         <ul>
           <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-          <li>Bestätigen Sie auf der IAM-Seite auf der Registerkarte Identität, dass es sich um eine systemzugewiesene verwaltete Identität handelt.</li>
+          <li>Bestätigen Sie auf der Registerkarte Identität unter Ressourcenverwaltung, dass es sich um eine systemzugewiesene, verwaltete Identität handelt.</li>
           <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
           <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
           <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
@@ -140,11 +129,13 @@ Wenn Sie einen Copilot mit einem Chatfluss erstellt haben, können Sie den Fluss
     - **Was möchten Sie auswerten?**: Dataset
     - **Auswertungsname**: *Geben Sie einen eindeutigen Namen ein.*
     - **Welche Art von Szenario bewerten Sie?**: Frage und Antwort ohne Kontext
+    - Wählen Sie **Weiter** aus.
     - **Wählen Sie die Daten aus, die Sie auswerten möchten**: Fügen Sie Ihr Dataset hinzu.
         - Laden Sie die https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl-JSONL-Datei herunter, und laden Sie sie auf die Benutzeroberfläche hoch.
     - **Metriken auswählen**: Kohärenz, Sprachfluss
     - **Verbindung**: *Ihre KI Services-Verbindung*
     - **Bereitstellungsname/Modell**: *Ihr bereitgestelltes GPT-3.5-Modell*
+1. Klicken Sie auf **Weiter**, überprüfen Sie Ihre Daten und übermitteln Sie die neue Auswertung.
 1. Warten Sie, bis die Auswertungen abgeschlossen sind. Eventuell müssen Sie die Seite aktualisieren.
 1. Wählen Sie die gerade erstellte Auswertung aus.
 1. Erkunden Sie das **Metrik-Dashboard** und **Detaillierte Metrikergebnisse**.

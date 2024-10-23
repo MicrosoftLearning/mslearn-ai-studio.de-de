@@ -23,26 +23,19 @@ Sehen Sie sich zunächst Azure KI Studio an.
 
 Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu hosten. Sie können diese Ressource entweder beim Erstellen eines Projekts erstellen oder vorab bereitstellen (wie in dieser Übung).
 
-1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Hubs** und dann **+ Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
+1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Ressourcen** und dann **+ Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
-    - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz, Norden
-        - UK, Süden
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
     - **Verbinden von Azure KI Services oder Azure OpenAI**: *Wählen Sie eine Option aus, um einen neuen KI-Dienste zu erstellen oder einen vorhandenen zu verwenden.*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
     > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
+1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen.
+1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
+   
     Nachdem der Azure KI-Hub erstellt wurde, sollte er ähnlich wie in der folgenden Abbildung aussehen:
 
     ![Screenshot: Details eines Azure KI-Hubs in Azure KI Studio.](./media/azure-ai-resource.png)
@@ -73,19 +66,20 @@ Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Si
 
 ## Bereitstellen und Testen eines Modells
 
-Sie können ein Projekt verwenden, um komplexe KI-Lösungen basierend auf generativen KI-Modellen zu erstellen. Das vollständige Erkunden aller in Azure KI Studio verfügbaren Entwicklungsoptionen würde den Umfang dieser Übung übersteigen. Sie werden aber einige grundlegende Möglichkeiten erkunden, wie Sie mit Modellen in einem Projekt arbeiten können.
+Sie können ein Projekt verwenden, um komplexe KI-Lösungen basierend auf generativen KI-Modellen zu erstellen. Eine vollständige Erkundung aller in Azure KI Studio verfügbaren Entwicklungsoptionen würde den Rahmen dieser Übung sprengen, aber wir werden einige grundlegende Möglichkeiten erkunden, wie Sie mit Modellen in einem Projekt arbeiten können.
 
 1. Wählen Sie im linken Bereich für Ihr Projekt im Abschnitt **Komponenten** die Seite **Bereitstellungen** aus.
-1. Wählen Sie auf der Seite **Bereitstellungen** auf der Registerkarte **Modellbereitstellungen** die Option **+ Bereitstellung erstellen** aus.
+1. Wählen Sie auf der Seite **Einrichtungen** auf der Registerkarte **Modell-Einrichtungen** die Option **+ Modell einrichten** aus.
 1. Suchen Sie in der Liste nach dem Modell **gpt-35-turbo**, und wählen Sie „Bestätigen“ aus.
 1. Stellen Sie das Modell mit den folgenden Einstellungen bereit:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
     - **Bereitstellungstyp**: Standard
-    - **Verbundene Azure OpenAI-Ressource**: *Wählen Sie die Standardverbindung aus, die beim Erstellen des Hubs erstellt wurde.*
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: Standard
-
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
+      
     > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
 1. Nachdem das Modell bereitgestellt wurde, wählen Sie auf der Seite „Bereitstellungsübersicht“ die Option **Im Playground öffnen** aus.
