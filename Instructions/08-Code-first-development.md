@@ -37,17 +37,18 @@ In dieser Übung verwenden Sie [GitHub Codespaces](https://github.com/features/c
 
 Führen Sie die folgenden Schritte aus, um Ihre Entwicklungsumgebung zu initialisieren:
 
-1. **Das Repository verzweigen**: Wählen Sie die Schaltfläche **Verzweigen** in der oberen rechten Ecke der GitHub-Repository-Seite, um eine Kopie des Repositorys in Ihrem GitHub-Konto zu erstellen.
+1. Navigieren Sie zum **contoso-chat** Projektarchiv: `https://github.com/Azure-Samples/contoso-chat` 
+1. Klicken Sie auf die Schaltfläche **Fork** in der oberen rechten Ecke der Contoso-Chat GitHub-Repository-Seite, um eine Kopie des Repositorys in Ihrem GitHub-Konto zu erstellen.
 1. Sobald Sie ihr Verzweigungs-Repository haben, wählen Sie den **Code**-Button und dann **"Codespaces"** aus.
 1. Wählen Sie die **+** Schaltfläche aus, um einen neuen Codespace im Hauptzweig Ihres Verzweigungs-Repositorys zu erstellen.
 
     ![Verwenden von GitHub Codespaces](./media/create_codespaces.png)
 
-1. In wenigen Sekunden werden Sie zu einer neuen Browser-Registerkarte weitergeleitet, in der die Codespaces-Umgebung standardmäßig mit einem [angeschlossenen Visual Studio Code Editor](https://code.visualstudio.com/docs/devcontainers/containers) eingerichtet ist. Sie können entweder in der Browser-Registerkarte weiterarbeiten oder die Verbindung zu den laufenden Codespaces von Ihrem lokalen Visual Studio Code-Editor aus wiederherstellen, indem Sie auf die Schaltfläche **Öffnen in VS Code Desktop** im Menü oben links klicken.
+1. Binnen weniger Sekunden werden Sie zu einer neuen Browser-Registerkarte weitergeleitet, in der die Codespaces-Umgebung standardmäßig mit einem [angeschlossenen Visual Studio Code Editor](https://code.visualstudio.com/docs/devcontainers/containers) eingerichtet ist.
 
 ## Verbinden der VS Code-Umgebung mit Azure
 
-Der nächste Schritt ist die Verbindung Ihrer lokalen Entwicklungsumgebung mit dem Azure-Abonnement, in dem Sie das Projekt bereitstellen möchten. Öffnen Sie zunächst ein neues Terminal in Ihrer Visual Studio Code-IDE.
+Der nächste Schritt ist die Verbindung Ihrer Entwicklungsumgebung mit dem Azure-Abonnement, in dem Sie das Projekt bereitstellen möchten. Öffnen Sie zunächst ein neues Terminal in Ihrer VS Code-Umgebung, die in Codespaces ausgeführt wird.
 
 1. Überprüfen Sie zunächst, ob die [neueste Version](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) der Azure Developer CLI installiert ist.
     ```bash
