@@ -22,42 +22,36 @@ Sie müssen zuerst ein Projekt in Azure KI Studio erstellen, um die erforderlich
 Sie erstellen zunächst ein Azure KI Studio-Projekt und einen Azure KI-Hub für seine Unterstützung.
 
 1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. Wählen Sie die Seite **Erstellen** und dann **+ Neues Projekt** aus.
+1. Wählen Sie die **Startseite** und dann **+ Neues Projekt** aus.
 1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
-    - **Azure-Hub**: *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
-        - **Name des KI-Hubs**: *Ein eindeutiger Name*
-        - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-        - **Ressourcengruppe:** *Neue Ressourcengruppe*
-        - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz, Norden
-        - UK, Süden
+    - **Hub:** *Erstellen Sie einen neuen Hub mit den folgenden Einstellungen:*
+    - **Hub-Name:** *Ein eindeutiger Name*
+    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
+    - **Ressourcengruppe:** *Neue Ressourcengruppe*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
+    - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
-1. Warten Sie 5 bis 10 Minuten, bis Ihr Projekt erstellt wurde.
+1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
 ## Bereitstellen eines GPT-Modells
 
 Um ein LLM-Modell in Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Mit Azure KI Studio können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Flows verwenden können.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
-1. Navigieren Sie in Azure OpenAI Studio zur Seite **Bereitstellungen**.
 1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
-    - **Modell**: `gpt-35-turbo`
-    - **Modellversion**: *Behalten Sie den Standardwert bei.*
-    - **Bereitstellungsname**: `gpt-35-turbo`
-    - Legen Sie die Optionen unter **Erweitert** fest, um den Standardinhaltsfilter zu verwenden und die Token pro Minute (TPM) auf **5.000** zu beschränken.
-
+    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungstyp**: Standard
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
+    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
+   
 Nachdem Sie ihr LLM-Modell bereitgestellt haben, können Sie einen Flow in Azure KI Studio erstellen, der das bereitgestellte Modell aufruft.
 
 ## Erstellen und Ausführen eines Flows in Azure KI Studio
@@ -72,6 +66,18 @@ Zum Erstellen eines neuen Flows mit einer Vorlage können Sie einen der Flowtype
 1. Wählen Sie **+ Erstellen** aus, um einen neuen Flow zu erstellen.
 1. Erstellen Sie einen neuen **Standardflow**, und geben Sie `entity-recognition` als Ordnernamen ein.
 
+<details>  
+    <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
+    <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
+    <ul>
+        <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
+        <li>Bestätigen Sie auf der IAM-Seite auf der Registerkarte Identität, dass es sich um eine systemzugewiesene verwaltete Identität handelt.</li>
+        <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
+        <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
+        <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
+    </ul>
+</details>
+
 Ein Standardflow mit einer Eingabe, zwei Knoten und einer Ausgabe wird für Sie erstellt. Sie aktualisieren den Flow, um zwei Eingaben zu übernehmen, Entitäten zu extrahieren, die Ausgabe vom LLM-Knoten zu bereinigen und die Entitäten als Ausgabe zurückzugeben.
 
 ### Starten der automatischen Runtime
@@ -79,9 +85,8 @@ Ein Standardflow mit einer Eingabe, zwei Knoten und einer Ausgabe wird für Sie 
 Zum Testen des Flows benötigen Sie eine Computeressource. Die erforderliche Computeressource wird Ihnen über die Runtime zur Verfügung gestellt.
 
 1. Nach dem Erstellen des neuen Flows, den Sie `entity-recognition` genannt haben, sollte der Flow in Studio geöffnet werden.
-1. Wählen Sie auf der oberen Leiste das Feld **Runtime auswählen** aus.
-1. Wählen Sie in der Liste **Automatische Runtime** die Option **Start** aus, um die automatische Runtime zu starten.
-1. Warten Sie, bis die Runtime gestartet wurde.
+1. Wählen Sie **Computesitzung starten** in der oberen Leiste aus.
+1. Es dauert 1 bis 3 Minuten, bis die Computesitzung gestartet wird.
 
 ### Konfigurieren der Eingaben
 

@@ -42,17 +42,17 @@ Ihre Copilot-Lösung integriert benutzerdefinierte Daten in einen Prompt Flow. U
 Jetzt können Sie ein Azure KI Studio-Projekt und die Azure KI-Ressourcen erstellen, um es zu unterstützen.
 
 1. Öffnen Sie in einem Webbrowser [Azure KI Studio](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. Wählen Sie auf der **Startseite** von Azure AI Studio die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
+1. Wählen Sie auf der **Startseite** von Azure AI Studio die Option **+ Neues Projekt** aus.
+1. Unter **Projekt erstellen** geben Sie Ihrem Projekt einen eindeutigen Namen, wählen Sie dann **Anpassen** und erstellen Sie ein Projekt mit den folgenden Einstellungen:
 
-    - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
-    - **Hub:** *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
+    - **Erstellen Sie einen Hub**: *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
 
         - **Hub-Name:** *Ein eindeutiger Name*
         - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
         - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
         - **Speicherort:** *Derselbe Standort wie Ihre Azure KI-Suche-Ressource*
-        - **Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
-        - **Azure KI Search**: *Wählen Sie Ihre Azure KI Search-Ressource aus*
+        - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+        - **Verbinden Sie Azure AI Search**: *Wählen Sie Ihre Azure AI Search Ressource*
 
 1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
@@ -64,13 +64,16 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 - Ein Modell, das in natürlicher Sprache Antworten auf Fragen generieren kann, basierend auf Ihren Daten.
 
 1. Wählen Sie in Azure KI Studio in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
-1. Erstellen Sie eine neue Bereitstellung des Modells **text-embedding-ada-002** mit den folgenden Einstellungen:
+1. Erstellen Sie eine neue Bereitstellung des Modells **text-embedding-ada-002** mit den folgenden Einstellungen, indem Sie **Anpassen** im Assistenten für die Bereitstellung des Modells wählen::
 
     - **Bereitstellungsname**: `text-embedding-ada-002`
-    - **Modellversion**: *Standard*
-    - **Erweiterte Optionen**:
-        - **Inhaltsfilter**: *Standard*
-        - **Ratenbegrenzung für Token pro Minute**: `5K`
+    - **Bereitstellungstyp**: Standard
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
+    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
+      
 1. Wiederholen Sie die vorherigen Schritte zum Bereitstellen eines **gpt-35-turbo-16k-** Modells mit dem Bereitstellungsnamen `gpt-35-turbo-16k`.
 
     > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
@@ -85,7 +88,7 @@ Die Daten für Ihren Copilot bestehen aus einer Reihe von Reisebroschüren des f
 1. Erweitern Sie im Assistenten **Hinzufügen Ihrer Daten** das Dropdownmenü, um **Dateien/Ordner hochladen** auszuwählen.
 1. Wählen Sie **Ordner hochladen** und dann den Ordner **Broschüren** aus.
 1. Legen Sie den Datennamen auf `brochures` fest.
-1. Warten Sie, bis der Ordner hochgeladen wurde, und beachten Sie, dass er mehrere PDF-Dateien enthält.
+1. Warten Sie, bis der Ordner hochgeladen wurde, und beachten Sie, dass er mehrere .pdf-Dateien enthält.
 
 ## Erstellen eines Indexes für Ihre Daten
 
@@ -93,16 +96,16 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 
 1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Indizes** aus.
 1. Fügen Sie einen neuen Index mit den folgenden Einstellungen hinzu:
-    - **Quelldaten**:
+    - **Quellstandort**:
         - **Datenquelle**: Daten in Azure KI Studio
             - *Auswählen der Datenquelle **Broschüren***
-    - **Indexeinstellungen**:
+    - **Indexkonfiguration**:
         - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
-        - **Indexname**: `brochures-index`
+        - **Vektorindex**: `brochures-index`
         - **VM**: Automatisch auswählen
     - **Sucheinstellungen**:
         - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
-        - **Auswählen eines Einbettungsmodells**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
+        - **Azure OpenAI-Verbindung**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
         
 1. Warten Sie, bis der Indizierungsprozess abgeschlossen ist, was mehrere Minuten dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
 
@@ -115,12 +118,12 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Projekt-Playground** die Seite **Chat** aus.
-1. Stellen Sie auf der Seite "Chat" im Bereich "Optionen" sicher, dass ihre **gpt-35-turbo-16k** Modellbereitstellung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Vergewissern Sie sich auf der Seite „Chat“ im Bereich „Setup“, dass Ihre Bereitstellung des Modells **gpt-35-turbo-16k** ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
 1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
-1. Wählen Sie im Setupbereich die Registerkarte **Daten hinzufügen** aus, und fügen Sie dann den Projektindex **Broschürenindex** hinzu, und wählen Sie den Suchtyp **Hybrid (Vektor + Schlüsselwort)** aus.
+1. Wählen Sie im Bereich „Setup“ die Registerkarte **Daten hinzufügen** aus, fügen Sie dann den Projektindex **Broschüren-Index** hinzu und wählen Sie den Suchtyp **Hybrid (Vektor + Schlüsselwort)** aus.
 
    > **Hinweis**: Einige Benutzende stellen fest, dass neu erstellte Indizes nicht sofort verfügbar sind. Das Aktualisieren des Browsers hilft in der Regel, aber wenn das Problem weiterhin auftritt, bei dem der Index nicht gefunden werden kann, müssen Sie möglicherweise warten, bis der Index erkannt wird.
-   
+
 1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
 1. Überprüfen Sie die Antwort, die auf Daten im Index basiert.
 
@@ -135,9 +138,9 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
         <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
         <ul>
           <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-          <li>Bestätigen Sie auf der IAM-Seite auf der Registerkarte Identität, dass es sich um eine systemzugewiesene verwaltete Identität handelt.</li>
+          <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
           <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-          <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
+          <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong>, <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, wählen Sie die <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong> und wählen Sie Ihre Azure AI Dienste Ressource.</li>
           <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
         </ul>
     </details>
@@ -175,7 +178,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
     - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
-1. Legen Sie im Abschnitt **Lookup** die folgenden Parameterwerte fest:
+1. Warten Sie, bis die Computesitzung gestartet ist, und legen Sie dann im Abschnitt **Suchabfrage** die folgenden Parameterwerte fest:
 
     - **mlindex_content**: *Wählen Sie das leere Feld aus, um den Bereich „Generieren“ zu öffnen*
         - **index_type**: Registrierter Index
@@ -217,7 +220,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie i
 
 Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierten Daten verwendet, können Sie ihn als Dienst bereitstellen, der von einer Copilot-Anwendung genutzt werden soll.
 
-> **Hinweis:** Je nach Region und Rechenzentrumslast können Bereitstellungen manchmal eine Weile dauern. Sie können sich auf den nachstehenden Abschnitt "Herausforderung" setzen, während sie die Bereitstellungen bereitstellt oder die Tests Ihrer Bereitstellung überspringt, wenn Sie nur wenig Zeit haben.
+> **Hinweis**: Abhängig von der Region und der Auslastung des Rechenzentrums kann die Bereitstellung manchmal eine Weile dauern und manchmal wird ein Fehler bei der Interaktion mit der Bereitstellung ausgegeben. Sie können sich auf den nachstehenden Abschnitt "Herausforderung" setzen, während sie die Bereitstellungen bereitstellt oder die Tests Ihrer Bereitstellung überspringt, wenn Sie nur wenig Zeit haben.
 
 1. Wählen Sie auf der Symbolleiste **Bereitstellen** aus.
 1. Erstellen Sie eine Bereitstellung mit den folgenden Einstellungen:
