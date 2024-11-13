@@ -5,13 +5,13 @@ lab:
 
 # Feinabstimmung eines Sprachmodells für die Chatvervollständigung in Azure KI Studio
 
-Wenn Sie möchten, dass sich ein Sprachmodell auf eine bestimmte Art und Weise verhält, können Sie Prompt Engineering verwenden, um das gewünschte Verhalten zu definieren. Wenn Sie die Konsistenz des gewünschten Verhaltens verbessern wollen, können Sie sich für eine Feinabstimmung eines Modells entscheiden und es mit Ihrem Prompt-Engineering-Ansatz vergleichen, um zu bewerten, welche Methode Ihren Anforderungen am besten entspricht.
+Wenn Sie möchten, dass sich ein Sprachmodell auf eine bestimmte Weise verhält, können Sie das entsprechende Engineering verwenden, um das gewünschte Verhalten zu definieren. Wenn Sie die Konsistenz des gewünschten Verhaltens verbessern möchten, können Sie ein Modell optimieren, indem Sie es mit Ihrem Prompt-Engineering-Ansatz vergleichen, um zu bewerten, welche Methode Ihren Anforderungen am besten entspricht.
 
-In dieser Übung nehmen Sie mit Azure KI Studio eine Feinabstimmung eines Sprachmodells vor, das Sie für ein benutzerdefiniertes Chat-Anwendungsszenario verwenden möchten. Sie werden das Feinabstimmungsmodell mit einem Basismodell vergleichen, um festzustellen, ob das Feinabstimmungsmodell Ihren Bedürfnissen besser entspricht.
+In dieser Übung werden Sie ein Sprachmodell mit Azure KI Studio feinabstimmen, das Sie für ein benutzerdefiniertes Chat-Anwendungsszenario verwenden möchten. Sie vergleichen das fein abgestimmte Modell mit einem Basismodell, um zu beurteilen, ob das fein abgestimmte Modell Ihren Anforderungen besser entspricht.
 
-Stellen Sie sich vor, Sie arbeiten für ein Reisebüro und entwickeln eine Chat-Anwendung, die den Kunden bei der Urlaubsplanung helfen soll. Ziel ist es, einen einfachen und inspirierenden Chat zu schaffen, der Ziele und Aktivitäten vorschlägt. Da der Chat nicht mit Datenquellen verbunden ist, sollte er **keine** spezifischen Empfehlungen für Hotels, Flüge oder Restaurants bereitstellen, um die Vertrauensbeziehung mit Ihrer Kundschaft zu gewährleisten.
+Stellen Sie sich vor, Sie arbeiten für ein Reisebüro und entwickeln eine Chatanwendung, um Personen bei der Planung ihres Urlaubs zu helfen. Ziel ist es, einen einfachen und inspirierenden Chat zu erstellen, der Ziele und Aktivitäten vorschlägt. Da der Chat nicht mit Datenquellen verbunden ist, sollte er **keine** spezifischen Empfehlungen für Hotels, Flüge oder Restaurants bereitstellen, um das Vertrauen Ihrer Kundinnen und Kunden sicherzustellen.
 
-Diese Übung dauert etwa **60** Minuten.
+Diese Übung dauert ungefähr **60** Minuten.
 
 ## Erstellen eines KI-Hubs und eines KI-Projekts in Azure KI Studio
 
@@ -25,22 +25,22 @@ Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hub
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+    - **Standort**: Wählen Sie eine der folgenden Regionen **USA (Ost 2)**, **USA, Norden-Mitte**, **Schweden, Mitte**, **Schweiz, Westen**\*
+    - **Verbinden Sie Azure KI Services oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Weitere Informationen zur [Feinabstimmung von Modellregionen](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
 1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
 ## Optimieren eines GPT-3.5 Modells
 
-Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie zuerst mit der Feinabstimmung. Bevor Sie ein Modell optimieren können, benötigen Sie ein Dataset.
+Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie zuerst mit dem Feinabstimmungsauftrag. Bevor Sie ein Modell optimieren können, benötigen Sie ein Dataset.
 
 1. Speichern Sie das Schulungs-Dataset lokal als JSONL-Datei: [https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-finetune.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl)
 
-    > **Hinweis**: Ihr Gerät speichert die Datei möglicherweise standardmäßig als .txt-Datei. Wählen Sie alle Dateien aus und entfernen Sie die Endung .txt, um sicherzustellen, dass Sie die Datei als JSONL speichern.
+    > **Hinweis**: Ihr Gerät speichert die Datei möglicherweise standardmäßig als .txt-Datei. Wählen Sie alle Dateien aus, und entfernen Sie das .txt-Suffix, um sicherzustellen, dass Sie die Datei als JSONL speichern.
 
 1. Navigieren Sie zur Seite **Feinabstimmung** unter dem Abschnitt **Tools**, indem Sie das Menü auf der linken Seite verwenden.
 1. Wählen Sie die Schaltfläche zum Hinzufügen eines neuen Feinabstimmungsmodells, wählen Sie das Modell `gpt-35-turbo` und wählen Sie **Bestätigen**.
@@ -65,27 +65,27 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie 
     - **Datei hochladen**: Wählen Sie die JSONL-Datei aus, die Sie in einem früheren Schritt heruntergeladen haben.
     - **Gültigkeitsprüfungsdaten**: Keine
     - **Vorgangsparameter**: *Standardeinstellungen beibehalten*
-1. Die Feinabstimmung wird gestartet und kann einige Zeit in Anspruch nehmen.
+1. Die Feinabstimmung beginnt und kann einige Zeit in Anspruch nehmen.
 
-> **Hinweis**: Die Feinabstimmung und Bereitstellung kann einige Zeit in Anspruch nehmen, daher müssen Sie möglicherweise regelmäßig nachsehen. Sie können bereits mit dem nächsten Schritt fortfahren, während Sie warten.
+> **Hinweis**: Die Feinabstimmung und Bereitstellung kann einige Zeit in Anspruch nehmen, sodass Sie möglicherweise regelmäßig zurückkehren müssen. Sie können bereits mit dem nächsten Schritt fortfahren, während Sie warten.
 
 ## Chat mit einem Basismodell
 
-Während Sie darauf warten, dass die Feinabstimmung abgeschlossen ist, wollen wir uns mit einem GPT 3.5-Basismodell unterhalten, um zu sehen, wie es sich schlägt.
+Während Sie warten, bis der Feinabstimmungsauftrag abgeschlossen ist, chatten wir mit einem Basis-GPT 3.5-Modell, um die Leistung zu bewerten.
 
 1. Navigieren Sie zur Seite **Einrichtungen** unter dem Abschnitt **Komponenten**, indem Sie das Menü auf der linken Seite verwenden.
-1. Wählen Sie die Schaltfläche **+ Modell bereitstellen**, und wählen Sie die Option **Basismodell bereitstellen**.
-1. Stellen Sie ein `gpt-35-turbo`-Modell bereit, das dem gleichen Modelltyp entspricht, den Sie bei der Feinabstimmung verwendet haben.
-1. Wenn die Bereitstellung abgeschlossen ist, navigieren Sie zur Seite **Chat** unter dem Abschnitt **Project Playground**.
-1. Wählen Sie im Setup-Bereitstellungsvorgang Ihr bereitgestelltes `gpt-35-model` Basismodell aus.
+1. Wählen Sie die Schaltfläche ** + Modell bereitstellen** und dann die Option **Basismodell bereitstellen** aus.
+1. Stellen Sie ein `gpt-35-turbo`-Modell bereit, bei dem es sich um denselben Modelltyp handelt, den Sie bei der Feinabstimmung verwendet haben.
+1. Wenn die Bereitstellung abgeschlossen ist, navigieren Sie zur Seite **Chat** im Abschnitt **Projekt-Playground**.
+1. Wählen Sie Ihr bereitgestelltes `gpt-35-model`-Basismodell in der Setupbereitstellung aus.
 1. Geben Sie im Chat-Fenster die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
-    Die Antworten sind sehr allgemein gehalten. Denken Sie daran, dass wir eine Chat-Anwendung schaffen wollen, die Menschen zum Reisen inspiriert.
+    Die Antworten sind sehr allgemein gehalten. Denken Sie daran, dass wir eine Chatanwendung erstellen möchten, die Menschen zum Reisen inspiriert.
 1. Aktualisieren Sie die Systemnachricht mit der folgenden Eingabeaufforderung:
     ```md
     You are an AI assistant that helps people plan their holidays.
     ```
-1. Wählen Sie **Speichern** und dann **Chat löschen** aus und fragen Sie erneut `What can you do?`. Als Antwort kann Ihnen die Assistenz sagen, dass sie Ihnen helfen kann, Flüge, Hotels und Mietwagen für Ihre Reise zu buchen. Sie möchten dieses Verhalten vermeiden.
-1. Aktualisieren Sie die Systemnachricht erneut mit einem neuen Prompt:
+1. Wählen Sie **Speichern** und dann **Chat löschen** aus, und fragen Sie erneut `What can you do?` Als Antwort kann der Assistent Ihnen mitteilen, dass er Ihnen helfen kann, Flüge, Hotels und Mietwagen für Ihre Reise zu buchen. Sie möchten dieses Verhalten verhindern.
+1. Aktualisieren Sie die Systemnachricht erneut mit einer neuen Eingabeaufforderung:
 
     ```md
     You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
@@ -94,7 +94,7 @@ Während Sie darauf warten, dass die Feinabstimmung abgeschlossen ist, wollen wi
     ```
 
 1. Klicken Sie auf **Speichern**, und **Chat löschen**.
-1. Testen Sie Ihre Chat-Anwendung weiter, um zu überprüfen, dass sie keine Informationen bereitstellt, die nicht auf den erhaltenen Daten beruhen. Stellen Sie zum Beispiel die folgenden Fragen und untersuchen Sie die Antworten des Modells:
+1. Testen Sie ihre Chatanwendung weiterhin, um sicherzustellen, dass sie keine Informationen bereitstellt, die nicht auf abgerufenen Daten basieren. Stellen Sie beispielsweise die folgenden Fragen, und erkunden Sie die Antworten des Modells:
    
     `Where in Rome should I stay?`
     
@@ -102,13 +102,13 @@ Während Sie darauf warten, dass die Feinabstimmung abgeschlossen ist, wollen wi
 
     `Give me a list of five bed and breakfasts in Trastevere.`
 
-    Das Modell kann Ihnen eine Liste von Hotels bereitstellen, auch wenn Sie es angewiesen haben, keine Hotelempfehlungen zu geben. Dies ist ein Beispiel für inkonsistentes Verhalten. Wir wollen untersuchen, ob das fein abgestimmte Modell in diesen Fällen besser abschneidet.
+    Das Modell stellt Ihnen eventuell eine Liste von Hotels zur Verfügung, auch wenn Sie es angewiesen haben, keine Hotelempfehlungen zu geben. Dies ist ein Beispiel für ein inkonsistentes Verhalten. Schauen wir uns an, ob das fein abgestimmte Modell in diesen Fällen besser funktioniert.
 
-1. Navigieren Sie zur Seite **Feinabstimmung** unter **Tools**, um Ihren Feinabstimmungsauftrag und seinen Status zu finden. Wenn es noch läuft, können Sie Ihr bereitgestelltes Basismodell auch weiterhin manuell auswerten. Wenn der Vorgang abgeschlossen ist, können Sie mit dem nächsten Abschnitt fortfahren.
+1. Navigieren Sie zur Seite **Feinabstimmung** unter **Tools**, um Ihren Feinabstimmungsauftrag und dessen Status zu finden. Wenn sie noch ausgeführt wird, können Sie die manuelle Auswertung Ihres bereitgestellten Basismodells fortsetzen. Wenn sie abgeschlossen ist, können Sie mit dem nächsten Abschnitt fortfahren.
 
 ## Bereitstellen des optimierten Modells
 
-Wenn die Feinabstimmung erfolgreich abgeschlossen ist, können Sie das fein abgestimmte Modell bereitstellen.
+Wenn die Feinabstimmung erfolgreich abgeschlossen wurde, können Sie das fein abgestimmte Modell bereitstellen.
 
 1. Verwenden des fein abgestimmten Modells Wählen Sie die Registerkarte **Metriken** und erkunden Sie die Feinabstimmung der Metriken.
 1. Stellen Sie das fein abgestimmte Modell mit den folgenden Konfigurationen bereit:
@@ -116,11 +116,11 @@ Wenn die Feinabstimmung erfolgreich abgeschlossen ist, können Sie das fein abge
     - **Bereitstellungstyp**: Standard
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
     - **Inhaltsfilter**: Standard
-1. Warten Sie, bis die Bereitstellung abgeschlossen ist, bevor Sie sie testen können; dies kann eine Weile dauern.
+1. Warten Sie, bis die Bereitstellung abgeschlossen ist, bevor Sie sie testen können. Dies kann eine Weile dauern.
 
 ## Verwenden des fein abgestimmten Modells
 
-Nachdem Sie nun Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie das Modell genauso testen wie Ihr bereitgestelltes Basismodell.
+Nachdem Sie Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie das Modell jetzt wie Ihr bereitgestelltes Basismodell testen.
 
 1. Wenn die Verteilung fertig ist, navigieren Sie zu dem fein abgestimmten Modell und wählen Sie **Open in playground**.
 1. Aktualisieren Sie die Systemnachricht mit den folgenden Anweisungen:
@@ -131,7 +131,7 @@ Nachdem Sie nun Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie d
     Ask engaging questions to help someone plan their trip and think about what they want to do on their holiday.
     ```
 
-1. Testen Sie Ihr fein abgestimmtes Modell, um festzustellen, ob sein Verhalten nun konsistenter ist. Stellen Sie z. B. die folgenden Fragen erneut und untersuchen Sie die Antworten des Modells:
+1. Testen Sie Ihr fein abgestimmtes Modell, um zu beurteilen, ob sein Verhalten jetzt konsistenter ist. Stellen Sie beispielsweise die folgenden Fragen erneut, und erkunden Sie die Antworten des Modells:
    
     `Where in Rome should I stay?`
     
