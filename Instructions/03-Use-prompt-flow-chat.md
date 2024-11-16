@@ -18,24 +18,14 @@ Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hub
 1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
     - **Hub:** *Erstellen Sie einen neuen Hub mit den folgenden Einstellungen:*
-        - **Hub-Name:** *Ein eindeutiger Name*
-        - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-        - **Ressourcengruppe:** *Neue Ressourcengruppe*
-        - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz, Norden
-        - UK, Süden
+    - **Hub-Name:** *Ein eindeutiger Name*
+    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
+    - **Ressourcengruppe:** *Neue Ressourcengruppe*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
     - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
 1. Warten Sie, bis Ihr Projekt erstellt wurde.
@@ -47,11 +37,12 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
 1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
     - **Bereitstellungstyp**: Standard
-    - **Verbundene Azure OpenAI-Ressource**: *Wählen Sie die Standardverbindung aus.*
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: Standard
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
 1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
 1. Geben Sie im Chatfenster die Abfrage „`What can you do?`“ ein.
 
@@ -77,7 +68,7 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Wählen Sie **Änderungen übernehmen** aus.
+1. Wählen Sie **Speichern**.
 1. Geben Sie im Chatfenster dieselbe Abfrage wie zuvor ein: `What can you do?` Beachten Sie die geänderte Antwort.
 
 Nachdem Sie nun mit der Systemmeldung für das bereitgestellte GPT-Modell experimentiert haben, können Sie die Anwendung weiter anpassen, indem Sie mit dem Prompt Flow arbeiten.

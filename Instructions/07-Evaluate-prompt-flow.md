@@ -20,7 +20,7 @@ Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hub
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
     - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
+    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
     > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
@@ -33,7 +33,7 @@ Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hub
 Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Mit Azure KI Studio können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Flows verwenden können.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
-1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
+1. Erstellen Sie eine neue Bereitstellung des Modells **gpt-35-turbo** mit den folgenden Einstellungen, indem Sie **Anpassen** im Assistenten **Modell bereitstellen** auswählen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
@@ -42,7 +42,7 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
 1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
-1. Ändern Sie die **Systemmeldung** wie folgt:
+1. Ändern Sie im Textfeld **Modellanweisungen und Kontext geben** den Inhalt wie folgt:
 
    ```
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
@@ -128,14 +128,17 @@ Wenn Sie einen Copilot mit einem Chatfluss erstellt haben, können Sie den Fluss
 
     - **Was möchten Sie auswerten?**: Dataset
     - **Auswertungsname**: *Geben Sie einen eindeutigen Namen ein.*
-    - **Welche Art von Szenario bewerten Sie?**: Frage und Antwort ohne Kontext
     - Wählen Sie **Weiter** aus.
     - **Wählen Sie die Daten aus, die Sie auswerten möchten**: Fügen Sie Ihr Dataset hinzu.
         - Laden Sie die https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl-JSONL-Datei herunter, und laden Sie sie auf die Benutzeroberfläche hoch.
+    - Wählen Sie **Weiter** aus.
     - **Metriken auswählen**: Kohärenz, Sprachfluss
     - **Verbindung**: *Ihre KI Services-Verbindung*
     - **Bereitstellungsname/Modell**: *Ihr bereitgestelltes GPT-3.5-Modell*
-1. Klicken Sie auf **Weiter**, überprüfen Sie Ihre Daten und übermitteln Sie die neue Auswertung.
+    - **Abfrage**: Wählen Sie **Frage** als Datenquelle
+    - **Antwort**: Wählen Sie **Antwort** als Datenquelle
+      
+1. Wählen Sie **Weiter** aus, überprüfen Sie Ihre Daten und senden Sie mit **Übermitteln** die neue Bewertung ab.
 1. Warten Sie, bis die Auswertungen abgeschlossen sind. Eventuell müssen Sie die Seite aktualisieren.
 1. Wählen Sie die gerade erstellte Auswertung aus.
 1. Erkunden Sie das **Metrik-Dashboard** und **Detaillierte Metrikergebnisse**.

@@ -20,22 +20,12 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu host
 1. Wählen Sie im Abschnitt „Verwaltung“ die Option „Alle Ressourcen“ und dann **+Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
-    - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz, Norden
-        - UK, Süden
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: Wählen Sie eine Option aus, um einen neuen KI-Dienste zu erstellen oder einen vorhandenen zu verwenden.
+    - **Ressourcengruppe:** *Neue Ressourcengruppe*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Klicken Sie auf **Erstellen**. Die Erstellung des ersten Hubs kann einige Minuten dauern. Während der Huberstellung werden auch die folgenden KI-Ressourcen für Sie erstellt: 
     - KI Services
@@ -68,14 +58,14 @@ Jetzt können Sie ein Modell bereitstellen, das über **Azure KI Studio** verwe
 1. Erstellen Sie in Azure KI Studio eine neue Bereitstellung mit den folgenden Einstellungen:
 
     - **Modell**: gpt-35-turbo
+    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
-    - **Verbundene Azure OpenAI-Ressource**: *Ihre Azure OpenAI-Verbindung*
-    - **Modellversion**: Automatische Aktualisierung auf die Standardeinstellung
-    - **Bereitstellungsname**: *Ein eindeutiger Name Ihrer Wahl*
-    - **Erweiterte Optionen**
-        - **Inhaltsfilter**: Standard
-        - **Ratenbegrenzung für Token pro Minute**: 5.000
-
+    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
+    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+    - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
+      
 > **Hinweis:** Jedes Azure KI Studio-Modell ist für ein anderes Verhältnis von Funktionen und Leistung optimiert. Wir verwenden das Modell **GPT 3.5 Turbo** in dieser Übung, das sich in hohem Maße für Szenarien zur Generierung natürlicher Sprache und Chatszenarien eignet.
 
 ## Erkunden der Inhaltsfilter
