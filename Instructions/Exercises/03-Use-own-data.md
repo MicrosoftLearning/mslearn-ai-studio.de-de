@@ -1,13 +1,10 @@
----
-lab:
-  title: 'Erstellen eines benutzerdefinierten Copilots, der Ihre eigenen Daten verwendet'
----
-
 # Erstellen eines benutzerdefinierten Copilots, der Ihre eigenen Daten verwendet
 
 Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein gängiges Muster für die Entwicklung von benutzerdefinierten *Copiloten* – chatbasierten Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
 
-In dieser Übung verwenden Sie das Azure KI Foundry Portal, um benutzerdefinierte Daten in einen generativen KI Prompt Flow zu integrieren.
+In dieser Übung verwenden Sie Azure KI Studio, um benutzerdefinierte Daten in einen generativen KI-Prompt Flow zu integrieren.
+
+> **Hinweis:** Azure KI Studio befindet sich zum Zeitpunkt des Schreibens in der Vorschau und befindet sich in der aktiven Entwicklung. Einige Elemente des Diensts sind möglicherweise nicht genau wie beschrieben, und einige Features funktionieren möglicherweise nicht wie erwartet.
 
 Diese Übung dauert ca. **45** Minuten.
 
@@ -39,22 +36,23 @@ Ihre Copilot-Lösung integriert benutzerdefinierte Daten in einen Prompt Flow. U
 
 ## Erstellen eines Azure KI-Projekts
 
-Jetzt sind Sie bereit, ein Azure KI Foundry-Projekt und die Azure KI-Ressourcen zu erstellen, die es unterstützen.
+Jetzt können Sie ein Azure KI Studio-Projekt und die Azure KI-Ressourcen erstellen, um es zu unterstützen.
 
-1. Öffnen Sie in einem Webbrowser das [Azure KI Foundry Portal](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an.
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Im **Assistenten zum Erstellen eines Projekts** können Sie alle Azure-Ressourcen sehen, die automatisch mit Ihrem Projekt erstellt werden. Wählen Sie **Anpassen** und verbinden Sie sich mit Ihrer Azure KI-Such-Ressource:
+1. Öffnen Sie in einem Webbrowser [Azure KI Studio](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
+1. Wählen Sie auf der **Startseite** von Azure AI Studio die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
 
-    - **Hub-Name:** *Ein eindeutiger Name*
-    - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
-    - **Speicherort:** *Derselbe Standort wie Ihre Azure KI-Suche-Ressource*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
-    - **Verbinden Sie Azure AI Search**: *Wählen Sie Ihre Azure AI Search Ressource*
+    - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
+    - **Hub:** *Erstellen Sie eine neue Ressource mit den folgenden Einstellungen:*
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen.
-1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-   
+        - **Hub-Name:** *Ein eindeutiger Name*
+        - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
+        - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
+        - **Speicherort:** *Derselbe Standort wie Ihre Azure KI-Suche-Ressource*
+        - **Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+        - **Azure KI Search**: *Wählen Sie Ihre Azure KI Search-Ressource aus*
+
+1. Warten Sie, bis Ihr Projekt erstellt wurde.
+
 ## Bereitstellen von Modellen
 
 Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
@@ -62,17 +60,14 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 - Ein *Einbettungsmodell* zum Vektorisieren von Textdaten für eine effiziente Indizierung und Verarbeitung.
 - Ein Modell, das in natürlicher Sprache Antworten auf Fragen generieren kann, basierend auf Ihren Daten.
 
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich links unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Erstellen Sie eine neue Bereitstellung des Modells **text-embedding-ada-002** mit den folgenden Einstellungen, indem Sie **Anpassen** im Assistenten zum Bereitstellen des Modells wählen:
+1. Wählen Sie in Azure KI Studio in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
+1. Erstellen Sie eine neue Bereitstellung des Modells **text-embedding-ada-002** mit den folgenden Einstellungen:
 
     - **Bereitstellungsname**: `text-embedding-ada-002`
-    - **Bereitstellungstyp**: Standard
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
-    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
-      
+    - **Modellversion**: *Standard*
+    - **Erweiterte Optionen**:
+        - **Inhaltsfilter**: *Standard*
+        - **Ratenbegrenzung für Token pro Minute**: `5K`
 1. Wiederholen Sie die vorherigen Schritte zum Bereitstellen eines **gpt-35-turbo-16k-** Modells mit dem Bereitstellungsnamen `gpt-35-turbo-16k`.
 
     > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
@@ -82,29 +77,29 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 Die Daten für Ihren Copilot bestehen aus einer Reihe von Reisebroschüren des fiktiven Reisebüros *Margie‘s Travel* im PDF-Format. Fügen wir sie dem Projekt hinzu.
 
 1. Laden Sie das [gezippte Archiv der Broschüren](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) aus `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` herunter und extrahieren Sie es in einen Ordner mit dem Namen **Broschüren** in Ihrem lokalen Dateisystem.
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
+1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Daten** aus.
 1. Wählen Sie **+ Neue Daten** aus.
 1. Erweitern Sie im Assistenten **Hinzufügen Ihrer Daten** das Dropdownmenü, um **Dateien/Ordner hochladen** auszuwählen.
 1. Wählen Sie **Ordner hochladen** und dann den Ordner **Broschüren** aus.
-1. Wählen Sie **Weiter** und setzen Sie den Dateinamen auf `brochures`.
-1. Warten Sie, bis der Ordner hochgeladen wurde, und beachten Sie, dass er mehrere .pdf-Dateien enthält.
+1. Legen Sie den Datennamen auf `brochures` fest.
+1. Warten Sie, bis der Ordner hochgeladen wurde, und beachten Sie, dass er mehrere PDF-Dateien enthält.
 
 ## Erstellen eines Indexes für Ihre Daten
 
 Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie sie verwenden, um einen Index in Ihrer Azure KI Search-Ressource zu erstellen.
 
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
-1. Auf der Registerkarte **Indizes** fügen Sie einen neuen Index mit den folgenden Einstellungen hinzu:
-    - **Quellstandort**:
-        - **Datenquelle**: Daten im Azure KI Foundry-Portal
+1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Indizes** aus.
+1. Fügen Sie einen neuen Index mit den folgenden Einstellungen hinzu:
+    - **Quelldaten**:
+        - **Datenquelle**: Daten in Azure KI Studio
             - *Auswählen der Datenquelle **Broschüren***
-    - **Indexkonfiguration**:
+    - **Indexeinstellungen**:
         - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
-        - **Vektorindex**: `brochures-index`
+        - **Indexname**: `brochures-index`
         - **VM**: Automatisch auswählen
     - **Sucheinstellungen**:
         - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
-        - **Azure OpenAI-Verbindung**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
+        - **Auswählen eines Einbettungsmodells**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
         
 1. Warten Sie, bis der Indizierungsprozess abgeschlossen ist, was mehrere Minuten dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
 
@@ -116,34 +111,19 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite die Seite **Spielplätze**.
-1. Vergewissern Sie sich auf der Seite „Chat“ im Bereich „Setup“, dass Ihre Bereitstellung des Modells **gpt-35-turbo-16k** ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Projekt-Playground** die Seite **Chat** aus.
+1. Stellen Sie auf der Seite "Chat" im Bereich "Optionen" sicher, dass ihre **gpt-35-turbo-16k** Modellbereitstellung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
 1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
-1. Erweitern Sie im Bereich „Einrichtung“ das Feld **Ihre Daten hinzufügen** und fügen Sie dann den Projektindex **Broschüren-Index** hinzu und wählen Sie den Suchtyp **hybrid (Vektor + Schlüsselwort)** aus.
-
-   > **Hinweis**: Einige Benutzende stellen fest, dass neu erstellte Indizes nicht sofort verfügbar sind. Das Aktualisieren des Browsers hilft in der Regel, aber wenn das Problem weiterhin auftritt, bei dem der Index nicht gefunden werden kann, müssen Sie möglicherweise warten, bis der Index erkannt wird.
-
+1. Wählen Sie im Setupbereich die Registerkarte **Daten hinzufügen** aus, und fügen Sie dann den Projektindex **Broschürenindex** hinzu, und wählen Sie den Suchtyp **Hybrid (Vektor + Schlüsselwort)** aus.
 1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
 1. Überprüfen Sie die Antwort, die auf Daten im Index basiert.
 
 ## Verwenden des Indexes in einem Prompt Flow
 
-Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie ihn problemlos in einem Prompt Flow verwenden können.
+Ihr Vektorindex wurde in Ihrem Azure KI Studio-Projekt gespeichert, sodass Sie ihn einfach in einem Prompt Flow verwenden können.
 
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich links unter **Erstellen und Anpassen** die Seite **Prompt flow**.
+1. Wählen Sie in Azure KI Studio in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Tools** die Seite **Prompt Flow** aus.
 1. Erstellen Sie einen neuen Prompt Flow, indem Sie das **Multi-Round Q&A für Ihr Datenbeispiel** im Katalog klonen. Speichern Sie Ihren Klon dieses Beispiels in einem Ordner mit dem Namen `brochure-flow`.
-    <details>  
-      <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
-        <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
-        <ul>
-          <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-          <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
-          <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-          <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong>, <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, wählen Sie die <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong> und wählen Sie Ihre Azure AI Dienste Ressource.</li>
-          <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
-        </ul>
-    </details>
-
 1. Wenn die Seite mit dem Prompt Flow-Designer geöffnet wird, überprüfen Sie den **Broschüren-Flow**. Das Diagramm sollte der folgenden Abbildung ähneln:
 
     ![Ein Screenshot eines Prompt Flow-Diagramms](./media/chat-flow.png)
@@ -177,7 +157,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
     - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
-1. Warten Sie, bis die Computesitzung gestartet ist, und legen Sie dann im Abschnitt **Suchabfrage** die folgenden Parameterwerte fest:
+1. Legen Sie im Abschnitt **Lookup** die folgenden Parameterwerte fest:
 
     - **mlindex_content**: *Wählen Sie das leere Feld aus, um den Bereich „Generieren“ zu öffnen*
         - **index_type**: Registrierter Index
@@ -219,7 +199,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
 
 Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierten Daten verwendet, können Sie ihn als Dienst bereitstellen, der von einer Copilot-Anwendung genutzt werden soll.
 
-> **Hinweis**: Abhängig von der Region und der Auslastung des Rechenzentrums kann die Bereitstellung manchmal eine Weile dauern und manchmal wird ein Fehler bei der Interaktion mit der Bereitstellung ausgegeben. Sie können sich auf den nachstehenden Abschnitt "Herausforderung" setzen, während sie die Bereitstellungen bereitstellt oder die Tests Ihrer Bereitstellung überspringt, wenn Sie nur wenig Zeit haben.
+> **Hinweis:** Je nach Region und Rechenzentrumslast können Bereitstellungen manchmal eine Weile dauern. Sie können sich auf den nachstehenden Abschnitt "Herausforderung" setzen, während sie die Bereitstellungen bereitstellt oder die Tests Ihrer Bereitstellung überspringt, wenn Sie nur wenig Zeit haben.
 
 1. Wählen Sie auf der Symbolleiste **Bereitstellen** aus.
 1. Erstellen Sie eine Bereitstellung mit den folgenden Einstellungen:
@@ -232,7 +212,7 @@ Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierte
         - **Rückschließen der Datensammlung**: Ausgewählt
     - **Erweiterte Einstellungen**:
         - *Verwenden der Standardeinstellungen*
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
+1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
 1. Aktualisieren Sie die Ansicht, bis die **brochure-endpoint-1**-Bereitstellung als *erfolgreich* unter dem **Broschüren-Endpunkt**-Endpunkt angezeigt wird (dies kann lange dauern).
 1. Wenn die Bereitstellung erfolgreich war, wählen Sie sie aus. Geben Sie dann auf der Seite **Test** den Prompt `What is there to do in San Francisco?` ein und überprüfen Sie die Antwort.
 1. Geben Sie den Prompt `Where else could I go?` ein und überprüfen Sie die Antwort.
@@ -240,9 +220,9 @@ Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierte
 
 ## Herausforderung 
 
-Nachdem Sie nun erfahren haben, wie Sie Ihre eigenen Daten in einen mit dem Azure KI Foundry-Portal erstellten Copiloten integrieren können, lassen Sie uns weiterforschen!
+Sie haben erfahren, wie Sie Ihre eigenen Daten in einen Copilot integrieren können, der mit Azure KI Studio erstellt wurde. Lassen Sie uns dieses Thema nun weiter erkunden!
 
-Versuchen Sie, eine neue Datenquelle über das Azure KI Foundry-Portal hinzuzufügen, sie zu indizieren und die indizierten Daten in einen Prompt Flow zu integrieren. Einige Datasets, die Sie ausprobieren könnten, sind zum Beispiel:
+Versuchen Sie, über Azure KI Studio eine neue Datenquelle hinzuzufügen, zu indizieren und die indizierten Daten in einen Prompt flow zu integrieren. Einige Datasets, die Sie ausprobieren könnten, sind zum Beispiel:
 
 - Eine Sammlung von Artikeln (z. B. Forschungsartikel), die sich auf Ihrem Computer befinden
 - Eine Reihe von Präsentationen aus früheren Konferenzen
@@ -254,4 +234,4 @@ Seien Sie dabei möglichst kreativ, um Ihre Datenquelle zu erstellen und in Ihre
 
 Um unnötige Azure-Kosten und Ressourcenauslastung zu vermeiden, sollten Sie die in dieser Übung bereitgestellten Ressourcen entfernen.
 
-1. Wenn Sie die Erkundung von Azure KI Foundry abgeschlossen haben, kehren Sie zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` zurück und melden sich gegebenenfalls mit Ihren Azure-Anmeldedaten an. Löschen Sie dann die Ressourcen in der Ressourcengruppe, in der Sie Ihre Azure KI-Suche- und Azure AI-Ressourcen bereitgestellt haben.
+1. Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, kehren Sie bei Bedarf zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` zurück, und melden Sie sich bei Bedarf mit Ihren Azure-Anmeldeinformationen an. Löschen Sie dann die Ressourcen in der Ressourcengruppe, in der Sie Ihre Azure KI-Suche- und Azure AI-Ressourcen bereitgestellt haben.

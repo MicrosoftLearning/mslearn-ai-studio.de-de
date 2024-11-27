@@ -1,13 +1,13 @@
 ---
 lab:
-  title: 'Untersuchen Sie Inhaltsfilter, um die Ausgabe von schädlichen Inhalten in Azure AI Studio zu verhindern.'
+  title: 'Erkunden Sie Inhaltsfilter, um die Ausgabe schädlicher Inhalte in Azure KI Foundry zu verhindern.'
 ---
 
-# Untersuchen Sie Inhaltsfilter, um die Ausgabe von schädlichen Inhalten in Azure AI Studio zu verhindern.
+# Erkunden Sie Inhaltsfilter, um die Ausgabe schädlicher Inhalte in Azure KI Foundry zu verhindern.
 
-Azure KI Studio enthält Standardinhaltsfilter, um sicherzustellen, dass potenziell schädliche Eingabeaufforderungen und -vervollständigungen identifiziert und aus Interaktionen mit dem Dienst entfernt werden. Überdies können Sie die Berechtigung zum Definieren von benutzerdefinierten Inhaltsfiltern für Ihre spezifischen Anforderungen beantragen, um sicherzustellen, dass Ihre Modellimplementierungen die entsprechenden verantwortungsvollen KI-Prinzipien für Ihr generatives KI-Szenario durchsetzen. Die Inhaltsfilterung ist ein Element eines wirksamen Ansatzes für verantwortungsvolle KI bei der Arbeit mit generativen KI-Modellen.
+Azure KI Foundry enthält standardmäßige Inhaltsfilter, um sicherzustellen, dass potenziell schädliche Aufforderungen und Vervollständigungen erkannt und aus den Interaktionen mit dem Dienst entfernt werden. Überdies können Sie die Berechtigung zum Definieren von benutzerdefinierten Inhaltsfiltern für Ihre spezifischen Anforderungen beantragen, um sicherzustellen, dass Ihre Modellimplementierungen die entsprechenden verantwortungsvollen KI-Prinzipien für Ihr generatives KI-Szenario durchsetzen. Die Inhaltsfilterung ist ein Element eines wirksamen Ansatzes für verantwortungsvolle KI bei der Arbeit mit generativen KI-Modellen.
 
-In dieser Übung untersuchen Sie die Auswirkungen der Standardinhaltsfilter in Azure KI Studio.
+In dieser Übung werden Sie die Auswirkungen der standardmäßigen Inhaltsfilter in Azure KI Foundry untersuchen.
 
 Diese Übung dauert ungefähr **25** Minuten.
 
@@ -34,28 +34,28 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu host
 
 1. Nachdem der Azure KI-Hub erstellt wurde, sollte er ähnlich wie in der folgenden Abbildung aussehen:
 
-    ![Screenshot: Details eines Azure KI-Hubs in Azure KI Studio.](./media/azure-ai-overview.png)
+    ![Screenshot eines Azure KI Hub Details im Azure KI Foundry Portal.](./media/azure-ai-overview.png)
 
 ## Erstellen eines Projekts
 
 Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie nun ein Projekt in Ihrem Azure KI-Hub.
 
-1. Wählen Sie in Azure KI Studio auf der Seite **Hub-Übersicht** die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
+1. Wählen Sie im Azure KI Foundry-Portal auf der Seite **Hub-Übersicht** die Option **+ Neues Projekt** aus. Erstellen Sie dann im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
 
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
     - **Hub:** *Ihr KI-Hub*
 
 1. Warten Sie, bis Ihr Projekt erstellt wurde. Wenn es fertig ist, sollte es ähnlich wie in der folgenden Abbildung aussehen:
 
-    ![Screenshot: Projektdetailseite in Azure KI Studio](./media/azure-ai-project.png)
+    ![Screenshot einer Projektdetailseite im Azure KI Foundry Portal.](./media/azure-ai-project.png)
 
 1. Zeigen Sie die Seiten im linken Bereich an, erweitern Sie jeden Abschnitt, und sehen Sie sich die Aufgaben an, die Sie ausführen können, und die Ressourcen, die Sie in einem Projekt verwalten können.
 
 ## Bereitstellen eines Modells
 
-Jetzt können Sie ein Modell bereitstellen, das über **Azure KI Studio** verwendet werden soll. Nach der Bereitstellung verwenden Sie das Modell, um Inhalte in natürlicher Sprache zu generieren.
+Jetzt können Sie ein Modell bereitstellen, das Sie über das **Azure KI Foundry Portal** verwenden können. Nach der Bereitstellung verwenden Sie das Modell, um Inhalte in natürlicher Sprache zu generieren.
 
-1. Erstellen Sie in Azure KI Studio eine neue Bereitstellung mit den folgenden Einstellungen:
+1. Erstellen Sie im Azure KI Foundry Portal eine neue Bereitstellung mit den folgenden Einstellungen:
 
     - **Modell**: gpt-35-turbo
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
@@ -66,7 +66,7 @@ Jetzt können Sie ein Modell bereitstellen, das über **Azure KI Studio** verwe
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
       
-> **Hinweis:** Jedes Azure KI Studio-Modell ist für ein anderes Verhältnis von Funktionen und Leistung optimiert. Wir verwenden das Modell **GPT 3.5 Turbo** in dieser Übung, das sich in hohem Maße für Szenarien zur Generierung natürlicher Sprache und Chatszenarien eignet.
+> **Hinweis**: Jedes Azure KI Foundry Modell ist für ein unterschiedliches Gleichgewicht von Fähigkeiten und Leistung optimiert. Wir verwenden das Modell **GPT 3.5 Turbo** in dieser Übung, das sich in hohem Maße für Szenarien zur Generierung natürlicher Sprache und Chatszenarien eignet.
 
 ## Erkunden der Inhaltsfilter
 
@@ -101,7 +101,7 @@ Inhaltsfilter werden auf Eingabeaufforderungen und Vervollständigungen angewend
 
 1. Kehren Sie zur Bereitstellungsseite zurück, und beachten Sie, dass Ihre Bereitstellung jetzt auf den benutzerdefinierten Inhaltsfilter verweist, den Sie erstellt haben.
 
-    ![Screenshot der Bereitstellungsseite in Azure KI Studio.](./media/azure-ai-deployment.png)
+    ![Screenshot der Bereitstellungsseite im Azure KI Foundry Portal.](./media/azure-ai-deployment.png)
 
 ## Generieren von Ausgaben in natürlicher Sprache
 
@@ -131,9 +131,9 @@ Sehen wir uns an, wie sich das Modell in einer Konversation verhält.
    Describe characteristics of Scottish people.
     ```
 
-8. Beachten Sie die Ausgabe, die hoffentlich darauf hinweisen sollte, dass die Anforderung, rassistisch und abwertend zu sein, nicht unterstützt wird. Diese Verhinderung einer anstößigen Ausgabe ist das Ergebnis der Standardinhaltsfilter in Azure KI Studio.
+8. Beachten Sie die Ausgabe, die hoffentlich darauf hinweisen sollte, dass die Anforderung, rassistisch und abwertend zu sein, nicht unterstützt wird. Diese Verhinderung von anstößigen Ausgaben ist das Ergebnis der standardmäßigen Inhaltsfilter im Azure KI Foundry Portal.
 
-> **Tipp**: Weitere Informationen zu den Kategorien und Schweregraden, die in Inhaltsfiltern verwendet werden, finden Sie in der Dokumentation des Azure KI Studio-Diensts unter [Inhaltsfilterung](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering).
+> **Tipp**: Weitere Einzelheiten zu den Kategorien und Schweregraden, die in den Inhaltsfiltern verwendet werden, finden Sie unter [Inhaltsfilterung](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) in der Dokumentation des Azure KI Foundry Portal Service.
 
 ## Bereinigung
 

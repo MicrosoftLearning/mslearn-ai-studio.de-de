@@ -1,9 +1,9 @@
 ---
 lab:
-  title: Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI Studio
+  title: Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI-Studio
 ---
 
-# Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI Studio
+# Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI-Studio
 
 Das Extrahieren wertvoller Informationen aus Text wird als Erkennung benannter Entitäten (Named Entity Recognition, NER) bezeichnet. Entitäten sind Schlüsselwörter, die für Sie in einem bestimmten Text von Interesse sind.
 
@@ -11,39 +11,41 @@ Das Extrahieren wertvoller Informationen aus Text wird als Erkennung benannter E
 
 Große Sprachmodelle (Large Language Models, LLMs) können zum Ausführen von NER verwendet werden. Zum Erstellen einer Anwendung, die Text als Eingabe- und Ausgabeentitäten verwendet, können Sie einen Flow erstellen, der einen LLM-Knoten mit Prompt Flow nutzt.
 
-In dieser Übung verwenden Sie Prompt Flow von Azure KI Studio, um eine LLM-Anwendung zu erstellen, die einen Entitätstyp und Text als Eingabe erwartet. Sie ruft ein GPT-Modell von Azure OpenAI über einen LLM-Knoten auf, um die erforderliche Entität aus dem angegebenen Text zu extrahieren, bereinigt das Ergebnis und gibt die extrahierten Entitäten aus.
+In dieser Übung verwenden Sie den Prompt Flow des Azure KI Foundry-Portals, um eine LLM-Anwendung zu erstellen, die einen Entitätstyp und Text als Eingabe erwartet. Sie ruft ein GPT-Modell von Azure OpenAI über einen LLM-Knoten auf, um die erforderliche Entität aus dem angegebenen Text zu extrahieren, bereinigt das Ergebnis und gibt die extrahierten Entitäten aus.
 
 ![Übersicht über die Übung](./media/get-started-lab.png)
 
-Sie müssen zuerst ein Projekt in Azure KI Studio erstellen, um die erforderlichen Azure-Ressourcen zu erstellen. Anschließend können Sie ein GPT-Modell mit dem Azure OpenAI-Dienst bereitstellen. Sobald Sie über die erforderlichen Ressourcen verfügen, können Sie den Flow erstellen. Abschließend führen Sie den Flow aus, um ihn zu testen und die Beispielausgabe anzuzeigen.
+Sie müssen zunächst ein Projekt im Azure KI Foundry-Portal anlegen, um die erforderlichen Azure-Ressourcen zu erstellen. Anschließend können Sie ein GPT-Modell mit dem Azure OpenAI-Dienst bereitstellen. Sobald Sie über die erforderlichen Ressourcen verfügen, können Sie den Flow erstellen. Abschließend führen Sie den Flow aus, um ihn zu testen und die Beispielausgabe anzuzeigen.
 
-## Erstellen eines Projekts in Azure KI Studio
+## Erstellen eines Projekts im Azure KI Foundry-Portal
 
-Sie erstellen zunächst ein Azure KI Studio-Projekt und einen Azure KI-Hub für seine Unterstützung.
+Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts und eines Azure KI Hubs, der dieses unterstützt.
 
 1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. Wählen Sie die **Startseite** und dann **+ Neues Projekt** aus.
-1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
+1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
+1. Im Assistenten **Projekt erstellen** sehen Sie alle Azure-Ressourcen, die automatisch mit Ihrem Projekt erstellt werden, oder Sie können die folgenden Einstellungen anpassen, indem Sie **Anpassen** wählen, bevor Sie **Erstellen** wählen:
+
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
     - **Hub:** *Erstellen Sie einen neuen Hub mit den folgenden Einstellungen:*
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
     - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
+    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
     > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
-1. Warten Sie, bis Ihr Projekt erstellt wurde.
+1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
+1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 
 ## Bereitstellen eines GPT-Modells
 
-Um ein LLM-Modell in Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Mit Azure KI Studio können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Flows verwenden können.
+Um ein LLM-Modell in Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
-1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
+1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
+1. Erstellen Sie eine neue Bereitstellung des Modells **gpt-35-turbo** mit den folgenden Einstellungen, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
+   
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
@@ -52,9 +54,9 @@ Um ein LLM-Modell in Prompt Flow zu verwenden, müssen Sie zuerst ein Modell ber
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
    
-Nachdem Sie ihr LLM-Modell bereitgestellt haben, können Sie einen Flow in Azure KI Studio erstellen, der das bereitgestellte Modell aufruft.
+Jetzt, wo Sie Ihr Sprachmodell bereitstellen, können Sie im Azure KI Foundry-Portal einen Ablauf erstellen, der das bereitgestellte Modell aufruft.
 
-## Erstellen und Ausführen eines Flows in Azure KI Studio
+## Erstellen und Ausführen eines Ablaufs im Azure KI Foundry-Portal
 
 Sie haben alle erforderlichen Ressourcen bereitgestellt und können nun einen Flow erstellen.
 
@@ -62,7 +64,7 @@ Sie haben alle erforderlichen Ressourcen bereitgestellt und können nun einen Fl
 
 Zum Erstellen eines neuen Flows mit einer Vorlage können Sie einen der Flowtypen auswählen, die Sie entwickeln möchten.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Tools** die Option **Prompt Flow** aus.
+1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Erstellen und Anpassen** die Option **Promptablauf**.
 1. Wählen Sie **+ Erstellen** aus, um einen neuen Flow zu erstellen.
 1. Erstellen Sie einen neuen **Standardflow**, und geben Sie `entity-recognition` als Ordnernamen ein.
 
@@ -71,7 +73,7 @@ Zum Erstellen eines neuen Flows mit einer Vorlage können Sie einen der Flowtype
     <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
     <ul>
         <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-        <li>Bestätigen Sie auf der IAM-Seite auf der Registerkarte Identität, dass es sich um eine systemzugewiesene verwaltete Identität handelt.</li>
+        <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
         <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
         <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
         <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
@@ -108,12 +110,11 @@ Der Standardflow enthält bereits einen Knoten, der das LLM-Tool verwendet. Sie 
 
 1. Navigieren Sie zum **LLM-Knoten** mit dem Namen `joke`.
 1. Ersetzen sie den Namen durch `NER_LLM`.
-1. Wählen Sie unter **Verbindung** die Verbindung `Default_AzureOpenAI` aus.
+1. Wählen Sie für **Verbindung** die Verbindung, die für Sie erstellt wurde, als Sie den KI-Hub erstellt haben.
 1. Wählen Sie unter **deployment_name** das von Ihnen bereitgestellte Modell `gpt-35-turbo` aus.
 1. Ersetzen Sie das Feld „Prompt“ durch den folgenden Code:
 
    ```yml
-   {% raw %}
    system:
 
    Your task is to find entities of a certain type from the given text content.
@@ -126,7 +127,6 @@ Der Standardflow enthält bereits einen Knoten, der das LLM-Tool verwendet. Sie 
    Entity type: {{entity_type}}
    Text content: {{text}}
    Entities:
-   {% endraw %}
    ```
 
 1. Wählen Sie **Eingabe überprüfen und parsen** aus.
@@ -180,7 +180,7 @@ Nachdem Sie den Flow entwickelt haben, können Sie ihn ausführen, um ihn zu tes
 
 ## Löschen von Azure-Ressourcen
 
-Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, löschen Sie die erstellten Ressourcen, um unnötige Azure-Kosten zu vermeiden.
+Wenn Sie die Erkundung des Azure KI Foundry-Portals beendet haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
 
 - Navigieren Sie zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com`.
 - Wählen Sie auf der **Startseite** des Azure-Portals die Option **Ressourcengruppen** aus.

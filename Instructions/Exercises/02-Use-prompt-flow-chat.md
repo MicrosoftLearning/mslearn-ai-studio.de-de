@@ -1,55 +1,72 @@
 ---
 lab:
-  title: Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
+  title: "Erste Schritte beim Erstellen von benutzerdefinierten Copilots mit Prompt Flow in Azure\_KI Studio"
 ---
 
-# Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
+# Erste Schritte beim Erstellen von benutzerdefinierten Copilots mit Prompt Flow in Azure KI Studio
 
-In dieser Übung verwenden Sie den Prompt Flow des Azure KI Foundry-Portals, um einen benutzerdefinierten Copiloten zu erstellen, der einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
+In dieser Übung verwenden Sie den Prompt Flow von Azure KI Studio, um einen benutzerdefinierten Copilot zu erstellen, der einen Benutzerprompt- und Chatverlauf als Eingaben verwendet und ein GPT-Modell aus Azure OpenAI verwendet, um eine Ausgabe zu generieren.
 
-Diese Übung dauert ungefähr **30** Minuten.
+> Um diese Übung abzuschließen, muss für Ihr Azure-Abonnement der Zugriff auf den Azure OpenAI-Dienst genehmigt werden. Füllen Sie das [Registrierungsformular](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) aus, um den Zugriff auf Azure OpenAI-Modelle anzufordern.
 
-## Erstellen eines KI-Hubs und eines Projekts im Azure KI Foundry-Portal
+Zum Erstellen eines Copilots mit Prompt Flow müssen Sie die folgenden Schritte ausführen:
 
-Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb eines Azure KI-Hubs:
+- Erstellen Sie einen KI-Hub und ein KI-Projekt in Azure KI Studio.
+- Stellen Sie ein GPT-Modell bereit.
+- Erstellen Sie einen Flow, der das bereitgestellte GPT-Modell verwendet, um eine Antwort basierend auf der Eingabe des Benutzers zu generieren.
+- Testen Sie den Flow, und stellen Sie ihn bereit.
+
+## Erstellen eines KI-Hubs und eines KI-Projekts in Azure KI Studio
+
+Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hubs:
 
 1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Im Assistenten **Projekt erstellen** sehen Sie alle Azure-Ressourcen, die automatisch mit Ihrem Projekt erstellt werden, oder Sie können die folgenden Einstellungen anpassen, indem Sie **Anpassen** wählen, bevor Sie **Erstellen** wählen:
-
-    - **Hub-Name:** *Ein eindeutiger Name*
-    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+1. Wählen Sie die **Startseite** und dann **+ Neues Projekt** aus.
+1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
+    - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
+    - **Hub:** *Erstellen Sie einen neuen Hub mit den folgenden Einstellungen:*
+        - **Hub-Name:** *Ein eindeutiger Name*
+        - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
+        - **Ressourcengruppe:** *Neue Ressourcengruppe*
+        - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
+        - Australien (Osten)
+        - Kanada, Osten
+        - East US
+        - USA (Ost) 2
+        - Frankreich, Mitte
+        - Japan, Osten
+        - USA Nord Mitte
+        - Schweden, Mitte
+        - Schweiz, Norden
+        - UK, Süden
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen einer neuen Verbindung*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
-1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
+1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
+1. Warten Sie 5 bis 10 Minuten, bis Ihr Projekt erstellt wurde.
 
 ## Bereitstellen eines GPT-Modells
 
-Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
+Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Mit Azure KI Studio können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Flows verwenden können.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
+1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
 1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Bereitstellungstyp**: Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
+    - **Bereitstellungstyp**: Standard
+    - **Verbundene Azure OpenAI-Ressource**: *Wählen Sie die Standardverbindung aus.*
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
+    - **Inhaltsfilter**: Standard
 1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
 1. Geben Sie im Chatfenster die Abfrage „`What can you do?`“ ein.
 
     Beachten Sie, dass die Antwort generisch ist, da es keine spezifischen Anweisungen für den Assistenten gibt. Um den Fokus auf eine bestimmte Aufgabe zu legen, können Sie den Systemprompt ändern.
 
-1. Ändern Sie die Nachricht **Geben Sie dem Modell Anweisungen und Kontext** in die folgende:
+1. Ändern Sie die **Systemmeldung** wie folgt:
 
-   ```md
+   ```
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
    **Capabilities**:
@@ -72,21 +89,9 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
 
 Nachdem Sie nun mit der Systemmeldung für das bereitgestellte GPT-Modell experimentiert haben, können Sie die Anwendung weiter anpassen, indem Sie mit dem Prompt Flow arbeiten.
 
-## Erstellen und Ausführen eines Chatverlaufs im Azure KI Foundry-Portal
+## Erstellen und Ausführen eines Chatflows in Azure KI Studio
 
 Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow basierend auf Ihren Konfigurationen im Playground erstellen. Da Sie bereits im Playground experimentiert haben, verwenden Sie diese Option, um einen neuen Flow zu erstellen.
-
-<details>  
-    <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
-    <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
-    <ul>
-        <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-        <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
-        <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-        <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
-        <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
-    </ul>
-</details>
 
 1. Wählen Sie im **Chat-Playground** in der oberen Leiste die Option **Prompt Flow** aus.
 1. Geben Sie den Ordnernamen „`Travel-Chat`“ ein.
@@ -108,6 +113,7 @@ Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow ba
 1. Überprüfen Sie das Feld für den Prompt, und stellen Sie sicher, dass es wie folgt aussieht:
 
    ```yml
+   {% raw %}
    system:
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
@@ -134,6 +140,7 @@ Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow ba
 
    user:
    {{question}}
+   {% endraw %}
    ```
 
 ### Testen und Bereitstellen des Flows
@@ -157,15 +164,16 @@ Nachdem Sie den Flow entwickelt haben, können Sie ihn im Chatfenster testen.
         - **Rückschließen der Datensammlung**: Aktiviert
     - **Erweiterte Einstellungen**:
         - *Verwenden der Standardeinstellungen*
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Beachten Sie, dass standardmäßig die **Modellbereitstellungen** aufgelistet werden, einschließlich des von Ihnen bereitgestellten Sprachmodells und des bereitgestellten Ablaufs. Es kann einige Zeit dauern, bis die Bereitstellung aufgelistet und erfolgreich erstellt wird.
+1. Wählen Sie in Azure KI Studio im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
+1. Beachten Sie, dass standardmäßig die **Modellbereitstellungen** aufgelistet werden, einschließlich Ihres bereitgestellten Sprachmodells.
+1. Wählen Sie die Registerkarte **App-Bereitstellungen** aus, um Ihren bereitgestellten Flow zu finden. Es kann einige Zeit dauern, bis die Bereitstellung aufgelistet und erfolgreich erstellt wird.
 1. Wenn die Bereitstellung erfolgreich war, wählen Sie sie aus. Geben Sie dann auf der Seite **Test** den Prompt `What is there to do in San Francisco?` ein und überprüfen Sie die Antwort.
 1. Geben Sie den Prompt `Where else could I go?` ein und überprüfen Sie die Antwort.
 1. Zeigen Sie die Seite **Nutzen** für den Endpunkt an und beachten Sie, dass sie Verbindungsinformationen und Beispielcode enthält, die Sie zum Erstellen einer Clientanwendung für Ihren Endpunkt verwenden können, sodass Sie die Prompt Flow-Lösung als benutzerdefinierten Copilot in eine Anwendung integrieren können.
 
 ## Löschen von Azure-Ressourcen
 
-Wenn Sie die Erkundung des Azure KI Foundry-Portals beendet haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
+Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, löschen Sie die erstellten Ressourcen, um unnötige Azure-Kosten zu vermeiden.
 
 - Navigieren Sie zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com`.
 - Wählen Sie auf der **Startseite** des Azure-Portals die Option **Ressourcengruppen** aus.
