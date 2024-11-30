@@ -5,7 +5,7 @@ lab:
 
 # Erstellen eines benutzerdefinierten Kopiloten mit Code-First-Entwicklungstools
 
-In dieser Übung klonen Sie eine Azure Developer CLI-Vorlage, die Ihr KI-Projekt bereitstellt und [auf einen Online-Endpunkt](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) auf Azure AI Studio bereitstellt. Anschließend verwenden Sie ihn als Ausgangspunkt, um Ihren eigenen benutzerdefinierten Copilot mit Azure AI und einer Code-first-Erfahrung zu erstellen.
+In dieser Übung klonen und stellen Sie eine Azure Developer CLI-Vorlage bereit, die Ihr KI-Projekt auf Azure KI Foundry bereitstellt und [auf einen Online-Endpunkt](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) überträgt. Anschließend verwenden Sie ihn als Ausgangspunkt, um Ihren eigenen benutzerdefinierten Copilot mit Azure AI und einer Code-first-Erfahrung zu erstellen.
 
 Diese Übung dauert ungefähr **90** Minuten.
 
@@ -21,7 +21,7 @@ Für diese Übung benötigen Sie Folgendes:
 
 Um mit der Azure Developer CLI AI-Projektvorlage zu beginnen, navigieren Sie zur [Azure AI-Vorlagen mit Azure Developer CLI-Sammlung](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). In der Sammlung finden Sie verschiedene Projekte, die nach Technologie und Anwendungsfall gruppiert sind, darunter Beispiele für multimodale und Multi-Agenten-Projekte, Copilot-ähnliche Projekte und Beispiele, die verschiedene Frameworks und Azure-Dienste integrieren.
 
-Für diese Übung nehmen Sie den **[Contoso Chat Retail Copilot mit Azure AI Studio & PromptFlow (Python)](https://aka.ms/contoso-retail-sample)** Projektvorlage als Ausgangspunkt. Diese Projektvorlage ist eine Code-first-Erfahrung, die Prompty und PromptFlow verwendet, um einen benutzerdefinierten Copilot (Chat AI) zu erstellen, der in die Einzelhandelswebsite (Chat-UI) eines fiktiven Unternehmens namens Contoso Outdoors integriert werden kann.
+Für diese Übung nehmen Sie die Projektvorlage **[Contoso Chat Retail copilot with Azure AI Foundry & PromptFlow (Python)](https://aka.ms/contoso-retail-sample)** als Ausgangspunkt. Diese Projektvorlage ist eine Code-first-Erfahrung, die Prompty und PromptFlow verwendet, um einen benutzerdefinierten Copilot (Chat AI) zu erstellen, der in die Einzelhandelswebsite (Chat-UI) eines fiktiven Unternehmens namens Contoso Outdoors integriert werden kann.
 
 ![Contoso Chat UI/UX](./media/contoso_outdoors_website.png)
 
@@ -83,7 +83,7 @@ Sobald Sie angemeldet sind, können Sie mit der Bereitstellung der Azure-Ressour
 Die Bereitstellung einer KI-Anwendung mit azd kann 10 Minuten oder mehr dauern. Sie können den Fortschritt nachverfolgen, indem Sie:
 
 - Den detaillierten Fortschritt im [Azure Portal](https://ms.portal.azure.com/) einsehen. Suchen Sie nach der Ressourcengruppe, die Ihrem Umgebungsnamen entspricht. Wählen Sie die Option **Bereitstellungen** in der Randleiste aus und überwachen Sie dann den Bereitstellungsstatus der zu erstellenden Ressourcen.
-- Das [Azure KI Studio](https://ai.azure.com)-Portal besuchen. Melden Sie sich mit Ihrem Azure-Konto an. Suchen Sie nach dem KI-Hub, der der oben genannten Ressourcengruppe entspricht (möglicherweise müssen Sie einige Male aktualisieren). Wählen Sie das aufgelistete KI-Projekt aus und wählen Sie **Bereitstellungen** in der Randleiste aus, um den Status für Modelle und Chatanwendungsbereitstellungen nachzuverfolgen.
+- Besuchen Sie das [Azure AI Foundry Portal](https://ai.azure.com). Melden Sie sich mit Ihrem Azure-Konto an. Suchen Sie nach dem KI-Hub, der der oben genannten Ressourcengruppe entspricht (möglicherweise müssen Sie einige Male aktualisieren). Wählen Sie das aufgelistete KI-Projekt aus und wählen Sie **Bereitstellungen** in der Randleiste aus, um den Status für Modelle und Chatanwendungsbereitstellungen nachzuverfolgen.
 
 Sehen wir uns an, wie Sie die Bereitstellung von Ressourcen mithilfe des Azure-Portals überprüfen.
 
@@ -92,13 +92,13 @@ Sehen wir uns an, wie Sie die Bereitstellung von Ressourcen mithilfe des Azure-P
 
     ![Ressourcengruppenübersicht des Azure-Portals](./media/azure-portal-resource-group.png)
 
-1. Beginnen wir mit der Überprüfung, ob die wichtigsten [Azure KI Studio](https://learn.microsoft.com/azure/ai-studio/concepts/architecture)-Architekturressourcen erstellt wurden. Die folgende Abbildung enthält weitere Details dazu, was jede dieser Ressourcen für unsere KI-Anwendung bereitstellt.
+1. Überprüfen Sie zunächst, ob die wichtigsten [Azure AI Foundry Architektur](https://learn.microsoft.com/azure/ai-studio/concepts/architecture)-Ressourcen erstellt wurden. Die folgende Abbildung enthält weitere Details dazu, was jede dieser Ressourcen für unsere KI-Anwendung bereitstellt.
 
     - **Azure KI-Hub**: Azure-Ressource auf oberster Ebene. Stellt eine Umgebung für die Zusammenarbeit für Teams bereit.
     - **Azure KI-Projekt**: Untergeordnetes Element des Hubs. Gruppiert App-Komponenten für die Orchestrierung, Anpassung.
     - **Azure KI-Dienste**: Verwaltet Ihre Modellendpunkte.
 
-    ![Azure KI Studio-Architektur](./media/resource-provider-connected-resources.svg)
+    ![Azure KI Foundry-Architektur](./media/resource-provider-connected-resources.svg)
 
 1. Als Nächstes stellen wir sicher, dass wir zwei wichtige Ressourcen für die Implementierung unseres Entwurfsmusters für die [erweiterte Abrufgenerierung](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) bereitgestellt haben, indem wir die Produkt- und Kundendaten für den abfragegesteuerten Abruf speichern.
 
@@ -115,11 +115,11 @@ Sehen wir uns an, wie Sie die Bereitstellung von Ressourcen mithilfe des Azure-P
 
 1. Zuletzt werden Sie eine neue Ressource mit dem Typ **Machine Learning Onlinebereitstellung** bemerken. Dies ist die Ressource, die unserem bereitgestellten Azure KI-Projektendpunkt (für den Chat-Copilot) entspricht.
 
-## Überprüfen der Bereitstellung mithilfe von Azure KI Studio
+## Validieren Sie die Bereitstellung mit Azure KI Foundry
 
-Das Azure-Portal hilft Ihnen, die zugrunde liegenden Azure-Ressourcen für Ihr Projekt zu verwalten. Das Azure KI Studio-Portal hilft Ihnen, die KI-Projekte selbst *zu erstellen und zu verwalten*, von der Modellauswahl bis hin zur Anwendungsbereitstellung. Der Befehl `azd up` sollte den gesamten Prozess von der Bereitstellung erforderlicher Modelle bis zum Bereitstellen und Hosten des Copilot-API-Endpunkts für die Verwendung abgeschlossen haben. Überprüfen wir, ob die Anwendung wie erwartet funktioniert.
+Das Azure-Portal hilft Ihnen, die zugrunde liegenden Azure-Ressourcen für Ihr Projekt zu verwalten. Das Azure KI Foundry Portal hilft Ihnen bei der *Erstellung und Verwaltung* der KI-Projekte selbst, von der Modellauswahl bis zur Bereitstellung der Anwendung. Der Befehl `azd up` sollte den gesamten Prozess von der Bereitstellung erforderlicher Modelle bis zum Bereitstellen und Hosten des Copilot-API-Endpunkts für die Verwendung abgeschlossen haben. Überprüfen wir, ob die Anwendung wie erwartet funktioniert.
 
-1. Besuchen Sie die Seite **Verwalten** im [Azure KI Studio](https://ai.azure.com/manage) , um alle Azure KI-Hubs in Ihrem Abonnement anzuzeigen.
+1. Besuchen Sie die Seite **Verwalten** im [Azure KI Foundry Portal](https://ai.azure.com/manage), um alle Azure KI Hubs in Ihrem Abonnement anzuzeigen.
 1. Wählen Sie den Hub für Ihre Ressourcengruppe aus, um alle Azure KI-Projekte darin anzuzeigen.
 1. Wählen Sie das standardmäßige KI-Projekt im Hub aus, und wählen Sie dann **Bereitstellungen** im Menü auf der linken Seite aus.
 1. Überprüfen Sie unter **Modellbereitstellungen**, ob Sie über eine Azure OpenAI-Verbindung verfügen, einschließlich der Bereitstellungen von:
@@ -131,13 +131,13 @@ Das Azure-Portal hilft Ihnen, die zugrunde liegenden Azure-Ressourcen für Ihr P
 
     ![Azure-KI-Projektbereitstellungen](./media/azure-ai-project-deployment.png)
 
-## Testen der Bereitstellung (in der Cloud) mit Azure AI Studio
+## Testen der Bereitstellung (in der Cloud) mit Azure KI Foundry
 
-Um zu überprüfen, ob der eingesetzte Copilot funktioniert, verwenden Sie die integrierte Testumgebung im Azure AI Studio.
+Um zu überprüfen, ob der bereitgestellte Copilot funktioniert, verwenden Sie die integrierte Testspielplatzfunktion im Azure KI Foundry-Portal.
 
 ![Abrufen von Bereitstellungsdetails](./media/chat-deployment-details.png)
 
-1. Wählen Sie im Azure AI Studio in der Liste **App-Bereitstellungen** die Bereitstellung **Chat-Bereitstellung-xxxx** aus.
+1. Wählen Sie im Azure KI Foundry-Portal aus der Liste **App-Bereitstellungen** die Bereitstellung **chat-deployment-xxxx**.
 1. Wählen Sie auf der Seite **Details** der installierten Chat-Anwendung die Registerkarte **Test** aus, um die Testschnittstelle zu erhalten.
 
     BBeachten Sie, dass die Registerkarte **Details** auch `Target URI`- und `Key`-Werte enthält, die Sie mit anderen Front-End-Anwendungen (z. B. der Contoso Outdoor-Website) verwenden können, um diesen Chat-Assistenten für echte Benutzerinteraktionen zu integrieren.

@@ -1,17 +1,17 @@
 ---
 lab:
-  title: Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten im Azure KI Studio
+  title: Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten in Azure KI Foundry
 ---
 
-# Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten im Azure KI Studio
+# Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten in Azure KI Foundry
 
-In dieser Übung untersuchen Sie integrierte und benutzerdefinierte Auswertungen, um die Leistung Ihrer KI-Anwendungen mit Azure KI Studio zu bewerten und zu vergleichen.
+In dieser Übung lernen Sie integrierte und benutzerdefinierte Auswertungen kennen, um die Leistung Ihrer KI-Anwendungen mit dem Azure KI Foundry-Portal zu bewerten und zu vergleichen.
 
 Diese Übung dauert ungefähr **30** Minuten.
 
-## Erstellen eines KI-Hubs und eines KI-Projekts in Azure KI Studio
+## Erstellen eines KI-Hubs und eines KI-Projekts in Azure KI Foundry
 
-Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hubs:
+Sie beginnen mit der Erstellung eines Azure KI Foundry-Projekts innerhalb eines Azure KI-Hubs:
 
 1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
 1. Wählen Sie die **Startseite** und dann **+ Neues Projekt** aus.
@@ -30,9 +30,10 @@ Zunächst erstellen Sie ein Azure KI Studio-Projekt innerhalb eines Azure KI-Hub
 
 ## Bereitstellen eines GPT-Modells
 
-Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Mit Azure KI Studio können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Flows verwenden können.
+Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Komponenten** die Seite **Bereitstellungen** aus.
+1. Navigieren Sie zur Seite **Modelle + Endpunkte** unter dem Abschnitt **Meine Assets**, indem Sie das Menü auf der linken Seite verwenden.
+1. Wählen Sie die Schaltfläche ** + Modell bereitstellen** und dann die Option **Basismodell bereitstellen** aus.
 1. Erstellen Sie eine neue Bereitstellung des Modells **gpt-35-turbo** mit den folgenden Einstellungen, indem Sie **Anpassen** im Assistenten **Modell bereitstellen** auswählen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
@@ -62,12 +63,12 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Wählen Sie **Speichern**.
-1. Geben Sie im Chatfenster die Abfrage `What can you do?` ein, um zu überprüfen, ob das Sprachmodell erwartungsgemäß funktioniert.
+1. Wählen Sie **Änderungen übernehmen** aus.
+1. Geben Sie im Chatfenster (Verlauf) die Anfrage ein: `What can you do?`, um zu überprüfen, ob sich das Sprachmodell wie erwartet verhält.
 
 Nachdem Sie nun über ein bereitgestelltes Modell mit einer aktualisierten Systemmeldung verfügen, können Sie das Modell auswerten.
 
-## Auswerten eines Sprachmodells in Azure KI Studio
+## Manuelle Bewertung eines Sprachmodells im Azure KI Foundry-Portal
 
 Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Durch die manuelle Überprüfung können Sie verschiedene Eingaben einzeln testen, um zu bewerten, ob das Modell wie erwartet ausgeführt wird.
 
@@ -112,7 +113,13 @@ Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Durch 
 
 ## Bewerten Ihres Copilots mit integrierten Metriken
 
-Wenn Sie einen Copilot mit einem Chatfluss erstellt haben, können Sie den Fluss bewerten, indem Sie eine Batchausführung durchführen und die Leistung des Flusses mit integrierten Metriken bewerten.
+Wenn Sie eine Chat-Anwendung mit Prompt Flow erstellt haben, können Sie den Flow evaluieren, indem Sie einen Batch-Lauf durchführen und die Leistung des Flows mit integrierten Metriken bewerten.
+
+![Diagramm der Konstruktion des Eingabedatensatzes für die Auswertung.](./media/diagram-dataset-evaluation.png)
+
+Um einen Chatverlauf zu bewerten, werden die Benutzeranfragen und die Chatantworten als Input für eine Bewertung bereitgestellt.
+
+Um Zeit zu sparen, haben wir für Sie einen Batch-Ausgabedatensatz erstellt, der die Ergebnisse mehrerer Eingaben enthält, die von einem Prompt Flow verarbeitet werden. Jedes der Ergebnisse wird im Dataset gespeichert, das Sie im nächsten Schritt auswerten.
 
 1. Wählen Sie die Registerkarte **Automatisierte Auswertungen** und erstellen Sie eine **Neue Auswertung** mit den folgenden Einstellungen: <details>  
       <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
@@ -130,7 +137,7 @@ Wenn Sie einen Copilot mit einem Chatfluss erstellt haben, können Sie den Fluss
     - **Auswertungsname**: *Geben Sie einen eindeutigen Namen ein.*
     - Wählen Sie **Weiter** aus.
     - **Wählen Sie die Daten aus, die Sie auswerten möchten**: Fügen Sie Ihr Dataset hinzu.
-        - Laden Sie die https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl-JSONL-Datei herunter, und laden Sie sie auf die Benutzeroberfläche hoch.
+        - Laden Sie den [Validierungsdatensatz](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) unter `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl` herunter, speichern Sie ihn als JSONL-Datei und laden Sie ihn in die Benutzeroberfläche hoch.
     - Wählen Sie **Weiter** aus.
     - **Metriken auswählen**: Kohärenz, Sprachfluss
     - **Verbindung**: *Ihre KI Services-Verbindung*
@@ -145,7 +152,7 @@ Wenn Sie einen Copilot mit einem Chatfluss erstellt haben, können Sie den Fluss
 
 ## Löschen von Azure-Ressourcen
 
-Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, löschen Sie die erstellten Ressourcen, um unnötige Azure-Kosten zu vermeiden.
+Wenn Sie die Erkundung der Azure KI Foundry abgeschlossen haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
 
 - Navigieren Sie zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com`.
 - Wählen Sie auf der **Startseite** des Azure-Portals die Option **Ressourcengruppen** aus.

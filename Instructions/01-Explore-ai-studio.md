@@ -1,29 +1,30 @@
 ---
 lab:
-  title: Erkunden der Komponenten und Tools von Azure KI Studio
+  title: Erkunden der Komponenten und Tools von Azure KI Foundry
 ---
 
-# Erkunden der Komponenten und Tools von Azure KI Studio
+# Erkunden der Komponenten und Tools von Azure KI Foundry
 
-In dieser Übung verwenden Sie Azure KI Studio, um ein Projekt zu erstellen und ein generatives KI-Modell zu erkunden.
+In dieser Übung verwenden Sie das Azure KI Foundry-Portal, um ein Projekt zu erstellen und ein generatives KI-Modell zu erkunden.
 
 Diese Übung dauert ca. **30** Minuten.
 
-## Öffnen von Azure KI Studio
+## Öffnen des Azure KI Foundry-Portals
 
-Sehen Sie sich zunächst Azure KI Studio an.
+Beginnen wir mit der Erkundung des Azure KI Foundry-Portals.
 
-1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Die Startseite von Azure KI Studio sieht ähnlich wie in der folgenden Abbildung aus:
+1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Die Startseite des Azure KI Foundry-Portals sieht ähnlich aus wie das folgende Bild:
 
-    ![Screenshot: Azure KI Studio](./media/azure-ai-studio-home.png)
+    ![Screenshot des Azure KI Foundry-Portals.](./media/azure-ai-studio-home.png)
 
 1. Überprüfen Sie die Informationen auf der Startseite. Zeigen Sie dann die einzelnen Registerkarten an, und sehen Sie sich die darauf enthaltenen Optionen zum Erkunden von Modellen und Funktionen, Erstellen von Projekten und Verwalten von Ressourcen an.
 
-## Erstellen eines Azure KI-Hubs
+## Erstellen eines Azure KI-Hubs und eines Projekts
 
-Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu hosten. Sie können diese Ressource entweder beim Erstellen eines Projekts erstellen oder vorab bereitstellen (wie in dieser Übung).
+Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie uns ein Projekt und ein Azure KI-Hub.
 
-1. Wählen Sie im Abschnitt **Verwaltung** die Option **Alle Ressourcen** und dann **+ Neuer Hub** aus. Erstellen Sie eine neue Regel mit den folgenden Einstellungen:
+1. Wählen Sie auf der Startseite **+ Projekt erstellen**. Im Assistenten **Projekt erstellen** sehen Sie alle Azure-Ressourcen, die automatisch mit Ihrem Projekt erstellt werden, oder Sie können die folgenden Einstellungen anpassen, indem Sie **Anpassen** wählen, bevor Sie **Erstellen** wählen:
+   
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen, oder wählen Sie eine vorhandene Ressourcengruppe aus.*
@@ -33,45 +34,30 @@ Sie benötigen einen Azure KI-Hub in Ihrem Azure-Abonnement, um Projekte zu hos
 
     > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen.
+1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
 1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
    
-    Nachdem der Azure KI-Hub erstellt wurde, sollte er ähnlich wie in der folgenden Abbildung aussehen:
+    Nachdem Sie den Azure KI-Hub und das Projekt erstellt haben, sollte es ähnlich wie das folgende Bild aussehen:
 
-    ![Screenshot: Details eines Azure KI-Hubs in Azure KI Studio.](./media/azure-ai-resource.png)
+    ![Screenshot der Details eines Azure KI-Hubs im Azure KI Foundry-Portal.](./media/azure-ai-resource.png)
 
-1. Öffnen Sie eine neue Browserregisterkarte (lassen Sie die Registerkarte mit Azure KI Studio geöffnet), und navigieren Sie unter [https://portal.azure.com](https://portal.azure.com?azure-portal=true) zum Azure-Portal. Melden Sie sich dort mit Ihren Azure-Anmeldeinformationen an, wenn Sie dazu aufgefordert werden.
+1. Öffnen Sie eine neue Browser-Registerkarte (lassen Sie die Registerkarte des Azure KI Foundry-Portals geöffnet) und rufen Sie das Azure-Portal unter [https://portal.azure.com](https://portal.azure.com?azure-portal=true) auf, indem Sie sich mit Ihren Azure-Zugangsdaten anmelden, falls Sie dazu aufgefordert werden.
 1. Navigieren Sie zu der Ressourcengruppe, in der Sie Ihren Azure KI-Hub erstellt haben, und zeigen Sie die erstellten Azure-Ressourcen an.
 
     ![Screenshot: Azure KI-Hub und zugehörige Ressourcen im Azure-Portal.](./media/azure-portal.png)
 
-1. Wechseln Sie zurück zur Browserregisterkarte von Azure KI Studio.
-1. Zeigen Sie die einzelnen Seiten im Bereich links auf der Seite für Ihren Azure KI-Hub an, und sehen Sie sich die Artefakte an, die Sie erstellen und verwalten können. Beachten Sie auf der Seite **Verbindungen**, dass bereits Verbindungen zu Azure OpenAI- und KI-Diensten erstellt wurden.
-
-## Erstellen eines Projekts
-
-Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie nun ein Projekt in Ihrem Azure KI-Hub.
-
-1. Stellen Sie in Azure KI Studio sicher, dass Sie sich im soeben erstellten Hub befinden (Sie sehen im Pfad oben auf dem Bildschirm, wo Sie sich befinden).
-1. Navigieren Sie über das Menü links zu **Alle Projekte**.
-1. Wählen Sie **+ New project** aus.
-1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
-    - **Aktueller Hub**: *Ihr KI-Hub*
-    - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
-1. Warten Sie, bis Ihr Projekt erstellt wurde. Wenn es fertig ist, sollte es ähnlich wie in der folgenden Abbildung aussehen:
-
-    ![Screenshot: Projektdetailseite in Azure KI Studio](./media/azure-ai-project.png)
-
-1. Zeigen Sie die Seiten im linken Bereich an, erweitern Sie jeden Abschnitt, und sehen Sie sich die Aufgaben an, die Sie ausführen können, und die Ressourcen, die Sie in einem Projekt verwalten können.
+1. Kehren Sie zur Browser-Registerkarte des Azure KI Foundry-Portals zurück.
+1. Zeigen Sie die einzelnen Seiten im Bereich links auf der Seite für Ihren Azure KI-Hub an, und sehen Sie sich die Artefakte an, die Sie erstellen und verwalten können. Auf der Seite **Management Center** können Sie **Verbundene Ressourcen** auswählen, entweder unter Ihrem Hub oder Ihrem Projekt, und feststellen, dass bereits Verbindungen zu Azure OpenAI und KI-Services erstellt wurden.
+1. Wenn Sie sich auf der Seite Management Center befinden, wählen Sie **Zum Projekt gehen**.
 
 ## Bereitstellen und Testen eines Modells
 
-Sie können ein Projekt verwenden, um komplexe KI-Lösungen basierend auf generativen KI-Modellen zu erstellen. Eine vollständige Erkundung aller in Azure KI Studio verfügbaren Entwicklungsoptionen würde den Rahmen dieser Übung sprengen, aber wir werden einige grundlegende Möglichkeiten erkunden, wie Sie mit Modellen in einem Projekt arbeiten können.
+Sie können ein Projekt verwenden, um komplexe KI-Lösungen basierend auf generativen KI-Modellen zu erstellen. Eine vollständige Untersuchung aller im Azure KI Foundry-Portal verfügbaren Entwicklungsoptionen würde den Rahmen dieser Übung sprengen, aber wir werden einige grundlegende Möglichkeiten erkunden, wie Sie mit Modellen in einem Projekt arbeiten können.
 
-1. Wählen Sie im linken Bereich für Ihr Projekt im Abschnitt **Komponenten** die Seite **Bereitstellungen** aus.
-1. Wählen Sie auf der Seite **Einrichtungen** auf der Registerkarte **Modell-Einrichtungen** die Option **+ Modell einrichten** aus.
+1. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
+1. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** die Option **+ Modell bereitstellen**.
 1. Suchen Sie in der Liste nach dem Modell **gpt-35-turbo**, und wählen Sie „Bestätigen“ aus.
-1. Stellen Sie das Modell mit den folgenden Einstellungen bereit:
+1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
@@ -86,11 +72,11 @@ Sie können ein Projekt verwenden, um komplexe KI-Lösungen basierend auf genera
 1. Stellen Sie auf der Seite **Chat-Playground** sicher, dass Ihre Modellimplementierung im Abschnitt **Bereitstellung** ausgewählt ist.
 1. Geben Sie im Chatfenster eine Abfrage wie *Was ist KI?* ein, und sehen Sie sich die Antwort an:
 
-    ![Screenshot: Playground in Azure KI Studio](./media/playground.png)
+    ![Screenshot des Spielplatzes im Azure KI Foundry-Portal.](./media/playground.png)
 
 ## Bereinigung
 
-Wenn Sie mit der Erkundung von Azure KI Studio fertig sind, sollten Sie die in dieser Übung erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
+Wenn Sie die Erkundung des Azure KI-Foundry-Portals abgeschlossen haben, sollten Sie die Ressourcen, die Sie in dieser Übung erstellt haben, löschen, um unnötige Azure-Kosten zu vermeiden.
 
 1. Kehren Sie zur Browserregisterkarte mit dem Azure-Portal zurück (oder öffnen Sie das [Azure-Portal](https://portal.azure.com?azure-portal=true) auf einer neuen Browserregisterkarte erneut), und zeigen Sie den Inhalt der Ressourcengruppe an, in der Sie die in dieser Übung verwendeten Ressourcen bereitgestellt haben.
 1. Wählen Sie auf der Symbolleiste die Option **Ressourcengruppe löschen** aus.
