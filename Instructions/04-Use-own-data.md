@@ -1,11 +1,11 @@
 ---
 lab:
-  title: 'Erstellen eines benutzerdefinierten Copilots, der Ihre eigenen Daten verwendet'
+  title: 'Erstellen einer generativen KI-App, die Ihre eigenen Daten verwendet'
 ---
 
-# Erstellen eines benutzerdefinierten Copilots, der Ihre eigenen Daten verwendet
+# Erstellen einer generativen KI-App, die Ihre eigenen Daten verwendet
 
-Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein gängiges Muster für die Entwicklung von benutzerdefinierten *Copiloten* – chatbasierten Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
+Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein häufig verwendetes Muster für die Entwicklung generativer KI-Apps – chatbasierte Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
 
 In dieser Übung verwenden Sie das Azure KI Foundry Portal, um benutzerdefinierte Daten in einen generativen KI Prompt Flow zu integrieren.
 
@@ -13,7 +13,7 @@ Diese Übung dauert ca. **45** Minuten.
 
 ## Erstellen einer Azure KI-Suche-Ressource
 
-Ihre Copilot-Lösung integriert benutzerdefinierte Daten in einen Prompt Flow. Um diese Integration zu unterstützen, benötigen Sie eine Azure KI Search-Ressource, mit der Ihre Daten indiziert werden sollen.
+Ihre generative KI-App-Lösung wird benutzerdefinierte Daten in einen schnellen Ablauf integrieren. Um diese Integration zu unterstützen, benötigen Sie eine Azure KI Search-Ressource, mit der Ihre Daten indiziert werden sollen.
 
 1. Öffnen Sie in einem Webbrowser das [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
 1. Wählen Sie auf der Startseite **+ Ressource erstellen** aus und suchen Sie nach `Azure AI Search`. Erstellen Sie dann eine neue Azure KI Search-Ressource mit den folgenden Einstellungen:
@@ -240,7 +240,7 @@ Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierte
 
 ## Herausforderung 
 
-Nachdem Sie nun erfahren haben, wie Sie Ihre eigenen Daten in einen mit dem Azure KI Foundry-Portal erstellten Copiloten integrieren können, lassen Sie uns weiterforschen!
+Nachdem Sie nun erfahren haben, wie Sie Ihre eigenen Daten in eine generative KI-App integrieren können, die mit dem Azure-KI-Foundry-Portal erstellt wurde, lassen Sie uns weiterforschen!
 
 Versuchen Sie, eine neue Datenquelle über das Azure KI Foundry-Portal hinzuzufügen, sie zu indizieren und die indizierten Daten in einen Prompt Flow zu integrieren. Einige Datasets, die Sie ausprobieren könnten, sind zum Beispiel:
 

@@ -1,6 +1,6 @@
-# Übungen zu Azure KI Studio
+# Azure AI FoundryExercises
 
-Dieses Repository enthält Anweisungen und Ressourcen, um praktische Übungen in [Microsoft Learn-Modulen in Azure KI Studio](https://docs.microsoft.com/training) zu unterstützen.
+Dieses Repository enthält Anweisungen und Ressourcen zur Unterstützung praktischer Übungen in [Microsoft Learn-Modulen auf dem Azure KI Foundry-Portal](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/).
 
 ## Melden von Problemen
 
