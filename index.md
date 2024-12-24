@@ -4,7 +4,7 @@ permalink: index.html
 layout: home
 ---
 
-# Auswertung von generativen KI-Anwendungen mit Azure AI Studio
+# Entwickeln generativer KI-Apps im Azure KI Foundry-Portal
 
 Die folgenden Übungen sollen Ihnen eine praktische Lernerfahrung bieten, in der Sie gängige Muster und Techniken erkunden, die Entwickler verwenden, um generative KI-Anwendungen wie Chat-basierte „Copilots“ zu erstellen, und lernen, wie diese Muster mit Azure AI Services – insbesondere Azure OpenAI Service und Azure AI Studio – implementiert werden können.
 
