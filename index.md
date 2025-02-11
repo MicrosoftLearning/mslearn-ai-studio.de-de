@@ -4,20 +4,15 @@ permalink: index.html
 layout: home
 ---
 
-# Entwicklung generativer KI-Lösungen
+# Entwickeln generativer KI-Apps im Azure KI Foundry-Portal
 
-Die folgenden Schnellstartübungen sind darauf ausgelegt, Ihnen eine praktische Lernerfahrung zu bieten, in der Sie allgemeine Aufgaben erkunden, die Entwickler und Entwicklerinnen beim Erstellen von generativen KI-Lösungen in Microsoft Azure ausführen.
+Die folgenden Übungen sollen Ihnen eine praktische Lernerfahrung bieten, in der Sie gängige Muster und Techniken erkunden, die Entwickler verwenden, um generative KI-Anwendungen wie Chat-basierte „Copilots“ zu erstellen, und lernen, wie diese Muster mit Azure AI Services – insbesondere Azure OpenAI Service und Azure AI Studio – implementiert werden können.
 
-> **Hinweis**: Um die Übungen durchführen zu können, benötigen Sie ein Azure-Abonnement, das Ihnen ausreichende Berechtigungen und Kontingente für die Bereitstellung der erforderlichen Azure-Ressourcen und generativen KI-Modelle bietet. Wenn Sie noch kein Konto haben, können Sie sich für ein [Azure-Konto](https://azure.microsoft.com/free) anmelden. Für neue Benutzende gibt es dort eine kostenlose Testoption, die Guthaben für die ersten 30 Tage beinhaltet.
+Sie können diese Übungen zwar auch alleine durchführen, aber sie sind als Ergänzung zu den Modulen von [Microsoft Learn](https://learn.microsoft.com/training/paths/create-custom-copilots-ai-studio/) gedacht, in denen Sie einige der Konzepte, auf denen diese Übungen basieren, vertiefen können.
 
-## Schnellstartübungen
+> **Hinweis**: Um die Übungen durchzuführen, benötigen Sie ein Azure-Abonnement, in dem Sie über ausreichende Berechtigungen und Kontingente verfügen, um die von Azure AI Studio verwendeten Azure-Ressourcen bereitzustellen und Azure OpenAI GPT-Modelle einzusetzen und zu verwenden. Wenn Sie noch kein Konto haben, können Sie sich für ein [Azure-Konto](https://azure.microsoft.com/free) anmelden. Für neue Benutzende gibt es dort eine kostenlose Testoption, die Guthaben für die ersten 30 Tage beinhaltet.
+
+## Übungen
 
 {% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions'" %} {% for activity in labs  %}
-<hr>
-### [{{ activity.lab.title }}]({{ site.github.url }}{{ activity.url }})
-
-{{activity.lab.description}}
-
-{% endfor %}
-
-> **Hinweis**: Diese Übungen können zwar eigenständig absolviert werden, sie sind jedoch als Ergänzung zu den Modulen auf [Microsoft Learn](https://learn.microsoft.com/training/paths/create-custom-copilots-ai-studio/) gedacht, in denen Sie tiefer in einige der zugrunde liegenden Konzepte eintauchen können, auf denen diese Übungen basieren.
+- [{{ activity.lab.title }}]({{ site.github.url }}{{ activity.url }}) {% endfor %}

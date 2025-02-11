@@ -1,10 +1,9 @@
 ---
 lab:
-  title: Auswählen und Bereitstellen eines Sprachmodells
-  description: 'Generative KI-Anwendungen basieren auf einem oder mehreren Sprachmodellen. Erfahren Sie, wie Sie geeignete Modelle für Ihr generatives KI-Projekt finden und auswählen.'
+  title: 'Erforschen, Bereitstellen und Chatten mit Sprachmodellen in Azure KI Foundry'
 ---
 
-# Auswählen und Bereitstellen eines Sprachmodells
+# Erforschen, Bereitstellen und Chatten mit Sprachmodellen in Azure KI Foundry
 
 Der Modellkatalog von Azure KI Foundry dient als zentrales Repository, in dem Sie eine Vielzahl von Modellen erforschen und verwenden können, was die Erstellung Ihres generativen KI-Szenarios erleichtert.
 

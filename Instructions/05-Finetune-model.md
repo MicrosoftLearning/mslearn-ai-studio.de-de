@@ -1,10 +1,9 @@
 ---
 lab:
-  title: Optimieren eines Sprachmodells
-  description: 'Erfahren Sie, wie Sie ihre eigenen zusätzlichen Trainingsdaten verwenden, um ein Modell zu optimieren und sein Verhalten anzupassen.'
+  title: Feinabstimmung eines Sprachmodells für die Chatvervollständigung in der Azure KI Foundry
 ---
 
-# Optimieren eines Sprachmodells
+# Feinabstimmung eines Sprachmodells für die Chatvervollständigung in der Azure KI Foundry
 
 Wenn Sie möchten, dass sich ein Sprachmodell auf eine bestimmte Weise verhält, können Sie das entsprechende Engineering verwenden, um das gewünschte Verhalten zu definieren. Wenn Sie die Konsistenz des gewünschten Verhaltens verbessern möchten, können Sie ein Modell optimieren, indem Sie es mit Ihrem Prompt-Engineering-Ansatz vergleichen, um zu bewerten, welche Methode Ihren Anforderungen am besten entspricht.
 
