@@ -1,11 +1,12 @@
 ---
 lab:
-  title: Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
+  title: Verwenden eines Prompt Flows zur Verwaltung von Konversationen in einer Chat-App
+  description: 'Erfahren Sie, wie Sie Prompt Flows verwenden, um Konversationsdialoge zu verwalten und sicherzustellen, dass Prompts für optimale Ergebnisse konstruiert und orchestriert werden.'
 ---
 
-# Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
+# Verwenden eines Prompt Flows zur Verwaltung von Konversationen in einer Chat-App
 
-In dieser Übung verwenden Sie den Prompt Flow des Azure KI Foundry-Portals, um einen benutzerdefinierten Copiloten zu erstellen, der einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
+In dieser Übung verwenden Sie den Prompt-Flow des Azure KI Foundry-Portals, um eine benutzerdefinierte Chat-App zu erstellen, die einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
 
 Diese Übung dauert ungefähr **30** Minuten.
 
@@ -42,6 +43,9 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
+
+    > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
+
 1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
 1. Geben Sie im Chatfenster die Abfrage „`What can you do?`“ ein.
 
@@ -83,7 +87,7 @@ Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow ba
         <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
         <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
         <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-        <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
+        <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong>, <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, wählen Sie die <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong> und wählen Sie Ihre Azure AI Dienste Ressource.</li>
         <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
     </ul>
 </details>

@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten in Azure KI Foundry
+  title: Bewerten der generativen KI-Leistung
+  description: 'Erfahren Sie, wie Sie Modelle und Chatflows auswerten können, um die Leistung Ihrer Chat-App und ihre Fähigkeit, angemessen zu reagieren, zu optimieren.'
 ---
 
-# Bewerten Sie die Leistung Ihres benutzerdefinierten Copiloten in Azure KI Foundry
+# Bewerten der generativen KI-Leistung
 
 In dieser Übung lernen Sie integrierte und benutzerdefinierte Auswertungen kennen, um die Leistung Ihrer KI-Anwendungen mit dem Azure KI Foundry-Portal zu bewerten und zu vergleichen.
 
@@ -42,6 +43,9 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
+
+    > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
+
 1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
 1. Ändern Sie im Textfeld **Modellanweisungen und Kontext geben** den Inhalt wie folgt:
 
@@ -109,9 +113,9 @@ Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Durch 
 1. Jetzt können Sie die Ausgaben für jede Frage manuell überprüfen, indem Sie unten rechts in einer Antwort das Symbol mit dem Daumen nach oben oder unten auswählen. Bewerten Sie jede Antwort, und stellen Sie sicher, dass Sie in Ihren Bewertungen mindestens einen Daumen nach oben und einen Daumen nach unten verwenden.
 1. Klicken Sie in der oberen Menüleiste auf **Ergebnisse speichern**. Geben Sie `manual_evaluation_results` als Namen für die Ergebnisse ein.
 1. Navigieren Sie über das Menü auf der linken Seite zu **Auswertungen**.
-1. Wählen Sie die Registerkarte **Manuellen Auswertungen** aus, um die manuellen Auswertungen zu finden, die Sie gerade gespeichert haben. Beachten Sie, dass Sie Ihre zuvor erstellten manuellen Auswertungen durchsehen, dort weitermachen, wo Sie aufgehört haben, und die aktualisierten Auswertungen speichern können.
+1. Wählen Sie die Registerkarte **Manuellen Auswertungen** aus, um die manuellen Auswertungen zu finden, die Sie gerade gespeichert haben. Beachten Sie, dass Sie Ihre zuvor erstellten manuellen Auswertungen durchsuchen, dort weitermachen, wo Sie aufgehört haben, und die aktualisierten Auswertungen speichern können.
 
-## Bewerten Ihres Copilots mit integrierten Metriken
+## Auswerten Ihrer Chat-App mit den integrierten Metriken
 
 Wenn Sie eine Chat-Anwendung mit Prompt Flow erstellt haben, können Sie den Flow evaluieren, indem Sie einen Batch-Lauf durchführen und die Leistung des Flows mit integrierten Metriken bewerten.
 
@@ -138,12 +142,15 @@ Um Zeit zu sparen, haben wir für Sie einen Batch-Ausgabedatensatz erstellt, der
     - Wählen Sie **Weiter** aus.
     - **Wählen Sie die Daten aus, die Sie auswerten möchten**: Fügen Sie Ihr Dataset hinzu.
         - Laden Sie den [Validierungsdatensatz](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) unter `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl` herunter, speichern Sie ihn als JSONL-Datei und laden Sie ihn in die Benutzeroberfläche hoch.
+
+    > **Hinweis**: Ihr Gerät speichert die Datei möglicherweise standardmäßig als .txt-Datei. Wählen Sie alle Dateien aus, und entfernen Sie das .txt-Suffix, um sicherzustellen, dass Sie die Datei als JSONL speichern.
+
     - Wählen Sie **Weiter** aus.
     - **Metriken auswählen**: Kohärenz, Sprachfluss
     - **Verbindung**: *Ihre KI Services-Verbindung*
     - **Bereitstellungsname/Modell**: *Ihr bereitgestelltes GPT-3.5-Modell*
-    - **Abfrage**: Wählen Sie **Frage** als Datenquelle
-    - **Antwort**: Wählen Sie **Antwort** als Datenquelle
+    - **Abfrage**: Wählen Sie **Abfrage** als Datenquelle aus.
+    - **Antwort**: Wählen Sie **Antwort** als Datenquelle aus
       
 1. Wählen Sie **Weiter** aus, überprüfen Sie Ihre Daten und senden Sie mit **Übermitteln** die neue Bewertung ab.
 1. Warten Sie, bis die Auswertungen abgeschlossen sind. Eventuell müssen Sie die Seite aktualisieren.
