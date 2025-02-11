@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Erstellen eines benutzerdefinierten Kopiloten mit Code-First-Entwicklungstools
+  title: Erstellen einer generativen KI-App mit Code-First-Entwicklungstools
+  description: 'Erfahren Sie, wie Sie mithilfe von Code die Elemente Ihrer generativen KI-App erstellen und aktualisieren, um automatisierte Build- und Bereitstellungsvorgänge in einem DevOps-Szenario zu unterstützen.'
 ---
 
-# Erstellen eines benutzerdefinierten Kopiloten mit Code-First-Entwicklungstools
+# Erstellen einer generativen KI-App mit Code-First-Entwicklungstools
 
 In dieser Übung klonen und stellen Sie eine Azure Developer CLI-Vorlage bereit, die Ihr KI-Projekt auf Azure KI Foundry bereitstellt und [auf einen Online-Endpunkt](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) überträgt. Anschließend verwenden Sie ihn als Ausgangspunkt, um Ihren eigenen benutzerdefinierten Copilot mit Azure AI und einer Code-first-Erfahrung zu erstellen.
 

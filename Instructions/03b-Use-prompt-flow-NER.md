@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI-Studio
+  title: Verwenden von Prompt Flow zur Erkennung benannter Entitäten (NER)
+  description: 'Generative KI ist nicht nur für Chat-Apps gedacht – erfahren Sie, wie Sie Prompt-Flow in einem Textanalyseszenario einsetzen können, in dem benannte Entitäten aus dem Text extrahiert werden müssen.'
 ---
 
-# Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI-Studio
+# Verwenden von Prompt Flow zur Erkennung benannter Entitäten (NER)
 
 Das Extrahieren wertvoller Informationen aus Text wird als Erkennung benannter Entitäten (Named Entity Recognition, NER) bezeichnet. Entitäten sind Schlüsselwörter, die für Sie in einem bestimmten Text von Interesse sind.
 
@@ -124,8 +125,10 @@ Der Standardflow enthält bereits einen Knoten, der das LLM-Tool verwendet. Sie 
 
    user:
    
+   {% raw %}
    Entity type: {{entity_type}}
    Text content: {{text}}
+   {% endraw %}
    Entities:
    ```
 

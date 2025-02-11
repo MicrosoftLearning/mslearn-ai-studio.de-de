@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Feinabstimmung eines Sprachmodells für die Chatvervollständigung in der Azure KI Foundry
+  title: Optimieren eines Sprachmodells
+  description: 'Erfahren Sie, wie Sie ihre eigenen zusätzlichen Trainingsdaten verwenden, um ein Modell zu optimieren und sein Verhalten anzupassen.'
 ---
 
-# Feinabstimmung eines Sprachmodells für die Chatvervollständigung in der Azure KI Foundry
+# Optimieren eines Sprachmodells
 
 Wenn Sie möchten, dass sich ein Sprachmodell auf eine bestimmte Weise verhält, können Sie das entsprechende Engineering verwenden, um das gewünschte Verhalten zu definieren. Wenn Sie die Konsistenz des gewünschten Verhaltens verbessern möchten, können Sie ein Modell optimieren, indem Sie es mit Ihrem Prompt-Engineering-Ansatz vergleichen, um zu bewerten, welche Methode Ihren Anforderungen am besten entspricht.
 
@@ -55,9 +56,9 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie 
     <p>Wenn Sie einen Berechtigungsfehler erhalten, versuchen Sie Folgendes, um das Problem zu beheben:</p>
     <ul>
         <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-        <li>Bestätigen Sie auf der IAM-Seite auf der Registerkarte Identität, dass es sich um eine systemzugewiesene verwaltete Identität handelt.</li>
-        <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-        <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
+        <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
+        <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Speicher-Blobdaten-Besitzer</em> hinzu.</li>
+        <li>Wählen Sie unter <strong>Zugriff zuweisen an</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, <strong>Alle systemseitig zugewiesenen verwalteten Identitäten</strong> und Ihre Azure KI-Ressource aus.</li>
         <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
     </ul>
     </details>
@@ -76,6 +77,9 @@ Während Sie warten, bis der Feinabstimmungsauftrag abgeschlossen ist, chatten w
 1. Navigieren Sie zur Seite **Modelle + Endpunkte** unter dem Abschnitt **Meine Assets**, indem Sie das Menü auf der linken Seite verwenden.
 1. Wählen Sie die Schaltfläche ** + Modell bereitstellen** und dann die Option **Basismodell bereitstellen** aus.
 1. Stellen Sie ein `gpt-35-turbo`-Modell bereit, bei dem es sich um denselben Modelltyp handelt, den Sie bei der Feinabstimmung verwendet haben.
+
+> **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
+
 1. Wenn die Bereitstellung abgeschlossen ist, wählen Sie die Schaltfläche **Im Spielzimmer öffnen**.
 1. Vergewissern Sie sich, dass Ihr bereitgestelltes `gpt-35-model` Basismodell im Einrichtungsfenster ausgewählt ist.
 1. Geben Sie im Chat-Fenster die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
@@ -122,7 +126,7 @@ Wenn die Feinabstimmung erfolgreich abgeschlossen wurde, können Sie das fein ab
 
 ## Verwenden des fein abgestimmten Modells
 
-Nachdem Sie Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie das Modell jetzt wie Ihr bereitgestelltes Basismodell testen.
+Nachdem Sie Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie es wie das bereitgestellte Basismodell testen.
 
 1. Wenn die Verteilung fertig ist, navigieren Sie zu dem fein abgestimmten Modell und wählen Sie **Open in playground**.
 1. Aktualisieren Sie die Systemnachricht mit den folgenden Anweisungen:
@@ -141,7 +145,7 @@ Nachdem Sie Ihr fein abgestimmtes Modell bereitgestellt haben, können Sie das M
 
     `Give me a list of five bed and breakfasts in Trastevere.`
 
-## Bereinigung
+## Bereinigen
 
 Wenn Sie die Erkundung von Azure KI Foundry abgeschlossen haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
 
