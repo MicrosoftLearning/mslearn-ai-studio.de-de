@@ -1,10 +1,9 @@
 ---
 lab:
-  title: 'Anwenden von Inhaltsfiltern, um die Ausgabe von schädlichen Inhalten zu verhindern'
-  description: 'Erfahren Sie, wie Sie Inhaltsfilter anwenden, die potenziell anstößige oder schädliche Ausgaben in Ihrer generativen KI-App mindern.'
+  title: 'Erkunden Sie Inhaltsfilter, um die Ausgabe schädlicher Inhalte in Azure KI Foundry zu verhindern.'
 ---
 
-# Anwenden von Inhaltsfiltern, um die Ausgabe von schädlichen Inhalten zu verhindern
+# Erkunden Sie Inhaltsfilter, um die Ausgabe schädlicher Inhalte in Azure KI Foundry zu verhindern.
 
 Azure KI Foundry enthält standardmäßige Inhaltsfilter, um sicherzustellen, dass potenziell schädliche Aufforderungen und Vervollständigungen erkannt und aus den Interaktionen mit dem Dienst entfernt werden. Überdies können Sie die Berechtigung zum Definieren von benutzerdefinierten Inhaltsfiltern für Ihre spezifischen Anforderungen beantragen, um sicherzustellen, dass Ihre Modellimplementierungen die entsprechenden verantwortungsvollen KI-Prinzipien für Ihr generatives KI-Szenario durchsetzen. Die Inhaltsfilterung ist ein Element eines wirksamen Ansatzes für verantwortungsvolle KI bei der Arbeit mit generativen KI-Modellen.
 

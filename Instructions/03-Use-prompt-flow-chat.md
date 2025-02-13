@@ -1,12 +1,11 @@
 ---
 lab:
-  title: Verwenden eines Prompt Flows zur Verwaltung von Konversationen in einer Chat-App
-  description: 'Erfahren Sie, wie Sie Prompt Flows verwenden, um Konversationsdialoge zu verwalten und sicherzustellen, dass Prompts für optimale Ergebnisse konstruiert und orchestriert werden.'
+  title: Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
 ---
 
-# Verwenden eines Prompt Flows zur Verwaltung von Konversationen in einer Chat-App
+# Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
 
-In dieser Übung verwenden Sie den Prompt-Flow des Azure KI Foundry-Portals, um eine benutzerdefinierte Chat-App zu erstellen, die einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
+In dieser Übung verwenden Sie den Prompt Flow des Azure KI Foundry-Portals, um einen benutzerdefinierten Copiloten zu erstellen, der einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
 
 Diese Übung dauert ungefähr **30** Minuten.
 

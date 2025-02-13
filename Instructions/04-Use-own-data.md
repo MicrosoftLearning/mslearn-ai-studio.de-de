@@ -1,7 +1,6 @@
 ---
 lab:
   title: 'Erstellen einer generativen KI-App, die Ihre eigenen Daten verwendet'
-  description: 'Erfahren Sie, wie Sie mithilfe des RAG-Modells (Retrieval Augmented Generation) eine Chat-App erstellen, die Aufforderungen zur Verwendung Ihrer eigenen Daten anfordert.'
 ---
 
 # Erstellen einer generativen KI-App, die Ihre eigenen Daten verwendet
