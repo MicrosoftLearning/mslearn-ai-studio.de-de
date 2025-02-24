@@ -44,7 +44,7 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
 
 ## Bereitstellen eines generativen KI-Modells
 
-Jetzt sind Sie bereit, ein generatives KI-Sprachmodell zur Unterstützung Ihrer Chat-Anwendung einzusetzen. In diesem Beispiel verwenden Sie das Microsoft Phi-4-Modell, aber die Prinzipien sind für jedes Modell identisch.
+Jetzt können Sie ein generatives KI-Sprachmodell bereitstellen, um Ihre Chat-Anwendung zu unterstützen. In diesem Beispiel verwenden Sie das Microsoft Phi-4-Modell, aber die Prinzipien sind für jedes Modell identisch.
 
 1. Verwenden Sie in der Symbolleiste oben rechts auf Ihrer Azure AI Foundry-Projektseite das Symbol **Funktionen anzeigen**, um das Feature **Modelle zum Azure KI-Modellinferenz-Service bereitstellen** zu aktivieren. Mit diesem Feature wird sichergestellt, dass Ihre Modellbereitstellung für den Azure KI-Rückschlussdienst verfügbar ist, den Sie im Anwendungscode verwenden.
 1. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
