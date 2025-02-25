@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Feinabstimmung eines Sprachmodells für die Chatvervollständigung in der Azure KI Foundry
+  title: Optimieren eines Sprachmodells
+  description: 'Erfahren Sie, wie Sie ihre eigenen zusätzlichen Trainingsdaten verwenden, um ein Modell zu optimieren und sein Verhalten anzupassen.'
 ---
 
-# Feinabstimmung eines Sprachmodells für die Chatvervollständigung in der Azure KI Foundry
+# Optimieren eines Sprachmodells
 
 Wenn Sie möchten, dass sich ein Sprachmodell auf eine bestimmte Weise verhält, können Sie das entsprechende Engineering verwenden, um das gewünschte Verhalten zu definieren. Wenn Sie die Konsistenz des gewünschten Verhaltens verbessern möchten, können Sie ein Modell optimieren, indem Sie es mit Ihrem Prompt-Engineering-Ansatz vergleichen, um zu bewerten, welche Methode Ihren Anforderungen am besten entspricht.
 
@@ -34,7 +35,7 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb 
 1. Überprüfen Sie Ihre Konfiguration, und erstellen Sie Ihr Projekt.
 1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
-## Optimieren eines GPT-3.5 Modells
+## Optimieren eines GPT-4-Modells
 
 Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie zuerst mit dem Feinabstimmungsauftrag. Bevor Sie ein Modell optimieren können, benötigen Sie ein Dataset.
 
@@ -43,7 +44,7 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie 
     > **Hinweis**: Ihr Gerät speichert die Datei möglicherweise standardmäßig als .txt-Datei. Wählen Sie alle Dateien aus, und entfernen Sie das .txt-Suffix, um sicherzustellen, dass Sie die Datei als JSONL speichern.
 
 1. Navigieren Sie zur Seite **Feinabstimmung** unter dem Abschnitt **Erstellen und Anpassen**, indem Sie das Menü auf der linken Seite verwenden.
-1. Wählen Sie die Schaltfläche zum Hinzufügen eines neuen Feinabstimmungsmodells, wählen Sie das Modell `gpt-35-turbo`, wählen Sie **Weiter** und dann **Bestätigen**.
+1. Wählen Sie die Schaltfläche zum Hinzufügen eines neuen Feinabstimmungsmodells, wählen Sie das Modell `gpt-4`, wählen Sie **Weiter** und dann **Bestätigen**.
 1. **Optimieren Sie** das Modell mithilfe der folgenden Konfiguration:
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
     - **Modellsuffix**: `ft-travel`
@@ -71,16 +72,16 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie 
 
 ## Chat mit einem Basismodell
 
-Während Sie warten, bis der Feinabstimmungsauftrag abgeschlossen ist, chatten wir mit einem Basis-GPT 3.5-Modell, um die Leistung zu bewerten.
+Während Sie auf den Abschluss der Feinabstimmung warten, lassen Sie uns mit einem Basis-GPT-4-Modell sprechen, um seine Leistung zu beurteilen.
 
 1. Navigieren Sie zur Seite **Modelle + Endpunkte** unter dem Abschnitt **Meine Assets**, indem Sie das Menü auf der linken Seite verwenden.
 1. Wählen Sie die Schaltfläche ** + Modell bereitstellen** und dann die Option **Basismodell bereitstellen** aus.
-1. Stellen Sie ein `gpt-35-turbo`-Modell bereit, bei dem es sich um denselben Modelltyp handelt, den Sie bei der Feinabstimmung verwendet haben.
+1. Stellen Sie ein `gpt-4`-Modell bereit, bei dem es sich um denselben Modelltyp handelt, den Sie bei der Feinabstimmung verwendet haben.
 
 > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
 
 1. Wenn die Bereitstellung abgeschlossen ist, wählen Sie die Schaltfläche **Im Spielzimmer öffnen**.
-1. Vergewissern Sie sich, dass Ihr bereitgestelltes `gpt-35-model` Basismodell im Einrichtungsfenster ausgewählt ist.
+1. Vergewissern Sie sich, dass Ihr bereitgestelltes `gpt-4` Basismodell im Einrichtungsfenster ausgewählt ist.
 1. Geben Sie im Chat-Fenster die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
     Die Antworten sind sehr allgemein gehalten. Denken Sie daran, dass wir eine Chatanwendung erstellen möchten, die Menschen zum Reisen inspiriert.
 1. Aktualisieren Sie die Systemmeldung im Setup-Fenster mit der folgenden Aufforderung:

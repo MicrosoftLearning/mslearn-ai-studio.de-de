@@ -1,6 +1,7 @@
 ---
 lab:
   title: 'Erstellen einer generativen KI-App, die Ihre eigenen Daten verwendet'
+  description: 'Erfahren Sie, wie Sie mithilfe des RAG-Modells (Retrieval Augmented Generation) eine Chat-App erstellen, die Aufforderungen zur Verwendung Ihrer eigenen Daten anfordert.'
 ---
 
 # Erstellen einer generativen KI-App, die Ihre eigenen Daten verwendet
@@ -75,7 +76,7 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 
     > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
 
-1. Wiederholen Sie die vorherigen Schritte zum Bereitstellen eines **gpt-35-turbo-16k-** Modells mit dem Bereitstellungsnamen `gpt-35-turbo-16k`.
+1. Wiederholen Sie die vorherigen Schritte, um ein **gpt-4**-Modell mit dem Bereitstellungsnamen `gpt-4` bereitzustellen.
 
     > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
@@ -119,7 +120,7 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite die Seite **Spielplätze**.
-1. Vergewissern Sie sich auf der Seite „Chat“ im Bereich „Setup“, dass Ihre Bereitstellung des Modells **gpt-35-turbo-16k** ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Stellen Sie auf der Seite „Chat“ im Bereich „Setup“ sicher, dass Ihre **gpt-4**-Modelimplementierung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
 1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
 1. Erweitern Sie im Bereich „Einrichtung“ das Feld **Ihre Daten hinzufügen** und fügen Sie dann den Projektindex **Broschüren-Index** hinzu und wählen Sie den Suchtyp **hybrid (Vektor + Schlüsselwort)** aus.
 
@@ -176,7 +177,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
 
     - **Verbindung**: *Die standardmäßige Azure OpenAI-Ressource für Ihren KI-Hub*
     - **API**: Chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
 1. Warten Sie, bis die Computesitzung gestartet ist, und legen Sie dann im Abschnitt **Suchabfrage** die folgenden Parameterwerte fest:
@@ -200,9 +201,9 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
 
 1. Wählen Sie im Abschnitt **chat_with_context** die folgenden Einstellungen aus (lassen Sie andere wie sie sind):
 
-    - **Verbindung**: Default_AzureOpenAI
+    - **Verbindung**: *Die standardmäßige Azure OpenAI-Ressource für Ihren KI-Hub*
     - **Api**: Chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
     Stellen Sie dann sicher, dass die **Eingaben** für dieses Tool die folgenden Parameter enthalten:
