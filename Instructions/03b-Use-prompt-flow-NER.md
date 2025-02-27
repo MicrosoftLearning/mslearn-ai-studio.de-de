@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI-Studio
+  title: Verwenden von Prompt Flow zur Erkennung benannter Entitäten (NER)
+  description: 'Generative KI ist nicht nur für Chat-Apps gedacht – erfahren Sie, wie Sie Prompt-Flow in einem Textanalyseszenario einsetzen können, in dem benannte Entitäten aus dem Text extrahiert werden müssen.'
 ---
 
-# Verwenden von Prompt Flow für Named Entity Recognition (NER) in Azure KI-Studio
+# Verwenden von Prompt Flow zur Erkennung benannter Entitäten (NER)
 
 Das Extrahieren wertvoller Informationen aus Text wird als Erkennung benannter Entitäten (Named Entity Recognition, NER) bezeichnet. Entitäten sind Schlüsselwörter, die für Sie in einem bestimmten Text von Interesse sind.
 
@@ -30,11 +31,11 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts und eines 
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - **Verbinden Sie Azure KI Services oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
 1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
@@ -44,7 +45,8 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts und eines 
 Um ein LLM-Modell in Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Erstellen Sie eine neue Bereitstellung des Modells **gpt-35-turbo** mit den folgenden Einstellungen, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
+1. Wählen Sie **+ Modell bereitstellen** und **Basismodell bereitstellen** aus.
+1. Erstellen Sie eine neue Bereitstellung des **gpt-4**-Modells mit den folgenden Einstellungen, indem Sie in den Bereitstellungsdetails auf **Anpassen** klicken:
    
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
@@ -111,7 +113,7 @@ Der Standardflow enthält bereits einen Knoten, der das LLM-Tool verwendet. Sie 
 1. Navigieren Sie zum **LLM-Knoten** mit dem Namen `joke`.
 1. Ersetzen sie den Namen durch `NER_LLM`.
 1. Wählen Sie für **Verbindung** die Verbindung, die für Sie erstellt wurde, als Sie den KI-Hub erstellt haben.
-1. Wählen Sie unter **deployment_name** das von Ihnen bereitgestellte Modell `gpt-35-turbo` aus.
+1. Wählen Sie unter **deployment_name** das von Ihnen bereitgestellte Modell `gpt-4` aus.
 1. Ersetzen Sie das Feld „Prompt“ durch den folgenden Code:
 
    ```yml
@@ -124,10 +126,9 @@ Der Standardflow enthält bereits einen Knoten, der das LLM-Tool verwendet. Sie 
 
    user:
    
-   {% raw %}
    Entity type: {{entity_type}}
    Text content: {{text}}
-   {% endraw %}
+
    Entities:
    ```
 

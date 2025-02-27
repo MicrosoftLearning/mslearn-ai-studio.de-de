@@ -20,11 +20,11 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Projekts innerhalb eines 
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - **Verbinden Sie Azure KI Services oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen.
 1. Wählen Sie **Ein Projekt erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
@@ -35,7 +35,7 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
 
 1. Navigieren Sie zur Seite **Modelle + Endpunkte** unter dem Abschnitt **Meine Assets**, indem Sie das Menü auf der linken Seite verwenden.
 1. Wählen Sie die Schaltfläche ** + Modell bereitstellen** und dann die Option **Basismodell bereitstellen** aus.
-1. Erstellen Sie eine neue Bereitstellung des Modells **gpt-35-turbo** mit den folgenden Einstellungen, indem Sie **Anpassen** im Assistenten **Modell bereitstellen** auswählen:
+1. Erstellen Sie eine neue Bereitstellung des **gpt-4**-Modells mit den folgenden Einstellungen, indem Sie im Assistenten **Modell bereitstellen** die Option **Anpassen** auswählen:
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
@@ -148,7 +148,7 @@ Um Zeit zu sparen, haben wir für Sie einen Batch-Ausgabedatensatz erstellt, der
     - Wählen Sie **Weiter** aus.
     - **Metriken auswählen**: Kohärenz, Sprachfluss
     - **Verbindung**: *Ihre KI Services-Verbindung*
-    - **Bereitstellungsname/Modell**: *Ihr bereitgestelltes GPT-3.5-Modell*
+    - **Bereitstellungsname/Modell**: *Ihr bereitgestelltes GPT-4-Modell*
     - **Abfrage**: Wählen Sie **Abfrage** als Datenquelle aus.
     - **Antwort**: Wählen Sie **Antwort** als Datenquelle aus
       

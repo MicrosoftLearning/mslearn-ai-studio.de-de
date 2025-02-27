@@ -1,11 +1,12 @@
 ---
 lab:
-  title: Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
+  title: Verwenden eines Prompt Flows zur Verwaltung von Konversationen in einer Chat-App
+  description: 'Erfahren Sie, wie Sie Prompt Flows verwenden, um Konversationsdialoge zu verwalten und sicherzustellen, dass Prompts für optimale Ergebnisse konstruiert und orchestriert werden.'
 ---
 
-# Erstellen eines benutzerdefinierten Copiloten mit Prompt Flow im Azure KI Foundry-Portal
+# Verwenden eines Prompt Flows zur Verwaltung von Konversationen in einer Chat-App
 
-In dieser Übung verwenden Sie den Prompt Flow des Azure KI Foundry-Portals, um einen benutzerdefinierten Copiloten zu erstellen, der einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
+In dieser Übung verwenden Sie den Prompt-Flow des Azure KI Foundry-Portals, um eine benutzerdefinierte Chat-App zu erstellen, die einen Benutzerprompt und einen Chatverlauf als Eingaben verwendet und ein GPT-Modell von Azure OpenAI nutzt, um eine Ausgabe zu erzeugen.
 
 Diese Übung dauert ungefähr **30** Minuten.
 
@@ -20,11 +21,11 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb 
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - **Verbinden Sie Azure KI Services oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
 1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
@@ -34,7 +35,8 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb 
 Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Erstellen Sie eine neue Bereitstellung des **gpt-35-Turbo**-Modells mit den folgenden Einstellungen:
+1. Wählen Sie **+ Modell bereitstellen** und **Basismodell bereitstellen** aus. 
+1. Erstellen Sie eine neue Bereitstellung des **gpt-4**-Modells mit den folgenden Einstellungen, indem Sie in den Bereitstellungsdetails auf **Anpassen** klicken.
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
@@ -106,7 +108,7 @@ Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow ba
 
 1. Wählen Sie im Abschnitt „LLM-Knoten“ für **Verbindung** die Verbindung aus, die beim Erstellen des KI-Hubs für Sie erstellt wurde.
 1. Als **API** wählen Sie **Chat** aus.
-1. Wählen Sie unter **Bereitstellungsname** das von Ihnen bereitgestellte **GPT-35-Turbo**-Modell aus.
+1. Wählen Sie für **deployment_name** das von Ihnen bereitgestellte Modell **gpt-4** aus.
 1. Wählen Sie für **Antwortformat** die Option **{"type":"text"}** aus.
 1. Überprüfen Sie das Feld für den Prompt, und stellen Sie sicher, dass es wie folgt aussieht:
 

@@ -1,9 +1,10 @@
 ---
 lab:
-  title: 'Erkunden Sie Inhaltsfilter, um die Ausgabe schädlicher Inhalte in Azure KI Foundry zu verhindern.'
+  title: 'Anwenden von Inhaltsfiltern, um die Ausgabe von schädlichen Inhalten zu verhindern'
+  description: 'Erfahren Sie, wie Sie Inhaltsfilter anwenden, die potenziell anstößige oder schädliche Ausgaben in Ihrer generativen KI-App mindern.'
 ---
 
-# Erkunden Sie Inhaltsfilter, um die Ausgabe schädlicher Inhalte in Azure KI Foundry zu verhindern.
+# Anwenden von Inhaltsfiltern, um die Ausgabe von schädlichen Inhalten zu verhindern
 
 Azure KI Foundry enthält standardmäßige Inhaltsfilter, um sicherzustellen, dass potenziell schädliche Aufforderungen und Vervollständigungen erkannt und aus den Interaktionen mit dem Dienst entfernt werden. Überdies können Sie die Berechtigung zum Definieren von benutzerdefinierten Inhaltsfiltern für Ihre spezifischen Anforderungen beantragen, um sicherzustellen, dass Ihre Modellimplementierungen die entsprechenden verantwortungsvollen KI-Prinzipien für Ihr generatives KI-Szenario durchsetzen. Die Inhaltsfilterung ist ein Element eines wirksamen Ansatzes für verantwortungsvolle KI bei der Arbeit mit generativen KI-Modellen.
 
@@ -22,11 +23,11 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb 
     - **Hub-Name:** *Ein eindeutiger Name*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - **Verbinden Sie Azure KI Services oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
 1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
@@ -36,7 +37,7 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb 
 Jetzt können Sie ein Modell bereitstellen, das Sie über das **Azure KI Foundry Portal** verwenden können. Nach der Bereitstellung verwenden Sie das Modell, um Inhalte in natürlicher Sprache zu generieren.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Erstellen Sie eine neue Bereitstellung des Modells **gpt-35-turbo** mit den folgenden Einstellungen, indem Sie im Assistenten zum Bereitstellen von Modellen auf **Anpassen** klicken:
+1. Erstellen Sie eine neue Bereitstellung des **gpt-4**-Modells mit den folgenden Einstellungen, indem Sie im Assistenten „Modell bereitstellen“ die Option **Anpassen** auswählen:
    
     - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Standard
@@ -46,7 +47,7 @@ Jetzt können Sie ein Modell bereitstellen, das Sie über das **Azure KI Foundry
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
       
-> **Hinweis**: Jedes Azure KI Foundry Modell ist für ein unterschiedliches Gleichgewicht von Fähigkeiten und Leistung optimiert. Wir verwenden das Modell **GPT 3.5 Turbo** in dieser Übung, das sich in hohem Maße für Szenarien zur Generierung natürlicher Sprache und Chatszenarien eignet.
+> **Hinweis**: Jedes Azure KI Foundry Modell ist für ein unterschiedliches Gleichgewicht von Fähigkeiten und Leistung optimiert. Wir verwenden das Modell **GPT-4** in dieser Übung, das sich in hohem Maße für Szenarien zur Generierung natürlicher Sprache und Chatszenarien eignet.
 
 ## Erkunden der Inhaltsfilter
 
@@ -83,7 +84,7 @@ Inhaltsfilter werden auf Eingabeaufforderungen und Vervollständigungen angewend
 
 1. Kehren Sie zur Seite **Modelle + Endpunkte** zurück und stellen Sie fest, dass Ihre Bereitstellung jetzt auf den von Ihnen erstellten benutzerdefinierten Inhaltsfilter verweist.
 
-    ![Screenshot der Bereitstellungsseite im Azure KI Foundry Portal.](./media/azure-ai-deployment.png)
+    ![Screenshot der Bereitstellungsseite im Azure KI Foundry Portal.](./media/model-gpt-4-custom-filter.png)
 
 ## Generieren von Ausgaben in natürlicher Sprache
 
