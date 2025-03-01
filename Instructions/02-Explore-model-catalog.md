@@ -1,13 +1,14 @@
 ---
 lab:
-  title: 'Erforschen, Bereitstellen und Chatten mit Sprachmodellen in Azure KI Foundry'
+  title: Auswählen und Bereitstellen eines Sprachmodells
+  description: 'Generative KI-Anwendungen basieren auf einem oder mehreren Sprachmodellen. Erfahren Sie, wie Sie geeignete Modelle für Ihr generatives KI-Projekt finden und auswählen.'
 ---
 
-# Erforschen, Bereitstellen und Chatten mit Sprachmodellen in Azure KI Foundry
+# Auswählen und Bereitstellen eines Sprachmodells
 
 Der Modellkatalog von Azure KI Foundry dient als zentrales Repository, in dem Sie eine Vielzahl von Modellen erforschen und verwenden können, was die Erstellung Ihres generativen KI-Szenarios erleichtert.
 
-In dieser Übung werden Sie den Modellkatalog im Azure KI Foundry-Portal erkunden.
+In dieser Übung erkunden Sie den Modellkatalog im Azure AI Foundry-Portal und vergleichen potenzielle Modelle für eine generative KI-Anwendung, die bei der Lösung von Problemen hilft.
 
 Diese Übung dauert ungefähr **25** Minuten.
 
@@ -17,119 +18,168 @@ Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Si
 
 1. Öffnen Sie in einem Webbrowser das [Azure KI Foundry Portal](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an.
 
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**. Im Assistenten **Projekt erstellen** sehen Sie alle Azure-Ressourcen, die automatisch mit Ihrem Projekt erstellt werden, oder Sie können die folgenden Einstellungen anpassen, indem Sie **Anpassen** wählen, bevor Sie **Erstellen** wählen:
-
-    - **Hub-Name:** *Ein eindeutiger Name*
+1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
+1. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
+    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe:** *Neue Ressourcengruppe*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-35-turbo** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
+    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Die Modellquoten werden auf der Ebene des Mandanten durch regionale Quoten eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
-1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
-1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-   
-    Nachdem Sie den Azure KI-Hub und das Projekt erstellt haben, sollte es ähnlich wie das folgende Bild aussehen:
+1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
+1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
 
-    ![Screenshot der Details eines Azure KI-Hubs im Azure KI Foundry-Portal.](./media/azure-ai-resource.png)
+    ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
 
-1. Öffnen Sie eine neue Browser-Registerkarte (lassen Sie die Registerkarte des Azure KI Foundry-Portals geöffnet) und rufen Sie das Azure-Portal unter [https://portal.azure.com](https://portal.azure.com?azure-portal=true) auf, indem Sie sich mit Ihren Azure-Zugangsdaten anmelden, falls Sie dazu aufgefordert werden.
-1. Navigieren Sie zu der Ressourcengruppe, in der Sie Ihren Azure KI-Hub erstellt haben, und zeigen Sie die erstellten Azure-Ressourcen an.
+## Konfigurieren der Azure AI Inference-Dienstbereitstellung
 
-    ![Screenshot: Azure KI-Hub und zugehörige Ressourcen im Azure-Portal.](./media/azure-portal.png)
+Es gibt mehrere Optionen für die Bereitstellung von Modellen im Azure AI Foundry-Portal. In dieser Übung verwenden Sie die Bereitstellungsoption **Azure KI-Modellinferenz**, die sowohl *Azure OpenAI*-Modelle als auch *Model-as-a-Service*-Modelle aus dem Azure AI Foundry-Modellkatalog unterstützt. Da alle Modelle auf einem gemeinsamen Endpunkt bereitgestellt werden, der von Ihrer Azure AI Services-Ressource gehostet wird, ist es einfach, beim Testen zwischen Modellen zu wechseln, um Verhalten und Leistung zu vergleichen.
 
-1. Kehren Sie zur Browser-Registerkarte des Azure KI Foundry-Portals zurück.
-1. Zeigen Sie die einzelnen Seiten im Bereich links auf der Seite für Ihren Azure KI-Hub an, und sehen Sie sich die Artefakte an, die Sie erstellen und verwalten können. Auf der Seite **Management Center** können Sie **Verbundene Ressourcen** auswählen, entweder unter Ihrem Hub oder Ihrem Projekt, und feststellen, dass bereits Verbindungen zu Azure OpenAI und KI-Services erstellt wurden.
-1. Wenn Sie sich auf der Seite Management Center befinden, wählen Sie **Zum Projekt gehen**.
+1. Verwenden Sie auf der Symbolleiste oben rechts auf der Azure AI Foundry-Projektseite das Symbol **Vorschaufeatures**, um Vorschaufeatures anzuzeigen.
+1. Aktivieren Sie das Feature **Modelle im Azure KI-Modellinferenzdienst bereitstellen**. Schließen Sie dann den Bereich **Vorschaufeature**.
 
-## Auswählen eines Modells mithilfe von Modell-Benchmarks
+## Überprüfen von Modelldetails und Benchmarks
 
-Bevor Sie ein Modell bereitstellen, können Sie die Modell-Benchmarks untersuchen, um zu entscheiden, welches Modell ihren Anforderungen am besten entspricht.
+Um Ihnen bei der Auswahl eines Modells zu helfen, können Sie sich die Modellbeschreibungen und Benchmarks ansehen, um festzustellen, welches Modell ihren Anforderungen am besten entspricht.
 
-Stellen Sie sich vor, Sie möchten einen benutzerdefinierten Copilot erstellen, der als Reiseassistent dient. Insbesondere möchten Sie, dass Ihr Copilot Unterstützung für reisebezogene Anfragen wie Visaanforderungen, Wettervorhersagen, lokale Attraktionen und kulturelle Normen bietet.
+1. Wählen Sie im Azure KI Foundry-Projektportal im Menübereich auf der linken Seite **Modellkatalog** aus.
+1. Suchen Sie auf der Startseite des Modellkatalogs nach `gpt-4`, um das Chat-Abschlussmodell **gpt-4** zu finden.
 
-Ihr Kopilot muss sachlich korrekte Informationen liefern, daher ist Bodenständigkeit wichtig. Darüber hinaus möchten Sie, dass die Antworten des Copilot leicht zu lesen und zu verstehen sind. Daher sollten Sie auch ein Modell wählen, das in Bezug auf Geläufigkeit und Kohärenz gut abschneidet.
+    ![Screenshot einer Suche nach „gpt-4“ im Modellkatalog.](./media/model-catalog-search-gpt4.png)
 
-1. Navigieren Sie im Azure KI Foundry-Projektportal über das Menü auf der linken Seite zu **Modellkatalog**.
-    Wählen Sie auf der Katalogseite **Mit Benchmarks vergleichen** aus. Auf der Seite „Modell-Benchmarks“ finden Sie eine bereits für Sie erstellte Tabelle, in der verschiedene Modelle verglichen werden.
-1. Wählen Sie **+ Modell aus, um zu vergleichen** und **gpt-4-32k** und **gpt-4** zum Metrikdiagramm hinzuzufügen. Wählen Sie im Dropdown-Menü **X-Achse** unter **Qualität** die folgenden Metriken aus und betrachten Sie jedes resultierende Diagramm, bevor Sie zum nächsten wechseln:
+1. Wählen Sie das Modell **gpt-4** aus, um seine Details anzuzeigen. Lesen Sie die Beschreibung, und überprüfen Sie die anderen informationen, die auf der Seite verfügbar sind.
+
+    ![Screenshot der Detailseite des gpt-4-Modells.](./media/gpt4-details.png)
+
+1. Zeigen Sie auf der Seite **gpt-4** die Registerkarte **Benchmarks** an, um zu sehen, wie das Modell im Vergleich zu einigen Standardleistungs-Benchmarks bei anderen Modellen abschneidet, die in ähnlichen Szenarien verwendet werden.
+
+    ![Screenshot der Seite „gpt-4-Modell-Benchmarks“.](./media/gpt4-benchmarks.png)
+
+1. Verwenden Sie den Pfeil „Zurück“ (**&larr;**) neben dem Seitentitel **gpt-4**, um zur Startseite des Modellkatalogs zurückzukehren.
+1. Suchen Sie im Modellkatalog nach `Phi-3.5-mini-instruct` und sehen Sie sich die Details und Benchmarks für das Modell **Phi-3.5-mini-instruct** an.
+
+## Vergleichen von Modellen
+
+Sie haben zwei verschiedene Modelle überprüft, von denen beide verwendet werden können, um eine generative KI-Chatanwendung zu implementieren. Jetzt vergleichen wir die Metriken für diese beiden Modelle visuell.
+
+1. Kehren Sie zur Startseite des **Modellkatalogs** zurück.
+1. Wählen Sie **Modelle vergleichen** aus. Ein visuelles Diagramm für den Modellvergleich wird mit einer Auswahl gängiger Modelle angezeigt.
+
+    ![Screenshot der Modellvergleichsseite.](./media/compare-models.png)
+
+1. Beachten Sie im Bereich **Modelle zum Vergleichen** auf der linken Seite, dass Sie beliebte Aufgaben auswählen können, z. B. *Fragen und Antworten*, um automatisch häufig verwendete Modelle für bestimmte Aufgaben auszuwählen.
+1. Verwenden Sie das Symbol **Alle Modelle löschen** (&#128465;), um alle vordefinierten Modelle zu entfernen.
+1. Verwenden Sie die Schaltfläche **+Modell zum Vergleichen**, um der Liste das Modell **gpt-4** hinzuzufügen. Verwenden Sie dann dieselbe Schaltfläche, um der Liste das Modell **Phi-3.5-mini-instruct** hinzuzufügen.
+1. Überprüfen Sie das Diagramm, das die Modelle basierend auf dem **Qualitätsindex** (eine standardisierte Bewertung, die die Modellqualität angibt) und den **Kosten** vergleicht. Sie können die spezifischen Werte für ein Modell anzeigen, indem Sie den Mauszeiger über den entsprechenden Punkt im Diagramm bewegen.
+
+    ![Screenshot des Modellvergleichsdiagramms für gpt-4 und Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+
+1. Wählen Sie im Dropdown-Menü **X-Achse** unter **Qualität** die folgenden Metriken aus und betrachten Sie jedes resultierende Diagramm, bevor Sie zum nächsten wechseln:
+    - Genauigkeit
     - Kohärenz
     - Geläufigkeit
-    - Quellenübereinstimmung
-1. Beim Erkunden der Ergebnisse können Sie versuchen, die folgenden Fragen zu beantworten:
-    - Beobachten Sie einen Unterschied bei der Leistung zwischen GPT-3.5- und GPT-4-Modellen?
-    - Gibt es einen Unterschied zwischen Versionen desselben Modells?
-    - Wie unterscheidet sich die 32k-Variante von GPT-4 vom Basismodell?
+    - Relevance
 
-In der Azure OpenAI-Sammlung können Sie zwischen GPT-3.5- und GPT-4-Modellen wählen. Lassen Sie uns diese beiden Modelle einsetzen und untersuchen, wie sie sich für Ihren Anwendungsfall eignen.
-
-## Bereitstellen von Azure OpenAI-Modellen
+## Bereitstellen von Modellen
 
 Nachdem Sie Ihre Optionen nun mithilfe von Modell-Benchmarks untersucht haben, können Sie Sprachmodelle bereitstellen. Sie können den Modellkatalog durchsuchen und von dort aus bereitstellen oder ein Modell über die Seite**Bereitstellungen** zur Verfügung stellen. Lassen Sie uns beide Optionen erkunden.
 
-### Bereitstellen eines Modells aus dem Modellkatalog
+### Bereitstellen eines Modells aus dem *Modellkatalog*
 
-Beginnen wir mit der Bereitstellung eines Modells aus dem Modellkatalog. Sie können diese Option bevorzugen, wenn Sie alle verfügbaren Modelle filtern möchten.
+Beginnen wir mit der Bereitstellung eines Modells aus dem Modellkatalog. Sie können diese Option bevorzugen, wenn Sie verschiedene verfügbare Modelle prüfen möchten.
 
-1. Navigieren Sie über das Menü auf der linken Seite zur Seite **Modellkatalog**.
-1. Suchen Sie nach dem von Azure KI kuratierten `gpt-35-turbo`-Modell und stellen Sie es mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
-   
-    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Bereitstellungstyp**: Standard
+1. Kehren Sie zur Startseite des **Modellkatalogs** zurück.
+1. Suchen Sie wie zuvor das `gpt-4` Modell und wählen Sie es aus.
+1. Wählen Sie auf der Seite **gpt-4** die Option **Bereitstellen** aus und stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie in den Bereitstellungsdetails die Option **Anpassen** auswählen:
+    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `gpt-4-model`.*
+    - **Bereitstellungstyp**: Globaler Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
+    - **Verbundene KI-Ressource**: *Ihrer Azure OpenAI-Ressourcenverbindung*
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
     - **Inhaltsfilter**: StandardV2 
     - **Dynamische Quote aktivieren**: Deaktiviert
+      
+    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
-    > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
+1. Warten Sie, bis der **Bereitstellungsstatus** der Bereitstellung **erfolgreich** war.
 
-### Bereitstellen eines Modells über Models + Endpunkte
+### Bereitstellen eines Modells über *Modelle + Endpunkte*
 
 Wenn Sie bereits genau wissen, welches Modell Sie bereitstellen möchten, ziehen Sie es vielleicht vor, dies über **Modelle + Endpunkte** zu tun.
 
-1. Navigieren Sie zur Seite **Modelle + Endpunkte** unter dem Abschnitt **Meine Assets**, indem Sie das Menü auf der linken Seite verwenden.
-1. Stellen Sie auf der Registerkarte **Modellbereitstellungen** ein neues Basismodell mit den folgenden Einstellungen bereit, indem Sie in den Bereitstellungsdetails **Anpassen** wählen:
-    - **Modell**: gpt-4
-    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Bereitstellungstyp**: Standard
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
-    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
-    - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
+1. Wählen Sie in der Navigationsleiste auf der linken Seite im Bereich **Meine Assets** die Option **Modelle + Endpunkte** aus.
+1. Wählen Sie auf der Registerkarte **Modellbereitstellungen** in der Dropdownliste **+ Modell bereitstellen** die Option **Basismodell bereitstellen** aus. Suchen Sie dann nach `Phi-3.5-mini-instruct` und bestätigen Sie Ihre Auswahl.
+1. Stimmen Sie der Modelllizenz zu.
+1. Stellen Sie ein **Phi-3.5-mini-instruct** -Modell mit den folgenden Einstellungen bereit:
+    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `phi-35-model`*
+    - **Bereitstellungstyp**: Globaler Standard
+    - **Bereitstellungsdetails**: *Verwenden der Standardeinstellungen.*
+
+1. Warten Sie, bis der **Bereitstellungsstatus** der Bereitstellung **erfolgreich** war.
 
 ## Testen von Modellen im Chat-Playground
 
 Nachdem wir nun zwei Modelle zum Vergleichen haben, sehen wir uns an, wie sich die Modelle in einer Unterhaltungsinteraktion verhalten.
 
-1. Navigieren Sie über das Menü auf der linken Seite zur Seite **Spielplätze**.
-1. Wählen Sie im **Chat-Playground** Ihre GPT-3.5-Bereitstellung aus.
-1. Geben Sie im Chat-Fenster die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
-    Die Antworten sind sehr allgemein gehalten. Denken Sie daran, dass wir einen benutzerdefinierten Kopiloten erstellen wollen, der als Reiseassistent dient. In der Frage, die Sie stellen, können Sie angeben, welche Art von Hilfe Sie benötigen.
-1. Geben Sie im Chatfenster die Abfrage `Imagine you're a travel assistant, what can you help me with?` ein. Die Antworten sind bereits spezifischer. Möglicherweise möchten Sie nicht, dass Ihre Endbenutzer bei jeder Interaktion mit Ihrem Copilot den erforderlichen Kontext bereitstellen müssen. Um globale Anweisungen hinzuzufügen, können Sie die Systemmeldung bearbeiten.
-1. Aktualisieren Sie unter **Setup** das Feld **Geben Sie die Modellanweisungen und den Kontext** mit der folgenden Aufforderung:
+### Vorbereiten des Chats
 
-   ```
-   You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
-   ```
-
+1. Wählen Sie in der Navigationsleiste **Playgrounds** aus. Wählen Sie dann den **Chatplayground** aus.
+1. Legen Sie im Bereich **Setup** im Feld **Dem Modell Anweisungen und Kontext geben** die Systemansage auf `You are an AI assistant that helps solve problems.` fest
 1. Wählen Sie **Änderungen übernehmen** aus.
-1. Geben Sie im Chatfenster die Abfrage `What can you do?` ein, und schauen Sie sich die neue Antwort an. Beobachten Sie, wie sich dies von der Antwort unterscheidet, die Sie zuvor erhalten haben. Die Antwort ist ausreichend spezifisch, um jetzt zu reisen.
-1. Setzen Sie das Gespräch fort, indem Sie fragen: `I'm planning a trip to London, what can I do there?` Der Copilot bietet viele reisebezogene Informationen. Möglicherweise möchten Sie die Ausgabe noch weiter verbessern. Vielleicht möchten Sie zum Beispiel, dass die Antwort prägnanter ausfällt.
-1. Aktualisieren Sie die Systemnachricht, indem Sie am Ende der Nachricht `Answer with a maximum of two sentences.`hinzufügen. Wenden Sie die Änderung an, löschen Sie den Chat und testen Sie den Chat erneut, indem Sie eine Frage stellen: `I'm planning a trip to London, what can I do there?` Vielleicht möchten Sie auch, dass Ihr Copilot das Gespräch fortsetzt, anstatt nur die Frage zu beantworten.
-1. Aktualisieren Sie den Kontext des Modells, indem Sie `End your answer with a follow-up question.` an das Ende der Eingabeaufforderung anhängen. Speichern Sie die Änderung und testen Sie den Chat erneut, indem Sie nachfragen: `I'm planning a trip to London, what can I do there?`
-1. Ändern Sie Ihre **Einrichtung** auf Ihr GPT-4-Modell und wiederholen Sie alle Schritte in diesem Abschnitt. Beachten Sie, wie die Modelle in ihren Ausgaben variieren können.
-1. Testen Sie schließlich beide Modelle für die Abfrage `Who is the prime minister of the UK?`. Die Leistung bei dieser Frage hängt mit der Fundiertheit der Modelle zusammen (d. h. ob die Antworten sachlich richtig sind). Korreliert die Leistung mit Ihren Schlussfolgerungen aus den Modell-Benchmarks?
 
-Nachdem Sie nun beide Modelle untersucht haben, überlegen Sie, welches Modell Sie jetzt für Ihren Anwendungsfall auswählen würden. Zu Beginn können die Ergebnisse der Modelle unterschiedlich sein, und Sie werden vielleicht ein Modell dem anderen vorziehen. Nach der Aktualisierung der Systemmeldung werden Sie jedoch feststellen, dass der Unterschied minimal ist. Unter dem Gesichtspunkt der Kostenoptimierung können Sie sich dann für das Modell GPT-3.5 und nicht für das Modell GPT-4 entscheiden, da ihre Leistung sehr ähnlich ist.
+### Chatten mit dem *gpt-4*-Modell
+
+Wählen Sie im Bereich **Setup** Ihr *gpt-4*-Modell aus.
+1. Geben Sie im Chatfenster die folgende Abfrage ein:
+
+    ```
+    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?
+    ```
+
+1. Zeigen Sie die Antwort an. Geben Sie dann die folgende Nachverfolgungsabfrage ein:
+
+    ```
+    Explain your reasoning.
+    ```
+
+### Chatten mit dem *Phi-3.5*-Modell
+
+1. Wählen Sie im Bereich **Setup** Ihr *Phi-3.5*-Modell aus.
+1. Stellen Sie sicher, dass eine neue Chatsitzung gestartet wird, bevor Sie die gleichen Prompts wiederholen, die Sie zuvor zum Testen des gpt-4-Modells verwendet haben.
+1. Geben Sie im Chatfenster die folgende Abfrage ein:
+
+    ```
+    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?
+    ```
+
+1. Zeigen Sie die Antwort an. Geben Sie dann die folgende Nachverfolgungsabfrage ein:
+
+    ```
+    Explain your reasoning.
+    ```
+
+### Durchführen eines weiteren Vergleichs
+
+1. Probieren Sie das folgende Puzzle mit beiden Modellen aus, bitten Sie die Modelle, ihre Begründung zu erklären (die richtige Antwort ist 40!):
+
+    ```
+    I have 53 socks in my drawer: 21 identical blue, 15 identical black and 17 identical red. The lights are out, and it is completely dark. How many socks must I take out to make 100 percent certain I have at least one pair of black socks?
+    ```
+
+## Reflektieren der Modelle
+
+Sie haben zwei Modelle verglichen, die sich sowohl in ihrer Fähigkeit, angemessene Reaktionen zu generieren, als auch in ihren Kosten unterscheiden können. In jedem generativen Szenario müssen Sie ein Modell finden, das die richtige Balance zwischen der Eignung für die Aufgabe, die Sie ihm übertragen möchten, und den Kosten für die Nutzung des Modells für die Anzahl der Anfragen, die es voraussichtlich bearbeiten muss, bietet.
+
+Die im Modellkatalog enthaltenen Details und Benchmarks sowie die Möglichkeit, Modelle visuell zu vergleichen, bieten einen nützlichen Ausgangspunkt für die Identifizierung von Kandidatenmodellen für eine generative KI-Lösung. Anschließend können Sie Kandidatenmodelle mit einer Vielzahl von System- und Benutzerprompts im Chat-Playground testen.
 
 ## Bereinigen
 
 Wenn Sie die Erkundung des Azure KI-Foundry-Portals abgeschlossen haben, sollten Sie die Ressourcen, die Sie in dieser Übung erstellt haben, löschen, um unnötige Azure-Kosten zu vermeiden.
 
-1. Kehren Sie zur Browserregisterkarte mit dem Azure-Portal zurück (oder öffnen Sie das [Azure-Portal](https://portal.azure.com?azure-portal=true) auf einer neuen Browserregisterkarte erneut), und zeigen Sie den Inhalt der Ressourcengruppe an, in der Sie die in dieser Übung verwendeten Ressourcen bereitgestellt haben.
+1. Öffnen Sie das [Azure-Portal](https://portal.azure.com), und zeigen Sie den Inhalt der Ressourcengruppe an, in der Sie die in dieser Übung verwendeten Ressourcen bereitgestellt haben.
 1. Wählen Sie auf der Symbolleiste die Option **Ressourcengruppe löschen** aus.
 1. Geben Sie den Namen der Ressourcengruppe ein, und bestätigen Sie, dass Sie sie löschen möchten.
