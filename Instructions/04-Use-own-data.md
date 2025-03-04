@@ -12,49 +12,30 @@ In dieser Übung verwenden Sie das Azure KI Foundry Portal, um benutzerdefiniert
 
 Diese Übung dauert ca. **45** Minuten.
 
-## Erstellen einer Azure KI-Suche-Ressource
+## Erstellen eines Azure KI Foundry-Projekts
 
-Ihre generative KI-App-Lösung wird benutzerdefinierte Daten in einen schnellen Ablauf integrieren. Um diese Integration zu unterstützen, benötigen Sie eine Azure KI Search-Ressource, mit der Ihre Daten indiziert werden sollen.
+Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforderlichen Dienstressourcen, die es benötigt, mithilfe Ihrer eigenen Daten – einschließlich einer Azure KI-Suche-Ressource.
 
-1. Öffnen Sie in einem Webbrowser das [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
-1. Wählen Sie auf der Startseite **+ Ressource erstellen** aus und suchen Sie nach `Azure AI Search`. Erstellen Sie dann eine neue Azure KI Search-Ressource mit den folgenden Einstellungen:
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry-Logo** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht:
 
-    - **Abonnement:** *Wählen Sie Ihr Azure-Abonnement aus.*
-    - **Ressourcengruppe**: *Wählen oder erstellen Sie eine Ressourcengruppe*.
-    - **Dienstname**: *Geben Sie einen eindeutigen Dienstnamen ein*
-    - **Speicherort:** *Treffen Sie eine **zufällige** Auswahl aus einer der folgenden Regionen*\*
-        - Australien (Osten)
-        - Kanada, Osten
-        - East US
-        - USA (Ost) 2
-        - Frankreich, Mitte
-        - Japan, Osten
-        - USA Nord Mitte
-        - Schweden, Mitte
-        - Schweiz 
-    - **Tarif**: Standard.
+    ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-    > \* Später erstellen Sie einen Azure KI-Hub (einschließlich eines Azure OpenAI-Diensts) in derselben Region wie Ihre Azure KI-Suche-Ressource. Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die aufgeführten Regionen enthalten das Standardkontingent für die in dieser Übung verwendeten Modelltypen. Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze in Szenarien erreicht, in denen Sie einen Mandanten für andere Benutzer und Benutzerinnen freigeben. Wenn später in der Übung eine Kontingentgrenze erreicht wird, müssen Sie eventuell einen weiteren Azure KI-Hub in einer anderen Region erstellen.
-
-1. Warten Sie, bis ihre Azure KI Search-Ressourcenbereitstellung abgeschlossen ist.
-
-## Erstellen eines Azure KI-Projekts
-
-Jetzt sind Sie bereit, ein Azure KI Foundry-Projekt und die Azure KI-Ressourcen zu erstellen, die es unterstützen.
-
-1. Öffnen Sie in einem Webbrowser das [Azure KI Foundry Portal](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an.
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Im **Assistenten zum Erstellen eines Projekts** können Sie alle Azure-Ressourcen sehen, die automatisch mit Ihrem Projekt erstellt werden. Wählen Sie **Anpassen** und verbinden Sie sich mit Ihrer Azure KI-Such-Ressource:
+1. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
+    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
+    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
+    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann sowohl **gpt-4** als auch **text-embedding-ada-002** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
+    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
+    - **Verbinden von Azure KI-Suche**: *Erstellen Sie eine neue Ressource von Azure KI-Suche mit einem eindeutigen Namen*
 
-    - **Hub-Name:** *Ein eindeutiger Name*
-    - **Azure-Abonnement**: *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe:** *Wählen Sie die Ressourcengruppe aus, die die Ressource Ihrer Azure KI-Suche enthält*
-    - **Speicherort:** *Derselbe Standort wie Ihre Azure KI-Suche-Ressource*
-    - **Verbinden Sie Azure AI Dienst oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
-    - **Verbinden Sie Azure AI Search**: *Wählen Sie Ihre Azure AI Search Ressource*
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen.
-1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
+1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
+1. Wenn Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die **Übersichtsseite** des Projekts im Azure AI Foundry-Portal, die in etwa wie folgt aussehen sollte:
+
+    ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
    
 ## Bereitstellen von Modellen
 
