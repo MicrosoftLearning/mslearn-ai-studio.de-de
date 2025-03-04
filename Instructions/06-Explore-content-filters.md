@@ -27,7 +27,7 @@ Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb 
     - **Verbinden Sie Azure KI Services oder Azure OpenAI**: (Neu) *Automatisches Ausfüllen Ihres ausgewählten Hub-Namens*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Durch die zufällige Auswahl einer Region wird das Risiko reduziert, dass eine einzelne Region ihre Kontingentgrenze erreicht. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Die in der Standorthilfe aufgelisteten Regionen enthalten Standardquoten für den/die in dieser Übung verwendeten Modelltyp(en). Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. Erfahren Sie mehr über die [Modellverfügbarkeit pro Region](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Wenn Sie **Anpassen** gewählt haben, wählen Sie **Weiter** und überprüfen Sie Ihre Konfiguration.
 1. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
@@ -92,7 +92,7 @@ Sehen wir uns an, wie sich das Modell in einer Konversation verhält.
 
 1. Navigieren Sie im linken Bereich zu den **Spielplätzen**.
 
-1. Geben Sie im Modus **Chat** die folgende Eingabeaufforderung in den Abschnitt **Chatverlauf** ein.
+1. Öffnen Sie den **Chat- Playground** und geben Sie im Abschnitt **Chatverlauf** den folgenden Prompt ein.
 
     ```
    Describe characteristics of Scottish people.
@@ -108,13 +108,13 @@ Sehen wir uns an, wie sich das Modell in einer Konversation verhält.
 
 1. Wenden Sie die Änderungen auf die Systemmeldung an.
 
-1. Geben Sie im Abschnitt **Chatsitzung** erneut die folgende Eingabeaufforderung ein.
+1. Geben Sie im Abschnitt **Chatverlauf** erneut das folgende Prompt ein.
 
     ```
    Describe characteristics of Scottish people.
     ```
 
-8. Beachten Sie die Ausgabe, die hoffentlich darauf hinweisen sollte, dass die Anforderung, rassistisch und abwertend zu sein, nicht unterstützt wird. Diese Verhinderung von anstößigen Ausgaben ist das Ergebnis der standardmäßigen Inhaltsfilter im Azure KI Foundry Portal.
+8. Beachten Sie die Ausgabe, die hoffentlich darauf hinweisen sollte, dass die Anforderung, rassistisch und abwertend zu sein, nicht unterstützt wird. Diese Verhinderung von anstößigen Inhalten ist das Ergebnis der Inhaltsfilterung.
 
 > **Tipp**: Weitere Einzelheiten zu den Kategorien und Schweregraden, die in den Inhaltsfiltern verwendet werden, finden Sie unter [Inhaltsfilterung](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) in der Dokumentation des Azure KI Foundry Portal Service.
 
