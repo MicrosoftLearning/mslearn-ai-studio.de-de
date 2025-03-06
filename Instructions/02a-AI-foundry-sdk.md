@@ -24,18 +24,11 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
     - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
-    - **Ort**: Wählen Sie eine zufällige Region aus der folgenden Liste\*:
-        - East US
-        - USA (Ost) 2
-        - USA Nord Mitte
-        - USA Süd Mitte
-        - Schweden, Mitte
-        - USA (Westen)
-        - USA, Westen 3
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
     - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Die Modellquoten werden auf der Ebene des Mandanten durch regionale Quoten eingeschränkt. Wenn Sie einen zufälligen Bereich auswählen, können Sie die Kontingentverfügbarkeit verteilen, wenn mehrere Benutzende im selben Mandanten arbeiten. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
@@ -60,7 +53,9 @@ Jetzt können Sie ein generatives KI-Sprachmodell bereitstellen, um Ihre Chat-An
 
 Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundry SDK verwenden, um eine Anwendung zu entwickeln, die mit ihm chattet.
 
-### Vorbereiten der Anwendungskonfiguration
+> **Tipp**: Sie können Ihre Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
+
+### Klonen des Anwendungs-Repositorys
 
 1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
 1. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
@@ -71,6 +66,8 @@ Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundr
 
 1. Wählen Sie in der Cloud Shell-Symbolleiste im Menü **Einstellungen** das Menüelement **Zur klassischen Version wechseln** aus (dies ist für die Verwendung des Code-Editors erforderlich).
 
+    > **Tipp**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers einnehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
+
 1. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository für diese Übung zu klonen:
 
     ```
@@ -78,26 +75,53 @@ Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundr
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:
+### Vorbereiten der Anwendungskonfiguration
+
+> **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
+
+1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:  
+
+    **Python**
 
     ```
-    cd mslearn-ai-foundry/labfiles/chat-app/python
+   cd mslearn-ai-foundry/labfiles/chat-app/python
     ```
 
-1. Geben Sie im Befehlszeilenbereich der Cloud Shell den folgenden Befehl ein, um die Python-Bibliotheken zu installieren, die Sie verwenden werden:
-    - **python-dotenv**: Wird verwendet, um Einstellungen aus einer Anwendungskonfigurationsdatei zu laden.
-    - **azure-identity**: Wird für die Authentifizierung mit Entra-ID-Anmeldeinformationen verwendet.
-    - **azure-ai-projects**: Wird verwendet, um mit einem Azure AI Foundry-Projekt zu arbeiten.
-    - **azure-ai-inference**: Wird verwendet, um mit einem generativen KI-Modell zu chatten.
+    **C#**
+
+    ```
+   cd mslearn-ai-foundry/labfiles/chat-app/c-sharp
+    ```
+
+1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die Bibliotheken zu installieren, die Sie verwenden möchten:
+
+    **Python**
 
     ```
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
-1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Python-Konfigurationsdatei **.env** zu bearbeiten:
+    **C#**
+
+    ```
+   dotnet add package Azure.AI.Inference
+   dotnet add package Azure.AI.Projects --prerelease
+   dotnet add package Azure.Identity
+    ```
+    
+
+1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Konfigurationsdatei zu bearbeiten:
+
+    **Python**
 
     ```
    code .env
+    ```
+
+    **C#**
+
+    ```
+   code appsettings.json
     ```
 
     Die Datei wird in einem Code-Editor geöffnet.
@@ -107,37 +131,75 @@ Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundr
 
 ### Schreiben von Code, um sich mit Ihrem Projekt zu verbinden und mit Ihrem Modell zu chatten
 
-> **Tipp**: Achten Sie beim Hinzufügen von Code zur Python-Codedatei darauf, den richtigen Einzug beizubehalten.
+> **Tipp**: Achten Sie beim Hinzufügen von Code auf den richtigen Einzug.
 
-1. Geben Sie den folgenden Befehl ein, um die zur Verfügung gestellte Python-Code-Datei **chat-app.py** zu bearbeiten:
+1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Codedatei zu bearbeiten:
+
+    **Python**
 
     ```
    code chat-app.py
     ```
 
-1. Beachten Sie in der Codedatei die vorhandenen **import**-Anweisungen, die am Anfang der Datei hinzugefügt wurden. Fügen Sie dann unter dem Kommentar **# Add AI Projects reference** den folgenden Code hinzu, um die Azure AI-Projektebibliothek zu referenzieren:
+    **C#**
 
-    ```python
+    ```
+   code Program.cs
+    ```
+
+1. Beachten Sie in der Codedatei die vorhandenen Anweisungen, die am Anfang der Datei hinzugefügt wurden, um die erforderlichen SDK-Namespaces zu importieren. Fügen Sie dann unter dem Kommentar **Add references** den folgenden Code hinzu, um auf die Namespaces in den zuvor installierten Bibliotheken zu verweisen:
+
+    **Python**
+
+    ```
+   from dotenv import load_dotenv
+   from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
     ```
 
-1. Beachten Sie in der **main**-Funktion unter dem Kommentar **# Get configuration settings**, dass der Code die Werte für die Zeichenfolge der Projektverbindung und den Namen der Modellbereitstellung lädt, die Sie in der Datei **.env** festgelegt haben.
-1. Fügen Sie unter dem Kommentar **# Initialize the project client** den folgenden Code ein, um eine Verbindung zu Ihrem Azure AI Foundry-Projekt mit den Azure-Anmeldedaten herzustellen, mit denen Sie derzeit angemeldet sind:
+    **C#**
 
-    ```python
-   project = AIProjectClient.from_connection_string(
+    ```
+   using Azure.Identity;
+   using Azure.AI.Projects;
+   using Azure.AI.Inference;
+    ```
+
+1. Beachten Sie, dass der Code in der **Hauptfunktion** unter dem Kommentar **Get configuration settings** die Zeichenfolge für die Projektverbindung und die Werte für den Namen der Modellbereitstellung lädt, die Sie in der Konfigurationsdatei definiert haben.
+1. Fügen Sie unter dem Kommentar **Initialize the project client** den folgenden Code hinzu, um sich mit Ihrem Azure AI Foundry-Projekt zu verbinden, und verwenden Sie dabei die Azure-Anmeldedaten, mit denen Sie derzeit angemeldet sind:
+
+    **Python**
+
+    ```
+   projectClient = AIProjectClient.from_connection_string(
         conn_str=project_connection,
-        credential=DefaultAzureCredential()
-        )
-    ```
-    
-1. Fügen Sie unter dem Kommentar **# Get a chat client** den folgenden Code ein, um ein Client-Objekt zum Chatten mit einem Modell zu erstellen:
-
-    ```python
-   chat = project.inference.get_chat_completions_client()
+        credential=DefaultAzureCredential())
     ```
 
-1. Beachten Sie, dass der Code einen Loop (Schleife) enthält, damit Benutzende einen Prompt eingeben können, bis sie „quit“ eingeben. Fügen Sie dann im Schleifenabschnitt unter dem Kommentar **# Get a chat completion** abrufen den folgenden Code hinzu, um den Prompt zu übermitteln und den Abschluss aus Ihrem Modell abzurufen:
+    **C#**
+
+    ```
+   var projectClient = new AIProjectClient(project_connection,
+                        new DefaultAzureCredential());
+    ```
+
+1. Fügen Sie unter dem Kommentar **Get a chat client** den folgenden Code ein, um ein Client-Objekt zum Chatten mit einem Modell zu erstellen:
+
+    **Python**
+
+    ```
+   chat = projectClient.inference.get_chat_completions_client()
+    ```
+
+    **C#**
+
+    ```
+   ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
+    ```
+
+1. Beachten Sie, dass der Code einen Loop (Schleife) enthält, damit Benutzende einen Prompt eingeben können, bis sie „quit“ eingeben. Fügen Sie dann im Schleifenabschnitt unter dem Kommentar **Get a chat completion** abrufen den folgenden Code hinzu, um den Prompt zu übermitteln und den Abschluss aus Ihrem Modell abzurufen:
+
+    **Python**
 
     ```python
    response = chat.complete(
@@ -150,14 +212,39 @@ Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundr
    print(response.choices[0].message.content)
     ```
 
+    **C#**
+
+    ```
+   var requestOptions = new ChatCompletionsOptions()
+   {
+       Model = model_deployment,
+       Messages =
+           {
+               new ChatRequestSystemMessage("You are a helpful AI assistant that answers questions."),
+               new ChatRequestUserMessage(input_text),
+           }
+   };
+    
+   Response<ChatCompletions> response = chat.Complete(requestOptions);
+   Console.WriteLine(response.Value.Content);
+    ```
+
 1. Verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen an der Codedatei zu speichern und verwenden Sie dann den Befehl **STRG+Q**, um den Code-Editor zu schließen, während die Befehlszeile der Cloud Shell geöffnet bleibt.
 
 ### Ausführen der Chatanwendung
 
-1. Geben Sie in der Cloud Shell-Befehlszeile den folgenden Befehl ein, um den Python-Code auszuführen:
+1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die App auszuführen:
+
+    **Python**
 
     ```
    python chat-app.py
+    ```
+
+    **C#**
+
+    ```
+   dotnet run
     ```
 
 1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `What is the fastest animal on Earth?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
