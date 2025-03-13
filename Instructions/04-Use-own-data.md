@@ -8,7 +8,7 @@ lab:
 
 Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein häufig verwendetes Muster für die Entwicklung generativer KI-Apps – chatbasierte Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
 
-In dieser Übung verwenden Sie das Azure KI Foundry Portal, um benutzerdefinierte Daten in einen generativen KI Prompt Flow zu integrieren.
+In dieser Übung verwenden Sie das Azure KI Foundry Portal, um benutzerdefinierte Daten in einen generativen KI Prompt Flow zu integrieren. Außerdem erfahren Sie, wie Sie das RAG-Muster in einer Client-App mithilfe der Azure AI Foundry- und Azure OpenAI-SDKs implementieren.
 
 Diese Übung dauert ca. **45** Minuten.
 
@@ -89,7 +89,7 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
     - **Sucheinstellungen**:
         - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
         - **Azure OpenAI-Verbindung**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
-        
+
 1. Warten Sie, bis der Indizierungsprozess abgeschlossen ist, was mehrere Minuten dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
 
     - Zerlegen, segmentieren und integrieren Sie die Texttoken in Ihre Broschürendaten.
@@ -116,21 +116,22 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
 
 1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich links unter **Erstellen und Anpassen** die Seite **Prompt flow**.
 1. Erstellen Sie einen neuen Prompt Flow, indem Sie das **Multi-Round Q&A für Ihr Datenbeispiel** im Katalog klonen. Speichern Sie Ihren Klon dieses Beispiels in einem Ordner mit dem Namen `brochure-flow`.
-    <details>  
-      <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
+
+    <details> 
+        <summary><font color="red"><b>Tipp zur Fehlerbehebung</b>: Berechtigungsfehler</font></summary>
         <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
         <ul>
-          <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-          <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
-          <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-          <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong>, <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, wählen Sie die <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong> und wählen Sie Ihre Azure AI Dienste Ressource.</li>
-          <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
+            <li>Wählen Sie im Azure-Portal in der Ressourcengruppe für Ihren Azure AI Foundry-Hub die KI Services-Ressource aus.</li>
+            <li>Stellen Sie unter <b>Ressourcenverwaltung</b> auf der Registerkarte <b>Identität</b> sicher, dass der Status der verwalteten Identität <b>System zugewiesen</b> auf <b>Ein</b> gesetzt ist.</li>
+            <li>Wählen Sie in der Ressourcengruppe für Ihren Azure AI Foundry-Hub das Speicherkonto aus</li>
+            <li>Fügen Sie auf der Seite <b>Zugriffssteuerung (IAM)</b> eine Rollenzuweisung hinzu, um der verwalteten Identität für Ihre Azure KI Services-Ressource die Rolle <b>Leser von Speicherblobdaten</b> zuzuweisen.</li>
+            <li>Warten Sie, bis die Rolle zugewiesen wurde, und wiederholen Sie dann den vorherigen Schritt.</li>
         </ul>
     </details>
 
 1. Wenn die Seite mit dem Prompt Flow-Designer geöffnet wird, überprüfen Sie den **Broschüren-Flow**. Das Diagramm sollte der folgenden Abbildung ähneln:
 
-    ![Ein Screenshot eines Prompt Flow-Diagramms](./media/chat-flow.png)
+    ![Ein Screenshot eines Prompt Flow-Diagramms.](./media/chat-flow.png)
 
     Der von Ihnen verwendete Beispiel-Prompt Flow implementiert die Prompt-Logik für eine Chatanwendung, in der Benutzer Texteingaben iterativ an die Chatoberfläche übermitteln kann. Der Unterhaltungsverlauf wird beibehalten und in den Kontext für jede Iteration einbezogen. Der Prompt Flow orchestriert eine Reihe von *Tools* für Folgendes:
 
@@ -142,7 +143,11 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
 
 1. Verwenden Sie die Schaltfläche **Computesitzung starten**, um Runtime Compute für den Flow zu starten.
 
-    Warten Sie, bis die Runtime gestartet wurde. Dies stellt einen Berechnungskontext für den Prompt Flow bereit. Während Sie warten, überprüfen Sie auf der Registerkarte **Flow** die Abschnitte für die Tools im Flow.
+    Warten Sie, bis die Computesitzung gestartet wird. Dies stellt einen Berechnungskontext für den Prompt Flow bereit. Während Sie warten, überprüfen Sie auf der Registerkarte **Flow** die Abschnitte für die Tools im Flow.
+
+    >**Hinweis**: Aufgrund von Infrastruktur- und Kapazitätsbeschränkungen kann es vorkommen, dass die Computesitzung in Zeiten hoher Nachfrage nicht gestartet werden kann. In diesem Fall können Sie den Prompt Flow überspringen und die Aufgabe **Erstellen einer RAG-Client-App mit den Azure AI Foundry- und Azure OpenAI-SDKs** starten.
+
+    Dann, wenn die Computesitzung gestartet wurde …
 
 1. Stellen Sie im Abschnitt **Eingaben** sicher, dass die Eingaben Folgendes umfassen:
     - **chat_history**
@@ -161,7 +166,7 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
     - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
-1. Warten Sie, bis die Computesitzung gestartet ist, und legen Sie dann im Abschnitt **Suchabfrage** die folgenden Parameterwerte fest:
+1. Legen Sie im Abschnitt **Lookup** die folgenden Parameterwerte fest:
 
     - **mlindex_content**: *Wählen Sie das leere Feld aus, um den Bereich „Generieren“ zu öffnen*
         - **index_type**: Registrierter Index
@@ -199,30 +204,140 @@ Ihr Vektorindex wurde in Ihrem Azure KI Foundry-Projekt gespeichert, sodass Sie 
 1. Überprüfen Sie die Antwort, die auf Daten im Index basieren sollte, und berücksichtigen Sie den Chatverlauf (so dass „dort“ als „in London“ verstanden wird).
 1. Überprüfen Sie die Ausgaben für jedes Tool im Flow und notieren Sie, wie jedes Tool im Flow mithilfe seiner Eingaben ausgeführt wird, um einen kontextbezogenen Prompt vorzubereiten und eine entsprechende Antwort zu erhalten.
 
-## Bereitstellen des Flows
+    Sie haben jetzt einen funktionierenden Prompt Flow, der Ihren Azure KI-Suche-Index verwendet, um das RAG-Muster zu implementieren. Weitere Informationen zum Bereitstellen und Nutzen Ihres Prompt Flows finden Sie in der [Azure AI Foundry-Dokumentation](https://learn.microsoft.com/azure/ai-foundry/how-to/flow-deploy).
 
-Nachdem Sie nun über einen funktionierenden Flow verfügen, der Ihre indizierten Daten verwendet, können Sie ihn als Dienst bereitstellen, der von einer Copilot-Anwendung genutzt werden soll.
+## Erstellen einer RAG-Client-App mit Azure AI Foundry- und Azure OpenAI-SDKs
 
-> **Hinweis**: Abhängig von der Region und der Auslastung des Rechenzentrums kann die Bereitstellung manchmal eine Weile dauern und manchmal wird ein Fehler bei der Interaktion mit der Bereitstellung ausgegeben. Sie können sich auf den nachstehenden Abschnitt "Herausforderung" setzen, während sie die Bereitstellungen bereitstellt oder die Tests Ihrer Bereitstellung überspringt, wenn Sie nur wenig Zeit haben.
+Während ein Prompt Flow eine großartige Möglichkeit ist, Ihr Modell und Ihre Daten in einer RAG-basierten Anwendung zu kapseln, können Sie auch die Azure AI Foundry- und Azure OpenAI-SDKs verwenden, um das RAG-Muster in einer Client-Anwendung zu implementieren. Sehen wir uns den Code an, um dies in einem einfachen Beispiel zu erreichen.
 
-1. Wählen Sie auf der Symbolleiste **Bereitstellen** aus.
-1. Erstellen Sie eine Bereitstellung mit den folgenden Einstellungen:
-    - **Grundeinstellungen**:
-        - **Endpunkt**: Neu
-        - **Endpunktname**: *Verwenden des standardmäßigen eindeutigen Endpunktnamens*
-        - **Bereitstellungsname**: *Verwenden des standardmäßigen Bereitstellungsendpunktnamens*
-        - **VM**: Standard_DS3_v2
-        - **Instanzenanzahl:** 3
-        - **Rückschließen der Datensammlung**: Ausgewählt
-    - **Erweiterte Einstellungen**:
-        - *Verwenden der Standardeinstellungen*
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Aktualisieren Sie die Ansicht, bis die **brochure-endpoint-1**-Bereitstellung als *erfolgreich* unter dem **Broschüren-Endpunkt**-Endpunkt angezeigt wird (dies kann lange dauern).
-1. Wenn die Bereitstellung erfolgreich war, wählen Sie sie aus. Geben Sie dann auf der Seite **Test** den Prompt `What is there to do in San Francisco?` ein und überprüfen Sie die Antwort.
-1. Geben Sie den Prompt `Where else could I go?` ein und überprüfen Sie die Antwort.
-1. Zeigen Sie die Seite **Nutzen** für den Endpunkt an und beachten Sie, dass sie Verbindungsinformationen und Beispielcode enthält, die Sie zum Erstellen einer Clientanwendung für Ihren Endpunkt verwenden können, sodass Sie die Prompt Flow-Lösung als benutzerdefinierten Copilot in eine Anwendung integrieren können.
+> **Tipp**: Sie können wählen, ob Sie Ihre RAG-Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
 
-## Herausforderung 
+### Vorbereiten der Anwendungskonfiguration
+
+1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
+1. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
+1. Öffnen Sie eine neue Browserregisterkarte (wobei das Azure AI Foundry-Portal auf der vorhandenen Registerkarte geöffnet bleibt). Wechseln Sie dann in der neuen Registerkarte zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an, wenn Sie dazu aufgefordert werden.
+1. Verwenden Sie die Taste **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung aus. Die Cloud Shell bietet eine Befehlszeilenschnittstelle in einem Bereich am unteren Rand des Azure-Portals.
+
+    > **Hinweis**: Wenn Sie zuvor eine Cloud-Shell erstellt haben, die eine *Bash*-Umgebung verwendet, wechseln Sie zu ***PowerShell***.
+
+1. Wählen Sie in der Cloud Shell-Symbolleiste im Menü **Einstellungen** das Menüelement **Zur klassischen Version wechseln** aus (dies ist für die Verwendung des Code-Editors erforderlich).
+
+    > **Tipp**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers einnehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
+
+1. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository für diese Übung zu klonen:
+
+    ```
+    rm -r mslearn-ai-foundry -f
+    git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
+    ```
+
+> **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
+
+1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:  
+
+    **Python**
+
+    ```
+   cd mslearn-ai-foundry/labfiles/rag-app/python
+    ```
+
+    **C#**
+
+    ```
+   cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
+    ```
+
+1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die Bibliotheken zu installieren, die Sie verwenden möchten:
+
+    **Python**
+
+    ```
+   pip install python-dotenv azure-ai-projects azure-identity openai
+    ```
+
+    **C#**
+
+    ```
+   dotnet add package Azure.Identity
+   dotnet add package Azure.AI.Projects --prerelease
+   dotnet add package Azure.AI.OpenAI --prerelease
+    ```
+    
+
+1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Konfigurationsdatei zu bearbeiten:
+
+    **Python**
+
+    ```
+   code .env
+    ```
+
+    **C#**
+
+    ```
+   code appsettings.json
+    ```
+
+    Die Datei wird in einem Code-Editor geöffnet.
+
+1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
+    - **your_project_endpoint**: Ersetzen Sie diesen Wert durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Overview** des Projekts im Azure AI Foundry-Portal).
+    - **your_model_deployment**: Ersetzen Sie dies durch den Namen, den Sie Ihrer Modellbereitstellung gegeben haben (der `gpt-4` lauten sollte).
+    - **your_index**: Ersetzen Sie dies durch Ihren Indexnamen (der `brochures-index` lauten sollte).
+1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q**, um den Code-Editor zu schließen, während die Befehlszeile der Cloud Shell geöffnet bleibt.
+
+### Erkunden von Code zur Implementierung des RAG-Musters
+
+1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Codedatei zu bearbeiten:
+
+    **Python**
+
+    ```
+   code rag-app.py
+    ```
+
+    **C#**
+
+    ```
+   code Program.cs
+    ```
+
+1. Überprüfen Sie den Code in der Datei, und notieren Sie Folgendes:
+    - Verwendet das Azure AI Foundry-SDK, um sich mit Ihrem Projekt zu verbinden (mithilfe der Projektverbindungszeichenfolge).
+    - Ruft die Standardverbindung für Azure KI-Suche aus Ihrem Projekt ab, damit der Endpunkt und der Schlüssel für Ihren Azure KI-Suche-Dienst bestimmt werden können.
+    - Erstellt einen authentifizierten Azure OpenAI-Client, basierend auf der standardmäßigen Azure OpenAI Service-Verbindung in Ihrem Projekt.
+    - Sendet einen Prompt (einschließlich einer System- und Benutzendenachricht) an den Azure OpenAI-Client und fügt zusätzliche Informationen über den Azure KI-Suche-Index hinzu, der zur Begründung des Prompts verwendet werden soll.
+    - Zeigt die Antwort des fundierten Prompts an.
+1. Verwenden Sie den Befehl **STRG+Q**, um den Code-Editor zu schließen, ohne Änderungen zu speichern, während die Cloud-Shell-Befehlszeile geöffnet bleibt.
+
+### Ausführen der Chatanwendung
+
+1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die App auszuführen:
+
+    **Python**
+
+    ```
+   python rag-app.py
+    ```
+
+    **C#**
+
+    ```
+   dotnet run
+    ```
+
+1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `Where can I travel to?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
+
+    Beachten Sie, dass die Antwort Quellverweise enthält, um die indizierten Daten anzugeben, in denen die Antwort gefunden wurde.
+
+1. Versuchen Sie es mit ein paar weiteren Fragen, zum Beispiel `Where should I stay in London?`.
+
+    > **Hinweis**: Diese einfache Beispielanwendung enthält keine Logik, um den Unterhaltungsverlauf beizubehalten, sodass jeder Prompt als neue Unterhaltung behandelt wird.
+
+1. Wenn Sie fertig sind, geben Sie `quit` ein, um das Programm zu beenden. Schließen Sie anschließend den Cloud Shell-Bereich.
+
+## Herausforderung
 
 Nachdem Sie nun erfahren haben, wie Sie Ihre eigenen Daten in eine generative KI-App integrieren können, die mit dem Azure-KI-Foundry-Portal erstellt wurde, lassen Sie uns weiterforschen!
 
@@ -232,7 +347,7 @@ Versuchen Sie, eine neue Datenquelle über das Azure KI Foundry-Portal hinzuzuf�
 - Eine Reihe von Präsentationen aus früheren Konferenzen
 - Jedes beliebige Dataset, das Repository [Azure Search Sample Data](https://github.com/Azure-Samples/azure-search-sample-data) verfügbar ist.
 
-Seien Sie dabei möglichst kreativ, um Ihre Datenquelle zu erstellen und in Ihren Prompt flow zu integrieren. Probieren Sie den Prompt flow aus, und geben Sie dabei Prompts ein, die nur mithilfe des von Ihnen ausgewählten Datasets beantwortet werden können!
+Seien Sie so einfallsreich wie möglich, um Ihre Datenquelle zu erstellen und sie in einen Prompt Flow oder eine Client-App zu integrieren. Testen Sie Ihre Lösung, indem Sie Prompts einreichen, die nur mit dem von Ihnen festgelegten Datensatz beantwortet werden können!
 
 ## Bereinigung
 

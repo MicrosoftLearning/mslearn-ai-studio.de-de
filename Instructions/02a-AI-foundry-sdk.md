@@ -55,7 +55,7 @@ Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundr
 
 > **Tipp**: Sie können Ihre Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
 
-### Klonen des Anwendungs-Repositorys
+### Vorbereiten der Anwendungskonfiguration
 
 1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
 1. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
@@ -74,8 +74,6 @@ Nachdem Sie nun ein Modell bereitgestellt haben, können Sie das Azure AI Foundr
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
-
-### Vorbereiten der Anwendungskonfiguration
 
 > **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
 
