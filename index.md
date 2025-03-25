@@ -4,13 +4,13 @@ permalink: index.html
 layout: home
 ---
 
-# Entwicklung generativer KI-Lösungen
+# Entwicklung generativer KI-Lösungen in Azure
 
-Die folgenden Schnellstartübungen sind darauf ausgelegt, Ihnen eine praktische Lernerfahrung zu bieten, in der Sie allgemeine Aufgaben erkunden, die Entwickler und Entwicklerinnen beim Erstellen von generativen KI-Lösungen in Microsoft Azure ausführen.
+Die folgenden Übungen sind darauf ausgelegt, Ihnen eine praktische Lernerfahrung zu bieten, in der Sie allgemeine Aufgaben erkunden, die Entwickler und Entwicklerinnen beim Erstellen von generativen KI-Lösungen in Microsoft Azure ausführen.
 
 > **Hinweis**: Um die Übungen durchführen zu können, benötigen Sie ein Azure-Abonnement, das Ihnen ausreichende Berechtigungen und Kontingente für die Bereitstellung der erforderlichen Azure-Ressourcen und generativen KI-Modelle bietet. Wenn Sie noch kein Konto haben, können Sie sich für ein [Azure-Konto](https://azure.microsoft.com/free) anmelden. Für neue Benutzende gibt es dort eine kostenlose Testoption, die Guthaben für die ersten 30 Tage beinhaltet.
 
-## Schnellstartübungen
+## Übungen
 
 {% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions'" %} {% for activity in labs  %}
 <hr>
