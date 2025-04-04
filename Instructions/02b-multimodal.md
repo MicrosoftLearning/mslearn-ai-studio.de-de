@@ -10,6 +10,8 @@ In dieser Übung verwenden Sie das generative KI-Modell *Phi-4-multimodal-instru
 
 Diese Übung dauert ca. **30** Minuten.
 
+> **Hinweis**: Diese Übung basiert auf Vorabversionen von SDKs, die sich möglicherweise noch ändern können. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln.
+
 ## Erstellen eines Azure KI Foundry-Projekts
 
 Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
@@ -129,7 +131,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     Die Datei wird in einem Code-Editor geöffnet.
 
 10. Ersetzen Sie in der Codedatei den Platzhalter **your_project_endpoint** durch die Zeichenfolge für die Verbindung zu Ihrem Projekt (kopiert von der **Übersichtsseite** des Azure AI Foundry-Portals) und den Platzhalter **your_model_deployment** durch den Namen, den Sie Ihrer Phi-4-multimodal-instruct-Modellimplementierung zugewiesen haben.
-11. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q**, um den Code-Editor zu schließen, während die Befehlszeile der Cloud Shell geöffnet bleibt.
+11. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Cloud Shell-Befehlszeile geöffnet bleibt.
 
 ### Schreiben von Code, um sich mit Ihrem Projekt zu verbinden und einen Chat-Client für Ihr Modell zu erhalten
 

@@ -12,6 +12,8 @@ In dieser Übung verwenden Sie das Azure KI Foundry-Portal und die Azure AI Foun
 
 Diese Übung dauert ca. **45** Minuten.
 
+> **Hinweis**: Diese Übung basiert auf Vorabversionen von SDKs, die sich möglicherweise noch ändern können. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln.
+
 ## Erstellen eines Azure KI Foundry-Projekts
 
 Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforderlichen Dienstressourcen, die es benötigt, mithilfe Ihrer eigenen Daten – einschließlich einer Azure KI-Suche-Ressource.
@@ -30,7 +32,7 @@ Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforder
     - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
     - **Verbinden von Azure KI-Suche**: *Erstellen Sie eine neue Ressource von Azure KI-Suche mit einem eindeutigen Namen*
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn ein Kontingentlimit erreicht wird und für beide Modelle keine Region empfohlen wird, wählen Sie nur einen davon aus, und verwenden Sie die empfohlene Region. Sie erstellen eine weitere Ressource in einer anderen Region für das zweite Modell später in der Übung.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Wenn Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die **Übersichtsseite** des Projekts im Azure AI Foundry-Portal, die in etwa wie folgt aussehen sollte:
@@ -189,7 +191,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
     - **your_project_endpoint**: Ersetzen Sie diesen Wert durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Overview** des Projekts im Azure AI Foundry-Portal).
     - **your_model_deployment**: Ersetzen Sie dies durch den Namen, den Sie Ihrer Modellbereitstellung gegeben haben (der `gpt-4` lauten sollte).
     - **your_index**: Ersetzen Sie dies durch Ihren Indexnamen (der `brochures-index` lauten sollte).
-1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q**, um den Code-Editor zu schließen, während die Befehlszeile der Cloud Shell geöffnet bleibt.
+1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Cloud Shell-Befehlszeile geöffnet bleibt.
 
 ### Erkunden von Code zur Implementierung des RAG-Musters
 
