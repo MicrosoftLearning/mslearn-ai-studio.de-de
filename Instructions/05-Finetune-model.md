@@ -20,7 +20,7 @@ Diese Übung dauert etwa **60** Minuten\*.
 
 Sie beginnen mit der Erstellung eines Azure KI Foundry-Portalprojekts innerhalb eines Azure KI-Hubs:
 
-1. Öffnen Sie in einem Webbrowser [https://ai.azure.com](https://ai.azure.com), und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an.
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
 1. Erstellen Sie im **Assistenten zum Erstellen eines neuen Projekts** ein Projekt mit den folgenden Einstellungen:
     - **Projektname:** *Ein eindeutiger Name für Ihr Projekt*
@@ -46,7 +46,7 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, starten Sie d
     > **Hinweis**: Ihr Gerät speichert die Datei möglicherweise standardmäßig als .txt-Datei. Wählen Sie alle Dateien aus, und entfernen Sie das .txt-Suffix, um sicherzustellen, dass Sie die Datei als JSONL speichern.
 
 1. Navigieren Sie zur Seite **Feinabstimmung** unter dem Abschnitt **Erstellen und Anpassen**, indem Sie das Menü auf der linken Seite verwenden.
-1. Wählen Sie die Schaltfläche zum Hinzufügen eines neuen Feinabstimmungsmodells, wählen Sie das Modell `gpt-4`, wählen Sie **Weiter** und dann **Bestätigen**.
+1. Wählen Sie die Schaltfläche aus, um ein neues Feinabstimmungsmodell hinzuzufügen, wählen Sie das Modell `gpt-4` aus und wählen Sie dann **Weiter**.
 1. **Optimieren Sie** das Modell mithilfe der folgenden Konfiguration:
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
     - **Modellsuffix**: `ft-travel`

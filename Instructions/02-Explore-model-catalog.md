@@ -39,8 +39,8 @@ Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Si
 
 Es gibt mehrere Optionen für die Bereitstellung von Modellen im Azure AI Foundry-Portal. In dieser Übung verwenden Sie die Bereitstellungsoption **Azure KI-Modellinferenz**, die sowohl *Azure OpenAI*-Modelle als auch *Model-as-a-Service*-Modelle aus dem Azure AI Foundry-Modellkatalog unterstützt. Da alle Modelle auf einem gemeinsamen Endpunkt bereitgestellt werden, der von Ihrer Azure AI Services-Ressource gehostet wird, ist es einfach, beim Testen zwischen Modellen zu wechseln, um Verhalten und Leistung zu vergleichen.
 
-1. Verwenden Sie auf der Symbolleiste oben rechts auf der Azure AI Foundry-Projektseite das Symbol **Vorschaufeatures**, um Vorschaufeatures anzuzeigen.
-1. Aktivieren Sie das Feature **Modelle im Azure KI-Modellinferenzdienst bereitstellen**. Schließen Sie dann den Bereich **Vorschaufeature**.
+1. Verwenden Sie auf der Symbolleiste oben rechts auf der Azure AI Foundry-Projektseite das Symbol **Vorschaufeatures** (📣), um Vorschaufeatures anzuzeigen.
+1. Stellen Sie sicher, dass die Funktion **Modelle im Azure KI-Modellinferenz-Service bereitstellen** aktiviert ist. Schließen Sie dann den Bereich **Vorschaufeature**.
 
 ## Überprüfen von Modelldetails und Benchmarks
 
@@ -101,7 +101,6 @@ Beginnen wir mit der Bereitstellung eines Modells aus dem Modellkatalog. Sie kö
     - **Verbundene KI-Ressource**: *Ihrer Azure OpenAI-Ressourcenverbindung*
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
     - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
       
     > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
