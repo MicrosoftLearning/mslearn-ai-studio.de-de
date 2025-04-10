@@ -16,10 +16,12 @@ Diese Übung dauert ungefähr **25** Minuten.
 
 Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie uns ein Projekt und ein Azure KI-Hub.
 
-1. Öffnen Sie in einem Webbrowser das [Azure KI Foundry Portal](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an.
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry-Logo** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht:
+
+    ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+1. Geben Sie im Assistenten **Projekt erstellen** einen passenden Projektnamen ein (z.B. `my-ai-project`) und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
     - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
@@ -95,16 +97,18 @@ Beginnen wir mit der Bereitstellung eines Modells aus dem Modellkatalog. Sie kö
 1. Kehren Sie zur Startseite des **Modellkatalogs** zurück.
 1. Suchen Sie wie zuvor das `gpt-4` Modell und wählen Sie es aus.
 1. Wählen Sie auf der Seite **gpt-4** die Option **Bereitstellen** aus und stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie in den Bereitstellungsdetails die Option **Anpassen** auswählen:
-    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `gpt-4-model`.*
-    - **Bereitstellungstyp**: Globaler Standard
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **Verbundene KI-Ressource**: *Ihrer Azure OpenAI-Ressourcenverbindung*
+1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
+    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `gpt-4`.*
+    - **Bereitstellungstyp**: Standard
+    - **Modellversion**: 0613
+    - **Verbundene AI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung*
     - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
     - **Inhaltsfilter**: StandardV2 
+    - **Dynamische Quote aktivieren**: Deaktiviert
       
     > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
-1. Warten Sie, bis der **Bereitstellungsstatus** der Bereitstellung **erfolgreich** war.
+1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
 ### Bereitstellen eines Modells über *Modelle + Endpunkte*
 
@@ -114,11 +118,11 @@ Wenn Sie bereits genau wissen, welches Modell Sie bereitstellen möchten, ziehen
 1. Wählen Sie auf der Registerkarte **Modellbereitstellungen** in der Dropdownliste **+ Modell bereitstellen** die Option **Basismodell bereitstellen** aus. Suchen Sie dann nach `Phi-3.5-mini-instruct` und bestätigen Sie Ihre Auswahl.
 1. Stimmen Sie der Modelllizenz zu.
 1. Stellen Sie ein **Phi-3.5-mini-instruct** -Modell mit den folgenden Einstellungen bereit:
-    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `phi-35-model`*
+    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `Phi-3.5-mini-instruct`*
     - **Bereitstellungstyp**: Globaler Standard
     - **Bereitstellungsdetails**: *Verwenden der Standardeinstellungen.*
 
-1. Warten Sie, bis der **Bereitstellungsstatus** der Bereitstellung **erfolgreich** war.
+1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
 ## Testen von Modellen im Chat-Playground
 

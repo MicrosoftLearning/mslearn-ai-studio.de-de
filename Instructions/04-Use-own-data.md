@@ -23,7 +23,7 @@ Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforder
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im Assistenten **Projekt erstellen** einen geeigneten Projektnamen für (z . B. `my-ai-project`) ein, wählen Sie die Option zum Erstellen eines neuen Hubs aus, wenn ein bestehender Hub vorgeschlagen wird. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
+1. Geben Sie im Assistenten **Projekt erstellen** einen passenden Projektnamen ein (z.B. `my-ai-project`) und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
     - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
@@ -59,7 +59,7 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 
     > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
 
-1. Wiederholen Sie die vorherigen Schritte, um ein **gpt-4**-Modell mit dem Bereitstellungsnamen `gpt-4` bereitzustellen.
+1. Wiederholen Sie die vorherigen Schritte, um ein **gpt-4**-Modell mit dem Bereitstellungsnamen `gpt-4` bereitzustellen, indem Sie eine **Standard**-Bereitstellung der Standardversion mit einer TPM-Ratenbegrenzung von 5K verwenden.
 
     > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
@@ -67,7 +67,7 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 
 Die Daten für Ihren Copilot bestehen aus einer Reihe von Reisebroschüren des fiktiven Reisebüros *Margie‘s Travel* im PDF-Format. Fügen wir sie dem Projekt hinzu.
 
-1. Laden Sie das [gezippte Archiv der Broschüren](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) aus `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` herunter und extrahieren Sie es in einen Ordner mit dem Namen **Broschüren** in Ihrem lokalen Dateisystem.
+1. Laden Sie in einer neuen Registerkarte des Browsers das [gezippte Archiv der Broschüren](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) von `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` herunter und entpacken Sie es in einen Ordner mit dem Namen **Broschüren** auf Ihrem lokalen Dateisystem.
 1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
 1. Wählen Sie **+ Neue Daten** aus.
 1. Erweitern Sie im Assistenten **Hinzufügen Ihrer Daten** das Dropdownmenü, um **Dateien/Ordner hochladen** auszuwählen.
@@ -91,12 +91,18 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
     - **Sucheinstellungen**:
         - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
         - **Azure OpenAI-Verbindung**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
+        - **Einbettungsmodell**: text-embedding-ada-002
+        - **Bereitstellung des Einbettungsmodells**: *Ihre Bereitstellung des* text-embedding-ada-002 *Modells*
 
-1. Warten Sie, bis der Indexerstellungsprozess abgeschlossen ist, was je nach verfügbaren Computeressourcen in Ihrem Abonnement eine Weile dauern kann. Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
+1. Erstellen Sie den Vektorindex und warten Sie, bis der Indizierungsprozess abgeschlossen ist, was je nach verfügbaren Rechenressourcen in Ihrem Abonnement eine Weile dauern kann.
+
+    Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
 
     - Zerlegen, segmentieren und integrieren Sie die Texttoken in Ihre Broschürendaten.
     - Erstellen Sie den Azure KI-Suchindex.
     - Registrieren Sie die Indexressource.
+
+    > **Tipp**: Während Sie darauf warten, dass der Index erstellt wird, können Sie einen Blick auf die heruntergeladenen Broschüren werfen, um sich mit deren Inhalt vertraut zu machen.
 
 ## Testen des Indexes im Playground
 
@@ -123,24 +129,31 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
 1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
 1. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
 1. Öffnen Sie eine neue Browserregisterkarte (wobei das Azure AI Foundry-Portal auf der vorhandenen Registerkarte geöffnet bleibt). Wechseln Sie dann in der neuen Registerkarte zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an, wenn Sie dazu aufgefordert werden.
-1. Verwenden Sie die Taste **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung aus. Die Cloud Shell bietet eine Befehlszeilenschnittstelle in einem Bereich am unteren Rand des Azure-Portals.
+
+    Schließen Sie alle Willkommensbenachrichtigungen, um die Startseite des Azure-Portals anzuzeigen.
+
+1. Verwenden Sie die Schaltfläche **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud-Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung ohne Speicher in Ihrem Abonnement.
+
+    Die Cloud Shell bietet eine Befehlszeilenschnittstelle in einem Bereich am unteren Rand des Azure-Portals. Sie können die Größe dieses Bereichs ändern oder maximieren, um die Arbeit zu vereinfachen.
 
     > **Hinweis**: Wenn Sie zuvor eine Cloud-Shell erstellt haben, die eine *Bash*-Umgebung verwendet, wechseln Sie zu ***PowerShell***.
 
 1. Wählen Sie in der Cloud Shell-Symbolleiste im Menü **Einstellungen** das Menüelement **Zur klassischen Version wechseln** aus (dies ist für die Verwendung des Code-Editors erforderlich).
 
-    > **Tipp**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers einnehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
+    **<font color="red">Stellen Sie sicher, dass Sie zur klassischen Version der Cloud Shell gewechselt haben, bevor Sie fortfahren.</font>**
 
-1. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository für diese Übung zu klonen:
+1. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository zu klonen, das die Codedateien für diese Übung enthält:
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-> **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
+    > **TIPP**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers in Anspruch nehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
 
-1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:  
+1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:
+
+    > **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
 
     **Python**
 
@@ -188,7 +201,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
     Die Datei wird in einem Code-Editor geöffnet.
 
 1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
-    - **your_project_endpoint**: Ersetzen Sie diesen Wert durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Overview** des Projekts im Azure AI Foundry-Portal).
+    - **Ihr_Projekt_Verbindungsstring**: Ersetzen Sie durch die Zeichenfolge für Ihr Projekt (kopiert von der Seite **Übersicht** des Projekts im Azure AI Foundry-Portal)
     - **your_model_deployment**: Ersetzen Sie dies durch den Namen, den Sie Ihrer Modellbereitstellung gegeben haben (der `gpt-4` lauten sollte).
     - **your_index**: Ersetzen Sie dies durch Ihren Indexnamen (der `brochures-index` lauten sollte).
 1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Cloud Shell-Befehlszeile geöffnet bleibt.
@@ -211,10 +224,12 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
 
 1. Überprüfen Sie den Code in der Datei, und notieren Sie Folgendes:
     - Verwendet das Azure AI Foundry-SDK, um sich mit Ihrem Projekt zu verbinden (mithilfe der Projektverbindungszeichenfolge).
+    - Erzeugt einen authentifizierten Azure OpenAI-Client aus Ihrer Projektverbindung.
     - Ruft die Standardverbindung für Azure KI-Suche aus Ihrem Projekt ab, damit der Endpunkt und der Schlüssel für Ihren Azure KI-Suche-Dienst bestimmt werden können.
-    - Erstellt einen authentifizierten Azure OpenAI-Client, basierend auf der standardmäßigen Azure OpenAI Service-Verbindung in Ihrem Projekt.
-    - Sendet einen Prompt (einschließlich einer System- und Benutzendenachricht) an den Azure OpenAI-Client und fügt zusätzliche Informationen über den Azure KI-Suche-Index hinzu, der zur Begründung des Prompts verwendet werden soll.
+    - Erzeugt eine geeignete Systemnachricht.
+    - Sendet einen Prompt (einschließlich der Systemnachricht und einer auf der Benutzereingabe basierenden Benutzermeldung) an den Azure-OpenAI-Client und fügt zusätzliche Informationen über den Azure-KI-Suchindex hinzu, der zur Begründung des Prompts verwendet werden soll.
     - Zeigt die Antwort des fundierten Prompts an.
+    - Fügt die Antwort zum Chatverlauf hinzu.
 1. Verwenden Sie den Befehl **STRG+Q**, um den Code-Editor zu schließen, ohne Änderungen zu speichern, während die Cloud-Shell-Befehlszeile geöffnet bleibt.
 
 ### Ausführen der Chatanwendung
@@ -233,27 +248,13 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
    dotnet run
     ```
 
-1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `Where can I travel to?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
+1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `Where should I stay in London?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
 
     Beachten Sie, dass die Antwort Quellverweise enthält, um die indizierten Daten anzugeben, in denen die Antwort gefunden wurde.
 
-1. Versuchen Sie es mit ein paar weiteren Fragen, zum Beispiel `Where should I stay in London?`.
-
-    > **Hinweis**: Diese einfache Beispielanwendung enthält keine Logik, um den Unterhaltungsverlauf beizubehalten, sodass jeder Prompt als neue Unterhaltung behandelt wird.
+1. Versuchen Sie es mit einer Anschlussfrage, zum Beispiel `What can I do there?`
 
 1. Wenn Sie fertig sind, geben Sie `quit` ein, um das Programm zu beenden. Schließen Sie anschließend den Cloud Shell-Bereich.
-
-## Herausforderung
-
-Nachdem Sie nun erfahren haben, wie Sie Ihre eigenen Daten in eine generative KI-App integrieren können, die mit dem Azure-KI-Foundry-Portal erstellt wurde, lassen Sie uns weiterforschen!
-
-Versuchen Sie, eine neue Datenquelle über das Azure KI Foundry-Portal hinzuzufügen, sie zu indizieren und die indizierten Daten in eine Client-App zu integrieren. Einige Datasets, die Sie ausprobieren könnten, sind zum Beispiel:
-
-- Eine Sammlung von Artikeln (z. B. Forschungsartikel), die sich auf Ihrem Computer befinden
-- Eine Reihe von Präsentationen aus früheren Konferenzen
-- Jedes beliebige Dataset, das Repository [Azure Search Sample Data](https://github.com/Azure-Samples/azure-search-sample-data) verfügbar ist.
-
-Testen Sie Ihre Lösung, indem Sie Prompts einreichen, die nur mit dem von Ihnen festgelegten Datensatz beantwortet werden können!
 
 ## Bereinigung
 
