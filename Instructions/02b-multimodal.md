@@ -21,7 +21,7 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 2. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-3. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+3. Geben Sie im Assistenten **Projekt erstellen** einen passenden Projektnamen ein (z.B. `my-ai-project`) und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 4. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
     - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
@@ -75,14 +75,14 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
 5. Wählen Sie in der Cloud Shell-Symbolleiste im Menü **Einstellungen** das Menüelement **Zur klassischen Version wechseln** aus (dies ist für die Verwendung des Code-Editors erforderlich).
 
-6. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository für diese Übung zu klonen:
+6. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository zu klonen, das die Codedateien für diese Übung enthält:
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-    > **Tipp**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers einnehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
+    > **TIPP**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers in Anspruch nehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
 
 7. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Anwendung enthält:  
 
@@ -130,7 +130,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
     Die Datei wird in einem Code-Editor geöffnet.
 
-10. Ersetzen Sie in der Codedatei den Platzhalter **your_project_endpoint** durch die Zeichenfolge für die Verbindung zu Ihrem Projekt (kopiert von der **Übersichtsseite** des Azure AI Foundry-Portals) und den Platzhalter **your_model_deployment** durch den Namen, den Sie Ihrer Phi-4-multimodal-instruct-Modellimplementierung zugewiesen haben.
+10. Ersetzen Sie in der Datei den Platzhalter **your_project_connection_string** durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Übersicht** des Projekts im Azure KI Foundry-Portal) und den Platzhalter **your_model_deployment** durch den Namen, den Sie Ihrer Bereitstellung des GPT-4-Modells zugewiesen haben.
 11. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Cloud Shell-Befehlszeile geöffnet bleibt.
 
 ### Schreiben von Code, um sich mit Ihrem Projekt zu verbinden und einen Chat-Client für Ihr Modell zu erhalten
