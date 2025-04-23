@@ -1,69 +1,87 @@
 ---
 lab:
-  title: Bewerten der generativen KI-Leistung
-  description: 'Erfahren Sie, wie Sie Modelle und Chatflows auswerten können, um die Leistung Ihrer Chat-App und ihre Fähigkeit, angemessen zu reagieren, zu optimieren.'
+  title: Bewertung der Leistung generativer KI-Modelle
+  description: 'Erfahren Sie, wie Sie Modelle und Prompts bewerten können, um die Leistung Ihrer Chat-App und ihre Fähigkeit, angemessen zu reagieren, zu optimieren.'
 ---
 
-# Bewerten der generativen KI-Leistung
+# Bewertung der Leistung generativer KI-Modelle
 
-In dieser Übung lernen Sie integrierte und benutzerdefinierte Auswertungen kennen, um die Leistung Ihrer KI-Anwendungen mit dem Azure KI Foundry-Portal zu bewerten und zu vergleichen.
+In dieser Übung werden Sie manuelle und automatische Bewertungen verwenden, um die Leistung eines Modells im Azure AI Foundry-Portal zu bewerten.
 
 Diese Übung dauert ungefähr **30** Minuten.
 
-## Erstellen eines Azure KI-Hubs und eines Projekts
+> **Hinweis**: Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschau oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
 
-Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie uns ein Projekt und ein Azure KI-Hub.
+## Erstellen eines Azure KI Foundry-Projekts
 
-1. Öffnen Sie in einem Webbrowser das [Azure KI Foundry Portal](https://ai.azure.com) unter `https://ai.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an.
+Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
+
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das **Azure AI Foundry**-Logo oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie den Bereich **Hilfe**, falls er geöffnet ist):
+
+    ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
+    - **Hubname**: *Ein gültiger Name für Ihren Hub*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
+    - **Ort**: Wählen Sie eine der folgenden Regionen\*
+        - USA (Ost) 2
+        - Frankreich, Mitte
+        - UK, Süden
+        - Schweden, Mitte
+    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Die Modellquoten werden auf der Ebene des Mandanten durch regionale Quoten eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Zum Zeitpunkt der Erstellung dieses Berichts unterstützen diese Regionen die Bewertung von KI-Sicherheitsmetriken. Die Modellverfügbarkeit wird durch regionale Kontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze erreicht werden, besteht die Möglichkeit, dass Sie ein weiteres Projekt in einer anderen Region erstellen müssen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
 
     ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
 
-## Bereitstellen eines GPT-Modells
+## Bereitstellen von Modellen
 
-Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
+In dieser Übung bewerten Sie die Leistung eines gpt-4o-mini-Modells. Außerdem verwenden Sie ein gpt-4o-Modell, um KI-unterstützte Auswertungsmetriken zu generieren.
 
-1. Navigieren Sie zur Seite **Modelle + Endpunkte** unter dem Abschnitt **Meine Assets**, indem Sie das Menü auf der linken Seite verwenden.
-1. Wählen Sie die Schaltfläche ** + Modell bereitstellen** und dann die Option **Basismodell bereitstellen** aus.
-1. Erstellen Sie eine neue Bereitstellung des **gpt-4**-Modells mit den folgenden Einstellungen, indem Sie im Assistenten **Modell bereitstellen** die Option **Anpassen** auswählen:
-    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Bereitstellungstyp**: Standard
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
-    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+1. Wählen Sie im Navigationsbereich links für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
+1. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** im Menü **+ Modell bereitstellen** die Option **Basismodell bereitstellen**.
+1. Suchen Sie das Modell **gpt-4o** in der Liste, wählen Sie es aus und bestätigen Sie es.
+1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
+    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungstyp**: Globaler Standard
+    - **Automatische Versionsaktualisierung**: Aktiviert
+    - **Modellversion**: *Wählen Sie die neueste verfügbare Version aus.*
+    - **Verbundene AI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung*
+    - **Tokens pro Minute Ratenlimit (Tausende)**: 50K *(oder das in Ihrem Abonnement verfügbare Maximum, wenn weniger als 50K)*
     - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
 
-    > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
+    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM sollten für die in dieser Übung verwendeten Daten ausreichend sein. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung zwar durchführen, aber es können Fehler auftreten, wenn das Kontingent überschritten wird.
 
-1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
-1. Ändern Sie im Textfeld **Modellanweisungen und Kontext geben** den Inhalt wie folgt:
+1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
+1. Kehren Sie zur Seite **Modelle + Endpunkte** zurück und wiederholen Sie die vorherigen Schritte, um ein **gpt-4o-mini**-Modell mit denselben Einstellungen einzurichten.
+
+## Manuelles Auswerten eines Modells
+
+Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Die manuelle Überprüfung ermöglicht es Ihnen, verschiedene Eingaben zu testen, um zu beurteilen, ob das Modell die erwartete Leistung erbringt.
+
+1. Laden Sie in einer neuen Browser-Registerkarte die Datei [travel_evaluation_data.csv](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv) von `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv` herunter und speichern Sie sie in einem lokalen Ordner.
+1. Zurück auf der Registerkarte des Azure AI Foundry-Portals, wählen Sie im Navigationsbereich im Abschnitt **Bewerten und Verbessern** die Option **Bewertung**.
+1. Zeigen Sie auf der Seite **Auswertung** die Registerkarte **Manuelle Auswertungen** an und wählen Sie **+ Neue manuelle Auswertung**.
+1. Ändern Sie die **Systemmeldung** in die folgenden Anweisungen für einen KI-Reiseassistenten:
 
    ```
-   **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
+   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
-   **Capabilities**:
+   Capabilities:
    - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
    - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
    - Share tips on packing, safety, and navigating travel disruptions.
    - Help with itinerary planning, including optimal routes and must-see landmarks.
    - Answer common travel questions and provide solutions to potential travel issues.
     
-   **Instructions**:
+   Instructions:
    1. Engage with the user in a friendly and professional manner, as a travel agent would.
    2. Use available resources to provide accurate and relevant travel information.
    3. Tailor responses to the user's specific travel needs and interests.
@@ -71,29 +89,41 @@ Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell b
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Wählen Sie **Änderungen übernehmen** aus.
-1. Geben Sie im Chatfenster (Verlauf) die Anfrage ein: `What can you do?`, um zu überprüfen, ob sich das Sprachmodell wie erwartet verhält.
+1. Wählen Sie im Abschnitt **Konfigurationen** in der Liste **Modell** Ihre **gpt-4o-mini**-Modellbereitstellung aus.
+1. Wählen Sie im Abschnitt **Manuelles Auswertungsergebnis** die Option **Testdaten importieren** und laden Sie die zuvor heruntergeladene Datei **Travel_evaluation_data.csv** hoch; ordnen Sie die Datensatzfelder wie folgt zu:
+    - **Eingabe**: Frage
+    - **Erwartete Antwort**: ExpectedResponse
+1. Überprüfen Sie die Fragen und erwarteten Antworten in der Testdatei . Sie verwenden diese, um die vom Modell generierten Antworten auszuwerten.
+1. Wählen Sie **Ausführen** in der oberen Leiste aus, um Ausgaben für alle Fragen zu generieren, die Sie als Eingaben hinzugefügt haben. Nach ein paar Minuten sollten die Antworten des Modells in einer neuen Spalte **Ausgabe** angezeigt werden, etwa so:
 
-Nachdem Sie nun über ein bereitgestelltes Modell mit einer aktualisierten Systemmeldung verfügen, können Sie das Modell auswerten.
+    ![Screenshot einer manuellen Bewertungsseite im Azure AI Foundry Portal.](./media/manual-evaluation.png)
 
-## Manuelle Bewertung eines Sprachmodells im Azure KI Foundry-Portal
+1. Überprüfen Sie die Ausgaben für jede Frage, vergleichen Sie die Ausgabe des Modells mit der erwarteten Antwort und „Bewertung“ der Ergebnisse, indem Sie die Daumen nach oben oder unten rechts in jeder Antwort auswählen.
+1. Nachdem Sie die Antworten bewertet haben, überprüfen Sie die Zusammenfassungskacheln oberhalb der Liste. Wählen Sie dann in der Symbolleiste **Ergebnisse speichern** und weisen Sie einen geeigneten Namen zu. Wenn Sie die Ergebnisse speichern, können Sie sie zu einem späteren Zeitpunkt für eine weitere Bewertung oder einen Vergleich mit einem anderen Modell abrufen.
 
-Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Durch die manuelle Überprüfung können Sie verschiedene Eingaben einzeln testen, um zu bewerten, ob das Modell wie erwartet ausgeführt wird.
+## Automatisierte Bewertung verwenden
 
-1. Wählen Sie im **Chat-Playground** das Dropdown-Menü **Auswerten** in der oberen Leiste und wählen Sie **Manuelle Auswertung**.
-1. Ändern Sie die **Systemnachricht** in die gleiche Nachricht, die Sie oben verwendet haben (hier wieder enthalten):
+Der manuelle Vergleich der Modellausgabe mit den von Ihnen erwarteten Antworten kann zwar eine nützliche Methode sein, um die Leistung eines Modells zu bewerten, ist aber in Szenarien, in denen Sie eine große Bandbreite an Fragen und Antworten erwarten, sehr zeitaufwändig und liefert kaum standardisierte Messwerte, mit denen Sie verschiedene Modell- und Prompt-Kombinationen vergleichen können.
+
+Die automatisierte Bewertung ist ein Ansatz, der versucht, diese Unzulänglichkeiten zu beheben, indem er Metriken berechnet und KI einsetzt, um Antworten auf Kohärenz, Relevanz und andere Faktoren zu bewerten.
+
+1. Verwenden Sie den Zurück-Pfeil (**&larr;**) neben dem Seitentitel **Manuelle Bewertung**, um zur Seite **Bewertung** zurückzukehren.
+1. Zeigen sie die Registerkarte **Automatisierte Bewertungen** an.
+1. Wählen Sie **Eine neue Bewertung erstellen**, und wenn Sie dazu aufgefordert werden, wählen Sie die Option, ein **Modell und eine Eingabeaufforderung** auszuwerten
+1. Überprüfen Sie auf der Seite **Erstellen einer neuen Auswertung** im Abschnitt **Grundlegende Informationen** den standardmäßig automatisch generierten Auswertungsnamen (Sie können diesen ändern, wenn Sie möchten) und wählen Sie Ihr **gpt-40-mini** Modell aus.
+1. Ändern Sie die **Systemmeldung** in die gleichen Anweisungen für einen KI-Reiseassistenten, die Sie zuvor verwendet haben:
 
    ```
-   **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
+   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
-   **Capabilities**:
+   Capabilities:
    - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
    - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
    - Share tips on packing, safety, and navigating travel disruptions.
    - Help with itinerary planning, including optimal routes and must-see landmarks.
    - Answer common travel questions and provide solutions to potential travel issues.
     
-   **Instructions**:
+   Instructions:
    1. Engage with the user in a friendly and professional manner, as a travel agent would.
    2. Use available resources to provide accurate and relevant travel information.
    3. Tailor responses to the user's specific travel needs and interests.
@@ -101,67 +131,33 @@ Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Durch 
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Fügen Sie im Abschnitt **Ergebnis der manuellen Auswertung** fünf Eingaben hinzu, für die Sie die Ausgabe überprüfen wollen. Geben Sie die folgenden fünf Fragen als fünf separate **Eingaben** ein:
+1. Im Abschnitt **Testdaten konfigurieren** können Sie ein GPT-Modell verwenden, um Testdaten für Sie zu generieren (die Sie dann bearbeiten und ergänzen können, um sie Ihren eigenen Erwartungen anzupassen), einen vorhandenen Datensatz verwenden oder eine Datei hochladen. Wählen Sie in dieser Übung **Vorhandenen Datensatz verwenden** und wählen Sie dann den **Reiseauswertungsdaten_csv_*xxxx...***-Datensatz (der erstellt wurde, als Sie die .csv-Datei zuvor hochgeladen haben).
+1. Überprüfen Sie die Beispielzeilen aus dem Datensatz, und wählen Sie dann im Abschnitt **Wählen Sie Ihre Datenspalte** die folgenden Spaltenzuordnungen:
+    - **Abfrage**: Frage
+    - **Kontext**: *Lassen Sie dies leer. Es wird verwendet, um die „Fundiertheit“ zu bewerten, wenn eine kontextbezogene Datenquelle mit Ihrem Modell verknüpft wird.*
+    - **Grundwahrheit**: ExpectedAnswer
+1. Im Abschnitt **Wählen Sie aus, was Sie bewerten möchten**, wählen Sie <u>alle</u> der folgenden Bewertungskategorien:
+    - KI-Qualität (KI-gestützt)
+    - Risiko und Sicherheit (KI-gestützt)
+    - KI-Qualität (NLP)
+1. Wählen Sie in der Liste **Eine Modellimplementierung als Richter auswählen** Ihr **gpt-4o** Modell aus. Dieses Modell wird verwendet, um die Antworten des ***gpt-4o-mini** Modells auf sprachbezogene Qualität und Standardvergleichsmetriken der generativen KI zu bewerten.
+1. Wählen Sie **Erstellen**, um den Bewertungsprozess zu starten, und warten Sie, bis er abgeschlossen ist. Dies kann einige Minuten dauern.
 
-   `Can you provide a list of the top-rated budget hotels in Rome?`
+    > **Tipp**: Wenn eine Fehlermeldung erscheint, die darauf hinweist, dass Projektberechtigungen gesetzt werden, warten Sie eine Minute und wählen Sie dann erneut **Erstellen**. Es kann einige Zeit dauern, bis die Ressourcenberechtigungen für ein neu erstelltes Projekt übertragen werden.
 
-   `I'm looking for a vegan-friendly restaurant in New York City. Can you help?`
+1. Wenn die Bewertung abgeschlossen ist, scrollen Sie gegebenenfalls nach unten, um den Bereich **Metriken-Dashboard** zu sehen und die **KI-Qualität (KI-unterstützt)**-Metriken zu betrachten:
 
-   `Can you suggest a 7-day itinerary for a family vacation in Orlando, Florida?`
+    ![Screenshot der KI-Qualitätsmetriken im Azure AI Foundry-Portal.](./media/ai-quality-metrics.png)
 
-   `Can you help me plan a surprise honeymoon trip to the Maldives?`
+    Verwenden Sie die Symbole **<sup>(i) </sup>**, um die Metrikdefinitionen anzuzeigen.
 
-   `Are there any guided tours available for the Great Wall of China?`
+1. Auf der Registerkarte **Risiko und Sicherheit** finden Sie die Metriken, die mit potenziell schädlichen Inhalten verbunden sind.
+1. Auf der Registerkarte **KI-Qualität (NLP**) finden Sie Standardmetriken für generative KI-Modelle.
+1. Scrollen Sie gegebenenfalls zum Anfang der Seite zurück und wählen Sie die Registerkarte **Daten**, um die Rohdaten der Auswertung anzuzeigen. Die Daten enthalten die Metriken für jede Eingabe sowie Erläuterungen zu den Überlegungen, die das gpt-4o Modell bei der Bewertung der Antworten angestellt hat.
 
-1. Wählen Sie **Ausführen** in der oberen Leiste aus, um Ausgaben für alle Fragen zu generieren, die Sie als Eingaben hinzugefügt haben.
-1. Jetzt können Sie die Ausgaben für jede Frage manuell überprüfen, indem Sie unten rechts in einer Antwort das Symbol mit dem Daumen nach oben oder unten auswählen. Bewerten Sie jede Antwort, und stellen Sie sicher, dass Sie in Ihren Bewertungen mindestens einen Daumen nach oben und einen Daumen nach unten verwenden.
-1. Klicken Sie in der oberen Menüleiste auf **Ergebnisse speichern**. Geben Sie `manual_evaluation_results` als Namen für die Ergebnisse ein.
-1. Navigieren Sie über das Menü auf der linken Seite zu **Auswertungen**.
-1. Wählen Sie die Registerkarte **Manuellen Auswertungen** aus, um die manuellen Auswertungen zu finden, die Sie gerade gespeichert haben. Beachten Sie, dass Sie Ihre zuvor erstellten manuellen Auswertungen durchsuchen, dort weitermachen, wo Sie aufgehört haben, und die aktualisierten Auswertungen speichern können.
+    ![Screenshot der Bewertungsdaten im Azure AI Foundry-Portal.](./media/evaluation-data.png)
 
-## Auswerten Ihrer Chat-App mit den integrierten Metriken
-
-Wenn Sie eine Chat-Anwendung mit Prompt Flow erstellt haben, können Sie den Flow evaluieren, indem Sie einen Batch-Lauf durchführen und die Leistung des Flows mit integrierten Metriken bewerten.
-
-![Diagramm der Konstruktion des Eingabedatensatzes für die Auswertung.](./media/diagram-dataset-evaluation.png)
-
-Um einen Chatverlauf zu bewerten, werden die Benutzeranfragen und die Chatantworten als Input für eine Bewertung bereitgestellt.
-
-Um Zeit zu sparen, haben wir für Sie einen Batch-Ausgabedatensatz erstellt, der die Ergebnisse mehrerer Eingaben enthält, die von einem Prompt Flow verarbeitet werden. Jedes der Ergebnisse wird im Dataset gespeichert, das Sie im nächsten Schritt auswerten.
-
-1. Wählen Sie die Registerkarte **Automatisierte Auswertungen** und erstellen Sie eine **Neue Auswertung** mit den folgenden Einstellungen: <details>  
-      <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
-        <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
-        <ul>
-          <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-          <li>Bestätigen Sie auf der Registerkarte Identität unter Ressourcenverwaltung, dass es sich um eine systemzugewiesene, verwaltete Identität handelt.</li>
-          <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-          <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, und wählen Sie die Option <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong>.</li>
-          <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
-        </ul>
-    </details>
-
-    - **Was möchten Sie auswerten?**: Dataset
-    - **Auswertungsname**: *Geben Sie einen eindeutigen Namen ein.*
-    - Wählen Sie **Weiter** aus.
-    - **Wählen Sie die Daten aus, die Sie auswerten möchten**: Fügen Sie Ihr Dataset hinzu.
-        - Laden Sie den [Validierungsdatensatz](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) unter `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl` herunter, speichern Sie ihn als JSONL-Datei und laden Sie ihn in die Benutzeroberfläche hoch.
-
-    > **Hinweis**: Ihr Gerät speichert die Datei möglicherweise standardmäßig als .txt-Datei. Wählen Sie alle Dateien aus, und entfernen Sie das .txt-Suffix, um sicherzustellen, dass Sie die Datei als JSONL speichern.
-
-    - Wählen Sie **Weiter** aus.
-    - **Metriken auswählen**: Kohärenz, Sprachfluss
-    - **Verbindung**: *Ihre KI Services-Verbindung*
-    - **Bereitstellungsname/Modell**: *Ihr bereitgestelltes GPT-4-Modell*
-    - **Abfrage**: Wählen Sie **Abfrage** als Datenquelle aus.
-    - **Antwort**: Wählen Sie **Antwort** als Datenquelle aus
-      
-1. Wählen Sie **Weiter** aus, überprüfen Sie Ihre Daten und senden Sie mit **Übermitteln** die neue Bewertung ab.
-1. Warten Sie, bis die Auswertungen abgeschlossen sind. Eventuell müssen Sie die Seite aktualisieren.
-1. Wählen Sie die gerade erstellte Auswertung aus.
-1. Erkunden Sie das **Metrik-Dashboard** auf der Registerkarte **Bericht** und **Detaillierte Metrik-Ergebnisse** auf der Registerkarte **Daten**.
-
-## Löschen von Azure-Ressourcen
+## Bereinigen
 
 Wenn Sie die Erkundung der Azure KI Foundry abgeschlossen haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
 

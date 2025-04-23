@@ -23,22 +23,22 @@ Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforder
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im Assistenten **Projekt erstellen** einen passenden Projektnamen ein (z.B. `my-ai-project`) und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
+1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Projektnamen ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
+    - **Hubname**: *Geben Sie einen gültigen Namen für Ihren Hub an*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann sowohl **gpt-4** als auch **text-embedding-ada-002** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4o** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - A**zure KI Services oder Azure OpenAI verbinden**: *Wählen Sie Neuen KI-Dienst erstellen aus*
     - **Verbinden von Azure KI-Suche**: *Erstellen Sie eine neue Ressource von Azure KI-Suche mit einem eindeutigen Namen*
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn ein Kontingentlimit erreicht wird und für beide Modelle keine Region empfohlen wird, wählen Sie nur einen davon aus, und verwenden Sie die empfohlene Region. Sie erstellen eine weitere Ressource in einer anderen Region für das zweite Modell später in der Übung.
+    > \* Azure OpenAI-Ressourcen werden durch regionale Modellkontingente eingeschränkt. Wenn später in der Übung eine Kontingentgrenze erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-1. Wenn Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die **Übersichtsseite** des Projekts im Azure AI Foundry-Portal, die in etwa wie folgt aussehen sollte:
+1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
 
     ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
-   
+
 ## Bereitstellen von Modellen
 
 Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
@@ -49,23 +49,22 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich links unter **Meine Assets** die Seite **Modelle + Endpunkte**.
 1. Erstellen Sie eine neue Bereitstellung des Modells **text-embedding-ada-002** mit den folgenden Einstellungen, indem Sie **Anpassen** im Assistenten zum Bereitstellen des Modells wählen:
 
-    - **Bereitstellungsname**: `text-embedding-ada-002`
-    - **Bereitstellungstyp**: Standard
+    - **Bereitstellungsname:***Ein gültiger Name für Ihre Modellimplementierung*
+    - **Bereitstellungstyp**: Globaler Standard
     - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
-    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+    - **Verbundene KI-Ressource**: *Wählen Sie die zuvor erstellte Ressource aus.*
+    - **Ratenlimit für Token pro Minute (Tausender)**: 50K *(oder das Maximum, das in Ihrem Abonnement verfügbar ist, falls weniger als 50K)*
     - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
 
     > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
 
-1. Wiederholen Sie die vorherigen Schritte, um ein **gpt-4**-Modell mit dem Bereitstellungsnamen `gpt-4` bereitzustellen, indem Sie eine **Standard**-Bereitstellung der Standardversion mit einer TPM-Ratenbegrenzung von 5K verwenden.
+1. Kehren Sie zur Seite **Modelle + Endpunkte** zurück, und wiederholen Sie die vorherigen Schritte zum Bereitstellen eines **gpt-4o**-Modells mithilfe einer Bereitstellung vom Typ **Global Standard** der neuesten Version mit einem TPM-Satzlimit von **50K** (oder dem Maximum, das in Ihrem Abonnement verfügbar ist, wenn weniger als 50K).
 
-    > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
+    > **Hinweis:** Durch das Verringern der Token pro Minute (TPM) wird die Überlastung des Kontingents vermieden, das in Ihrem verwendeten Abonnement verfügbar ist. 50.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
 
 ## Hinzufügen von Daten zu Ihrem Projekt
 
-Die Daten für Ihren Copilot bestehen aus einer Reihe von Reisebroschüren des fiktiven Reisebüros *Margie‘s Travel* im PDF-Format. Fügen wir sie dem Projekt hinzu.
+Die Daten für Ihre App bestehen aus einer Reihe von Reisebroschüren des fiktiven Reisebüros *Margie‘s Travel* im PDF-Format. Fügen wir sie dem Projekt hinzu.
 
 1. Laden Sie in einer neuen Registerkarte des Browsers das [gezippte Archiv der Broschüren](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) von `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` herunter und entpacken Sie es in einen Ordner mit dem Namen **Broschüren** auf Ihrem lokalen Dateisystem.
 1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
@@ -82,7 +81,7 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
 1. Auf der Registerkarte **Indizes** fügen Sie einen neuen Index mit den folgenden Einstellungen hinzu:
     - **Quellstandort**:
-        - **Datenquelle**: Daten im Azure KI Foundry-Portal
+        - **Datenquelle**: Daten in Azure AI Foundry
             - *Auswählen der Datenquelle **Broschüren***
     - **Indexkonfiguration**:
         - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
@@ -109,7 +108,7 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite die Seite **Playgrounds** aus und öffnen Sie den Playground **Chat**.
-1. Stellen Sie auf der Seite „Chat-Playground“ im Bereich „Setup“ sicher, dass Ihre **gpt-4**-Modelimplementierung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Vergewissern Sie sich auf der Seite Chat- Playground im Bereich Einrichtung, dass Ihre **gpt-4o**-Modellbereitstellung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
 1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
 1. Erweitern Sie im Bereich „Einrichtung“ das Feld **Ihre Daten hinzufügen** und fügen Sie dann den Projektindex **Broschüren-Index** hinzu und wählen Sie den Suchtyp **hybrid (Vektor + Schlüsselwort)** aus.
 
@@ -142,7 +141,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
 
     **<font color="red">Stellen Sie sicher, dass Sie zur klassischen Version der Cloud Shell gewechselt haben, bevor Sie fortfahren.</font>**
 
-1. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository zu klonen, das die Codedateien für diese Übung enthält:
+1. Geben Sie im Cloud Shell-Bereich die folgenden Befehle ein, um das GitHub-Repository zu klonen, das die Codedateien für diese Übung enthält (geben Sie den Befehl ein, oder kopieren Sie ihn in die Zwischenablage, und klicken Sie dann mit der rechten Maustaste in die Befehlszeile, und fügen Sie ihn als Nur-Text ein):
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -172,6 +171,8 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-ai-projects azure-identity openai
     ```
 
@@ -202,7 +203,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
 
 1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
     - **Ihr_Projekt_Verbindungsstring**: Ersetzen Sie durch die Zeichenfolge für Ihr Projekt (kopiert von der Seite **Übersicht** des Projekts im Azure AI Foundry-Portal)
-    - **your_model_deployment**: Ersetzen Sie dies durch den Namen, den Sie Ihrer Modellbereitstellung gegeben haben (der `gpt-4` lauten sollte).
+    - **Ihre_Modellbereitstellung** Ersetzen Sie durch den Namen, den Sie Ihrer **gpt-4o** Modellbereitstellung zugewiesen haben
     - **your_index**: Ersetzen Sie dies durch Ihren Indexnamen (der `brochures-index` lauten sollte).
 1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Cloud Shell-Befehlszeile geöffnet bleibt.
 
@@ -234,7 +235,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
 
 ### Ausführen der Chatanwendung
 
-1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die App auszuführen:
+1. Geben Sie im Bereich der Cloud-Shell-Befehlszeile den folgenden Befehl ein, um die App auszuführen:
 
     **Python**
 

@@ -10,6 +10,8 @@ In dieser Übung verwenden Sie den Prompt-Flow des Azure KI Foundry-Portals, um 
 
 Diese Übung dauert ungefähr **30** Minuten.
 
+> **Hinweis**: Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschau oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
+
 ## Erstellen eines Azure KI Foundry-Projekts
 
 Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
@@ -19,106 +21,96 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
+    - **Hubname**: *Ein gültiger Name für Ihren Hub*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
+    - **Speicherort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann **gpt-4o** im Fenster Hilfsprogramm für den Speicherort und verwenden Sie den empfohlenen Bereich\*
+    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen sind durch regionale Modellkontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
 
     ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
 
-## Bereitstellen eines GPT-Modells
+## Konfigurieren der Ressourcenautorisierung
 
-Um ein Sprachmodell im Prompt Flow zu verwenden, müssen Sie zuerst ein Modell bereitstellen. Über das Azure KI Foundry-Portal können Sie OpenAI-Modelle bereitstellen, die Sie in Ihren Abläufen verwenden können.
+Die Prompt Flow Tools in Azure AI Foundry erstellen dateibasierte Assets, die den Prompt Flow in einem Ordner im Blob Storage definieren. Bevor wir uns mit dem Prompt Flow befassen, müssen wir sicherstellen, dass Ihre Azure AI Services-Ressource den erforderlichen Zugriff auf den Blob-Speicher hat, damit sie diese lesen kann.
 
-1. Wählen Sie im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Wählen Sie **+ Modell bereitstellen** und **Basismodell bereitstellen** aus. 
-1. Erstellen Sie eine neue Bereitstellung des **gpt-4**-Modells mit den folgenden Einstellungen, indem Sie in den Bereitstellungsdetails auf **Anpassen** klicken.
-    - **Bereitstellungsname:** *Ein eindeutiger Name für die Modellimplementierung*
-    - **Bereitstellungstyp**: Standard
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **KI-Ressource**: *Wählen Sie die zuvor erstellte Quelle* aus
-    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+1. Wählen Sie im Azure AI Foundry-Portal im Navigationsbereich das **Verwaltungszentrum** und zeigen Sie die Detailseite für Ihr Projekt an, die ähnlich wie dieses Bild aussieht:
+
+    ![Screenshot des Verwaltungszentrums.](./media/ai-foundry-manage-project.png)
+
+1. Wählen Sie unter **Ressourcengruppe** Ihre Ressourcengruppe aus, um sie im Azure-Portal in einer neuen Browser-Registerkarte zu öffnen; melden Sie sich mit Ihren Azure-Anmeldedaten an, wenn Sie dazu aufgefordert werden, und schließen Sie alle Willkommensbenachrichtigungen, um die Ressourcengruppenseite anzuzeigen.
+
+    Die Ressourcengruppe enthält alle Azure-Ressourcen zur Unterstützung Ihres Hubs und Projekts.
+
+1. Wählen Sie die Ressource**Azure KI Services** für Ihren Hub, um sie zu öffnen. Erweitern Sie dann den Abschnitt **Unter Ressourcenverwaltung** und wählen Sie die Seite **Identität**:
+
+    ![Screenshot der Identitätsseite von Azure KI Services im Azure-Portal.](./media/ai-services-identity.png)
+
+1. Wenn der Status der vom System zugewiesenen Identität **Aus** ist, schalten Sie sie **Ein** und speichern Sie Ihre Änderungen. Warten Sie dann, bis die Änderung des Status bestätigt wurde.
+1. Kehren Sie zur Ressourcengruppenseite zurück, wählen Sie die Ressource **Speicherkonto** für Ihren Hub aus und zeigen Sie die Seite **Zugriffssteuerung (IAM)** an:
+
+    ![Screenshot der Seite für die Zugriffssteuerung für Speicherkonten im Azure-Portal.](./media/storage-access-control.png)
+
+1. Fügen Sie der Rolle `Storage blob data reader` eine Rollenzuweisung für die verwaltete Identität hinzu, die von Ihrer Azure KI Services-Ressource verwendet wird:
+
+    ![Screenshot der Seite für die Zugriffssteuerung für Speicherkonten im Azure-Portal.](./media/assign-role-access.png)
+
+1. Wenn Sie den Rollenzugriff überprüft und zugewiesen haben, damit die von Azure AI Services verwaltete Identität Blobs im Speicherkonto lesen kann, schließen Sie die Registerkarte des Azure-Portals und kehren Sie zum Azure AI Foundry-Portal zurück.
+1. Wählen Sie im Azure AI Foundry-Portal im Navigationsbereich **Zum Projekt gehen**, um zur Startseite Ihres Projekts zurückzukehren.
+
+## Bereitstellen eines generativen KI-Modells
+
+Jetzt sind Sie bereit, ein generatives KI-Sprachmodell zur Unterstützung Ihrer Prompt-Flow-Anwendung einzusetzen.
+
+1. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
+1. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** im Menü **+ Modell bereitstellen** die Option **Basismodell bereitstellen**.
+1. Suchen Sie das Modell **gpt-4o** in der Liste, wählen Sie es aus und bestätigen Sie es.
+1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
+    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungstyp**: Globaler Standard
+    - **Automatische Versionsaktualisierung**: Aktiviert
+    - **Modellversion**: *Wählen Sie die neueste verfügbare Version aus.*
+    - **Verbundene AI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung*
+    - **Tokens pro Minute Ratenlimit (Tausende)**: 50K *(oder das in Ihrem Abonnement verfügbare Maximum, wenn weniger als 50K)*
     - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
 
-    > **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
+    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM sollten für die in dieser Übung verwendeten Daten ausreichend sein. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung zwar durchführen, aber es können Fehler auftreten, wenn das Kontingent überschritten wird.
 
-1. Warten Sie, bis das Modell bereitgestellt wurde. Wenn die Bereitstellung bereit ist, wählen Sie **Im Playground öffnen** aus.
-1. Geben Sie im Chatfenster die Abfrage „`What can you do?`“ ein.
+1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
-    Beachten Sie, dass die Antwort generisch ist, da es keine spezifischen Anweisungen für den Assistenten gibt. Um den Fokus auf eine bestimmte Aufgabe zu legen, können Sie den Systemprompt ändern.
+## Erstellen eines Prompt Flows
 
-1. Ändern Sie die Nachricht **Geben Sie dem Modell Anweisungen und Kontext** in die folgende:
+Ein Prompt Flow bietet eine Möglichkeit, Prompts und andere Aktivitäten zu orchestrieren, um eine Interaktion mit einem generativen KI-Modell zu definieren. In dieser Übung verwenden Sie eine Vorlage, um einen einfachen Chat Flow für einen KI-Assistenten in einem Reisebüro zu erstellen.
 
-   ```md
-   **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
+1. Wählen Sie in der Navigationsleiste des Azure AI Foundry-Portals im Abschnitt **Erstellen und Anpassen** die Option **Prompt Flow**.
+1. Erstellen Sie einen neuen Flow auf der Grundlage der Vorlage **Chat Flow** und geben Sie `Travel-Chat` als Ordnernamen an.
 
-   **Capabilities**:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   **Instructions**:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
-   ```
+    Ein einfacher Chatflow wird für Sie erstellt.
 
-1. Wählen Sie **Änderungen übernehmen** aus.
-1. Geben Sie im Chatfenster dieselbe Abfrage wie zuvor ein: `What can you do?` Beachten Sie die geänderte Antwort.
+1. Um Ihren Flow testen zu können, benötigen Sie einen Rechner, und es kann eine Weile dauern, bis er startet. Wählen Sie daher **Compute-Sitzung starten**, um ihn zu starten, während Sie den Standard-Flow untersuchen und ändern.
 
-Nachdem Sie nun mit der Systemmeldung für das bereitgestellte GPT-Modell experimentiert haben, können Sie die Anwendung weiter anpassen, indem Sie mit dem Prompt Flow arbeiten.
+1. Sehen Sie sich den Prompt Flow an, der aus einer Reihe von *Eingaben*, *Ausgaben* und *Tools* besteht. Sie können die Eigenschaften dieser Objekte in den Bearbeitungsbereichen auf der linken Seite erweitern und bearbeiten und den Gesamtflow als Diagramm auf der rechten Seite anzeigen:
 
-## Erstellen und Ausführen eines Chatverlaufs im Azure KI Foundry-Portal
+    ![Screenshot des Prompt Flow Editors.](./media/prompt-flow.png)
 
-Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow basierend auf Ihren Konfigurationen im Playground erstellen. Da Sie bereits im Playground experimentiert haben, verwenden Sie diese Option, um einen neuen Flow zu erstellen.
-
-<details>  
-    <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
-    <p>Wenn beim Erstellen eines neuen Eingabeaufforderungsflusses ein Berechtigungsfehler angezeigt wird, versuchen Sie Folgendes zur Problembehandlung:</p>
-    <ul>
-        <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-        <li>Bestätigen Sie unter „Ressourcenverwaltung" auf der Registerkarte „Identität", dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
-        <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage blob data reader</em> hinzu.</li>
-        <li>Wählen Sie unter <strong>Zugriff zuweisen zu</strong>, <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, wählen Sie die <strong>Alle vom System zugewiesenen verwalteten Identitäten</strong> und wählen Sie Ihre Azure AI Dienste Ressource.</li>
-        <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
-    </ul>
-</details>
-
-1. Wählen Sie im **Chat-Playground** in der oberen Leiste die Option **Prompt Flow** aus.
-1. Geben Sie den Ordnernamen „`Travel-Chat`“ ein.
-
-    Ein einfacher Chatflow wird für Sie erstellt. Beachten Sie, dass folgende Elemente vorhanden sind: zwei Eingaben (Chatverlauf und Frage des Benutzers), ein LLM-Knoten, der eine Verbindung mit Ihrem bereitgestellten Sprachmodell herstellt, und eine Ausgabe, die die Antwort im Chat widerspiegelt.
-
-    Zum Testen des Flows benötigen Sie eine Computeressource.
-
-1. Wählen Sie **Computesitzung starten** in der oberen Leiste aus.
-1. Es dauert 1 bis 3 Minuten, bis die Computesitzung gestartet wird.
-1. Suchen Sie den LLM-Knoten mit dem Namen **Chat**. Beachten Sie, dass der Prompt bereits den Systemprompt enthält, den Sie im Chat-Playground angegeben haben.
-
-    Sie müssen den LLM-Knoten noch mit Ihrem bereitgestellten Modell verbinden.
-
-1. Wählen Sie im Abschnitt „LLM-Knoten“ für **Verbindung** die Verbindung aus, die beim Erstellen des KI-Hubs für Sie erstellt wurde.
-1. Als **API** wählen Sie **Chat** aus.
-1. Wählen Sie für **deployment_name** das von Ihnen bereitgestellte Modell **gpt-4** aus.
-1. Wählen Sie für **Antwortformat** die Option **{"type":"text"}** aus.
-1. Überprüfen Sie das Feld für den Prompt, und stellen Sie sicher, dass es wie folgt aussieht:
+1. Sehen Sie sich den Bereich **Eingaben** an und stellen Sie fest, dass es zwei Eingaben gibt (Chatverlauf und die Frage der benutzenden Person)
+1. Sehen Sie sich den Bereich **Ausgaben** an und stellen Sie fest, dass es eine Ausgabe gibt, die die Antwort des Modells wiedergibt.
+1. Zeigen Sie den LLM-Toolbereich **Chat** an, der die Informationen enthält, die zum Übermitteln einer Eingabeaufforderung an das Modell erforderlich sind.
+1. Wählen Sie im **Chat** LLM-Toolbereich für **Verbindung** die Verbindung für die Azure OpenAI-Service-Ressource in Ihrem KI-Hub aus. Konfigurieren Sie dann die folgenden Verbindungseigenschaften:
+    - **API**: Chat
+    - **deployment_name**: *Das von Ihnen bereitgestellte Modell gpt-4o*
+    - **response_format**: {"type":"text"}
+1. Ändern Sie das Feld **Prompt** wie folgt:
 
    ```yml
-   system:
+   # system:
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
    **Capabilities**:
@@ -136,46 +128,73 @@ Sie können einen neuen Flow mithilfe einer Vorlage erstellen oder einen Flow ba
    5. Encourage the user to ask follow-up questions for further assistance.
 
    {% for item in chat_history %}
-   user:
+   # user:
    {{item.inputs.question}}
-   assistant:
+   # assistant:
    {{item.outputs.answer}}
    {% endfor %}
 
-   user:
+   # user:
    {{question}}
    ```
 
-### Testen und Bereitstellen des Flows
+    Lesen Sie die Von Ihnen hinzugefügte Eingabeaufforderung, damit Sie damit vertraut sind. Sie besteht aus einer Systemnachricht (die ein Ziel, eine Definition der Fähigkeiten und einige Anweisungen enthält) und dem Chatverlauf (geordnet, um jede von der benutzenden Person eingegebene Frage und jede vorhergehende Antwort des Assistenten anzuzeigen)
 
-Nachdem Sie den Flow entwickelt haben, können Sie ihn im Chatfenster testen.
+1. Im Abschnitt **Eingaben** für das LLM-Tool **Chat** (unter der Eingabeaufforderung), stellen Sie sicher, dass die folgenden Variablen gesetzt sind:
+    - **question** (string): ${inputs.question}
+    - **chat_history** (string): ${inputs.chat_history}
 
-1. Stellen Sie sicher, dass die Computesitzung ausgeführt wird.
-1. Wählen Sie **Speichern**.
-1. Wählen Sie **Chat** aus, um den Flow zu testen.
-1. Geben Sie die Abfrage ein: `I have one day in London, what should I do?`. Überprüfen Sie dann die Ausgabe.
+1. Sichern Sie die Änderungen am Flow.
 
-    Wenn Sie mit dem Verhalten des von Ihnen erstellten Flows zufrieden sind, können Sie ihn bereitstellen.
+    > **Hinweis**: In dieser Übung beschränken wir uns auf einen einfachen Chat Flow. Beachten Sie jedoch, dass der Editor für den Prompt Flow viele weitere Tools enthält, die Sie dem Ablauf hinzufügen können, um eine komplexe Logik zur Orchestrierung von Unterhaltungen zu erstellen.
 
-1. Wählen Sie **Bereitstellen** aus, um den Flow mit den folgenden Einstellungen bereitzustellen:
+## Testen des Flows
+
+Nachdem Sie nun den Flow bereitgestellt haben, können Sie ihn im Chatfenster testen.
+
+1. Stellen Sie sicher, dass die Computesitzung ausgeführt wird. Wenn nicht, warten Sie, bis er startet.
+1. Wählen Sie in der Symbolleiste **Chat**, um den Bereich **Chat** zu öffnen, und warten Sie, bis der Chat initialisiert ist.
+1. Geben Sie die Abfrage ein: `I have one day in London, what should I do?`. Überprüfen Sie dann die Ausgabe. Der Chatbereich sollte in etwa so aussehen:
+
+    ![Screenshot des Promptflow-Chatbereichs.](./media/prompt-flow-chat.png)
+
+## Bereitstellen des Flows
+
+Wenn Sie mit dem Verhalten des von Ihnen erstellten Flows zufrieden sind, können Sie ihn bereitstellen.
+
+> **Hinweis**: Die Bereitstellung kann lange dauern und kann durch Kapazitätsbeschränkungen in Ihrem Abonnement oder Mandanten beeinträchtigt werden.
+
+1. Wählen Sie in der Symbolleiste **Bereitstellen** und setzen Sie den Flow mit den folgenden Einstellungen ein:
     - **Grundeinstellungen**:
         - **Endpunkt**: Neu
         - **Endpunktname**: *Geben Sie einen eindeutigen Namen ein.*
         - **Bereitstellungsname**: *Geben Sie einen eindeutigen Namen ein.*
         - **VM**: Standard_DS3_v2
-        - **Instanzenanzahl:** 3
-        - **Rückschließen der Datensammlung**: Aktiviert
+        - **Instanzenanzahl**: 1
+        - **Rückschließen Datensammlung**: Deaktiviert
     - **Erweiterte Einstellungen**:
         - *Verwenden der Standardeinstellungen*
-1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Beachten Sie, dass standardmäßig die **Modellbereitstellungen** aufgelistet werden, einschließlich des von Ihnen bereitgestellten Sprachmodells und des bereitgestellten Ablaufs. Es kann einige Zeit dauern, bis die Bereitstellung aufgelistet und erfolgreich erstellt wird.
-1. Wenn die Bereitstellung erfolgreich war, wählen Sie sie aus. Geben Sie dann auf der Seite **Test** den Prompt `What is there to do in San Francisco?` ein und überprüfen Sie die Antwort.
-1. Geben Sie den Prompt `Where else could I go?` ein und überprüfen Sie die Antwort.
-1. Zeigen Sie die Seite **Nutzen** für den Endpunkt an und beachten Sie, dass sie Verbindungsinformationen und Beispielcode enthält, die Sie zum Erstellen einer Clientanwendung für Ihren Endpunkt verwenden können, sodass Sie die Prompt Flow-Lösung als benutzerdefinierten Copilot in eine Anwendung integrieren können.
+1. Wählen Sie im Azure AI Foundry-Portal im Navigationsbereich im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
 
-## Löschen von Azure-Ressourcen
+    Wenn sich die Seite für Ihr gpt-4o-Modell öffnet, verwenden Sie die Schaltfläche **zurück**, um alle Modelle und Endpunkte anzuzeigen.
 
-Wenn Sie die Erkundung des Azure KI Foundry-Portals beendet haben, sollten Sie die von Ihnen erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
+1. Zu Beginn zeigt die Seite möglicherweise nur Ihre Modellbereitstellungen an. Es kann einige Zeit dauern, bis die Bereitstellung aufgelistet wird, und noch länger, bis sie erfolgreich erstellt ist.
+1. Wenn die Bereitstellung *erfolgreich* war, wählen Sie sie aus. Zeigen Sie dann die Seite **Test** an.
+
+    > **Tipp**: Wenn die Testseite den Endpunkt als ungesund beschreibt, kehren Sie zu den **Modellen und Endpunkten** zurück und warten Sie etwa eine Minute, bevor Sie die Ansicht aktualisieren und den Endpunkt erneut auswählen.
+
+1. Geben Sie den Prompt `What is there to do in San Francisco?` ein und überprüfen Sie die Antwort.
+1. Geben Sie den Prompt `Tell me something about the history of the city.` ein und überprüfen Sie die Antwort.
+
+    Der Testbereich sollte in etwa so aussehen:
+
+    ![Screenshot der Testseite des Prompt Flow-Endpunkts.](./media/deployed-flow.png)
+
+1. Sehen Sie sich die Seite **Verbrauchen** für den Endpunkt an, und beachten Sie, dass sie Verbindungsinformationen und Beispielcode enthält, mit dem Sie eine Client-Anwendung für Ihren Endpunkt erstellen können - so können Sie die Prompt Flow-Lösung als generative KI-Anwendung in eine Anwendung integrieren.
+
+## Bereinigen
+
+Wenn Sie die Untersuchung des Prompt-Flows abgeschlossen haben, sollten Sie die erstellten Ressourcen löschen, um unnötige Azure-Kosten zu vermeiden.
 
 - Navigieren Sie zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com`.
 - Wählen Sie auf der **Startseite** des Azure-Portals die Option **Ressourcengruppen** aus.
