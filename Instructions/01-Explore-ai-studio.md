@@ -10,13 +10,11 @@ In dieser Übung verwenden Sie das Azure AI Foundry-Portal, um einen Hub und ein
 
 Diese Übung dauert ca. **30** Minuten.
 
-> **Hinweis**: Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschau oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
-
 ## Öffnen des Azure KI Foundry-Portals
 
 Beginnen wir mit der Anmeldung im Azure AI Foundry-Portal.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry**-Logo oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie den Bereich **Hilfe**, falls er geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
@@ -29,14 +27,14 @@ Ein Azure KI-*Hub* bietet einen kollaborativen Arbeitsbereich, in dem Sie ein od
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
 1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein gültiger Name für Ihren Hub*
+    - **Hubname**: *Geben Sie einen gültigen Namen für Ihren Hub an*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
-    - **Speicherort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann **gpt-4o** im Fenster Hilfsprogramm für den Speicherort und verwenden Sie den empfohlenen Bereich\*
-    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4o** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - A**zure KI Services oder Azure OpenAI verbinden**: *Wählen Sie Neuen KI-Dienst erstellen aus*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen sind durch regionale Modellkontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
+    > \* Azure OpenAI-Ressourcen werden durch regionale Modellkontingente eingeschränkt. Wenn später in der Übung eine Kontingentgrenze erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
@@ -77,7 +75,7 @@ Angenommen, Ihr Projekt benötigt Zugriff auf eine zweite **Azure KI Services-Re
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Die Ressourcengruppe mit Ihren vorhandenen Azure AI Foundry-Ressourcen.*
     - **Region**: *Auswahl einer beliebigen verfügbaren Region, die nicht diejenige ist, in der sich Ihre vorhandenen Ressourcen befinden*
-    - **Name**: *Ein geeigneter Name für Ihre zweite Azure AI Services-Ressource*
+    - **Name**: *Ein geeigneter Name für Ihre zweite Azure KI Services-Ressource*
     - **Tarif**: Standard S0.
 1. Warten Sie, bis die Ressource „KI-Dienste“ erstellt wurde.
 1. Kehren Sie zur Browserregisterkarte des Azure AI Foundry-Portals zurück und sehen Sie sich in der Ansicht **Verwaltungszentrum** im Navigationsbereich im Abschnitt für Ihr *<u>Projekt</u>* die Seite **Verbundene Ressourcen** an. Die vorhandenen verbundenen Ressourcen in Ihrem Projekt werden aufgelistet.
@@ -114,29 +112,29 @@ Ihr Projekt enthält auch verbundene Ressourcen für Azure OpenAI, mit denen Sie
 
 1. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
 1. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** im Menü **+ Modell bereitstellen** die Option **Basismodell bereitstellen**.
-1. Suchen Sie das Modell **gpt-4o** in der Liste, wählen Sie es aus und bestätigen Sie es.
+1. Suchen Sie das Modell **gpt-4** in der Liste, wählen Sie es aus und bestätigen Sie es.
 1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
-    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungsname:***Ein gültiger Name für Ihre Modellimplementierung*
     - **Bereitstellungstyp**: Globaler Standard
     - **Automatische Versionsaktualisierung**: Aktiviert
     - **Modellversion**: *Wählen Sie die neueste verfügbare Version aus.*
     - **Verbundene AI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung*
-    - **Tokens pro Minute Ratenlimit (Tausende)**: 50K *(oder das in Ihrem Abonnement verfügbare Maximum, wenn weniger als 50K)*
+    - **Ratenlimit für Token pro Minute (Tausender)**: 50K *(oder das Maximum, das in Ihrem Abonnement verfügbar ist, falls weniger als 50K)*
     - **Inhaltsfilter**: StandardV2 
 
-    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM sollten für die in dieser Übung verwendeten Daten ausreichend sein. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung zwar durchführen, aber es können Fehler auftreten, wenn das Kontingent überschritten wird.
+    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM reicht für die in dieser Übung verwendeten Daten aus. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung abschließen, aber möglicherweise treten Fehler auf, wenn das Ratenlimit überschritten wird.
 
 1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
 1. Nachdem das Modell bereitgestellt wurde, wählen Sie auf der Seite „Bereitstellungsübersicht“ die Option **Im Playground öffnen** aus.
 1. Stellen Sie auf der Seite **Chat-Playground** sicher, dass Ihre Modellimplementierung im Abschnitt **Bereitstellung** ausgewählt ist.
-1. Geben Sie im Bereich **Setup** in das Feld **Geben Sie dem Modell Anweisungen und Kontext** die folgenden Anweisungen:
+1. Geben Sie im Bereich **Setup** im Feld **Geben Sie die Modellanweisungen und den Kontext** die folgenden Anweisungen ein:
 
     ```
     You are a history teacher who can answer questions about past events all around the world.
     ```
 
-1. Übernehmen Sie die Änderungen, um die Systemmeldung zu aktualisieren.
+1. Wenden Sie die Änderungen an, um die Systemmeldung zu aktualisieren.
 1. Geben Sie im Chat-Fenster eine Abfrage wie `What are the key events in the history of Scotland?` ein und sehen Sie sich die Antwort an:
 
     ![Screenshot des Spielplatzes im Azure KI Foundry-Portal.](./media/ai-foundry-playground.png)
