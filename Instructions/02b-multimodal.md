@@ -10,7 +10,7 @@ In dieser Übung verwenden Sie das generative KI-Modell *Phi-4-multimodal-instru
 
 Diese Übung dauert ca. **30** Minuten.
 
-> **Hinweis**: Diese Übung basiert auf Vorabversionen von SDKs, die sich möglicherweise noch ändern können. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln.
+> **Hinweis**: Diese Übung basiert auf Vorabversionen von SDKs, die sich möglicherweise noch ändern können. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln. Es können unerwartete Verhaltensweisen, Warnungen oder Fehler auftreten.
 
 ## Erstellen eines Azure KI Foundry-Projekts
 
@@ -21,11 +21,11 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 2. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-3. Geben Sie im Assistenten **Projekt erstellen** einen passenden Projektnamen ein (z.B. `my-ai-project`) und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
+3. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie die Option zum Erstellen eines neuen Hubs, falls ein vorhandener Hub vorgeschlagen wird. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 4. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
+    - **Hubname**: *Ein gültiger Name für Ihren Hub*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
     - **Region:** Wählen Sie eine der folgenden Regionen aus\*:
         - East US
         - USA (Ost) 2
@@ -34,7 +34,7 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
         - Schweden, Mitte
         - USA (Westen)
         - USA, Westen 3
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
+    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
     > \* Zum Zeitpunkt des Schreibens steht das Microsoft Modell *Phi-4-multimodal-instruct*, das wir in dieser Übung verwenden werden, in diesen Regionen zur Verfügung. Sie können die neueste regionale Verfügbarkeit für bestimmte Modelle in der [Azure AI Foundry-Dokumentation](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability) überprüfen. Wenn später in der Übung eine regionale Kontingentgrenze erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
@@ -48,12 +48,12 @@ Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
 
 Jetzt können Sie ein *Phi-4-multimodal-instruct*-Modell bereitstellen, um multimodale Prompts zu unterstützen.
 
-1. Verwenden Sie in der Symbolleiste oben rechts auf Ihrer Azure AI Foundry-Projektseite das Symbol **Funktionen anzeigen**, um das Feature **Modelle zum Azure KI-Modellinferenz-Service bereitstellen** zu aktivieren. Mit diesem Feature wird sichergestellt, dass Ihre Modellbereitstellung für den Azure KI-Rückschlussdienst verfügbar ist, den Sie im Anwendungscode verwenden.
+1. Verwenden Sie in der Symbolleiste oben rechts auf Ihrer Azure KI-Foundry-Projektseite das Symbol „Vorschau-Funktionen“ (**Preview features**) (**&#9215;**), um sicherzustellen, dass die Funktion **Modelle im Azure KI-Modellinferenzdienst bereitstellen**) aktiviert ist. Mit diesem Feature wird sichergestellt, dass Ihre Modellbereitstellung für den Azure KI-Rückschlussdienst verfügbar ist, den Sie im Anwendungscode verwenden.
 2. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
 3. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** im Menü **+ Modell bereitstellen** die Option **Basismodell bereitstellen**.
 4. Suchen Sie in der Liste das Modell **Phi-4-multimodal-instruct**, wählen Sie es aus und bestätigen Sie es.
 5. Stimmen Sie der Lizenzvereinbarung zu, wenn Sie dazu aufgefordert werden, und stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
-    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung – zum Beispiel `Phi-4-multimodal` (merken Sie sich den Namen, den Sie vergeben, Sie brauchen ihn später.*)
+    - **Bereitstellungsname**: *Ein gültiger Name für die Bereitstellung Ihres Modells*
     - **Bereitstellungstyp**: Globaler Standard
     - **Bereitstellungsdetails**: *Verwenden der Standardeinstellungen.*
 6. Warten Sie, bis der Bereitstellungsstatus **Abgeschlossen** ist.
@@ -62,20 +62,27 @@ Jetzt können Sie ein *Phi-4-multimodal-instruct*-Modell bereitstellen, um multi
 
 Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in einer Clientanwendung verwenden.
 
-> **Tipp**: Sie können Ihre Lösung mit Python oder Microsoft C# entwickeln *(in Kürze verfügbar)*. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
+> **Tipp**: Sie können Ihre Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
 
 ### Vorbereiten der Anwendungskonfiguration
 
 1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
 2. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
 3. Öffnen Sie eine neue Browserregisterkarte (wobei das Azure AI Foundry-Portal auf der vorhandenen Registerkarte geöffnet bleibt). Wechseln Sie dann in der neuen Registerkarte zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an, wenn Sie dazu aufgefordert werden.
-4. Verwenden Sie die Taste **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung aus. Die Cloud Shell bietet eine Befehlszeilenschnittstelle in einem Bereich am unteren Rand des Azure-Portals.
+
+    Schließen Sie alle Willkommensbenachrichtigungen, um die Startseite des Azure-Portals anzuzeigen.
+
+1. Verwenden Sie die Schaltfläche **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud-Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung ohne Speicher in Ihrem Abonnement.
+
+    Die Cloud-Shell stellt eine Befehlszeilenschnittstelle in einem Bereich unten im Azure-Portal bereit. Sie können die Größe dieses Bereichs ändern oder maximieren, um die Arbeit zu vereinfachen.
 
     > **Hinweis**: Wenn Sie zuvor eine Cloud-Shell erstellt haben, die eine *Bash*-Umgebung verwendet, wechseln Sie zu ***PowerShell***.
 
 5. Wählen Sie in der Cloud Shell-Symbolleiste im Menü **Einstellungen** das Menüelement **Zur klassischen Version wechseln** aus (dies ist für die Verwendung des Code-Editors erforderlich).
 
-6. Geben Sie im PowerShell-Bereich die folgenden Befehle ein, um das GitHub-Repository zu klonen, das die Codedateien für diese Übung enthält:
+    **<font color="red">Stellen Sie sicher, dass Sie zur klassischen Version der Cloud Shell gewechselt haben, bevor Sie fortfahren.</font>**
+
+1. Geben Sie im Cloud Shell-Bereich die folgenden Befehle ein, um das GitHub-Repository mit den Code-Dateien für diese Übung zu klonen (geben Sie den Befehl ein oder kopieren Sie ihn in die Zwischenablage, klicken Sie dann mit der rechten Maustaste in die Befehlszeile und fügen Sie ihn als Nur-Text ein):
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -103,6 +110,8 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
@@ -131,7 +140,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     Die Datei wird in einem Code-Editor geöffnet.
 
 10. Ersetzen Sie in der Datei den Platzhalter **your_project_connection_string** durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Übersicht** des Projekts im Azure KI Foundry-Portal) und den Platzhalter **your_model_deployment** durch den Namen, den Sie Ihrer Bereitstellung des GPT-4-Modells zugewiesen haben.
-11. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Cloud Shell-Befehlszeile geöffnet bleibt.
+11. Nachdem Sie die Platzhalter ersetzt haben, speichern Sie Ihre Änderungen im Code-Editor mit dem Befehl **STRG+S** oder **Rechtsklick > Speichern** und schließen Sie den Code-Editor mit dem Befehl **STRG+Q** oder **Rechtsklick > Beenden**, wobei die Cloud Shell-Befehlszeile geöffnet bleibt.
 
 ### Schreiben von Code, um sich mit Ihrem Projekt zu verbinden und einen Chat-Client für Ihr Modell zu erhalten
 
@@ -155,7 +164,8 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
     **Python**
 
-    ```
+    ```python
+   # Add references
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
@@ -173,18 +183,20 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
     **C#**
 
-    ```
+    ```csharp
+   // Add references
    using Azure.Identity;
    using Azure.AI.Projects;
    using Azure.AI.Inference;
     ```
 
 3. Beachten Sie, dass der Code in der **Hauptfunktion** unter dem Kommentar **Get configuration settings** die Zeichenfolge für die Projektverbindung und die Werte für den Namen der Modellbereitstellung lädt, die Sie in der Konfigurationsdatei definiert haben.
-4. Fügen Sie unter dem Kommentar **Initialize the project client** den folgenden Code hinzu, um sich mit Ihrem Azure AI Foundry-Projekt zu verbinden, und verwenden Sie dabei die Azure-Anmeldedaten, mit denen Sie derzeit angemeldet sind:
+4. Fügen Sie unter dem Kommentar **Projektclient initialisieren** den folgenden Code hinzu, um eine Verbindung zu Ihrem Azure KI-Foundry-Projekt herzustellen, wobei Sie die Anmeldeinformationen für Azure verwenden, mit denen Sie derzeit angemeldet sind:
 
     **Python**
 
-    ```
+    ```python
+   # Get configuration settings
    project_client = AIProjectClient.from_connection_string(
         conn_str=project_connection,
         credential=DefaultAzureCredential())
@@ -192,7 +204,8 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
     **C#**
 
-    ```
+    ```csharp
+   // Get configuration settings
    var projectClient = new AIProjectClient(project_connection,
                         new DefaultAzureCredential());
     ```
@@ -201,13 +214,15 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
     **Python**
 
-    ```
+    ```python
+   # Get a chat client
    chat_client = project_client.inference.get_chat_completions_client(model=model_deployment)
     ```
 
     **C#**
 
-    ```
+    ```csharp
+   // Get a chat client
    ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
@@ -219,6 +234,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     **Python**
 
     ```python
+   # Get a response to text input
    response = chat_client.complete(
        messages=[
            SystemMessage(system_message),
@@ -229,7 +245,8 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
     **C#**
 
-    ```
+    ```csharp
+   // Get a response to text input
    var requestOptions = new ChatCompletionsOptions()
    {
    Model = model_deployment,
@@ -246,7 +263,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
 2. Verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen in der Codedatei zu speichern. Schließen Sie sie jedoch noch nicht.
 
-3. Geben Sie im Befehlszeilenbereich von Cloud Shell unterhalb des Code-Editors den folgenden Befehl ein, um die App auszuführen:
+3. Geben Sie im Cloud Shell-Befehlszeilenbereich unterhalb des Code-Editors den folgenden Befehl ein, um die App auszuführen:
 
     **Python**
 
@@ -272,6 +289,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     **Python**
 
     ```python
+   # Get a response to image input
    image_url = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg"
    image_format = "jpeg"
    request = Request(image_url, headers={"User-Agent": "Mozilla/5.0"})
@@ -293,7 +311,8 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     **C#**
 
     ```csharp
-  string imageUrl = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg";
+  // Get a response to image input
+   string imageUrl = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg";
    ChatCompletionsOptions requestOptions = new ChatCompletionsOptions()
    {
        Messages = {
@@ -311,7 +330,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
 
 2. Verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen in der Codedatei zu speichern. Schließen Sie sie jedoch noch nicht.
 
-3. Geben Sie im Befehlszeilenbereich von Cloud Shell unterhalb des Code-Editors den folgenden Befehl ein, um die App auszuführen:
+3. Geben Sie im Cloud Shell-Befehlszeilenbereich unterhalb des Code-Editors den folgenden Befehl ein, um die App auszuführen:
 
     **Python**
 
@@ -337,6 +356,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     **Python**
 
     ```python
+   # Get a response to audio input
    file_path="https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/manzanas.mp3"
    response = chat_client.complete(
            messages=[
@@ -358,6 +378,7 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
     **C#**
 
     ```csharp
+   // Get a response to audio input
    string audioUrl="https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/manzanas.mp3";
    var requestOptions = new ChatCompletionsOptions()
    {
@@ -374,10 +395,9 @@ Nachdem Sie das Modell bereitgestellt haben, können Sie die Bereitstellung in e
    Console.WriteLine(response.Value.Content);
     ```
 
-
 2. Verwenden Sie den Befehl **STRG+S**, um Ihre Änderungen in der Codedatei zu speichern. Sie können den Code-Editor (**STRG+Q**) auch schließen, wenn Sie möchten.
 
-3. Geben Sie im Befehlszeilenbereich von Cloud Shell unterhalb des Code-Editors den folgenden Befehl ein, um die App auszuführen:
+3. Geben Sie im Cloud Shell-Befehlszeilenbereich unterhalb des Code-Editors den folgenden Befehl ein, um die App auszuführen:
 
     **Python**
 

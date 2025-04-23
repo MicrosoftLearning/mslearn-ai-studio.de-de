@@ -10,11 +10,13 @@ In dieser Übung verwenden Sie das Azure AI Foundry-Portal, um einen Hub und ein
 
 Diese Übung dauert ca. **30** Minuten.
 
+> **Hinweis**: Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschau oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
+
 ## Öffnen des Azure KI Foundry-Portals
 
 Beginnen wir mit der Anmeldung im Azure AI Foundry-Portal.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry-Logo** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht:
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
@@ -25,16 +27,16 @@ Beginnen wir mit der Anmeldung im Azure AI Foundry-Portal.
 Ein Azure KI-*Hub* bietet einen kollaborativen Arbeitsbereich, in dem Sie ein oder mehrere *Projekte* definieren können. Wir erstellen ein Projekt und einen Azure KI-Hub und überprüfen die Azure-Ressourcen, die erstellt werden, um sie zu unterstützen.
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im **Assistenten zum Erstellen eines Projekts** einen geeigneten Projektnamen für (z. B. `my-ai-project`) ein und überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihr Projekt zu unterstützen.
+1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein eindeutiger Name – z. B. `my-ai-hub`.*
+    - **Hubname**: *Ein gültiger Name für Ihren Hub*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine neue Ressourcengruppe mit einem eindeutigen Namen (z.B. `my-ai-resources`), oder wählen Sie eine bestehende aus.*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
-    - **Verbinden von Azure KI Services oder Azure OpenAI**: *Erstellen Sie eine neue KI Services-Ressource mit einem geeigneten Namen (z.B. `my-ai-services`) oder verwenden Sie eine vorhandene.*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
+    - **Speicherort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann **gpt-4o** im Fenster Hilfsprogramm für den Speicherort und verwenden Sie den empfohlenen Bereich\*
+    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen werden auf Mandantenebene durch regionale Kontingente eingeschränkt. Wenn später in der Übung ein Kontingentlimit erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Azure OpenAI-Ressourcen sind durch regionale Modellkontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
@@ -75,7 +77,7 @@ Angenommen, Ihr Projekt benötigt Zugriff auf eine zweite **Azure KI Services-Re
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Die Ressourcengruppe mit Ihren vorhandenen Azure AI Foundry-Ressourcen.*
     - **Region**: *Auswahl einer beliebigen verfügbaren Region, die nicht diejenige ist, in der sich Ihre vorhandenen Ressourcen befinden*
-    - **Name**: *Ein eindeutiger Name*
+    - **Name**: *Ein geeigneter Name für Ihre zweite Azure AI Services-Ressource*
     - **Tarif**: Standard S0.
 1. Warten Sie, bis die Ressource „KI-Dienste“ erstellt wurde.
 1. Kehren Sie zur Browserregisterkarte des Azure AI Foundry-Portals zurück und sehen Sie sich in der Ansicht **Verwaltungszentrum** im Navigationsbereich im Abschnitt für Ihr *<u>Projekt</u>* die Seite **Verbundene Ressourcen** an. Die vorhandenen verbundenen Ressourcen in Ihrem Projekt werden aufgelistet.
@@ -108,25 +110,34 @@ Ihr Azure AI Foundry-Projekt hat Zugriff auf Azure KI Services. Probieren wir da
 
 ## Bereitstellen und Testen eines generativen KI-Modells
 
-Ihr Projekt enthält auch verbundene Ressourcen für Azure OpenAI, mit denen Sie Azure OpenAI-Sprachmodelle verwenden können, um generative KI-Lösungen zu implementieren.
+Ihr Projekt enthält auch verbundene Ressourcen für Azure OpenAI, mit denen Sie Azure OpenAI-Sprachmodelle verwenden können, um generative KI-Lösungen zu implementieren. Sie können auch generative KI-Modelle von anderen Anbietern im Modellkatalog finden und verwenden.
 
 1. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
 1. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** im Menü **+ Modell bereitstellen** die Option **Basismodell bereitstellen**.
-1. Suchen Sie das Modell **gpt-4** in der Liste, wählen Sie es aus und bestätigen Sie es.
+1. Suchen Sie das Modell **gpt-4o** in der Liste, wählen Sie es aus und bestätigen Sie es.
 1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
-    - **Bereitstellungsname**: *Ein eindeutiger Name für Ihre Modellbereitstellung, zum Beispiel `gpt-4-model`.*
-    - **Bereitstellungstyp**: Standard
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
-    - **Verbundene KI-Ressource**: *Wählen Sie eine Ihrer Azure OpenAI-Ressourcenverbindungen aus.*
-    - **Ratenbegrenzung für Token pro Minute (Tausender)**: 5.000
+    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungstyp**: Globaler Standard
+    - **Automatische Versionsaktualisierung**: Aktiviert
+    - **Modellversion**: *Wählen Sie die neueste verfügbare Version aus.*
+    - **Verbundene AI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung*
+    - **Tokens pro Minute Ratenlimit (Tausende)**: 50K *(oder das in Ihrem Abonnement verfügbare Maximum, wenn weniger als 50K)*
     - **Inhaltsfilter**: StandardV2 
-    - **Dynamische Quote aktivieren**: Deaktiviert
-      
-    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 5.000 TPM reicht für die in dieser Übung verwendeten Daten aus.
+
+    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM sollten für die in dieser Übung verwendeten Daten ausreichend sein. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung zwar durchführen, aber es können Fehler auftreten, wenn das Kontingent überschritten wird.
+
+1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
 1. Nachdem das Modell bereitgestellt wurde, wählen Sie auf der Seite „Bereitstellungsübersicht“ die Option **Im Playground öffnen** aus.
 1. Stellen Sie auf der Seite **Chat-Playground** sicher, dass Ihre Modellimplementierung im Abschnitt **Bereitstellung** ausgewählt ist.
-1. Geben Sie im Chat-Fenster eine Abfrage wie `How can I use Azure AI Services in a software development project?` ein und sehen Sie sich die Antwort an:
+1. Geben Sie im Bereich **Setup** in das Feld **Geben Sie dem Modell Anweisungen und Kontext** die folgenden Anweisungen:
+
+    ```
+    You are a history teacher who can answer questions about past events all around the world.
+    ```
+
+1. Übernehmen Sie die Änderungen, um die Systemmeldung zu aktualisieren.
+1. Geben Sie im Chat-Fenster eine Abfrage wie `What are the key events in the history of Scotland?` ein und sehen Sie sich die Antwort an:
 
     ![Screenshot des Spielplatzes im Azure KI Foundry-Portal.](./media/ai-foundry-playground.png)
 
