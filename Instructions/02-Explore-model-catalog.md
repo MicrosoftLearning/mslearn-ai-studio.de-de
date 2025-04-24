@@ -12,27 +12,25 @@ In dieser Übung erkunden Sie den Modellkatalog im Azure AI Foundry-Portal und v
 
 Diese Übung dauert ungefähr **25** Minuten.
 
-> **Hinweis**: Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschau oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
-
 ## Erstellen eines Azure KI-Hubs und eines Projekts
 
 Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Sie ein oder mehrere *Projekte* definieren können. Erstellen Sie uns ein Projekt und ein Azure KI-Hub.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry**-Logo oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie den Bereich **Hilfe**, falls er geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
 1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein gültiger Name für Ihren Hub*
+    - **Hubname**: *Geben Sie einen gültigen Namen für Ihren Hub an*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
-    - **Speicherort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann **gpt-4o** im Fenster Hilfsprogramm für den Speicherort und verwenden Sie den empfohlenen Bereich\*
-    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
+    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus, wählen Sie dann **gpt-4o** im Fenster der Standorthilfe aus und verwenden Sie die empfohlene Region\*.
+    - A**zure KI Services oder Azure OpenAI verbinden**: *Wählen Sie Neuen KI-Dienst erstellen aus*
     - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Azure OpenAI-Ressourcen sind durch regionale Modellkontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
+    > \* Azure OpenAI-Ressourcen werden durch regionale Modellkontingente eingeschränkt. Wenn später in der Übung eine Kontingentgrenze erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
 
 1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
 1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
@@ -41,9 +39,9 @@ Ein Azure KI-Hub bietet einen Arbeitsbereich für die Zusammenarbeit, in dem Si
 
 ## Konfigurieren der Azure AI Inference-Dienstbereitstellung
 
-Es gibt mehrere Optionen für die Bereitstellung von Modellen im Azure AI Foundry-Portal. In dieser Übung verwenden Sie die Bereitstellungsoption **Azure KI-Modellinferenz**, die sowohl *Azure OpenAI*-Modelle als auch *Model-as-a-Service*-Modelle aus dem Azure AI Foundry-Modellkatalog unterstützt. Da alle Modelle auf einem gemeinsamen Endpunkt bereitgestellt werden, der von Ihrer Azure KI Services-Ressource gehostet wird, können Sie beim Testen einfach zwischen den Modellen wechseln, um Verhalten und Leistung zu vergleichen.
+Es gibt mehrere Optionen für die Bereitstellung von Modellen im Azure AI Foundry-Portal. In dieser Übung verwenden Sie die Bereitstellungsoption **Azure KI-Modellinferenz**, die sowohl *Azure OpenAI*-Modelle als auch *Model-as-a-Service*-Modelle aus dem Azure AI Foundry-Modellkatalog unterstützt. Da alle Modelle an einem gängigen Endpunkt bereitgestellt werden, der von Ihrer Azure KI-Dienste-Ressource gehostet wird, können Sie beim Testen einfach zwischen den Modellen wechseln, um Verhalten und Leistung zu vergleichen.
 
-1. Verwenden Sie in der Symbolleiste oben rechts auf Ihrer Azure AI Foundry-Projektseite das Symbol **Vorschaufunktionen** (**&#9215;**), um Vorschaufunktionen anzuzeigen.
+1. Verwenden Sie in der Symbolleiste oben rechts auf Ihrer Azure AI Foundry-Projektseite das Symbol **Vorschaufunktionen** (**&#9215;**), um die Vorschaufunktionen anzuzeigen.
 1. Stellen Sie sicher, dass die Funktion **Modelle im Azure KI-Modellinferenz-Service bereitstellen** aktiviert ist. Schließen Sie dann den Bereich **Vorschaufeature**.
 
 ## Überprüfen von Modelldetails und Benchmarks
@@ -51,17 +49,17 @@ Es gibt mehrere Optionen für die Bereitstellung von Modellen im Azure AI Foundr
 Um Ihnen bei der Auswahl eines Modells zu helfen, können Sie sich die Modellbeschreibungen und Benchmarks ansehen, um festzustellen, welches Modell ihren Anforderungen am besten entspricht.
 
 1. Wählen Sie im Azure KI Foundry-Projektportal im Menübereich auf der linken Seite **Modellkatalog** aus.
-1. Suchen Sie auf der Startseite des Modellkatalogs nach `gpt-4o`, um das Modell **gpt-4o** für den Chatabschluss zu finden.
+1. Suchen Sie auf der Startseite des Modellkatalogs nach `gpt-4o`, um das Modell **gpt-4o** mit Chatabschluss zu finden.
 
     ![Screenshot einer Suche nach „gpt-4o“ im Modellkatalog.](./media/model-catalog-search-gpt4.png)
 
-1. Wählen Sie das Modell **gpt-4o** aus, um seine Details anzuzeigen. Lesen Sie die Beschreibung, und überprüfen Sie die anderen informationen, die auf der Seite verfügbar sind.
+1. Wählen Sie das Modell **gpt-4o** und sehen Sie die Details. Lesen Sie die Beschreibung, und überprüfen Sie die anderen informationen, die auf der Seite verfügbar sind.
 
-    ![Screenshot der Detailseite des gpt-4o-Modells.](./media/gpt4-details.png)
+    ![Screenshot der Detailseite des Modells gpt-4o.](./media/gpt4-details.png)
 
-1. Zeigen Sie auf der Seite **gpt-4o** die Registerkarte **Benchmarks** an, um zu sehen, wie das Modell im Vergleich zu einigen Standardleistungs-Benchmarks bei anderen Modellen abschneidet, die in ähnlichen Szenarien verwendet werden.
+1. Auf der Seite **gpt-4o** können Sie auf der Registerkarte **Benchmarks** sehen, wie das Modell in einigen Standard-Leistungsbenchmarks mit anderen Modellen, die mithilfe ähnlicher Szenarien verwendet werden, abschneidet.
 
-    ![Screenshot der Seite „gpt-4o-Modell-Benchmarks“.](./media/gpt4-benchmarks.png)
+    ![Screenshot der Seite mit den gpt-4o-Modellbenchmarks.](./media/gpt4-benchmarks.png)
 
 1. Verwenden Sie den Zurück-Pfeil (**&larr;**) neben dem **gpt-4o**-Seitentitel, um zur Startseite des Modellkatalogs zurückzukehren.
 1. Suchen Sie im Modellkatalog nach `Phi-3.5-mini-instruct` und sehen Sie sich die Details und Benchmarks für das Modell **Phi-3.5-mini-instruct** an.
@@ -77,7 +75,7 @@ Sie haben zwei verschiedene Modelle überprüft, von denen beide verwendet werde
 
 1. Beachten Sie im Bereich **Modelle zum Vergleichen** auf der linken Seite, dass Sie beliebte Aufgaben auswählen können, z. B. *Fragen und Antworten*, um automatisch häufig verwendete Modelle für bestimmte Aufgaben auszuwählen.
 1. Verwenden Sie das Symbol **Alle Modelle löschen** (&#128465;), um alle vordefinierten Modelle zu entfernen.
-1. Verwenden Sie die Schaltfläche **+Modell zum Vergleichen**, um der Liste das Modell **gpt-4o** hinzuzufügen. Verwenden Sie dann dieselbe Schaltfläche, um der Liste das Modell **Phi-3.5-mini-instruct** hinzuzufügen.
+1. Verwenden Sie die Schaltfläche **+ Modell zum Vergleichen**, um der Liste das Modell **gpt-4o** hinzuzufügen. Verwenden Sie dann dieselbe Schaltfläche, um der Liste das Modell **Phi-3.5-mini-instruct** hinzuzufügen.
 1. Überprüfen Sie das Diagramm, das die Modelle basierend auf dem **Qualitätsindex** (eine standardisierte Bewertung, die die Modellqualität angibt) und den **Kosten** vergleicht. Sie können die spezifischen Werte für ein Modell anzeigen, indem Sie den Mauszeiger über den entsprechenden Punkt im Diagramm bewegen.
 
     ![Screenshot des Modellvergleichsdiagramms für gpt-4o und Phi-3.5-mini-instruct.](./media/comparison-chart.png)
@@ -100,15 +98,15 @@ Beginnen wir mit der Bereitstellung eines Modells aus dem Modellkatalog. Sie kö
 1. Suchen Sie wie zuvor das `gpt-4o` Modell und wählen Sie es aus.
 1. Wählen Sie auf der Seite **gpt-4o** die Option **Bereitstellen** aus und stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie in den Bereitstellungsdetails die Option **Anpassen** auswählen:
 1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
-    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungsname:***Ein gültiger Name für Ihre Modellimplementierung*
     - **Bereitstellungstyp**: Globaler Standard
     - **Automatische Versionsaktualisierung**: Aktiviert
     - **Modellversion**: *Wählen Sie die neueste verfügbare Version aus.*
     - **Verbundene AI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung*
-    - **Tokens pro Minute Ratenlimit (Tausende)**: 50K *(oder das in Ihrem Abonnement verfügbare Maximum, wenn weniger als 50K)*
+    - **Ratenlimit für Token pro Minute (Tausender)**: 50K *(oder das Maximum, das in Ihrem Abonnement verfügbar ist, falls weniger als 50K)*
     - **Inhaltsfilter**: StandardV2 
 
-    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM sollten für die in dieser Übung verwendeten Daten ausreichend sein. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung zwar abschließen, müssen aber möglicherweise warten und die Prompts erneut senden, wenn das Kontingent überschritten wird.
+    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM reicht für die in dieser Übung verwendeten Daten aus. Wenn Ihr verfügbares Kontingent niedriger ist als das, können Sie die Übung abschließen, aber möglicherweise müssen Sie warten und die Prompts erneut senden, wenn das Rate Limit überschritten wird.
 
 1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
@@ -120,7 +118,7 @@ Wenn Sie bereits genau wissen, welches Modell Sie bereitstellen möchten, ziehen
 1. Wählen Sie auf der Registerkarte **Modellbereitstellungen** in der Dropdownliste **+ Modell bereitstellen** die Option **Basismodell bereitstellen** aus. Suchen Sie dann nach `Phi-3.5-mini-instruct` und bestätigen Sie Ihre Auswahl.
 1. Stimmen Sie der Modelllizenz zu.
 1. Stellen Sie ein **Phi-3.5-mini-instruct** -Modell mit den folgenden Einstellungen bereit:
-    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+    - **Bereitstellungsname:***Ein gültiger Name für Ihre Modellimplementierung*
     - **Bereitstellungstyp**: Globaler Standard
     - **Bereitstellungsdetails**: *Verwenden der Standardeinstellungen.*
 
@@ -136,9 +134,9 @@ Nachdem wir nun zwei Modelle zum Vergleichen haben, sehen wir uns an, wie sich d
 1. Legen Sie im Bereich **Setup** im Feld **Dem Modell Anweisungen und Kontext geben** die Systemansage auf `You are an AI assistant that helps solve problems.` fest
 1. Wählen Sie **Änderungen übernehmen** aus.
 
-### Chatten mit dem *gpt-4o*-Modell
+### Chatten mit dem *gpt-4*-Modell
 
-Wählen Sie im Bereich **Setup** Ihr *gpt-4o*-Modell aus.
+Wählen Sie im Bereich **Setup** Ihr *gpt-4*-Modell aus.
 1. Geben Sie im Chatfenster die folgende Abfrage ein:
 
     ```
