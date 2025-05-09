@@ -1,10 +1,8 @@
 ---
-title: Entwicklung generativer KI-Lösungen
+title: Entwicklung generativer KI-Lösungen in Azure
 permalink: index.html
 layout: home
 ---
-
-# Entwicklung generativer KI-Lösungen in Azure
 
 Die folgenden Übungen sind darauf ausgelegt, Ihnen eine praktische Lernerfahrung zu bieten, in der Sie allgemeine Aufgaben erkunden, die Entwickler und Entwicklerinnen beim Erstellen von generativen KI-Lösungen in Microsoft Azure ausführen.
 
