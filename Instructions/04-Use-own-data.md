@@ -8,36 +8,30 @@ lab:
 
 Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein häufig verwendetes Muster für die Entwicklung generativer KI-Apps – chatbasierte Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
 
-In dieser Übung verwenden Sie das Azure KI Foundry-Portal und die Azure AI Foundry- und Azure OpenAI-SDKs, um benutzerdefinierte Daten in eine generative KI-App zu integrieren.
+In dieser Übung verwenden Sie Azure AI Foundry, um benutzerdefinierte Daten in eine generative KI-Lösung zu integrieren.
 
 Diese Übung dauert ca. **45** Minuten.
 
-> **Hinweis**: Diese Übung basiert auf Vorabversionen von SDKs, die sich möglicherweise noch ändern können. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
+> **Hinweis**: Diese Übung basiert auf Vorabversionen von Diensten, die sich möglicherweise noch ändern können.
 
-## Erstellen eines Azure KI Foundry-Projekts
+## Erstellen eines Azure AI Foundry-Hubs und -Projekts
 
-Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforderlichen Dienstressourcen, die es benötigt, mithilfe Ihrer eigenen Daten – einschließlich einer Azure KI-Suche-Ressource.
+Die Features von Azure AI Foundry, die wir in dieser Übung verwenden werden, erfordern ein Projekt, das auf einer Azure AI Foundry-*Hub-Ressource* basiert.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry-Logo** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht:
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
-1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein gültiger Name für Ihren Hub*
+1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources` und wählen Sie **Erstellen**. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
+1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein. Wenn ein vorhandener Hub vorgeschlagen wird, wählen Sie die Option zum Erstellen eines neuen Hubs aus und erweitern Sie **Erweiterte Optionen**, um die folgenden Einstellungen für Ihr Projekt festzulegen:
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann **gpt-4o** im Fenster Standort-Hilfsprogramm und verwenden Sie die empfohlene Region\*
-    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
-    - **Verbinden von Azure KI-Suche**: *Erstellen Sie eine neue Ressource von Azure KI-Suche mit einem eindeutigen Namen*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
+    - **Hubname**: Geben Sie einen gültigen Namen für Ihren Hub an.
+    - **Standort**: USA, Osten 2 oder Schweden, Mitte\*
 
-    > \* Azure OpenAI-Ressourcen sind durch regionale Modellkontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
+    > \* Einige Azure KI-Ressourcen unterliegen regionalen Modellkontingenten. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
-
-    ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
+1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
 ## Bereitstellen von Modellen
 
@@ -84,7 +78,15 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
         - **Datenquelle**: Daten im Azure KI Foundry-Portal
             - *Auswählen der Datenquelle **Broschüren***
     - **Indexkonfiguration**:
-        - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
+        - **Azure KI-Suche auswählen**: *Erstellen Sie eine neue Azure KI-Suchressource mit den folgenden Einstellungen*:
+            - **Abonnement**: *Ihr Azure-Abonnement*
+            - **Ressourcengruppe**: *Die gleiche Ressourcengruppe wie Ihr KI-Hub*
+            - **Dienstname**: *Ein gültiger Name für Ihre KI-Suchressource*
+            - **Ort**: *Der gleiche Standort wie Ihr KI-Hub*
+            - **Tarif**: Basic
+            
+            Bitte warten Sie, bis die KI-Suchressource erstellt wurde. Kehren Sie anschließend zur Azure AI Foundry zurück und schließen Sie die Konfiguration des Index ab, indem Sie **Andere KI-Suchressource verbinden** auswählen und eine Verbindung zu der soeben erstellten KI-Suchressource hinzufügen.
+ 
         - **Vektorindex**: `brochures-index`
         - **VM**: Automatisch auswählen
     - **Sucheinstellungen**:
@@ -117,42 +119,41 @@ Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen
 1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
 1. Überprüfen Sie die Antwort, die auf Daten im Index basiert.
 
-## Erstellen einer RAG-Client-App mit Azure AI Foundry- und Azure OpenAI-SDKs
+<!-- DEPRECATED STEPS
 
-Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Foundry- und Azure OpenAI-SDKs verwenden, um das RAG-Muster in einer Clientanwendung zu implementieren. Sehen wir uns den Code an, um dies in einem einfachen Beispiel zu erreichen.
+## Create a RAG client app with the Azure AI Foundry and Azure OpenAI SDKs
 
-> **Tipp**: Sie können wählen, ob Sie Ihre RAG-Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
+Now that you have a working index, you can use the Azure AI Foundry and Azure OpenAI SDKs to implement the RAG pattern in a client application. Let's explore the code to accomplish this in a simple example.
 
-### Vorbereiten der Anwendungskonfiguration
+> **Tip**: You can choose to develop your RAG solution using Python or Microsoft C#. Follow the instructions in the appropriate section for your chosen language.
 
-1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
-1. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
-1. Öffnen Sie eine neue Browserregisterkarte (wobei das Azure AI Foundry-Portal auf der vorhandenen Registerkarte geöffnet bleibt). Wechseln Sie dann in der neuen Registerkarte zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an, wenn Sie dazu aufgefordert werden.
+### Prepare the application configuration
 
-    Schließen Sie alle Willkommensbenachrichtigungen, um die Startseite des Azure-Portals anzuzeigen.
+1. In the Azure AI Foundry portal, view the **Overview** page for your project.
+1. In the **Project details** area, note the **Project connection string**. You'll use this connection string to connect to your project in a client application.
+1. Return to the browser tab containing the Azure portal (keeping the Azure AI Foundry portal open in the existing tab).
+1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a ***PowerShell*** environment with no storage in your subscription.
 
-1. Verwenden Sie die Schaltfläche **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud-Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung ohne Speicher in Ihrem Abonnement.
+    The cloud shell provides a command-line interface in a pane at the bottom of the Azure portal. You can resize or maximize this pane to make it easier to work in.
 
-    Die Cloud Shell bietet eine Befehlszeilenschnittstelle in einem Fenster am unteren Rand des Azure-Portals. Sie können die Größe dieses Bereichs ändern oder maximieren, um die Arbeit zu vereinfachen.
+    > **Note**: If you have previously created a cloud shell that uses a *Bash* environment, switch it to ***PowerShell***.
 
-    > **Hinweis**: Wenn Sie zuvor eine Cloud-Shell erstellt haben, die eine *Bash*-Umgebung verwendet, wechseln Sie zu ***PowerShell***.
+1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-1. Wählen Sie in der Cloud Shell-Symbolleiste im Menü **Einstellungen** das Menüelement **Zur klassischen Version wechseln** aus (dies ist für die Verwendung des Code-Editors erforderlich).
+    **<font color="red">Ensure you've switched to the classic version of the cloud shell before continuing.</font>**
 
-    **<font color="red">Stellen Sie sicher, dass Sie zur klassischen Version der Cloud Shell gewechselt haben, bevor Sie fortfahren.</font>**
-
-1. Geben Sie im Cloud Shell-Bereich die folgenden Befehle ein, um das GitHub-Repository mit den Codedateien für diese Übung zu klonen (geben Sie den Befehl ein oder kopieren Sie ihn in die Zwischenablage und klicken Sie dann mit der rechten Maustaste in die Befehlszeile, um ihn als reinen Text einzufügen):
+1. In the cloud shell pane, enter the following commands to clone the GitHub repo containing the code files for this exercise (type the command, or copy it to the clipboard and then right-click in the command line and paste as plain text):
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-    > **TIPP**: Wenn Sie Befehle in die Cloudshell einfügen, kann die Ausgabe einen großen Teil des Bildschirmpuffers in Anspruch nehmen. Sie können den Bildschirm löschen, indem Sie den Befehl `cls` eingeben, um sich besser auf die einzelnen Aufgaben konzentrieren zu können.
+    > **Tip**: As you paste commands into the cloudshell, the output may take up a large amount of the screen buffer. You can clear the screen by entering the `cls` command to make it easier to focus on each task.
 
-1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:
+1. After the repo has been cloned, navigate to the folder containing the chat application code files:
 
-    > **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
+    > **Note**: Follow the steps for your chosen programming language.
 
     **Python**
 
@@ -166,7 +167,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. Geben Sie im Befehlszeilenfenster der Cloud Shell den folgenden Befehl ein, um die zu verwendenden Bibliotheken zu installieren:
+1. In the cloud shell command-line pane, enter the following command to install the libraries you'll use:
 
     **Python**
 
@@ -185,7 +186,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
     ```
     
 
-1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Konfigurationsdatei zu bearbeiten:
+1. Enter the following command to edit the configuration file that has been provided:
 
     **Python**
 
@@ -199,18 +200,18 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
    code appsettings.json
     ```
 
-    Die Datei wird in einem Code-Editor geöffnet.
+    The file is opened in a code editor.
 
-1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
-    - **your_project_connection_string**: Ersetzen Sie diese durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Übersicht** des Projekts im Azure AI Foundry-Portal).
-    - **your_gpt_model_deployment** Ersetzen Sie den Namen durch den Namen, den Sie Ihrer **gpt-4o**-Modellimplementierung zugewiesen haben.
-    - **your_embedding_model_deployment**: Ersetzen Sie den Namen durch den Namen, den Sie Ihrer Modellimplementierung **text-embedding-ada-002** zugewiesen haben.
-    - **your_index**: Ersetzen Sie dies durch Ihren Indexnamen (der `brochures-index` lauten sollte).
-1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Befehlszeile der Cloud Shell geöffnet bleibt.
+1. In the code file, replace the following placeholders: 
+    - **your_project_connection_string**: Replace with the connection string for your project (copied from the project **Overview** page in the Azure AI Foundry portal).
+    - **your_gpt_model_deployment** Replace with the name you assigned to your **gpt-4o** model deployment.
+    - **your_embedding_model_deployment**: Replace with the name you assigned to your **text-embedding-ada-002** model deployment.
+    - **your_index**: Replace with your index name (which should be `brochures-index`).
+1. After you've replaced the placeholders, in the code editor, use the **CTRL+S** command or **Right-click > Save** to save your changes and then use the **CTRL+Q** command or **Right-click > Quit** to close the code editor while keeping the cloud shell command line open.
 
-### Erkunden von Code zur Implementierung des RAG-Musters
+### Explore code to implement the RAG pattern
 
-1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Codedatei zu bearbeiten:
+1. Enter the following command to edit the code file that has been provided:
 
     **Python**
 
@@ -224,24 +225,24 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
    code Program.cs
     ```
 
-1. Überprüfen Sie den Code in der Datei, und notieren Sie Folgendes:
-    - Verwendet das Azure AI Foundry-SDK, um sich mit Ihrem Projekt zu verbinden (mithilfe der Projektverbindungszeichenfolge).
-    - Erzeugt einen authentifizierten Azure OpenAI-Client aus Ihrer Projektverbindung.
-    - Ruft die Standardverbindung für Azure KI-Suche aus Ihrem Projekt ab, damit der Endpunkt und der Schlüssel für Ihren Azure KI-Suche-Dienst bestimmt werden können.
-    - Erzeugt eine geeignete Systemnachricht.
-    - Übermittelt einen Prompt (einschließlich des Systems und einer auf der Benutzereingabe basierenden Nachricht) an den Azure OpenAI-Client und fügt ihn hinzu:
-        - Verbindungsdetails für den abzufragenden Azure KI-Suche Index.
-        - Details zum Einbettungsmodell, das zur Vektorisierung der Abfrage verwendet werden soll\*.
-    - Zeigt die Antwort des fundierten Prompts an.
-    - Fügt die Antwort zum Chatverlauf hinzu.
+1. Review the code in the file, noting that it:
+    - Uses the Azure AI Foundry SDK to connect to your project (using the project connection string)
+    - Creates an authenticated Azure OpenAI client from your project connection.
+    - Retrieves the default Azure AI Search connection from your project so it can determine the endpoint and key for your Azure AI Search service.
+    - Creates a suitable system message.
+    - Submits a prompt (including the system and a user message based on the user input) to the Azure OpenAI client, adding:
+        - Connection details for the Azure AI Search index to be queried.
+        - Details of the embedding model to be used to vectorize the query\*.
+    - Displays the response from the grounded prompt.
+    - Adds the response to the chat history.
 
-    \**Die Abfrage für den Suchindex basiert auf dem Prompt und wird verwendet, um relevanten Text in den indizierten Dokumenten zu finden. Sie können eine stichwortbasierte Suche verwenden, bei der die Abfrage als Text übermittelt wird, aber eine vektorbasierte Suche kann effizienter sein - daher die Verwendung eines Einbettungsmodells, um den Abfragetext vor der Übermittlung zu vektorisieren.*
+    \* *The query for the search index is based on the prompt, and is used to find relevant text in the indexed documents. You can use a keyword-based search that submits the query as text, but using a vector-based search can be more efficient - hence the use of an embedding model to vectorize the query text before submitting it.*
 
-1. Verwenden Sie den Befehl **STRG+Q**, um den Code-Editor zu schließen, ohne Änderungen zu speichern, während die Cloud-Shell-Befehlszeile geöffnet bleibt.
+1. Use the **CTRL+Q** command to close the code editor without saving any changes, while keeping the cloud shell command line open.
 
-### Ausführen der Chatanwendung
+### Run the chat application
 
-1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die App auszuführen:
+1. In the cloud shell command-line pane, enter the following command to run the app:
 
     **Python**
 
@@ -255,13 +256,15 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
    dotnet run
     ```
 
-1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `Where should I go on vacation to see architecture?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
+1. When prompted, enter a question, such as `Where should I go on vacation to see architecture?` and review the response from your generative AI model.
 
-    Beachten Sie, dass die Antwort Quellverweise enthält, um die indizierten Daten anzugeben, in denen die Antwort gefunden wurde.
+    Note that the response includes source references to indicate the indexed data in which the answer was found.
 
-1. Versuchen Sie es mit einer Anschlussfrage, zum Beispiel `Where can I stay there?`
+1. Try a follow-up question, for example `Where can I stay there?`
 
-1. Wenn Sie fertig sind, geben Sie `quit` ein, um das Programm zu beenden. Schließen Sie anschließend den Cloud Shell-Bereich.
+1. When you're finished, enter `quit` to exit the program. Then close the cloud shell pane.
+
+-->
 
 ## Bereinigung
 
