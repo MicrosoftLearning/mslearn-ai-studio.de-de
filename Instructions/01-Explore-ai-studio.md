@@ -32,7 +32,7 @@ Ein *Azure KI-Projekt* bietet einen Arbeitsbereich für die KI-Entwicklung. Begi
 1. Wählen Sie in den Suchergebnissen das Modell **gpt-4o** aus, um dessen Details anzuzeigen, und wählen Sie dann oben auf der Seite für das Modell die Option **Dieses Modell verwenden** aus.
 1. Wenn Sie zum Erstellen eines Projekts aufgefordert werden, geben Sie einen gültigen Namen für Ihr Projekt ein und erweitern Sie **Erweiterte Optionen**.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Azure AI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure AI Foundry-Ressource*
+    - **Azure KI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure KI Foundry-Ressource*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
     - **Region**: *Wählen Sie einen beliebigen Standort aus, an dem KI Services unterstützt wird***\*
@@ -72,7 +72,7 @@ Ein *Azure KI-Projekt* bietet einen Arbeitsbereich für die KI-Entwicklung. Begi
 
 Ihr Azure AI Foundry-Projekt und die Azure AI Foundry-Ressource, zu der sie gehört, umfassen Verbindungen zu Ressourcen, die Sie in KI-Anwendungen verwenden können.
 
-1. Wählen Sie auf der Verwaltungszentrumsseite im Navigationsbereich unter Ihrem Projekt die Option **Zum Projekt wechseln**.
+1. Wählen Sie auf der Verwaltungszentrumsseite im Navigationsbereich unter Ihrem Projekt die Option **Zur Ressource wechseln**.
 1. Rufen Sie auf der Seite **Übersicht** des Projekts den Abschnitt **Endpunkte und Schlüssel** auf, der die Endpunkte und Autorisierungsschlüssel enthält, die Sie in Ihrem Anwendungscode für den Zugriff verwenden können:
     - Das Azure AI Foundry-Projekt und alle darin bereitgestellten Modelle.
     - Azure OpenAI in Azure AI Foundry-Modellen

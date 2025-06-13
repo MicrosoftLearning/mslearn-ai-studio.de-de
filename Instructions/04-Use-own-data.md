@@ -14,22 +14,26 @@ Diese Übung dauert ca. **45** Minuten.
 
 > **Hinweis**: Diese Übung basiert auf Vorabversionen, die sich möglicherweise noch ändern können.
 
-## Erstellen einer Azure KI Foundry-Ressource
+## Erstellen eines Azure AI Foundry-Hubs und -Projekts
 
-Beginnen wir mit der Erstellung einer Azure AI Foundry-Ressource.
+Die Funktionen von Azure KI-Foundry, die wir in dieser Übung verwenden werden, erfordern ein Projekt, das auf einer Azure KI-Foundry-*Hub*-Ressource basiert.
 
-1. Öffnen Sie in einem Webbrowser das [Azure-Portal](https://portal.azure.com) unter `https://portal.azure` und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden.
-1. Erstellen Sie eine neue `Azure AI Foundry`-Ressource mit den folgenden Einstellungen:
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
+
+    ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
+
+1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources`und wählen Sie **Erstellen** aus. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
+1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein. Wenn ein vorhandener Hub vorgeschlagen wird, wählen Sie die Option zum Erstellen eines neuen Hubs und erweitern Sie **Erweiterte Optionen**, um die folgenden Einstellungen für Ihr Projekt festzulegen:
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
-    - **Name**: *Ein gültiger Name für Ihre Azure AI Foundry-Ressource*
-    - **Region**: Wählen Sie aus einer der folgenden Regionen:
-        - USA (Ost) 2
-        - Schweden, Mitte
-    - **Standardprojektname**: *Ein gültiger Name für Ihr Projekt*
+    - **Hubname**: Geben Sie einen gültigen Namen für Ihren Hub an
+    - **Standort**: USA, Osten 2 oder Schweden-Mitte (*Falls später im Verlauf der Übung eine Kontingentgrenze überschritten wird, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region erstellen.*)
 
-1. Warten Sie, bis die Ressource erstellt wurde, und wechseln Sie dann zur Seite im Azure-Portal.
-1. Wählen Sie auf der Seite für Ihre Azure AI Foundry-Ressource die Option **Zum Azure AI Foundry-Portal wechseln** aus.
+    > **Hinweis**: Wenn Sie in einem Azure-Abonnement arbeiten, in dem Richtlinien zur Einschränkung zulässiger Ressourcennamen verwendet werden, müssen Sie möglicherweise den Link unten im Dialogfeld **Neues Projekt erstellen** verwenden, um den Hub über das Azure-Portal zu erstellen.
+
+    > **Hinweis**: Wenn die Schaltfläche **Erstellen** weiterhin deaktiviert ist, benennen Sie Ihren Hub bitte in einen eindeutigen alphanumerischen Wert um.
+
+1. Warten Sie, bis Ihr Projekt erstellt wurde, und navigieren Sie dann zu Ihrem Projekt.
 
 ## Bereitstellen von Modellen
 
@@ -59,40 +63,47 @@ Sie benötigen zwei Modelle, um Ihre Lösung zu implementieren:
 Die Daten für Ihre App bestehen aus einer Reihe von Reisebroschüren im PDF-Format von dem fiktiven Reisebüro *Margie's Travel*. Fügen wir sie dem Projekt hinzu.
 
 1. Laden Sie in einer neuen Registerkarte des Browsers das [gezippte Archiv der Broschüren](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) von `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` herunter und entpacken Sie es in einen Ordner mit dem Namen **Broschüren** auf Ihrem lokalen Dateisystem.
-1. Wählen Sie im Azure AI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite **Playgrounds** und anschließend **Chat-Playground ausprobieren**.
-1. Erweitern Sie im Bereich **Setup** des Playgrounds den Abschnitt **Daten hinzufügen** und wählen Sie **Datenquelle hinzufügen**.
-1. Erweitern Sie im Assistenten **Daten hinzufügen** das Dropdownmenü, um **Dateien hochladen** auszuwählen.
-1. Erstellen Sie eine neue Azure Blob Storage-Ressource mit den folgenden Einstellungen:
-    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Dieselbe Ressourcengruppe wie Ihre Azure AI Foundry-Ressource*
-    - **Speicherkonto-Name**: *Ein gültiger Name für Ihre Speicherkonto-Ressource*
-    - **Region**: *Gleiche Region wie Ihre Azure AI Foundry-Ressource*
-    - **Leistung**: Standard
-    - **Redundanz**: LRS
-1. Erstellen Sie Ihre Ressource, und warten Sie, bis die Bereitstellung abgeschlossen ist.
-1. Kehren Sie zur Azure AI Foundry-Registerkarte zurück, aktualisieren Sie die Liste der Azure Blob Storage-Ressourcen, und wählen Sie das neu erstellte Konto aus.
+1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
+1. Wählen Sie **+ Neue Daten** aus.
+1. Erweitern Sie im Assistenten **Hinzufügen Ihrer Daten** das Dropdownmenü, um **Dateien/Ordner hochladen** auszuwählen.
+1. Wählen Sie **Ordner hochladen** und laden Sie den Ordner **Broschüren** hoch. Warten Sie, bis alle Dateien des Ordners aufgelistet sind.
+1. Wählen Sie **Weiter** und setzen Sie den Dateinamen auf `brochures`.
+1. Warten Sie, bis der Ordner hochgeladen wurde, und beachten Sie, dass er mehrere .pdf-Dateien enthält.
 
-    > **Hinweis**: Wenn Sie eine Warnung erhalten, dass Azure OpenAI Ihre Berechtigung zum Zugriff auf Ihre Ressource benötigt, wählen Sie **CORS aktivieren**.
+## Erstellen eines Indexes für Ihre Daten
 
-1. Erstellen Sie eine neue Azure KI-Suche-Ressource mit den folgenden Einstellungen:
-    - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Dieselbe Ressourcengruppe wie Ihre Azure AI Foundry-Ressource*
-    - **Dienstname**: *Ein gültiger Name für Ihre Azure KI Search-Ressource*
-    - **Region**: *Gleiche Region wie Ihre Azure AI Foundry-Ressource*
-    - **Tarif**: Basic
+Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie sie verwenden, um einen Index in Ihrer Azure KI Search-Ressource zu erstellen.
 
-1. Erstellen Sie Ihre Ressource, und warten Sie, bis die Bereitstellung abgeschlossen ist.
-1. Kehren Sie zur Azure AI Foundry-Registerkarte zurück, aktualisieren Sie die Liste der Azure KI-Suche-Ressourcen, und wählen Sie das neu erstellte Konto aus.
-1. Benennen Sie Ihren Index `brochures-index`.
-1. Aktivieren Sie die Option **Vektorsuche zu dieser Suchressource hinzufügen** und wählen Sie das zuvor bereitgestellte Einbettungsmodell aus. Wählen Sie **Weiter** aus.
+1. Wählen Sie im Azure KI Foundry-Portal in Ihrem Projekt im Navigationsbereich auf der linken Seite unter **Meine Assets** die Seite **Daten + Indizes**.
+1. Auf der Registerkarte **Indizes** fügen Sie einen neuen Index mit den folgenden Einstellungen hinzu:
+    - **Quellstandort**:
+        - **Datenquelle**: Daten im Azure KI Foundry-Portal
+            - *Auswählen der Datenquelle **Broschüren***
+    - **Indexkonfiguration**:
+        - **AzureKI-Suchdienst auswählen**: *Erstellen Sie eine neue Azure-KI-Suchressource mit den folgenden Einstellungen*:
+            - **Abonnement**: *Ihr Azure-Abonnement*
+            - **Ressourcengruppe**: *Die gleiche Ressourcengruppe wie Ihr KI-Hub*
+            - **Dienstname**: *Ein gültiger Name für Ihre KI-Suchressource*
+            - **Standort**: *Derselbe Standort wie Ihr Arbeitsbereich*
+            - **Tarif**: Basic
+            
+            Warten Sie, bis die KI-Ressource erstellt wurde. Kehren Sie anschließend zu Azure KI-Foundry zurück und schließen Sie die Konfiguration des Index ab, indem Sie **Andere Azure KI-Suchressource verbinden** auswählen und eine Verbindung zu der soeben erstellten KI-Suchressource hinzufügen.
+ 
+        - **Vektorindex**: `brochures-index`
+        - **VM**: Automatisch auswählen
+    - **Sucheinstellungen**:
+        - **Vektoreinstellungen**: Hinzufügen der Vektorsuche zu dieser Suchressource
+        - **Azure OpenAI-Verbindung**: *Wählen Sie die standardmäßige Azure OpenAI-Ressource für Ihren Hub aus.*
+        - **Einbettungsmodell**: text-embedding-ada-002
+        - **Bereitstellung des Einbettungsmodells**: *Ihre Bereitstellung des* text-embedding-ada-002 *Modells*
 
-   >**Hinweis**: Es kann eine Weile dauern, bis der Assistent zum Hinzufügen von **Daten** das bereitgestellte Einbettungsmodell erkennt. Wenn Sie also die Vektorsuchoption nicht aktivieren können, brechen Sie den Assistenten ab, warten Sie einige Minuten, und versuchen Sie es erneut.
+1. Erstellen Sie den Vektorindex und warten Sie, bis der Indizierungsprozess abgeschlossen ist, was je nach verfügbaren Rechenressourcen in Ihrem Abonnement eine Weile dauern kann.
 
-1. Laden Sie alle PDF-Dateien aus dem zuvor extrahierten Ordner **Broschüren** hoch und wählen Sie dann **Weiter**.
-1. Wählen Sie im Schritt **Datenverwaltung** den Suchtyp **Hybrid (Vektor + Schlüsselwort)** und eine Blockgröße von **1024**. Wählen Sie **Weiter** aus.
-1. Wählen Sie im Schritt **Datenverbindung** als Authentifizierungstyp die Option **API-Schlüssel** aus. Wählen Sie **Weiter** aus.
-1. Überprüfen Sie alle Konfigurationsschritte und wählen Sie anschließend **Speichern und schließen**.
-1. Warten Sie, bis der Indexerstellungsprozess abgeschlossen ist, was je nach verfügbaren Computeressourcen in Ihrem Abonnement eine Weile dauern kann.
+    Der Indexerstellungsvorgang besteht aus den folgenden Aufträgen:
+
+    - Zerlegen, segmentieren und integrieren Sie die Texttoken in Ihre Broschürendaten.
+    - Erstellen Sie den Azure KI-Suchindex.
+    - Registrieren Sie die Indexressource.
 
     > **Tipp**: Während Sie darauf warten, dass der Index erstellt wird, können Sie einen Blick auf die heruntergeladenen Broschüren werfen, um sich mit deren Inhalt vertraut zu machen.
 
@@ -100,7 +111,14 @@ Die Daten für Ihre App bestehen aus einer Reihe von Reisebroschüren im PDF-For
 
 Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen wir, ob er verwendet werden kann, um generative KI-Antworten zu beeinflussen.
 
-1. Stellen Sie auf der Chat-Playground-Seite im Bereich „Setup“ sicher, dass die Bereitstellung Ihres **gpt-4o**-Modells ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Wählen Sie im Navigationsbereich auf der linken Seite die Seite **Playgrounds** aus und öffnen Sie den Playground **Chat**.
+1. Vergewissern Sie sich auf der Seite Chat Playground im Bereich Setup, dass Ihre **gpt-4o**-Modellimplementierung ausgewählt ist. Übermitteln Sie dann im Hauptchatsitzungsbereich die Eingabeaufforderung `Where can I stay in New York?`
+1. Überprüfen Sie die Antwort, die eine generische Antwort aus dem Modell ohne Daten aus dem Index sein sollte.
+1. Erweitern Sie im Bereich „Einrichtung“ das Feld **Ihre Daten hinzufügen** und fügen Sie dann den Projektindex **Broschüren-Index** hinzu und wählen Sie den Suchtyp **hybrid (Vektor + Schlüsselwort)** aus.
+
+   > **Tipp**: In einigen Fällen sind neu erstellte Indizes möglicherweise nicht sofort verfügbar. Das Aktualisieren des Browsers hilft in der Regel, aber wenn das Problem weiterhin auftritt, bei dem der Index nicht gefunden werden kann, müssen Sie möglicherweise warten, bis der Index erkannt wird.
+
+1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
 1. Überprüfen Sie die Antwort, die auf Daten im Index basiert.
 
 ## Erstellen einer RAG-Client-App
