@@ -69,8 +69,8 @@ Um ein Modell zu verwenden, müssen Sie ein Azure AI Foundry-*Projekt* erstellen
 
 1. Wählen Sie oben auf der Übersichtsseite des Modells **GPT-4o** die Option **Dieses Modell verwenden** aus.
 1. Wenn Sie zum Erstellen eines Projekts aufgefordert werden, geben Sie einen gültigen Namen für Ihr Projekt ein und erweitern Sie **Erweiterte Optionen**.
-1. Legen Sie im Abschnitt **Erweiterte Optionen** die folgenden Einstellungen für Ihren Hub fest:
-    - **Azure AI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure AI Foundry-Ressource*
+1. Legen Sie im Abschnitt **Erweiterte Optionen** die folgenden Einstellungen für Ihr Projekt fest:
+    - **Azure KI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure KI Foundry-Ressource*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
     - **Region**: *Wählen Sie einen beliebigen Standort aus, an dem KI Services unterstützt wird***\*

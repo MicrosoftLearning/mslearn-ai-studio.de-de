@@ -16,9 +16,9 @@ Diese Übung dauert etwa **60** Minuten\*.
 
 > \***Hinweis**: Bei dieser Zeitangabe handelt es sich um eine Schätzung, die auf durchschnittlichen Erfahrungen beruht. Die Feinabstimmung hängt von den Ressourcen der Cloud-Infrastruktur ab, deren Bereitstellung je nach Rechenzentrumskapazität und gleichzeitiger Nachfrage unterschiedlich viel Zeit in Anspruch nehmen kann. Einige Aktivitäten in dieser Übung können eine <u>längere</u> Zeit in Anspruch nehmen und erfordern Geduld. Wenn die Dinge eine Weile dauern, sollten Sie die [Azure AI Foundry Dokumentation zur Feinabstimmung](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) lesen oder eine Pause einlegen. Es ist möglich, dass einige Prozesse eine Zeitüberschreitung aufweisen oder scheinbar endlos laufen. Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschauphase oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
 
-## Bereitstellen eines Modells in einem Azure AI Foundry-Projekt
+## Bereitstellen Sie ein DALL-E-Modell in einem Azure KI Foundry-Projekt
 
-Beginnen wir mit der Bereitstellung eines Modells in einem Azure AI Foundry-Projekt.
+Beginnen wir mit dem Erstellen eines Azure KI Foundry-Projekts.
 
 1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
 
@@ -27,8 +27,8 @@ Beginnen wir mit der Bereitstellung eines Modells in einem Azure AI Foundry-Proj
 1. Suchen Sie auf der Startseite im Abschnitt **Modelle und Funktionen erkunden** nach dem Modell `gpt-4o`, das wir in unserem Projekt verwenden werden.
 1. Wählen Sie in den Suchergebnissen das Modell **gpt-4o** aus, um dessen Details anzuzeigen, und wählen Sie dann oben auf der Seite für das Modell die Option **Dieses Modell verwenden** aus.
 1. Wenn Sie zum Erstellen eines Projekts aufgefordert werden, geben Sie einen gültigen Namen für Ihr Projekt ein und erweitern Sie **Erweiterte Optionen**.
-1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Azure AI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure AI Foundry-Ressource*
+1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
+    - **Azure KI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure KI Foundry-Ressource*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
     - **Region**: *Bitte wählen Sie eine der folgenden Regionen aus*:\*
