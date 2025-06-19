@@ -21,7 +21,7 @@ Die Funktionen von Azure KI-Foundry, die wir in dieser Übung verwenden werden, 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
 1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources`und wählen Sie **Erstellen** aus. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
-1. Geben Sie im Assistenten zum **Erstellen eines Projekts** einen gültigen Namen für Ihr Projekt ein und verwenden Sie anschließend den Link **Hub umbenennen**, um den Hub mit einem gültigen Namen umzubenennen. Erweitern Sie anschließend **Erweiterte Optionen** und nehmen Sie die folgenden Einstellungen für Ihr Projekt vor:
+1. Geben Sie im Assistenten zum **Erstellen eines Projekts** einen gültigen Namen für Ihr Projekt ein und wählen Sie die Option zum Erstellen eines neuen Hubs aus. Verwenden Sie anschließend den Link **Hub umbenennen**, um einen gültigen Namen für Ihren neuen Hub anzugeben, erweitern Sie **Erweiterte Optionen** und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
     - **Region**: USA, Osten 2 oder Schweden-Mitte (*Falls später im Verlauf der Übung eine Kontingentgrenze überschritten wird, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region erstellen.*)
