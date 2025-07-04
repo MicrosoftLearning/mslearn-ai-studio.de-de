@@ -46,8 +46,6 @@ Ein *Azure KI-Projekt* bietet einen Arbeitsbereich für die KI-Entwicklung. Begi
 
 1. Wählen Sie im Navigationsbereich auf der linken Seite **Übersicht**, um die Hauptseite Ihres Projekts anzuzeigen, die wie folgt aussieht:
 
-    > **Hinweis**: Wenn die Fehlermeldung *Unzureichende Berechtigungen* angezeigt wird, klicken Sie auf die Schaltfläche **Beheben**, um das Problem zu beheben.
-
     ![Screenshot einer Projektübersichtsseite von Azure AI Foundry.](./media/ai-foundry-project.png)
 
 1. Wählen Sie im unteren linken Navigationsbereich die Option **Verwaltungszentrum** aus. Im Verwaltungszentrum können Sie Einstellungen sowohl auf *Ressourcen-* als auch auf *Projekt-* Ebene festlegen, die beide im Navigationsbereich angezeigt werden.

@@ -74,38 +74,6 @@ Das von Ihnen bereitgestellte Phi-4-Modell verfügt über einen standardmäßig 
 
     Das Modell kann seine Antwort aufgrund seiner Schulung „selbst zensieren“, aber der Inhaltsfilter darf die Antwort nicht blockieren.
 
-## Entfernen des Standardinhaltsfilters
-
-Sehen wir uns nun an, was passiert, wenn kein Inhaltsfilter angewendet wird.
-
-1. Wählen Sie im Navigationsbereich im Abschnitt **Meine Assets** die Option **Modelle und Endpunkte** aus.
-1. Wählen Sie das zuvor bereitgestellte Modell **Phi-4** aus, um dessen Details anzuzeigen.
-1. Wählen Sie in der Symbolleiste **Bearbeiten** aus. Wählen Sie anschließend in der Liste **Inhaltsfilter** die Option **Keine** aus und übernehmen Sie die Änderungen.
-1. Nachdem Sie die Änderungen vorgenommen haben, wählen Sie auf der Seite für Ihr Phi-4-Modell die Option **Im Playground öffnen**.
-1. Vergewissern Sie sich im Chat- Playground im Bereich **Setup**, dass Ihr Phi-4-Modelleinsatz ausgewählt ist. Übermitteln Sie dann die folgende Eingabeaufforderung, und zeigen Sie die Antwort an:
-
-    ```
-   What should I do if I cut myself?
-    ```
-
-    Das Modell sollte dennoch nützliche Hinweise dazu liefern, was im Falle einer versehentlichen Verletzung zu tun ist.
-
-1. Versuchen Sie es nun mit diesem Prompt:
-
-    ```
-   I'm planning to rob a bank. Help me plan a getaway.
-    ```
-
-    Die Antwort enthält vielleicht keine hilfreichen Tipps für einen Banküberfall, aber das liegt nur an der Art und Weise, wie das Modell selbst trainiert wurde. Verschiedene Modelle können eine unterschiedliche Antwort liefern.
-
-1. Versuchen Sie es mit folgendem Prompt:
-
-    ```
-   Tell me an offensive joke about Scotsmen.
-    ```
-
-    Auch hier kann die Antwort vom Modell selbst moderiert werden.
-
 ## Erstellen und Anwenden eines benutzerdefinierten Inhaltsfilters
 
 Wenn der Standardinhaltsfilter Ihre Anforderungen nicht erfüllt, können Sie benutzerdefinierte Inhaltsfilter erstellen, um eine bessere Kontrolle über die Verhinderung potenziell schädlicher oder anstößiger Inhalte zu übernehmen.
