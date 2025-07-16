@@ -14,36 +14,40 @@ Stellen Sie sich vor, Sie arbeiten für ein Reisebüro und entwickeln eine Chata
 
 Diese Übung dauert etwa **60** Minuten\*.
 
-> \***Hinweis**: Bei dieser Zeitangabe handelt es sich um eine Schätzung, die auf durchschnittlichen Erfahrungen beruht. Die Feinabstimmung hängt von den Ressourcen der Cloud-Infrastruktur ab, deren Bereitstellung je nach Rechenzentrumskapazität und gleichzeitiger Nachfrage unterschiedlich viel Zeit in Anspruch nehmen kann. Einige Aktivitäten in dieser Übung können eine <u>längere</u> Zeit in Anspruch nehmen und erfordern Geduld. Wenn die Dinge eine Weile dauern, sollten Sie die [Azure AI Foundry Dokumentation zur Feinabstimmung](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) lesen oder eine Pause einlegen.
+> \***Hinweis**: Bei dieser Zeitangabe handelt es sich um eine Schätzung, die auf durchschnittlichen Erfahrungen beruht. Die Feinabstimmung hängt von den Ressourcen der Cloud-Infrastruktur ab, deren Bereitstellung je nach Rechenzentrumskapazität und gleichzeitiger Nachfrage unterschiedlich viel Zeit in Anspruch nehmen kann. Einige Aktivitäten in dieser Übung können eine <u>längere</u> Zeit in Anspruch nehmen und erfordern Geduld. Wenn die Dinge eine Weile dauern, sollten Sie die [Azure AI Foundry Dokumentation zur Feinabstimmung](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) lesen oder eine Pause einlegen. Es ist möglich, dass einige Prozesse eine Zeitüberschreitung aufweisen oder scheinbar endlos laufen. Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschauphase oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
 
-## Erstellen eines KI-Hubs und eines Projekts im Azure KI Foundry-Portal
+## Bereitstellen Sie ein DALL-E-Modell in einem Azure KI Foundry-Projekt
 
-Beginnen wir mit der Erstellung eines Azure AI Foundry-Portalprojekts innerhalb eines Azure AI-Hubs:
+Beginnen wir mit dem Erstellen eines Azure KI Foundry-Projekts.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry-Logo** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht:
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Projektnamen ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
-1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Geben Sie einen gültigen Namen für Ihren Hub an*
+1. Suchen Sie auf der Startseite im Abschnitt **Modelle und Funktionen erkunden** nach dem Modell `gpt-4o`, das wir in unserem Projekt verwenden werden.
+1. Wählen Sie in den Suchergebnissen das Modell **gpt-4o** aus, um dessen Details anzuzeigen, und wählen Sie dann oben auf der Seite für das Modell die Option **Dieses Modell verwenden** aus.
+1. Wenn Sie zum Erstellen eines Projekts aufgefordert werden, geben Sie einen gültigen Namen für Ihr Projekt ein und erweitern Sie **Erweiterte Optionen**.
+1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
+    - **Azure KI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure KI Foundry-Ressource*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** aus und wählen Sie dann **gpt-4-finetune** im Fenster der Standorthilfe und verwenden Sie die empfohlene Region.\*
-    - A**zure KI Services oder Azure OpenAI verbinden**: *Wählen Sie Neuen KI-Dienst erstellen aus*
-    - **Verbinden von Azure KI-Suche**: *Erstellen Sie eine neue Ressource von Azure KI-Suche mit einem eindeutigen Namen*
+    - **Region**: *Bitte wählen Sie eine der folgenden Regionen aus*:\*
+        - USA (Ost) 2
+        - USA Nord Mitte
+        - Schweden, Mitte
 
-    > \* Azure OpenAI-Ressourcen werden durch regionale Modellkontingente eingeschränkt. Wenn später in der Übung eine Kontingentgrenze erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen. 
+    > \* Zum Zeitpunkt der Erstellung dieses Artikels unterstützen diese Regionen die Feinabstimmung für GPT-4o-Modelle.
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
+1. Wählen Sie **Erstellen** und warten Sie, bis Ihr Projekt einschließlich der von Ihnen ausgewählten GPT-4-Modellbereitstellung erstellt wurde.
+1. Wenn Ihr Projekt erstellt wird, wird der Chat-Playground automatisch geöffnet.
+1. Notieren Sie sich im Bereich **Setup** den Namen Ihrer Modellbereitstellung, der **gpt-4o** lauten sollte. Sie können dies überprüfen, indem Sie die Bereitstellung auf der Seite **Modelle und Endpunkte** anzeigen (öffnen Sie dazu einfach diese Seite im Navigationsbereich auf der linken Seite).
+1. Wählen Sie im Navigationsbereich auf der linken Seite **Übersicht**, um die Hauptseite Ihres Projekts anzuzeigen, die wie folgt aussieht:
 
-    ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
+    ![Screenshot einer Projektübersichtsseite von Azure AI Foundry.](./media/ai-foundry-project.png)
 
 ## Feinabstimmen eines Modells
 
-Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, starten Sie die Feinabstimmung jetzt und kehren nach der Untersuchung eines Basismodells, das zu Vergleichszwecken noch nicht feinabgestimmt wurde, zu ihr zurück.
+Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, beginnen Sie jetzt mit der Feinabstimmung und kehren später dazu zurück, nachdem Sie das bereits bereitgestellte Basis-GPT-4o-Modell untersucht haben.
 
 1. Laden Sie den [Trainingsdatensatz](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl) unter `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl` herunter und speichern Sie ihn lokal als JSONL-Datei.
 
@@ -52,27 +56,12 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, starten Sie d
 1. Navigieren Sie zur Seite **Feinabstimmung** unter dem Abschnitt **Erstellen und Anpassen**, indem Sie das Menü auf der linken Seite verwenden.
 1. Klicken Sie auf die Schaltfläche aus, um ein neues Feinabstimmungsmodell hinzuzufügen, wählen Sie das Modell **gpt-4o** aus und klicken Sie dann auf **Weiter**.
 1. **Optimieren Sie** das Modell mithilfe der folgenden Konfiguration:
-    - **Modellversion**: *Wählen Sie die Standardversion aus.*
+    - **Methode der Anpassung**: Überwacht
+    - **Basismodell**: *Wählen Sie die Standardversion von **GPT-4o aus.***
+    - **Schulungsdaten**: *Wählen Sie die Option zum **Hinzufügen von Schulungsdaten** und zum Hochladen und Anwenden der .jsonl-Datei aus, die Sie zuvor heruntergeladen haben.*
     - **Modellsuffix**: `ft-travel`
-    - **Verbundene KI-Ressource**: *Wählen Sie die Verbindung, die bei der Erstellung Ihres Hubs erstellt wurde. Sollte standardmäßig ausgewählt sein.*
-    - **Trainingsdaten**: Dateien hochladen
-
-    <details>  
-    <summary><b>Tip zur Problembehandlung</b>: Berechtigungsfehler</summary>
-    <p>Wenn Sie einen Berechtigungsfehler erhalten, versuchen Sie Folgendes, um das Problem zu beheben:</p>
-    <ul>
-        <li>Wählen Sie im Ressourcenmenü des Azure-Portals AI Dienste aus.</li>
-        <li>Bestätigen Sie unter Ressourcenverwaltung auf der Registerkarte Identität, dass es sich um eine vom System zugewiesene verwaltete Identität handelt.</li>
-        <li>Navigieren Sie zum dazugehörigen Speicherkonto. Fügen Sie auf der IAM-Seite die Rollenzuweisung <em>Storage Blob Data Besitzender</em> hinzu.</li>
-        <li>Wählen Sie unter <strong>Zugriff zuweisen an</strong> die Option <strong>Verwaltete Identität</strong>, <strong>+ Mitglieder auswählen</strong>, <strong>Alle systemseitig zugewiesenen verwalteten Identitäten</strong> und Ihre Azure KI-Ressource aus.</li>
-        <li>Überprüfen und zuweisen, um die neuen Einstellungen zu speichern, und wiederholen Sie den vorherigen Schritt.</li>
-    </ul>
-    </details>
-
-    - **Datei hochladen**: Wählen Sie die JSONL-Datei aus, die Sie in einem früheren Schritt heruntergeladen haben.
-    - **Gültigkeitsprüfungsdaten**: Keine
-    - **Vorgangsparameter**: *Standardeinstellungen beibehalten*
-1. Die Feinabstimmung beginnt und kann einige Zeit in Anspruch nehmen. Sie können mit dem nächsten Abschnitt der Übung fortfahren, während Sie warten.
+    - **Seed**: *Zufällig
+1. Übermitteln Sie die Feinabstimmungsdetails, und der Auftrag wird gestartet. Es kann einige Zeit dauern, bis der Vorgang abgeschlossen ist. Sie können mit dem nächsten Abschnitt der Übung fortfahren, während Sie warten.
 
 > **Hinweis**: Die Feinabstimmung und Bereitstellung kann sehr viel Zeit in Anspruch nehmen (30 Minuten oder länger). Überprüfen Sie daher in regelmäßigen Abständen Ihre Einstellungen. Sie können weitere Details über den bisherigen Fortschritt sehen, indem Sie den Feinabstimmungsmodellauftrag auswählen und die Registerkarte **Protokolle** anzeigen.
 
@@ -80,37 +69,22 @@ Da die Feinabstimmung eines Modells einige Zeit in Anspruch nimmt, starten Sie d
 
 Während Sie darauf warten, dass die Feinabstimmung abgeschlossen ist, wollen wir uns mit einem GPT-4o-Basismodell unterhalten, um seine Leistung zu beurteilen.
 
-1. Wählen Sie im linken Fensterbereich für Ihr Projekt im Abschnitt **Meine Assets** die Seite **Modelle + Endpunkte**.
-1. Wählen Sie auf der Seite **Modelle + Endpunkte** auf der Registerkarte **Modellbereitstellungen** im Menü **+ Modell bereitstellen** die Option **Basismodell bereitstellen**.
-1. Suchen Sie das Modell **gpt-4** in der Liste, wählen Sie es aus und bestätigen Sie es.
-1. Stellen Sie das Modell mit den folgenden Einstellungen bereit, indem Sie **Anpassen** in den Bereitstellungsdetails wählen:
-    - **Bereitstellungsname:***Ein gültiger Name für Ihre Modellimplementierung*
-    - **Bereitstellungstyp**: Globaler Standard
-    - **Automatische Versionsaktualisierung**: Aktiviert
-    - **Modellversion**: *Wählen Sie die neueste verfügbare Version aus.*
-    - **Verbundene KI-Ressource**: *Wählen Sie Ihre Azure OpenAI-Ressourcenverbindung aus (wenn Ihr aktueller Standort der KI-Ressource kein Kontingent für das Modell hat, das Sie bereitstellen möchten, werden Sie aufgefordert, einen unterschiedlichen Standort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird)*
-    - **Ratenlimit für Token pro Minute (Tausender)**: 50K *(oder das Maximum, das in Ihrem Abonnement verfügbar ist, falls weniger als 50K)*
-    - **Inhaltsfilter**: StandardV2 
-
-    > **Hinweis:** Durch das Verringern des TPM wird die Überlastung des Kontingents vermieden, das in dem von Ihnen verwendeten Abonnement verfügbar ist. 50.000 TPM reicht für die in dieser Übung verwendeten Daten aus. Wenn Ihr verfügbares Kontingent darunter liegt, können Sie die Übung abschließen, aber möglicherweise treten Fehler auf, wenn das Ratenlimit überschritten wird.
-
-1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
-
-> **Hinweis**: Wenn an Ihrem aktuellen Speicherort für KI-Ressourcen kein Kontingent für das Modell, das Sie bereitstellen möchten, verfügbar ist, werden Sie aufgefordert, einen anderen Speicherort zu wählen, an dem eine neue KI-Ressource erstellt und mit Ihrem Projekt verbunden wird.
-
-1. Wenn die Bereitstellung abgeschlossen ist, wählen Sie die Schaltfläche **Im Spielzimmer öffnen**.
-1. Überprüfen Sie, ob das von Ihnen bereitgestellte gpt-4o-Basismodell im Bereich „Setup“ ausgewählt ist.
+1. Wählen Sie im Navigationsbereich links **Playgrounds** aus und öffnen Sie den **Chat-Playground**.
+1. Überprüfen Sie, ob das von Ihnen bereitgestellte **GPT-4o-Basismodell** im Bereich „Setup“ ausgewählt ist.
 1. Geben Sie im Chat-Fenster die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
 
     Die Antworten können recht allgemein gehalten sein. Denken Sie daran, dass wir eine Chatanwendung erstellen möchten, die Menschen zum Reisen inspiriert.
 
 1. Aktualisieren Sie die Systemmeldung im Setup-Fenster mit der folgenden Aufforderung:
 
-    ```md
-    You are an AI assistant that helps people plan their holidays.
+    ```
+    You are an AI assistant that helps people plan their travel.
     ```
 
-1. Wählen Sie **Änderungen übernehmen**, wählen Sie dann **Chat löschen** und fragen Sie erneut `What can you do?`. Als Antwort kann Ihnen der Assistent sagen, dass er Ihnen bei der Buchung von Flügen, Hotels und Mietwagen für Ihre Reise helfen kann. Sie möchten dieses Verhalten verhindern.
+1. Wählen Sie **Änderungen übernehmen**, um die Systemmeldung zu aktualisieren.
+1. Geben Sie im Chatfenster erneut die Abfrage `What can you do?` ein und sehen Sie sich die Antwort an.
+1 Als Antwort könnte der Assistent Ihnen mitteilen, dass er Ihnen bei der Buchung von Flügen, Hotels und Mietwagen für Ihre Reise behilflich sein kann. Sie möchten dieses Verhalten verhindern.
+
 1. Aktualisieren Sie die Systemnachricht erneut mit einer neuen Eingabeaufforderung:
 
     ```
@@ -118,8 +92,7 @@ Während Sie darauf warten, dass die Feinabstimmung abgeschlossen ist, wollen wi
     You should not provide any hotel, flight, rental car or restaurant recommendations.
     Ask engaging questions to help someone plan their trip and think about what they want to do on their holiday.
     ```
-
-1. Wähle **Änderungen übernehmen** und **Chat löschen**.
+.
 1. Testen Sie ihre Chatanwendung weiterhin, um sicherzustellen, dass sie keine Informationen bereitstellt, die nicht auf abgerufenen Daten basieren. Stellen Sie zum Beispiel die folgenden Fragen und überprüfen Sie die Antworten des Modells, wobei Sie besonders auf den Tonfall und den Schreibstil achten sollten, den das Modell verwendet, um zu antworten:
    
     `Where in Rome should I stay?`

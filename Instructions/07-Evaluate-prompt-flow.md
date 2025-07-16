@@ -12,34 +12,29 @@ Diese Übung dauert ungefähr **30** Minuten.
 
 > **Hinweis**: Einige der in dieser Übung verwendeten Technologien befinden sich in der Vorschau oder in der aktiven Entwicklung. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
 
-## Erstellen eines Azure KI Foundry-Projekts
+## Erstellen eines Azure AI Foundry-Hubs und -Projekts
 
-Beginnen wir mit dem Erstellen eines Azure AI Foundry-Projekts.
+Die Funktionen von Azure KI-Foundry, die wir in dieser Übung verwenden werden, erfordern ein Projekt, das auf einer Azure KI-Foundry-*Hub*-Ressource basiert.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das **Azure AI Foundry**-Logo oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie den Bereich **Hilfe**, falls er geöffnet ist):
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option, einen neuen zu erstellen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
-1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Geben Sie einen gültigen Namen für Ihren Hub an*
+1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources`und wählen Sie **Erstellen** aus. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
+1. Geben Sie im Assistenten zum **Erstellen eines Projekts** einen gültigen Namen für Ihr Projekt ein und wählen Sie die Option zum Erstellen eines neuen Hubs aus. Verwenden Sie anschließend den Link **Hub umbenennen**, um einen gültigen Namen für Ihren neuen Hub anzugeben, erweitern Sie **Erweiterte Optionen** und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
-    - **Ort**: Wählen Sie eine der folgenden Regionen\*
+    - **Region**: Wählen Sie einen der folgenden Standorte aus (*Falls später im Verlauf der Übung eine Kontingentgrenze überschritten wird, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region erstellen.*):
         - USA (Ost) 2
         - Frankreich, Mitte
         - UK, Süden
         - Schweden, Mitte
-    - A**zure KI Services oder Azure OpenAI verbinden**: *Wählen Sie Neuen KI-Dienst erstellen aus*
-    - **Azure KI-Suche verbinden**: Verbindung überspringen
 
-    > \* Zum Zeitpunkt der Erstellung dieses Berichts unterstützen diese Regionen die Bewertung von KI-Sicherheitsmetriken. Die Modellverfügbarkeit wird durch regionale Kontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze erreicht werden, besteht die Möglichkeit, dass Sie ein weiteres Projekt in einer anderen Region erstellen müssen.
+    > **Hinweis**: Wenn Sie in einem Azure-Abonnement arbeiten, in dem Richtlinien zur Einschränkung zulässiger Ressourcennamen verwendet werden, müssen Sie möglicherweise den Link unten im Dialogfeld **Neues Projekt erstellen** verwenden, um den Hub über das Azure-Portal zu erstellen.
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
+    > **Hinweis**: Wenn die Schaltfläche **Erstellen** weiterhin deaktiviert ist, benennen Sie Ihren Hub bitte in einen eindeutigen alphanumerischen Wert um.
 
-    ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
+1. Warten Sie, bis Ihr Projekt erstellt wurde.
 
 ## Bereitstellen von Modellen
 
@@ -67,16 +62,17 @@ In dieser Übung bewerten Sie die Leistung eines gpt-4o-mini-Modells. Außerdem 
 Sie können Modellantworten basierend auf Testdaten manuell überprüfen. Die manuelle Überprüfung ermöglicht es Ihnen, verschiedene Eingaben zu testen, um zu beurteilen, ob das Modell die erwartete Leistung erbringt.
 
 1. Laden Sie in einem neuen Browser-Tab die Datei [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) von `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` herunter und speichern Sie sie in einem lokalen Ordner als **travel_evaluation_data.jsonl** (achten Sie darauf, die Datei als .jsonl-Datei und nicht als .txt-Datei zu speichern).
-1. Zurück auf der Registerkarte des Azure AI Foundry-Portals, wählen Sie im Navigationsbereich im Abschnitt **Bewerten und Verbessern** die Option **Bewertung**.
+1. Kehren Sie zur Registerkarte des Azure AI Foundry-Portals zurück, wählen Sie im Navigationsbereich im Abschnitt **Schützen und verwalten** die Option **Auswertung** aus.
+1. Wenn das Fenster **Neue Bewertung erstellen** automatisch geöffnet wird, wählen Sie **Abbrechen**, um es zu schließen.
 1. Zeigen Sie auf der Seite **Auswertung** die Registerkarte **Manuelle Auswertungen** an und wählen Sie **+ Neue manuelle Auswertung**.
-1. Wählen Sie im Abschnitt **Konfigurationen** in der Liste **Modell** Ihre **gpt-4o-mini**-Modellbereitstellung aus.
+1. Wählen Sie im Abschnitt **Konfigurationen** in der Liste **Modell** Ihre **gpt-4o**-Modellbereitstellung aus.
 1. Ändern Sie die **Systemmeldung** in die folgenden Anweisungen für einen KI-Reiseassistenten:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Wählen Sie im Abschnitt **Manuelles Auswertungsergebnis** die Option **Testdaten importieren** und laden Sie die zuvor heruntergeladene Datei **travel_evaluation_data.jsonl** hoch; ordnen Sie die Datensatzfelder wie folgt zu:
+1. Wählen Sie im Abschnitt **Manuelles Auswertungsergebnis** die Option **Testdaten importieren** und laden Sie die zuvor heruntergeladene Datei **travel_evaluation_data.jsonl** hoch. Scrollen Sie nach unten, um die Datensatzfelder wie folgt zuzuordnen:
     - **Eingabe**: Frage
     - **Erwartete Antwort**: ExpectedResponse
 1. Überprüfen Sie die Fragen und erwarteten Antworten in der Testdatei . Sie verwenden diese, um die vom Modell generierten Antworten auszuwerten.
@@ -95,39 +91,48 @@ Die automatisierte Bewertung ist ein Ansatz, der versucht, diese Unzulänglichke
 
 1. Verwenden Sie den Zurück-Pfeil (**&larr;**) neben dem Seitentitel **Manuelle Bewertung**, um zur Seite **Bewertung** zurückzukehren.
 1. Zeigen sie die Registerkarte **Automatisierte Bewertungen** an.
-1. Wählen Sie **Eine neue Bewertung erstellen**, und wenn Sie dazu aufgefordert werden, wählen Sie die Option, ein **Modell und eine Eingabeaufforderung** auszuwerten
-1. Überprüfen Sie auf der Seite **Erstellen einer neuen Auswertung** im Abschnitt **Grundlegende Informationen** den standardmäßig automatisch generierten Auswertungsnamen (Sie können diesen ändern, wenn Sie möchten) und wählen Sie Ihr **gpt-40-mini** Modell aus.
-1. Ändern Sie die **Systemmeldung** in die gleichen Anweisungen für einen KI-Reiseassistenten, die Sie zuvor verwendet haben:
+1. Wählen Sie **Neue Auswertung erstellen** und wählen Sie im Prompt die Option zum Auswerten eines **Modells auswählen** und wählen Sie **Weiter**.
+1. Wählen Sie auf der Seite **Datenquelle auswählen** die Option **Eigenen Datensatz verwenden** und wählen Sie den Datensatz **travel_evaluation_data_jsonl_*xxxx...*** basierend auf der zuvor hochgeladenen Datei aus und klicken Sie auf **Weiter**.
+1. Wählen Sie auf der Seite **Modell testen** das Modell **gpt-4o-mini** aus und ändern Sie die **Systemmeldung** in die Anweisungen für einen KI-Reiseassistenten, die Sie zuvor verwendet haben:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Im Abschnitt **Testdaten konfigurieren** können Sie ein GPT-Modell verwenden, um Testdaten für Sie zu generieren (die Sie dann bearbeiten und ergänzen können, um sie Ihren eigenen Erwartungen anzupassen), einen vorhandenen Datensatz verwenden oder eine Datei hochladen. Wählen Sie in dieser Übung **Vorhandenen Datensatz verwenden** und anschließend den Datensatz **travel_evaluation_data_jsonl_*xxxx...*** (der beim Hochladen der .jsonl-Datei zuvor erstellt wurde).
-1. Überprüfen Sie die Beispielzeilen aus dem Datensatz, und wählen Sie dann im Abschnitt **Wählen Sie Ihre Datenspalte** die folgenden Spaltenzuordnungen:
-    - **Abfrage**: Frage
-    - **Kontext**: *Lassen Sie dies leer. Es wird verwendet, um die „Fundiertheit“ zu bewerten, wenn eine kontextbezogene Datenquelle mit Ihrem Modell verknüpft wird.*
-    - **Grundwahrheit**: ExpectedAnswer
-1. Im Abschnitt **Wählen Sie aus, was Sie bewerten möchten**, wählen Sie <u>alle</u> der folgenden Bewertungskategorien:
-    - KI-Qualität (KI-gestützt)
-    - Risiko und Sicherheit (KI-gestützt)
-    - KI-Qualität (NLP)
-1. Wählen Sie in der Liste **Eine Modellimplementierung als Richter auswählen** Ihr **gpt-4o** Modell aus. Dieses Modell wird verwendet, um die Antworten des **gpt-4o-mini**-Modells auf sprachbezogene Qualität und Standardvergleichsmetriken der generativen KI zu bewerten.
-1. Wählen Sie **Erstellen**, um den Bewertungsprozess zu starten, und warten Sie, bis er abgeschlossen ist. Dies kann einige Minuten dauern.
+1. Für das Feld **Abfrage** wählen Sie **\{\{item.question\}\}**.
+1. Klicken Sie auf **Weiter**, um zur nächsten Seite zu wechseln.
+1. Auf der Seite **Gutachterin/Gutachter konfigurieren** fügen Sie über die Schaltfläche **+Hinzufügen** die folgenden Gutachterinnen/Gutachter hinzu und konfigurieren jeden wie folgt:
+    - **Modellbewertung**:
+        - **Kriterienname**: Semantic_similarity
+        - **Bewerten mit**: *Wählen Sie Ihr **gpt-4o**-Modell aus*
+        - **Benutzer**-Einstellungen (unten):
 
-    > **Tipp**: Wenn eine Fehlermeldung erscheint, die darauf hinweist, dass Projektberechtigungen gesetzt werden, warten Sie eine Minute und wählen Sie dann erneut **Erstellen**. Es kann einige Zeit dauern, bis die Ressourcenberechtigungen für ein neu erstelltes Projekt übertragen werden.
 
-1. Wenn die Bewertung abgeschlossen ist, scrollen Sie gegebenenfalls nach unten, um den Bereich **Metriken-Dashboard** zu sehen und die **KI-Qualität (KI-unterstützt)**-Metriken zu betrachten:
+            Ausgabe: \{\{sample.output_text\}\}<br>
+            Grundwahrheit: \{\{item.ExpectedResponse\}\}<br>
+            <br>
+        
+    - **Likert-Scale-Evaluator**:
+        - **Kriterienname**: Relevanz
+        - **Bewerten mit**: *Wählen Sie Ihr **gpt-4o**-Modell aus*
+        - **Abfrage**: \{\{item.question\}\}
 
-    ![Screenshot der KI-Qualitätsmetriken im Azure AI Foundry-Portal.](./media/ai-quality-metrics.png)
+    - **Ähnlichkeit des Texts**:
+        - **Kriterienname**: F1_Score
+        - **Grundwahrheit**: \{\{item. ExpectedResponse\}\}
 
-    Verwenden Sie die Symbole **<sup>(i) </sup>**, um die Metrikdefinitionen anzuzeigen.
+    - **Hasserfüllte und unfaire Inhalte**:
+        - **Kriterienname**: Hate_and_unfairness
+        - **Abfrage**: \{\{item.question\}\}
 
-1. Auf der Registerkarte **Risiko und Sicherheit** finden Sie die Metriken, die mit potenziell schädlichen Inhalten verbunden sind.
-1. Auf der Registerkarte **KI-Qualität (NLP**) finden Sie Standardmetriken für generative KI-Modelle.
-1. Scrollen Sie gegebenenfalls zum Anfang der Seite zurück und wählen Sie die Registerkarte **Daten**, um die Rohdaten der Auswertung anzuzeigen. Die Daten enthalten die Metriken für jede Eingabe sowie Erläuterungen zu den Überlegungen, die das gpt-4o Modell bei der Bewertung der Antworten angestellt hat.
+1. Wählen Sie **Weiter** und überprüfen Sie Ihre Bewertungseinstellungen. Sie sollten die Auswertung so konfiguriert haben, dass der Datensatz für die Reiseauswertung verwendet wird, um das Modell **gpt-4o-mini** hinsichtlich semantischer Ähnlichkeit, Relevanz, F1-Score sowie hasserfüllter und unfairer Sprache zu bewerten.
+1. Geben Sie der Auswertung einen geeigneten Namen, und **übermitteln Sie** sie, um den Auswertungsprozess zu starten, und warten Sie, bis der Vorgang abgeschlossen ist. Dies kann einige Minuten dauern. Sie können die Schaltfläche **Aktualisieren** in der Symbolleiste verwenden, um den Status zu überprüfen.
 
-    ![Screenshot der Bewertungsdaten im Azure AI Foundry-Portal.](./media/evaluation-data.png)
+1. Wenn die Auswertung abgeschlossen ist, scrollen Sie bei Bedarf nach unten, um die Ergebnisse zu überprüfen.
+
+    ![Screenshot der Evalationsmetriken.](./media/ai-quality-metrics.png)
+
+1. Wählen Sie oben auf der Seite die Registerkarte **Daten**, um die Rohdaten der Auswertung anzuzeigen. Die Daten enthalten die Metriken für jede Eingabe sowie Erläuterungen zu den Überlegungen, die das gpt-4o Modell bei der Bewertung der Antworten angestellt hat.
 
 ## Bereinigen
 

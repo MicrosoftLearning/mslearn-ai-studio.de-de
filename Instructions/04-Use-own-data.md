@@ -8,36 +8,31 @@ lab:
 
 Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendungen, die Daten aus benutzerdefinierten Datenquellen in einen Prompt für ein generatives KI-Modell integrieren. RAG ist ein häufig verwendetes Muster für die Entwicklung generativer KI-Apps – chatbasierte Anwendungen, die ein Sprachmodell verwenden, um Eingaben zu interpretieren und entsprechende Antworten zu generieren.
 
-In dieser Übung verwenden Sie das Azure KI Foundry-Portal und die Azure AI Foundry- und Azure OpenAI-SDKs, um benutzerdefinierte Daten in eine generative KI-App zu integrieren.
+In dieser Übung verwenden Sie Azure KI-Foundry, um benutzerdefinierte Daten in eine generative KI-Lösung zu integrieren.
 
 Diese Übung dauert ca. **45** Minuten.
 
-> **Hinweis**: Diese Übung basiert auf Vorabversionen von SDKs, die sich möglicherweise noch ändern können. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
+> **Hinweis**: Diese Übung basiert auf Vorabversionen, die sich möglicherweise noch ändern können.
 
-## Erstellen eines Azure KI Foundry-Projekts
+## Erstellen eines Azure AI Foundry-Hubs und -Projekts
 
-Beginnen wir mit der Erstellung eines Azure AI Foundry-Projekts und der erforderlichen Dienstressourcen, die es benötigt, mithilfe Ihrer eigenen Daten – einschließlich einer Azure KI-Suche-Ressource.
+Die Funktionen von Azure KI-Foundry, die wir in dieser Übung verwenden werden, erfordern ein Projekt, das auf einer Azure KI-Foundry-*Hub*-Ressource basiert.
 
-1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartbereiche, die beim ersten Anmelden geöffnet werden, und verwenden Sie bei Bedarf das **Azure AI Foundry-Logo** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht:
+1. Öffnen Sie in einem Webbrowser unter `https://ai.azure.com` das [Azure KI Foundry-Portal](https://ai.azure.com) und melden Sie sich mit Ihren Azure-Anmeldeinformationen an. Schließen Sie alle Tipps oder Schnellstartfenster, die bei der ersten Anmeldung geöffnet werden, und verwenden Sie gegebenenfalls das Logo **Azure AI Foundry** oben links, um zur Startseite zu navigieren, die ähnlich wie die folgende Abbildung aussieht (schließen Sie das **Hilfe**-Fenster, falls es geöffnet ist):
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-1. Wählen Sie auf der Startseite **+ Projekt erstellen**.
-1. Geben Sie im Assistenten **Projekt erstellen** einen gültigen Namen für Ihr Projekt ein und wählen Sie, falls ein vorhandener Hub vorgeschlagen wird, die Option zum Erstellen eines neuen. Überprüfen Sie dann die Azure-Ressourcen, die automatisch erstellt werden, um Ihren Hub und Ihr Projekt zu unterstützen.
-1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihren Hub fest:
-    - **Hubname**: *Ein gültiger Name für Ihren Hub*
+1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources`und wählen Sie **Erstellen** aus. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
+1. Geben Sie im Assistenten zum **Erstellen eines Projekts** einen gültigen Namen für Ihr Projekt ein und wählen Sie die Option zum Erstellen eines neuen Hubs aus. Verwenden Sie anschließend den Link **Hub umbenennen**, um einen gültigen Namen für Ihren neuen Hub anzugeben, erweitern Sie **Erweiterte Optionen** und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
-    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*
-    - **Standort**: Wählen Sie **Hilfe bei der Auswahl** und wählen Sie dann **gpt-4o** im Fenster Standort-Hilfsprogramm und verwenden Sie die empfohlene Region\*
-    - **Azure KI Services oder Azure OpenAI verbinden**: *Erstellen Sie eine neue KI-Dienst-Ressource*
-    - **Verbinden von Azure KI-Suche**: *Erstellen Sie eine neue Ressource von Azure KI-Suche mit einem eindeutigen Namen*
+    - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
+    - **Region**: USA, Osten 2 oder Schweden-Mitte (*Falls später im Verlauf der Übung eine Kontingentgrenze überschritten wird, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region erstellen.*)
 
-    > \* Azure OpenAI-Ressourcen sind durch regionale Modellkontingente eingeschränkt. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
+    > **Hinweis**: Wenn Sie in einem Azure-Abonnement arbeiten, in dem Richtlinien zur Einschränkung zulässiger Ressourcennamen verwendet werden, müssen Sie möglicherweise den Link unten im Dialogfeld **Neues Projekt erstellen** verwenden, um den Hub über das Azure-Portal zu erstellen.
 
-1. Klicken Sie auf **Weiter**, um Ihre Konfiguration zu überprüfen. Klicken Sie auf **Erstellen** und warten Sie, bis der Vorgang abgeschlossen ist.
-1. Sobald Ihr Projekt erstellt wurde, schließen Sie alle angezeigten Tipps und überprüfen Sie die Projektseite im Azure AI Foundry-Portal, die in etwa wie in der folgenden Abbildung aussehen sollte:
+    > **Hinweis**: Wenn die Schaltfläche **Erstellen** weiterhin deaktiviert ist, benennen Sie Ihren Hub bitte in einen eindeutigen alphanumerischen Wert um.
 
-    ![Screenshot eines Azure KI-Projekts im Azure AI Foundry-Portal.](./media/ai-foundry-project.png)
+1. Warten Sie, bis Ihr Projekt erstellt wurde, und navigieren Sie dann zu Ihrem Projekt.
 
 ## Bereitstellen von Modellen
 
@@ -84,7 +79,15 @@ Nachdem Sie Ihrem Projekt nun eine Datenquelle hinzugefügt haben, können Sie s
         - **Datenquelle**: Daten im Azure KI Foundry-Portal
             - *Auswählen der Datenquelle **Broschüren***
     - **Indexkonfiguration**:
-        - **Wählen Sie den Azure KI-Suche-Dienst aus:** *Wählen Sie die **AzureAISearch**-Verbindung mit Ihrer Azure KI Search-Ressource aus*
+        - **AzureKI-Suchdienst auswählen**: *Erstellen Sie eine neue Azure-KI-Suchressource mit den folgenden Einstellungen*:
+            - **Abonnement**: *Ihr Azure-Abonnement*
+            - **Ressourcengruppe**: *Die gleiche Ressourcengruppe wie Ihr KI-Hub*
+            - **Dienstname**: *Ein gültiger Name für Ihre KI-Suchressource*
+            - **Standort**: *Derselbe Standort wie Ihr Arbeitsbereich*
+            - **Tarif**: Basic
+            
+            Warten Sie, bis die KI-Ressource erstellt wurde. Kehren Sie anschließend zu Azure KI-Foundry zurück und schließen Sie die Konfiguration des Index ab, indem Sie **Andere Azure KI-Suchressource verbinden** auswählen und eine Verbindung zu der soeben erstellten KI-Suchressource hinzufügen.
+ 
         - **Vektorindex**: `brochures-index`
         - **VM**: Automatisch auswählen
     - **Sucheinstellungen**:
@@ -117,20 +120,15 @@ Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen
 1. Nachdem der Index hinzugefügt wurde und die Chatsitzung neu gestartet wurde, übermitteln Sie die Eingabeaufforderung `Where can I stay in New York?` erneut
 1. Überprüfen Sie die Antwort, die auf Daten im Index basiert.
 
-## Erstellen einer RAG-Client-App mit Azure AI Foundry- und Azure OpenAI-SDKs
+## Erstellen einer RAG-Client-App
 
-Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Foundry- und Azure OpenAI-SDKs verwenden, um das RAG-Muster in einer Clientanwendung zu implementieren. Sehen wir uns den Code an, um dies in einem einfachen Beispiel zu erreichen.
+Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry- und Azure OpenAI-SDKs verwenden, um das RAG-Muster in einer Clientanwendung zu implementieren. Sehen wir uns den Code an, um dies in einem einfachen Beispiel zu erreichen.
 
 > **Tipp**: Sie können wählen, ob Sie Ihre RAG-Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
 
 ### Vorbereiten der Anwendungskonfiguration
 
-1. Wechseln Sie im Azure AI Foundry-Portal zur **Übersichtsseite** Ihres Projekts.
-1. Beachten Sie im Bereich **Projektdetails** die **Projektverbindungszeichenfolge**. Sie verwenden diese Verbindungszeichenfolge, um eine Verbindung mit Ihrem Projekt in einer Clientanwendung herzustellen.
-1. Öffnen Sie eine neue Browserregisterkarte (wobei das Azure AI Foundry-Portal auf der vorhandenen Registerkarte geöffnet bleibt). Wechseln Sie dann in der neuen Registerkarte zum [Azure-Portal](https://portal.azure.com) unter `https://portal.azure.com` und melden Sie sich mit Ihren Azure-Anmeldedaten an, wenn Sie dazu aufgefordert werden.
-
-    Schließen Sie alle Willkommensbenachrichtigungen, um die Startseite des Azure-Portals anzuzeigen.
-
+1. Kehren Sie zur Browser-Registerkarte mit dem Azure-Portal zurück (lassen Sie das Azure KI-Foundry-Portal in der vorhandenen Registerkarte geöffnet).
 1. Verwenden Sie die Schaltfläche **[\>_]** rechts neben der Suchleiste oben auf der Seite, um eine neue Cloud-Shell im Azure-Portal zu erstellen, und wählen Sie eine ***PowerShell***-Umgebung ohne Speicher in Ihrem Abonnement.
 
     Die Cloud Shell bietet eine Befehlszeilenschnittstelle in einem Fenster am unteren Rand des Azure-Portals. Sie können die Größe dieses Bereichs ändern oder maximieren, um die Arbeit zu vereinfachen.
@@ -166,22 +164,20 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. Geben Sie im Befehlszeilenfenster der Cloud Shell den folgenden Befehl ein, um die zu verwendenden Bibliotheken zu installieren:
+1. Geben Sie im Befehlszeilenfenster der Cloud Shell den folgenden Befehl ein, um die OpenKI SDK-Bibliothek zu installieren:
 
     **Python**
 
     ```
    python -m venv labenv
    ./labenv/bin/Activate.ps1
-   pip install python-dotenv azure-ai-projects azure-identity openai
+   pip install -r requirements.txt openai
     ```
 
     **C#**
 
     ```
-   dotnet add package Azure.Identity
-   dotnet add package Azure.AI.Projects --prerelease
-   dotnet add package Azure.AI.OpenAI --prerelease
+   dotnet add package Azure.AI.OpenAI
     ```
     
 
@@ -202,10 +198,13 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
     Die Datei wird in einem Code-Editor geöffnet.
 
 1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
-    - **your_project_connection_string**: Ersetzen Sie diese durch die Verbindungszeichenfolge für Ihr Projekt (kopiert von der Seite **Übersicht** des Projekts im Azure AI Foundry-Portal).
-    - **your_gpt_model_deployment** Ersetzen Sie den Namen durch den Namen, den Sie Ihrer **gpt-4o**-Modellimplementierung zugewiesen haben.
-    - **your_embedding_model_deployment**: Ersetzen Sie den Namen durch den Namen, den Sie Ihrer Modellimplementierung **text-embedding-ada-002** zugewiesen haben.
-    - **your_index**: Ersetzen Sie dies durch Ihren Indexnamen (der `brochures-index` lauten sollte).
+    - **your_openai_endpoint**: Der OpenKI-Endpunkt von der Seite **Übersicht** Ihres Projekts im Azure KI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte **Azure OpenKI** ausgewählt haben, nicht die Registerkarte Azure KI-Inferenz oder Azure KI-Dienste).
+    - **Ihr_openai_api_key** Der Open KI-API-Schlüssel von der Seite **Übersicht** Ihres Projekts im Azure KI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte **Azure OpenKI** ausgewählt haben, nicht die Registerkarte Azure KI-Inferenz oder Azure KI-Dienste).
+    - **Ihr_Chat-Modell**: Der Name, den Sie Ihrer **gpt-4o**-Modellbereitstellung auf der Seite **Modelle + Endpunkte** im Azure KI Foundry-Portal zugewiesen haben (der Standardname lautet `gpt-4o`).
+    - **your_embedding_model**: Der Name, den Sie Ihrer **text-embedding-ada-002**-Modellbereitstellung auf der Seite **Modelle + Endpunkte** im Azure KI Foundry-Portal zugewiesen haben (der Standardname lautet `text-embedding-ada-002`).
+    - **your_search_endpoint**: Die URL für Ihre Azure KI Search-Ressource. Dies finden Sie im **Verwaltungscenter** im Azure KI Foundry-Portal.
+    - **your_search_api_key**: Der API-Schlüssel für Ihre Azure KI Search-Ressource. Dies finden Sie im **Verwaltungscenter** im Azure KI Foundry-Portal.
+    - **Ihr_Index**: Ersetzen Sie diesen Wert durch den Indexnamen aus der Seite „**Daten + Indizes**“ für Ihr Projekt im Azure KI-Foundry-Portal (dies sollte`brochures-index` sein).
 1. Nachdem Sie die Platzhalter ersetzt haben, verwenden Sie im Code-Editor den Befehl **STRG+S** oder **Rechtsklick > Speichern**, um Ihre Änderungen zu speichern, und verwenden Sie dann den Befehl **STRG+Q** oder **Rechtsklick > Beenden**, um den Code-Editor zu schließen, während die Befehlszeile der Cloud Shell geöffnet bleibt.
 
 ### Erkunden von Code zur Implementierung des RAG-Musters
@@ -225,10 +224,8 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie die Azure AI Fou
     ```
 
 1. Überprüfen Sie den Code in der Datei, und notieren Sie Folgendes:
-    - Verwendet das Azure AI Foundry-SDK, um sich mit Ihrem Projekt zu verbinden (mithilfe der Projektverbindungszeichenfolge).
-    - Erzeugt einen authentifizierten Azure OpenAI-Client aus Ihrer Projektverbindung.
-    - Ruft die Standardverbindung für Azure KI-Suche aus Ihrem Projekt ab, damit der Endpunkt und der Schlüssel für Ihren Azure KI-Suche-Dienst bestimmt werden können.
-    - Erzeugt eine geeignete Systemnachricht.
+    - Erstellt einen Azure OpenKI-Client unter Verwendung des Endpunkts, des Schlüssels und des Chatmodells.
+    - Erstellt eine geeignete Systemnachricht für eine reisebezogene Chatlösung.
     - Übermittelt einen Prompt (einschließlich des Systems und einer auf der Benutzereingabe basierenden Nachricht) an den Azure OpenAI-Client und fügt ihn hinzu:
         - Verbindungsdetails für den abzufragenden Azure KI-Suche Index.
         - Details zum Einbettungsmodell, das zur Vektorisierung der Abfrage verwendet werden soll\*.
