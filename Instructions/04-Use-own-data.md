@@ -22,7 +22,7 @@ Die Funktionen von Azure KI-Foundry, die wir in dieser Übung verwenden werden, 
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources`und wählen Sie **Erstellen** aus. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
+1. Navigieren Sie im Browser zu `https://ai.azure.com/managementCenter/allResources`, und wählen Sie **Neu erstellen** aus. Wählen Sie dann die Option zum Erstellen einer neuen **KI-Hubressource** aus.
 1. Geben Sie im Assistenten zum **Erstellen eines Projekts** einen gültigen Namen für Ihr Projekt ein und wählen Sie die Option zum Erstellen eines neuen Hubs aus. Verwenden Sie anschließend den Link **Hub umbenennen**, um einen gültigen Namen für Ihren neuen Hub anzugeben, erweitern Sie **Erweiterte Optionen** und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
@@ -164,7 +164,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. Geben Sie im Befehlszeilenfenster der Cloud Shell den folgenden Befehl ein, um die OpenKI SDK-Bibliothek zu installieren:
+1. Geben Sie im Befehlszeilenfenster der Cloud Shell den folgenden Befehl ein, um die OpenAI SDK-Bibliothek zu installieren:
 
     **Python**
 
@@ -198,8 +198,8 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
     Die Datei wird in einem Code-Editor geöffnet.
 
 1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
-    - **your_openai_endpoint**: Der OpenKI-Endpunkt von der Seite **Übersicht** Ihres Projekts im Azure KI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte **Azure OpenKI** ausgewählt haben, nicht die Registerkarte Azure KI-Inferenz oder Azure KI-Dienste).
-    - **Ihr_openai_api_key** Der Open KI-API-Schlüssel von der Seite **Übersicht** Ihres Projekts im Azure KI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte **Azure OpenKI** ausgewählt haben, nicht die Registerkarte Azure KI-Inferenz oder Azure KI-Dienste).
+    - **your_openai_endpoint**: Der Open AI-Endpunkt von der Seite **Übersicht** Ihres Projekts im Azure AI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte mit der Funktion **Azure OpenAI** ausgewählt haben, nicht die Registerkarte für Azure KI-Rückschlüsse oder Azure KI Services).
+    - **your_openai_api_key** Der Open AI-API-Schlüssel von der Seite **Übersicht** Ihres Projekts im Azure AI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte mit der Funktion **Azure OpenAI** ausgewählt haben, nicht die Registerkarte für Azure KI-Rückschlüsse oder Azure KI Services).
     - **Ihr_Chat-Modell**: Der Name, den Sie Ihrer **gpt-4o**-Modellbereitstellung auf der Seite **Modelle + Endpunkte** im Azure KI Foundry-Portal zugewiesen haben (der Standardname lautet `gpt-4o`).
     - **your_embedding_model**: Der Name, den Sie Ihrer **text-embedding-ada-002**-Modellbereitstellung auf der Seite **Modelle + Endpunkte** im Azure KI Foundry-Portal zugewiesen haben (der Standardname lautet `text-embedding-ada-002`).
     - **your_search_endpoint**: Die URL für Ihre Azure KI Search-Ressource. Dies finden Sie im **Verwaltungscenter** im Azure KI Foundry-Portal.
@@ -224,7 +224,7 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
     ```
 
 1. Überprüfen Sie den Code in der Datei, und notieren Sie Folgendes:
-    - Erstellt einen Azure OpenKI-Client unter Verwendung des Endpunkts, des Schlüssels und des Chatmodells.
+    - Erstellt einen Azure OpenAI-Client unter Verwendung des Endpunkts, des Schlüssels und des Chatmodells.
     - Erstellt eine geeignete Systemnachricht für eine reisebezogene Chatlösung.
     - Übermittelt einen Prompt (einschließlich des Systems und einer auf der Benutzereingabe basierenden Nachricht) an den Azure OpenAI-Client und fügt ihn hinzu:
         - Verbindungsdetails für den abzufragenden Azure KI-Suche Index.
@@ -251,6 +251,8 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
     ```
    dotnet run
     ```
+
+    > **Tipp**: Wenn ein Kompilierungsfehler auftritt, weil .NET Version 9.0 nicht installiert ist, verwenden Sie den Befehl `dotnet --version`, um die in Ihrer Umgebung installierte .NET-Version zu ermitteln. Bearbeiten Sie dann die Datei **rag_app.csproj** im Codeordner, um die **TargetFramework**-Einstellung entsprechend zu aktualisieren.
 
 1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `Where should I go on vacation to see architecture?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
 
