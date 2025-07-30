@@ -66,9 +66,9 @@ Ein *Azure KI-Projekt* bietet einen Arbeitsbereich für die KI-Entwicklung. Begi
 
 1. Schließen Sie die Azure-Portal-Registerkarte und kehren Sie zum Azure AI Foundry-Portal zurück.
 
-## Überprüfen von Projektverbindungen
+## Überprüfen von Projektendpunkten
 
-Ihr Azure AI Foundry-Projekt und die Azure AI Foundry-Ressource, zu der sie gehört, umfassen Verbindungen zu Ressourcen, die Sie in KI-Anwendungen verwenden können.
+Das Azure AI Foundry-Projekt enthält eine Reihe von *Endpunkten*, mit denen Clientanwendungen eine Verbindung mit dem Projekt sowie den Modellen und KI-Diensten herstellen können, die es umfasst.
 
 1. Wählen Sie auf der Verwaltungszentrumsseite im Navigationsbereich unter Ihrem Projekt die Option **Zur Ressource wechseln**.
 1. Rufen Sie auf der Seite **Übersicht** des Projekts den Abschnitt **Endpunkte und Schlüssel** auf, der die Endpunkte und Autorisierungsschlüssel enthält, die Sie in Ihrem Anwendungscode für den Zugriff verwenden können:

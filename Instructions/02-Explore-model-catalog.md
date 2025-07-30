@@ -34,7 +34,7 @@ Beginnen wir damit, sich beim Azure AI Foundry-Portal anzumelden und einige der 
     ![Screenshot der Seite „gpt-4o-Modell-Benchmarks“.](./media/gpt4-benchmarks.png)
 
 1. Verwenden Sie den Zurück-Pfeil (**&larr;**) neben dem **GPT-4o**-Seitentitel, um zum Modellkatalog zurückzukehren.
-1. Suchen Sie nach `Phi-3.5-mini-instruct` und zeigen Sie die Details und Benchmarks für das Modell **Phi-3.5-mini-instruct** an.
+1. Suchen Sie nach `Phi-4-mini-instruct`, und zeigen Sie die Details und Benchmarks für das Modell **Phi-4-mini-instruct** an.
 
 ## Vergleichen von Modellen
 
@@ -47,16 +47,14 @@ Sie haben zwei verschiedene Modelle überprüft, von denen beide verwendet werde
 
 1. Beachten Sie im Bereich **Zu vergleichende Modelle**, dass Sie beliebte Aufgaben wie *Fragen und Antworten* auswählen können, um automatisch häufig verwendete Modelle für bestimmte Aufgaben auszuwählen.
 1. Verwenden Sie das Symbol **Alle Modelle löschen** (&#128465;), um alle vordefinierten Modelle zu entfernen.
-1. Verwenden Sie die Schaltfläche **+Modell zum Vergleichen**, um der Liste das Modell **gpt-4o** hinzuzufügen. Verwenden Sie dann dieselbe Schaltfläche, um der Liste das Modell **Phi-3.5-mini-instruct** hinzuzufügen.
+1. Verwenden Sie die Schaltfläche **+Modell zum Vergleichen**, um der Liste das Modell **gpt-4o** hinzuzufügen. Verwenden Sie dann dieselbe Schaltfläche, um der Liste das Modell **Phi-4-mini-instruct** hinzuzufügen.
 1. Überprüfen Sie das Diagramm, das die Modelle basierend auf dem **Qualitätsindex** (eine standardisierte Bewertung, die die Modellqualität angibt) und den **Kosten** vergleicht. Sie können die spezifischen Werte für ein Modell anzeigen, indem Sie den Mauszeiger über den entsprechenden Punkt im Diagramm bewegen.
 
-    ![Screenshot des Modellvergleichsdiagramms für gpt-4o und Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+    ![Screenshot: Modellvergleichsdiagramm für gpt-4o und Phi-4-mini-instruct](./media/comparison-chart.png)
 
 1. Wählen Sie im Dropdown-Menü **X-Achse** unter **Qualität** die folgenden Metriken aus und betrachten Sie jedes resultierende Diagramm, bevor Sie zum nächsten wechseln:
     - Genauigkeit
-    - Kohärenz
-    - Geläufigkeit
-    - Relevance
+    - Qualitätsindex
 
     Basierend auf den Benchmarks sieht das GPT-4o-Modell wie das beste Gesamtleistungsangebot aus, aber zu höheren Kosten.
 
@@ -103,27 +101,25 @@ Nachdem Sie nun über eine Modellbereitstellung verfügen, können Sie den Playg
 
 ## Bereitstellen eines weiteren Modells
 
-Beim Erstellen des Projekts wurde das ausgewählte **GPT-4o-Modell** automatisch bereitgestellt. Stellen wir nun das von Ihnen ebenfalls in Betracht gezogene Modell ***Phi-3.5-mini-instruct** bereit.
+Beim Erstellen des Projekts wurde das ausgewählte **GPT-4o-Modell** automatisch bereitgestellt. Stellen wir nun das von Ihnen ebenfalls in Betracht gezogene Modell ***Phi-4-mini-instruct** bereit.
 
 1. Wählen Sie in der Navigationsleiste auf der linken Seite im Bereich **Meine Assets** die Option **Modelle + Endpunkte** aus.
-1. Wählen Sie auf der Registerkarte **Modellbereitstellungen** in der Dropdownliste **+ Modell bereitstellen** die Option **Basismodell bereitstellen** aus. Suchen Sie dann nach `Phi-3.5-mini-instruct` und bestätigen Sie Ihre Auswahl.
+1. Wählen Sie auf der Registerkarte **Modellbereitstellungen** in der Dropdownliste **+ Modell bereitstellen** die Option **Basismodell bereitstellen** aus. Suchen Sie dann nach `Phi-4-mini-instruct` und bestätigen Sie Ihre Auswahl.
 1. Stimmen Sie der Modelllizenz zu.
-1. Stellen Sie ein **Phi-3.5-mini-instruct** -Modell mit den folgenden Einstellungen bereit:
-    - **Bereitstellungsname:***Ein eindeutiger Name für die Modellimplementierung*
+1. Stellen Sie ein **Phi-4-mini-instruct**-Modell mit den folgenden Einstellungen bereit:
+    - **Bereitstellungsname:***Ein gültiger Name für die Modellimplementierung*
     - **Bereitstellungstyp**: Globaler Standard
     - **Bereitstellungsdetails**: *Verwenden der Standardeinstellungen.*
 
 1. Warten Sie, bis die Bereitstellung abgeschlossen ist.
 
-## Chatten mit dem *Phi-3.5*-Modell
+## Chatten mit dem *Phi-4*-Modell
 
 Jetzt chatten wir mit dem neuen Modell auf dem Playground.
 
 1. Wählen Sie in der Navigationsleiste **Playgrounds** aus. Wählen Sie dann den **Chatplayground** aus.
-1. Stellen Sie im Chat-Playground im Bereich **Setup** sicher, dass Ihr Modell **Phi-3.5-mini-instruct** ausgewählt ist, und legen Sie im Feld **Geben Sie dem Modell Anweisungen und Kontext** den System-Prompt `You are an AI assistant that helps solve problems.` fest (derselbe System-Prompt, den Sie zum Testen des GPT-4o-Modells verwendet haben).
-1. Wählen Sie **Änderungen übernehmen**, um den System-Prompt zu aktualisieren.
-1. Stellen Sie sicher, dass eine neue Chatsitzung gestartet wird, bevor Sie die gleichen Prompts wiederholen, die Sie zuvor zum Testen des gpt-4-Modells verwendet haben.
-1. Geben Sie im Chatfenster die folgende Abfrage ein:
+1. Vergewissern Sie sich im Chat-Playground im Bereich **Setup**, dass das Modell **Phi-4-mini-instruct** ausgewählt ist. Geben Sie im Chatfeld als erste Zeile `System message: You are an AI assistant that helps solve problems.` ein (derselbe Systemprompt, den Sie zum Testen des gpt-4o-Modells verwendet haben, aber da keine Systemmeldung eingerichtet ist, geben Sie dies als Kontext im ersten Chat an).
+1. Geben Sie in einer neuen Zeile im Chatfenster (unter Ihrer Systemmeldung) die folgende Abfrage ein:
 
     ```
    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?

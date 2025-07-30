@@ -36,8 +36,6 @@ Beginnen wir mit dem Erstellen eines Azure KI Foundry-Projekts.
 1. Notieren Sie sich im Bereich **Setup** den Namen Ihrer Modellbereitstellung, der **gpt-4o** lauten sollte. Sie können dies überprüfen, indem Sie die Bereitstellung auf der Seite **Modelle und Endpunkte** anzeigen (öffnen Sie dazu einfach diese Seite im Navigationsbereich auf der linken Seite).
 1. Wählen Sie im Navigationsbereich auf der linken Seite **Übersicht**, um die Hauptseite Ihres Projekts anzuzeigen, die wie folgt aussieht:
 
-    > **Hinweis**: Wenn die Fehlermeldung *Unzureichende Berechtigungen** angezeigt wird, klicken Sie auf die Schaltfläche „**Beheben**“, um das Problem zu beheben.
-
     ![Screenshot einer Projektübersichtsseite von Azure AI Foundry.](./media/ai-foundry-project.png)
 
 ## Erstellen einer Clientanwendung zum Chatten mit dem Modell
@@ -152,8 +150,9 @@ Nachdem Sie ein Modell bereitgestellt haben, können Sie die Azure AI Foundry un
     ```python
    # Add references
    from dotenv import load_dotenv
+   from urllib.parse import urlparse
    from azure.identity import DefaultAzureCredential
-   from azure.ai.projects import AIProjectClient
+   from azure.ai.inference import ChatCompletionsClient
    from azure.ai.inference.models import SystemMessage, UserMessage, AssistantMessage
     ```
 
@@ -167,48 +166,36 @@ Nachdem Sie ein Modell bereitgestellt haben, können Sie die Azure AI Foundry un
     ```
 
 1. Beachten Sie, dass der Code in der **Hauptfunktion** unter dem Kommentar **Get configuration settings** die Zeichenfolge für die Projektverbindung und die Werte für den Namen der Modellbereitstellung lädt, die Sie in der Konfigurationsdatei definiert haben.
-1. Finden Sie den Kommentar **Initialize the project client** und fügen Sie den folgenden Code hinzu, um sich mit Ihrem Azure AI Foundry-Projekt zu verbinden. Verwenden Sie dazu die Azure-Anmeldedaten, mit denen Sie derzeit angemeldet sind:
+1. Finden Sie den Kommentar **Get a chat client** und fügen Sie den folgenden Code hinzu, um ein Client-Objekt für den Chat mit einem Modell zu erstellen:
 
     > **Tipp**: Achten Sie darauf, die richtige Einzugsebene für den Code beizubehalten.
 
     **Python**
 
     ```python
-   # Initialize the project client
-   projectClient = AIProjectClient(            
-            credential=DefaultAzureCredential(
-                exclude_environment_credential=True,
-                exclude_managed_identity_credential=True
-            ),
-            endpoint=project_connection,
-        )
-    ```
-
-    **C#**
-
-    ```csharp
-   // Initialize the project client
-   DefaultAzureCredentialOptions options = new()
-       { ExcludeEnvironmentCredential = true,
-        ExcludeManagedIdentityCredential = true };
-   var projectClient = new AIProjectClient(
-        new Uri(project_connection),
-        new DefaultAzureCredential(options));
-    ```
-
-1. Finden Sie den Kommentar **Get a chat client** und fügen Sie den folgenden Code hinzu, um ein Client-Objekt für den Chat mit einem Modell zu erstellen:
-
-    **Python**
-
-    ```python
    # Get a chat client
-   chat = projectClient.inference.get_chat_completions_client()
+   inference_endpoint = f"https://{urlparse(project_endpoint).netloc}/models"
+
+   credential = DefaultAzureCredential(exclude_environment_credential=True,
+                                        exclude_managed_identity_credential=True,
+                                        exclude_interactive_browser_credential=False)
+
+   chat = ChatCompletionsClient(
+            endpoint=inference_endpoint,
+            credential=credential,
+            credential_scopes=["https://ai.azure.com/.default"])
     ```
 
     **C#**
 
     ```csharp
    // Get a chat client
+   DefaultAzureCredentialOptions options = new()More actions
+           { ExcludeEnvironmentCredential = true,
+            ExcludeManagedIdentityCredential = true };
+   var projectClient = new AIProjectClient(
+            new Uri(project_connection),
+            new DefaultAzureCredential(options));
    ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
@@ -294,6 +281,8 @@ Nachdem Sie ein Modell bereitgestellt haben, können Sie die Azure AI Foundry un
     ```
    dotnet run
     ```
+
+    > **Tipp**: Wenn ein Kompilierungsfehler auftritt, weil .NET Version 9.0 nicht installiert ist, verwenden Sie den Befehl `dotnet --version`, um die in Ihrer Umgebung installierte .NET-Version zu ermitteln. Bearbeiten Sie dann die Datei **chat_app.csproj** im Codeordner, um die **TargetFramework**-Einstellung entsprechend zu aktualisieren.
 
 1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `What is the fastest animal on Earth?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
 1. Versuchen Sie es mit einigen Folgefragen wie `Where can I see one?` oder `Are they endangered?`. Die Unterhaltung sollte fortgesetzt werden, wobei der Chatverlauf als Kontext für jede Iteration verwendet wird.
