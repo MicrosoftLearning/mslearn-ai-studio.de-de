@@ -103,7 +103,7 @@ Die automatisierte Bewertung ist ein Ansatz, der versucht, diese Unzulänglichke
 1. Klicken Sie auf **Weiter**, um zur nächsten Seite zu wechseln.
 1. Auf der Seite **Gutachterin/Gutachter konfigurieren** fügen Sie über die Schaltfläche **+Hinzufügen** die folgenden Gutachterinnen/Gutachter hinzu und konfigurieren jeden wie folgt:
     - **Modellbewertung**:
-        - **Kriterienname**: Semantic_similarity
+        - **Kriterienname**: *Wählen Sie die Voreinstellung **Semantic_similarity** aus.*
         - **Bewerten mit**: *Wählen Sie Ihr **gpt-4o**-Modell aus*
         - **Benutzer**-Einstellungen (unten):
 
@@ -113,12 +113,12 @@ Die automatisierte Bewertung ist ein Ansatz, der versucht, diese Unzulänglichke
             <br>
         
     - **Likert-Scale-Evaluator**:
-        - **Kriterienname**: Relevanz
+        - **Kriterienname**: *Wählen Sie die Voreinstellung **Relevance** aus.*
         - **Bewerten mit**: *Wählen Sie Ihr **gpt-4o**-Modell aus*
         - **Abfrage**: \{\{item.question\}\}
 
     - **Ähnlichkeit des Texts**:
-        - **Kriterienname**: F1_Score
+        - **Kriterienname**: *Wählen Sie die Voreinstellung **F1_Score** aus.*
         - **Grundwahrheit**: \{\{item. ExpectedResponse\}\}
 
     - **Hasserfüllte und unfaire Inhalte**:

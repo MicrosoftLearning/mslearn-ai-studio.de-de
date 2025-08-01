@@ -10,9 +10,15 @@ Retrieval Augmented Generation (RAG) ist eine Methode zum Erstellen von Anwendun
 
 In dieser Übung verwenden Sie Azure KI-Foundry, um benutzerdefinierte Daten in eine generative KI-Lösung zu integrieren.
 
-Diese Übung dauert ca. **45** Minuten.
+> **Hinweis:** Der Code in dieser Übung basiert auf Vorabversionen von SDK-Software, die sich möglicherweise Änderungen unterliegen. Wo nötig, haben wir spezielle Versionen von Paketen verwendet, die möglicherweise nicht die neuesten verfügbaren Versionen widerspiegeln. Es kann zu unerwartetem Verhalten, Warnungen oder Fehlern kommen.
 
-> **Hinweis**: Diese Übung basiert auf Vorabversionen, die sich möglicherweise noch ändern können.
+Obwohl diese Übung auf dem Azure OpenAI Python SDK basiert, können Sie KI-Chatanwendungen mit mehreren sprachspezifischen SDKs entwickeln, einschließlich:
+
+- [OpenAI für Python](https://pypi.org/project/openai/)
+- [Azure OpenAI für Microsoft .NET](https://www.nuget.org/packages/Azure.AI.OpenAI)
+- [Azure OpenAI für TypeScript](https://www.npmjs.com/package/@azure/openai)
+
+Diese Übung dauert ca. **45** Minuten.
 
 ## Erstellen eines Azure AI Foundry-Hubs und -Projekts
 
@@ -124,8 +130,6 @@ Bevor Sie Ihren Index in einem RAG-basierten Prompt Flow verwenden, überprüfen
 
 Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry- und Azure OpenAI-SDKs verwenden, um das RAG-Muster in einer Clientanwendung zu implementieren. Sehen wir uns den Code an, um dies in einem einfachen Beispiel zu erreichen.
 
-> **Tipp**: Sie können wählen, ob Sie Ihre RAG-Lösung mit Python oder Microsoft C# entwickeln. Folgen Sie den Anweisungen im entsprechenden Abschnitt für Ihre ausgewählte Sprache.
-
 ### Vorbereiten der Anwendungskonfiguration
 
 1. Kehren Sie zur Browser-Registerkarte mit dem Azure-Portal zurück (lassen Sie das Azure KI-Foundry-Portal in der vorhandenen Registerkarte geöffnet).
@@ -150,23 +154,11 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
 
 1. Navigieren Sie nach dem Klonen des Repositorys zu dem Ordner, der die Codedateien der Chatanwendung enthält:
 
-    > **Hinweis**: Führen Sie die Schritte für die gewählte Programmiersprache aus.
-
-    **Python**
-
     ```
    cd mslearn-ai-foundry/labfiles/rag-app/python
     ```
 
-    **C#**
-
-    ```
-   cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
-    ```
-
 1. Geben Sie im Befehlszeilenfenster der Cloud Shell den folgenden Befehl ein, um die OpenAI SDK-Bibliothek zu installieren:
-
-    **Python**
 
     ```
    python -m venv labenv
@@ -174,30 +166,15 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
    pip install -r requirements.txt openai
     ```
 
-    **C#**
-
-    ```
-   dotnet add package Azure.AI.OpenAI
-    ```
-    
-
 1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Konfigurationsdatei zu bearbeiten:
-
-    **Python**
 
     ```
    code .env
     ```
 
-    **C#**
-
-    ```
-   code appsettings.json
-    ```
-
     Die Datei wird in einem Code-Editor geöffnet.
 
-1. Ersetzen Sie in der Codedatei die folgenden Platzhalter: 
+1. Ersetzen Sie in der Konfigurationsdatei die folgenden Platzhalter: 
     - **your_openai_endpoint**: Der Open AI-Endpunkt von der Seite **Übersicht** Ihres Projekts im Azure AI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte mit der Funktion **Azure OpenAI** ausgewählt haben, nicht die Registerkarte für Azure KI-Rückschlüsse oder Azure KI Services).
     - **your_openai_api_key** Der Open AI-API-Schlüssel von der Seite **Übersicht** Ihres Projekts im Azure AI Foundry-Portal (stellen Sie sicher, dass Sie die Registerkarte mit der Funktion **Azure OpenAI** ausgewählt haben, nicht die Registerkarte für Azure KI-Rückschlüsse oder Azure KI Services).
     - **Ihr_Chat-Modell**: Der Name, den Sie Ihrer **gpt-4o**-Modellbereitstellung auf der Seite **Modelle + Endpunkte** im Azure KI Foundry-Portal zugewiesen haben (der Standardname lautet `gpt-4o`).
@@ -211,16 +188,8 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
 
 1. Geben Sie den folgenden Befehl ein, um die bereitgestellte Codedatei zu bearbeiten:
 
-    **Python**
-
     ```
    code rag-app.py
-    ```
-
-    **C#**
-
-    ```
-   code Program.cs
     ```
 
 1. Überprüfen Sie den Code in der Datei, und notieren Sie Folgendes:
@@ -240,19 +209,9 @@ Nachdem Sie nun über einen Arbeitsindex verfügen, können Sie Azure KI-Foundry
 
 1. Geben Sie im Befehlszeilenbereich von Cloud Shell den folgenden Befehl ein, um die App auszuführen:
 
-    **Python**
-
     ```
    python rag-app.py
     ```
-
-    **C#**
-
-    ```
-   dotnet run
-    ```
-
-    > **Tipp**: Wenn ein Kompilierungsfehler auftritt, weil .NET Version 9.0 nicht installiert ist, verwenden Sie den Befehl `dotnet --version`, um die in Ihrer Umgebung installierte .NET-Version zu ermitteln. Bearbeiten Sie dann die Datei **rag_app.csproj** im Codeordner, um die **TargetFramework**-Einstellung entsprechend zu aktualisieren.
 
 1. Wenn Sie dazu aufgefordert werden, geben Sie eine Frage ein, z. B. `Where should I go on vacation to see architecture?`, und überprüfen Sie die Antwort Ihres generativen KI-Modells.
 
