@@ -147,7 +147,7 @@ Nachdem Sie ein Modell bereitgestellt haben, können Sie die Azure AI Foundry- u
 
     ```python
    # Get a chat client
-   openai_client = project_client.inference.get_azure_openai_client(api_version="2024-10-21")
+   openai_client = project_client.get_openai_client(api_version="2024-10-21")
     ```
 
 1. Finden Sie den Kommentar **Initialize prompt with system message** und fügen Sie den folgenden Code hinzu, um eine Sammlung von Nachrichten mit einer Systemansage zu initialisieren.
