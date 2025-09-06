@@ -8,7 +8,7 @@ lab:
 
 Azure KI Foundry enthält standardmäßige Inhaltsfilter, um sicherzustellen, dass potenziell schädliche Aufforderungen und Vervollständigungen erkannt und aus den Interaktionen mit dem Dienst entfernt werden. Darüber hinaus können Sie benutzerdefinierte Inhaltsfilter für Ihre spezifischen Anforderungen definieren, um sicherzustellen, dass Ihre Modellimplementierungen die entsprechenden verantwortungsvollen KI-Prinzipien für Ihr generatives KI-Szenario durchsetzen. Die Inhaltsfilterung ist ein Element eines wirksamen Ansatzes für verantwortungsvolle KI bei der Arbeit mit generativen KI-Modellen.
 
-In dieser Übung werden Sie die Auswirkungen der standardmäßigen Inhaltsfilter in Azure KI Foundry untersuchen.
+In dieser Übung lernen Sie die Auswirkungen der Standardinhaltsfilter in Azure AI Foundry kennen.
 
 Diese Übung dauert ungefähr **25** Minuten.
 
@@ -22,34 +22,26 @@ Beginnen wir mit dem Erstellen eines Azure KI Foundry-Projekts.
 
     ![Screenshot des Azure KI Foundry-Portals.](./media/ai-foundry-home.png)
 
-1. Suchen Sie auf der Startseite im Abschnitt **Modelle und Funktionen erkunden** nach dem Modell `Phi-4`, das wir in unserem Projekt verwenden werden.
-1. Wählen Sie in den Suchergebnissen das Modell **Phi-4** aus, um dessen Details anzuzeigen, und wählen Sie dann oben auf der Seite für das Modell die Option **Dieses Modell verwenden** aus.
-1. Wenn Sie zur Erstellung eines Projekts aufgefordert werden, geben Sie einen gültigen Namen für Ihr Projekt ein und entfalten Sie die Option **Erweiterte Optionen**.
+1. Suchen Sie auf der Startseite im Abschnitt **Modelle und Funktionen erkunden** nach dem Modell `gpt-4o`, das wir in unserem Projekt verwenden werden.
+1. Wählen Sie in den Suchergebnissen das Modell **gpt-4o** aus, um dessen Details anzuzeigen, und wählen Sie dann oben auf der Seite für das Modell die Option **Dieses Modell verwenden** aus.
+1. Wenn Sie zum Erstellen eines Projekts aufgefordert werden, geben Sie einen gültigen Namen für Ihr Projekt ein und erweitern Sie **Erweiterte Optionen**.
 1. Wählen Sie **Anpassen** aus und legen Sie die folgenden Einstellungen für Ihr Projekt fest:
     - **Azure KI Foundry-Ressource**: *Ein gültiger Name für Ihre Azure KI Foundry-Ressource*
     - **Abonnement:** *Geben Sie Ihr Azure-Abonnement an.*
     - **Ressourcengruppe**: *Erstellen Sie eine Ressourcengruppe, oder wählen Sie eine Ressourcengruppe aus*.
-    - **Region:** Wählen Sie eine der folgenden Regionen\* aus:
-        - East US
-        - USA (Ost) 2
-        - USA Nord Mitte
-        - USA Süd Mitte
-        - Schweden, Mitte
-        - USA (Westen)
-        - USA, Westen 3
+    - **Region**: Wählen Sie die **empfohlene AI Foundry-Instanz aus***\*
 
-    > \* Zum Zeitpunkt des Erstellens steht das Microsoft Modell *Phi-4* , das wir in dieser Übung verwenden werden, in diesen Regionen zur Verfügung. Sie können die neueste regionale Verfügbarkeit für bestimmte Modelle in der [Azure AI Foundry-Dokumentation](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability) überprüfen. Wenn später in der Übung eine regionale Kontingentgrenze erreicht wird, besteht eventuell die Möglichkeit, eine andere Ressource in einer anderen Region zu erstellen.
+    > \* Einige Azure KI-Ressourcen unterliegen regionalen Modellkontingenten. Sollte im weiteren Verlauf der Übung eine Kontingentgrenze überschritten werden, müssen Sie möglicherweise eine weitere Ressource in einer anderen Region anlegen.
 
-1. Klicken Sie auf **Erstellen**, und warten Sie, bis das Projekt erstellt wird.
-1. Wenn Sie mit Phi-4-Informationen aufgefordert werden, stimmen Sie den Nutzungsbedingungen zu und stellen Sie das Modell bereit.
-1. Wenn Ihr Modell bereitgestellt wird, wählen Sie die blaue Schaltfläche oben in den Bereitstellungsinformationen aus, um den Playground zu öffnen.
-1. Notieren Sie sich im Bereich **Setup** den Namen Ihrer Modellbereitstellung, der **Phi-4** lauten sollte.
+1. Klicken Sie auf **Erstellen**, und warten Sie, bis das Projekt erstellt wird. Wenn Sie dazu aufgefordert werden, stellen Sie das Modell „gpt-4o“ mithilfe des Bereitstellungstyps **Globaler Standard** bereit.
+1. Wenn Ihr Modell bereitgestellt ist, wird es im Playground angezeigt.
+1. Notieren Sie sich im Bereich **Setup** den Namen Ihrer Modellbereitstellung, der **gpt-4o** lauten sollte.
 
 ## Chatten mit dem Inhaltsfilter
 
-Das von Ihnen bereitgestellte Phi-4-Modell verfügt über einen standardmäßig aktivierten Inhaltsfilter, der eine ausgewogene Kombination von Filtern umfasst, die die meisten schädlichen Inhalte blockieren und gleichzeitig die Eingabe und Ausgabe von Inhalten in Sprachen zulassen, die als relativ sicher gelten.
+Das von Ihnen bereitgestellte Modell verfügt über einen standardmäßig aktivierten Inhaltsfilter, der eine ausgewogene Kombination von Filtern umfasst, die die meisten schädlichen Inhalte blockieren und gleichzeitig die Eingabe und Ausgabe von Inhalten in Sprachen zulassen, die als relativ sicher gilt.
 
-1. Stellen Sie im Chat-Playground sicher, dass Ihr Phi-4-Modell ausgewählt ist.
+1. Stellen Sie im Chat-Playground sicher, dass Ihr gpt-4o-Modell ausgewählt ist.
 1. Senden Sie die folgende Eingabeaufforderung, und zeigen Sie die Antwort an:
 
     ```
@@ -93,15 +85,15 @@ Wenn der Standardinhaltsfilter Ihre Anforderungen nicht erfüllt, können Sie be
     - **Sexuell**: Sexuell eindeutige oder beleidigende Sprache.
     - **Selbstverletzung**: Sprache, die Selbstverletzung beschreibt oder dazu auffordert.
 
-    Für jede dieser Kategorien werden Filter auf Prompts und Vervollständigungen angewendet, basierend auf den Blockierungsschwellenwerten **Wenige blockieren**, **Einige blockieren** und **Alle blockieren**, die verwendet werden, um zu bestimmen, welche spezifischen Arten von Sprache vom Filter abgefangen und verhindert werden.
+    Für jede dieser Kategorien werden Filter auf Prompts und Vervollständigungen angewendet, basierend auf den Blockierungsschwellenwerten, die verwendet werden, um zu bestimmen, welche spezifischen Arten von Sprache vom Filter abgefangen und verhindert werden.
 
     Zusätzlich gibt es einen *Prompt-Schutz*, um absichtliche Versuche, Ihre generative KI-App zu missbrauchen, zu entschärfen.
 
-1. Ändern Sie den Schwellenwert für jede Kategorie des Eingabefilters auf **Alle blockieren**.
+1. Ändern Sie den Schwellenwert für jede Kategorie des Eingabefilters in den ***höchsten*** Blockierungsschwellenwert.
 
-1. Überprüfen Sie auf der Seite **Ausgabefilter** die Einstellungen, die auf die Ausgabeantworten angewendet werden können, und ändern Sie den Schwellenwert für jede Kategorie auf **Alle blockieren**.
+1. Überprüfen Sie auf der Seite **Ausgabefilter** die Einstellungen, die auf die Ausgabeantworten angewendet werden können, und ändern Sie den Schwellenwert für jede Kategorie in den ***höchsten*** Blockierungsschwellenwert..
 
-1. Wählen Sie auf der Seite **Bereitstellung** die Bereitstellung Ihres **Phi-4-Modells** aus, um den neuen Inhaltsfilter darauf anzuwenden, und bestätigen Sie im Prompt, dass Sie den vorhandenen Inhaltsfilter ersetzen möchten.
+1. Wählen Sie auf der Seite **Bereitstellung** Ihre **gpt-4o**-Modellimplementierung aus, um den neuen Inhaltsfilter darauf anzuwenden, und bestätigen Sie im Prompt, dass Sie den vorhandenen Inhaltsfilter ersetzen möchten.
 
 1. Wählen Sie auf der Seite**Überprüfung** die Option **Filter erstellen** und warten Sie, bis der Inhaltsfilter erstellt wurde.
 
@@ -119,7 +111,7 @@ Lassen Sie uns einen letzten Chat mit dem Modell führen, um die Auswirkung des 
    What should I do if I cut myself?
     ```
 
-    Dieses Mal sollte der Inhaltsfilter den Prompt auf der Grundlage blockieren, dass er als Verweis auf Selbstschäden interpretiert werden könnte.
+    Dieses Mal kann der Inhaltsfilter den Prompt auf der Grundlage blockieren, dass er als eine Anspielung auf Selbstverletzung interpretiert werden könnte.
 
     > **Wichtig**: Wenn Sie Bedenken wegen Selbstbeschädigung oder anderen psychischen Problemen haben, suchen Sie bitte professionelle Hilfe. Versuchen Sie, den Prompt `Where can I get help or support related to self-harm?` einzugeben.
 
